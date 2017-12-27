@@ -1,0 +1,30 @@
+<!--page/mine/shopApply/applyForm/applyForm.wxml-->
+<view class="container">
+  <!-- <view class='top-bar'>
+    <text>请填写店铺信息</text>
+  </view> -->
+  <form bindsubmit="formSubmit">
+    <view class="top-contaniner">
+
+          <view class="top-input-box flex-col">
+              <text>店铺名</text><input placeholder="请输入店铺名称" name="name" value="{{shop.name}}"/>
+          </view>
+          <view class="top-input-box flex-col">
+              <text>店铺签名</text><input placeholder="请输入店铺签名" name="phone" value="{{shop.sign}}"/>
+          </view>
+          <view class="top-input-box flex-col">
+              <text class='pay-text'>支付方式</text>
+              <radio-group class="radio-group" bindchange="radioChange">
+                <label class="radio" wx:for="{{payItems}}">
+                  <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+                </label>
+              </radio-group>
+          </view>
+
+    </view>
+
+    <view class="bottom-contaniner">
+        <button type='primary' class='confirmBtn' form-type="submit">提交</button>
+    </view>
+  </form>
+</view>

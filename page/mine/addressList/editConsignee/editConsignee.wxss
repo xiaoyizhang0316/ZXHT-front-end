@@ -1,0 +1,65 @@
+/**editConsignee.wxss**/
+
+page{
+    height: 0rpx;
+    background-color: #e3e3e3;
+}
+form {
+  width: 100%;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  width: 100%;
+  font-size: 30rpx;
+  background-color: #e3e3e3;
+} 
+
+.top-contaniner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.top-input-box {
+  width: 100%;
+  border-bottom: 1px #e3e3e3 solid;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.top-input-box text {
+  padding-left: 30rpx;
+  width: 180rpx;
+}
+.top-input-box input{
+  padding-left: 25rpx;
+  height: 90rpx;
+  width: 100%;
+}
+
+.bottom-contaniner {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 68%;
+}
+
+.bottom-contaniner text{
+    margin-top: 27rpx;
+  color: #888;
+  width: 80%;
+}
+
+.confirmBtn {
+  width: 90%;
+  margin-top: 27rpx;
+}

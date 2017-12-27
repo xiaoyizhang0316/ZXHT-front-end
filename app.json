@@ -1,0 +1,75 @@
+{
+  "pages": [
+    "page/welcome/welcome",
+    "page/index/index",
+    "page/category/category",
+    "page/category/brand/list",
+    "page/index/search/search",
+    "page/index/search/result/list",
+    "page/cart/cart",
+    "page/cart/orders/orders",
+    "page/details/details",
+    "page/mine/mine",
+    "page/mine/addressList/addressList",
+    "page/mine/addressList/consignee/consignee",
+    "page/mine/addressList/editConsignee/editConsignee",
+    "page/mine/addressList/consignee/upload/uploadImg",
+    "page/mine/order/orderHistory",
+    "page/mine/order/detail/orderDetail",
+    "page/mine/shop/apply",
+    "page/mine/shop/product/sell",
+    "page/mine/shop/product/template/allProducts",
+    "page/mine/shopSwitch/shopSwitch",
+    "page/mine/about/us",
+    "page/common/templates/textArea/textArea",
+    "page/mine/shopApply/shopApply",
+    "page/mine/shopApply/applySuccess/applySuccess",
+    "page/mine/shopApply/applyForm/applyForm"
+  ],
+  "window": {
+    "navigationBarTextStyle": "#ffffff",
+    "navigationBarTitleText": "真享 海淘",
+    "navigationBarBackgroundColor": "#AB956D",
+    "backgroundColor": "#eeeeee",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#b7b7b7",
+    "selectedColor": "#AB956D",
+    "borderStyle": "#f5f5f5",
+    "backgroundColor": "#f5f5f5",
+    "list": [
+      {
+        "pagePath": "page/index/index",
+        "iconPath": "image/tabBar/12.png",
+        "selectedIconPath": "image/tabBar/11.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "page/category/category",
+        "iconPath": "image/tabBar/22.png",
+        "selectedIconPath": "image/tabBar/21.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "page/cart/cart",
+        "iconPath": "image/tabBar/32.png",
+        "selectedIconPath": "image/tabBar/31.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "page/mine/mine",
+        "iconPath": "image/tabBar/42.png",
+        "selectedIconPath": "image/tabBar/41.png",
+        "text": "个人"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false
+}

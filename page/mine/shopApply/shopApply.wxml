@@ -1,0 +1,45 @@
+<!--page/mine/shopApply/shopApply.wxml-->
+<view class='container'>
+<view class='apply-container'>
+    <view class='apply-title'>
+        申请开店
+    </view>
+    <view class='apply-tip'>
+        开店注意事项如下：
+    </view>
+    <view class='apply-desc'>
+        <text>1. 开店后请联系管理员申请付款方式并在卖家中心进行设置</text>
+        <text>2. 您推荐的客户和客户所推荐的会直接成为您的客户</text>
+        <text>3. 欢迎您来开店，我们需要对您的手机号进行验证，请点击下面进行验证</text>
+    </view>
+    <view class='apply-btn'>
+          <button bindtap='doApply' type='warn'>确认申请</button>
+    </view>
+  </view>
+</view>
+
+
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-content">
+    <view class="modal-input">
+      <input placeholder-class="input-holder" type="number" maxlength="11" bindinput="inputChange" class="input" placeholder="请输入您的手机号"></input>
+    </view>
+      <view class="modal-input code-input">
+      <input placeholder-class="input-holder" type="number" bindinput="inputChange" class="input" placeholder="请输入验证码"></input>
+      <button bindtap='sendCode' disabled="{{codeBtnStatus}}">
+        <block wx:if="{{sendNeedSecond == 0}}">
+            获取验证码
+        </block>
+        <block wx:else>
+            重新发送 {{sendNeedSecond}}s
+        </block>
+      
+      </button>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
+</view>

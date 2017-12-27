@@ -1,0 +1,65 @@
+ <view style="background-color:#f8f8f8;flex-direction:column;{{magnify?'display:none':'display:flex'}};">
+  <view style="flex-direction:row;justify-content:space-between;flex:1;display: flex;margin-bottom: 10px;padding-top:10px;">
+    <view class="search-input" style="height:25px;">
+       <view>
+          <image style="height:25px;width:25px;" src="/image/public/find.png"></image>  
+        </view>
+       <input focus="{{focus}}" value="{{search}}" placeholder="搜索收件人姓名、手机、商品" placeholder-class="placeholderstyle" cursor-spacing="50px"  confirm-type="search" type="text" 
+        bindinput="searchOrder" focus="{{isFocus}}" auto-focus="{{isFocus}}"/>
+        <view class="{{displayClear?'':'hidden'}}" bindtap="reset">
+          <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>   
+        </view> 
+    </view>
+  </view>
+ </view>  
+
+<view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend"> 
+  <view class="explain-line" style="border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;flex-direction:column;padding-top:6px;margin-bottom:30px;" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderId}}">
+      <!-- <view style="position:absolute;margin-top:-45px;margin-left:75px;">
+         <image style="height:80px;width:80px;" src="/images/done-order.png"></image> 
+      </view>  -->
+      <view style="width:100%;height:30px;align-items:center;flex-direction:row;display:flex;align-items:center;justify-content:space-between;background-color:white;">
+        <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderTime}}</view>
+        <view style="font-size:14px;flex:2;">{{item.receiver.name}}</view> 
+        <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderId}}" catchtap="delOrder">
+            <image style="height:20px;width:20px;" src="/image/delete.png"></image> 
+        </view>
+      </view>
+
+       <scroll-view class="order-item-scroll" scroll-x>
+          
+           <view class="order-item-scroll-box" wx:for="{{item.items}}" wx:for-item="val">
+            <image src="{{val.image}}" class="order-item-image"></image>
+          </view>
+
+          <block wx:if="{{item.items.length == 1}}">
+            <view class="order-item-title">
+            <view class="order-item-title-box">
+            <text>{{item.items[0].title}}</text>
+            </view>
+            </view>
+          </block>
+
+
+          <!-- <view style="padding-left:20px;" wx:if="{{item.items.length > 1}}">2. {{item.items[1].name}}</view> 
+          <view style="padding-left:20px;" wx:if="{{item.items.length > 2}}">......</view>  -->
+      </scroll-view>
+
+       <!-- <view style="justify-content:flex-end;width:100%;height:30px;align-items:center;display:flex;flex-direction:row;background-color:white;">
+        <view style="padding-right:40px;font-size:14px;color:#515151;">共{{item.totalQuantity}}件商品</view>
+      </view>  -->
+      <view class='order-item-desc'>
+          <text>共{{item.items.length}}件商品</text>
+          <text class='middle-tip'>实付款:</text>
+          <text class='order-price'>$120.00</text>
+      </view> 
+       <view style="border-top:1px solid #eff3f4;width:100%;height:35px;align-items:center;display:flex;flex-direction:row;background-color:white;justify-content:space-between;">
+         <view style="padding-left:20px;font-size:13px;color:#515151;"> 
+           <!-- 距上次下单已有{{}}天 -->
+        </view> 
+                <view style="margin-right:20rpx;display:flex;border:1px solid #e64949;color:#e64949;padding:4px;font-size:12px;border-radius:3px;" data-order="{{item.orderId}}" data-logo="{{item.logo}}" catchtap="placeOrder">
+         再次下单
+       </view>
+      </view>  
+  </view>
+</view>

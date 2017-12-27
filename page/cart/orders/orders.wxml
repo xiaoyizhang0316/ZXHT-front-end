@@ -1,0 +1,36 @@
+<view class="main">
+
+        <view wx:if="{{hasAddress}}" class="orders-address">
+            <navigator url="/page/mine/addressList/addressList?action=selectOne">
+            <text style="color:#454552;display:block;">收件人信息</text>
+            <text class="orders-address-name">{{address.name}}</text>
+            <text class="orders-address-phone">{{address.phone}}</text>
+            <view class="orders-address-detail">{{address.city + address.detail}}</view>
+            </navigator>
+        </view>
+        <view wx:else class="orders-no-address">
+        <navigator url="/page/mine/addressList/consignee/consignee">添加收货地址</navigator>
+        </view>
+
+        <view class="orders-msg" bindtap='bindExtra'>
+              <view class="orders-msg-label"><text>补充说明:(可选)</text></view>
+              <view><text>{{memo}}</text></view>
+        </view>
+    
+
+
+    <view class="orders-box">
+        <view wx:for="{{orders}}" wx:key="index" class="orders-list">
+            <image class="orders-thumb" src="{{item.image}}"></image>
+            <view>
+                <view class="orders-pro-name">{{item.title}}</view>
+                <view class="orders-pro-price">$ {{item.price}} × {{item.num}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="orders-footer">
+        <view class="orders-footer-total">付款合计：${{total}}</view>
+        <view class="orders-footer-btn" bindtap="placeOrder">提交订单</view>
+    </view>
+</view>

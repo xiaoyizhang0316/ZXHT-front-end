@@ -1,0 +1,79 @@
+<import src="/page/common/templates/goodsList/goodsList-block/goodsList-block.wxml"/>
+<view class="main">
+
+<view class="search-box">
+
+   <swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
+        <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+            <swiper-item>
+                <image src="{{item}}" class="slide-image" width="100%"/>
+            </swiper-item>
+        </block>
+    </swiper>
+
+
+    <view class="search-input">
+      <view style="display:flex;flex:1;">
+        <view>
+          <image style="height:25px;width:25px;" src="/image/public/find.png"></image>   
+        </view>
+        <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindfocus="bindSearch" />
+        </view>
+        <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
+          <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>   
+        </view>
+        <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
+          <image style="height:21px;width:21px; margin-right: 5px;" src="/image/public/scan.png"></image>  
+        </view>        
+      </view>
+  </view>
+  
+  
+    <!-- <view class="selected" style='margin-top:-25px;'>
+          <view class="select-title"><text>店主精选</text></view>
+        <view class="select-top">
+            <view class="select-top-small">
+                <navigator url="list/list">
+                    <image src="/image/s1.png"></image>
+                </navigator>
+            </view>
+            <view class="select-top-small">
+                <navigator url="list/list">
+                    <image src="/image/s2.png"></image>
+                </navigator>
+            </view>
+        </view> 
+         <view class="select-bottom">
+            <navigator url="list/list">
+                <image src="/image/s3.png"></image>
+            </navigator>
+        </view>  
+    </view> -->
+
+
+    <view class="newest" style='margin-top:-30px;background-color:#f6f6f6'>
+        <view class="newest-title"><text>店主推荐</text></view>
+        <!-- <view class="newest-box">
+            <view class="newest-list">
+                <navigator url="/page/details/details">
+                    <image src="/image/product/cranberry.jpg"></image>
+                    <view class="newest-text"><text>Swisse 蔓越莓</text></view>
+                    <view class="newest-text"><text>$10.99</text></view>
+                </navigator>
+            </view>
+            <view class="newest-list">
+                <navigator url="/page/details/details">
+                    <image src="/image/product/liver.jpg"></image>
+                    <view class="newest-text"><text>Swisse 护肝片</text></view>
+                    <view class="newest-text"><text>$120</text></view>
+                </navigator>
+            </view>
+        </view> -->
+    
+
+      <view class="container">
+        <!-- <template is="goodsList" data="{{goodsList}}"/> -->
+        <template is="goodsList-block" data="{{goodsList}}"/>
+      </view>
+</view>
+</view>

@@ -1,0 +1,8 @@
+<view>
+<view class="top-tab flex-wrp flex-tab" style="display:flex;justify-content:space-around;" >
+  <view class="toptab flex-item {{currentNavtab==idx ? 'active' : ''}}" wx:for="{{navTab}}" wx:key="idx" wx:for-index="idx" wx:for-item="itemName" data-idx="{{idx}}" bindtap="switchTab">
+    <text>{{itemName}}</text>
+  </view>
+</view>
+
+</view>

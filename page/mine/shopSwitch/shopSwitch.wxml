@@ -1,0 +1,34 @@
+<!--page/mine/shopSwitch/shopSwitch.wxml-->
+<view class='container'>
+    <view class='top-bar'>
+      您已关注 <text class='shop-num'>{{shopList.length}}</text>个店铺
+    </view>
+    <view class='shop-list'>
+      <radio-group class="shop-radio-group" bindchange="radioChange">
+        <view class='shop-item' wx:for="{{shopList}}">
+            <radio class='shop-item-radio' value="{{index}}"/>
+            <image class='shop-item-image' src="{{item.shop_logo}}"></image>
+            <view class='shop-item-desc'>
+              <view class='shop-item-name'>{{item.shop_name}}</view>
+              <view class='shop-item-sign'>{{item.shop_sign}}</view>
+            </view>
+        </view>
+      </radio-group>
+    </view>
+    <view class='invisible-brick'>
+    </view>
+    <view class='bottom-bar'>
+      <view class='bottom-bar-desc'>
+            <!-- <text>当前选择:</text> -->
+            <block wx:if="{{isSelect}}">
+                <image class='shop-icon' src='/image/shop-color.png'></image>
+                <text class='selected-shop-name'>{{selectedShop.shop_name}}</text>
+            </block>
+            <block wx:else>
+                <!-- <text class='selected-shop-name-none'>暂无</text> -->
+                <image class='shop-icon' src='/image/shop-grey.png'></image>
+            </block>
+      </view>
+      <button type='warn' size='mini'>切换</button>
+    </view>
+</view>

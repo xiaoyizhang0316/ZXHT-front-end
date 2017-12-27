@@ -1,0 +1,39 @@
+<!--addressList.wxml-->
+<view class="container">
+
+  <scroll-view class="addressList-contaniner">
+        <view class="addressList-header">
+            <text>提示:</text>
+            <text wx:if="{{action == 'selectOne'}}">点击选择要使用的地址</text>
+            <text wx:if="{{action != 'selectOne'}}">长按设置默认地址</text>
+        </view>
+        <view class="addressList-item" wx:for="{{addressList}}"  wx:key="{{index}}">
+            <view class="addressList-item-left" data-index="{{index}}" bindtap="selectOne" bindlongpress="setDefault">
+                  <view>
+                        <text class="addressList-item-name">{{item.name}}</text>
+                        <text>{{item.phone}}</text>
+                  </view>
+                  <view>
+                        <text class="addressList-item-default" wx:if="{{item.isDefault == true}}">[默认]</text>
+                        <text>{{item.city + item.detail}}</text>
+                  </view>
+            </view>
+
+              <view class="addressList-item-right">
+                  <navigator class="addressList-item-right-nav" url="editConsignee/editConsignee?index={{index}}">
+                      <text>编辑</text>
+                  </navigator>   
+              </view>
+
+        </view>
+        
+        <view class="addressList-bottom-blank">
+        </view>
+  </scroll-view>
+
+  <view class="bottom-contaniner" bindtap='addConsignee'>
+      <text class='addAddressBtn'>新增收货地址</text>
+  </view>
+
+
+</view>

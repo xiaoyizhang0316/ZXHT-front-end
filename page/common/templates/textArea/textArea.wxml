@@ -1,0 +1,10 @@
+  <view class="bottom-view">
+    <form bindsubmit="submitTextarea">  
+       <view class="search-textarea"> 
+        <textarea value="{{inputContent}}" placeholder='{{placeHolder}}' name="textarea"/>
+       </view> 
+      <view style="display: flex;flex-direction: column; justify-content: center;flex:0.8;">
+        <button form-type="submit" class="button" type="primary" style="margin:15px 10px 0 10px;">确定</button>
+      </view>
+    </form>
+  </view>

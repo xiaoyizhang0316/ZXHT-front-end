@@ -1,0 +1,144 @@
+/* page/index/search/search.wxss */
+
+page {
+  background-color: #fff;
+  /* height: 0rpx; */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start；
+}
+
+.header-contaniner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  height: 60rpx;
+  font-size: 25rpx;
+  border-bottom: 1px #e3e3e3 solid;
+}
+
+.header-box {
+  width: 90%;
+  display: flex;
+}
+
+.header-box button{
+  font-size: 25rpx;
+
+}
+
+.header-input-box image{
+  height: 42rpx;
+  width: 42rpx;
+}
+.header-input-box .find-icon{
+  padding-left: 18rpx;
+  padding-right: 10rpx;
+  padding-top: 6rpx;
+}
+
+.header-input-box .clear-icon{
+  width: 52rpx;
+  padding-right: 20rpx;
+  padding-top: 6rpx;
+}
+
+.header-input-box {
+  display: flex;
+  width: 80%;
+  background-color: #f7f7f7;
+  border:2px #f7f7f7 solid;
+  border-radius:25rpx;
+}
+
+.header-input-box input {
+  width: 100%;
+}
+
+.label-contaniner {
+  position: fixed;
+  top: 102rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-box {
+    width: 89%;
+}
+
+
+.history-box-text{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top:10rpx;
+  padding-bottom:10rpx; 
+}
+
+
+.red-btn {
+  color: #ef3535;
+  font-size: 25rpx;
+  padding-right: 8rpx;
+}
+
+.box-name-text {
+  font-size: 30rpx;
+}
+
+.history-box-label {
+  display: flex;
+  flex-wrap: wrap;
+  width: 92%;
+
+}
+.box-label {
+  background-color: #ddd;
+  display: inline;
+  padding: 10rpx;
+  margin: 20rpx;
+  margin-left: 0rpx;
+  font-size: 26rpx;
+  border-radius:10rpx;
+  max-width: 230rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+
+.title-contaniner {
+  position: fixed;
+  top: 102rpx;
+  z-index: 999;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  font-size: 30rpx;
+}
+
+.title-line {
+  height: 65rpx;
+  width: 90%;
+  border-bottom: 1px #e3e3e3 solid;
+  display: flex;
+  align-items: center;
+  color: #888; 
+}
+
+.high-light-font {
+  color: #000; 
+  /* color: red; */
+}

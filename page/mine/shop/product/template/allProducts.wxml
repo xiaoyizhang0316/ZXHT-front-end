@@ -1,0 +1,64 @@
+<view class="main">
+
+  <view style='flex:1;display: flex;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;'>
+    <view class="search-box">
+      <view class="search-input">
+        <view style="display:flex;flex:1;">
+          <view>
+            <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
+          </view>
+          <input focus="{{focus}}" placeholder="搜索商品模板" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{lastQuery}}" bindinput="bindSearch" />
+        </view>
+        <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
+          <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+        </view>
+        <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
+          <image style="height:21px;width:21px; margin-right: 5px;" src="/image/public/scan.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="filter-box">
+    <view>
+      <picker bindchange="bindBrandChange" value="{{index}}" range="{{brandList}}">
+        <view class='picker-view'>品牌</view>
+      </picker>
+    </view>
+
+    <view>
+      <picker bindchange="bindCateChange" value="{{index}}" range="{{cateList}}">
+        <view class='picker-view'>分类</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class='goods-line-list-container'>
+    <view class='goods-line-list'>
+
+      <block wx:if="{{displayClear == false}}">
+      <view class="goods-line-item goods-line-list-child" wx:for="{{goodsLineList}}" wx:key="{{index}}">
+        <image class='goods-image-clo' src="{{item.thumb}}"></image>
+
+        <text class='goods-name-clo'>{{item.title}}</text>
+
+        <view class="goods-switch-clo">
+          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
+        </view>
+      </view>
+      </block>
+      <block wx:else>
+      <view class="goods-line-item goods-line-list-child" wx:for="{{searchResult}}" wx:key="{{index}}">
+        <image class='goods-image-clo' src="{{item.thumb}}"></image>
+
+        <text class='goods-name-clo'>{{item.title}}</text>
+
+        <view class="goods-switch-clo">
+          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
+        </view>
+      </view>
+      </block>
+
+    </view>
+  </view>
+</view>

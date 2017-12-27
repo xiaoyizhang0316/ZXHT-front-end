@@ -1,0 +1,74 @@
+/* page/mine/shopApply/applySuccess/applySuccess.wxss */
+page{
+  background-color: #f9f9f9 ; 
+}
+
+.container {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center; 
+}
+.success-tips {
+  /* height: 200rpx; */
+  width: 90%;
+  margin-top: 30rpx;
+}
+.wrap {
+  background-color: #fefefe; 
+  margin-bottom:  10px;
+  padding: 7px;
+  position: relative;  
+  border-bottom: 3px solid #e9e9e9;
+  border-right: 2px solid #e9e9e9;
+  border-radius: 5px; 
+  color:#454552; 
+}
+
+.success-notice {
+  font-size: 50rpx;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+.success-desc {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 30rpx;
+  color: #06266f;
+}
+
+.success-operation {
+  margin-top: 20rpx;
+}
+
+.success-operation-text {
+  font-size: 30rpx;
+}
+
+.success-image-list {
+  margin-top: 20rpx;
+  display: flex;
+   justify-content: space-around; 
+  font-size: 24rpx;
+}
+
+.success-image-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 24rpx;
+}
+
+.share-item {
+  flex-basis: 20%;
+}
+
+.back-item {
+  /* flex-basis: 45%; */
+}
+
+.success-image-item image{
+  height: 80rpx;
+  width: 80rpx;
+}

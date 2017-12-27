@@ -1,0 +1,132 @@
+@import '/page/common/common.wxss';
+
+.search-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.head-img  {
+  justify-content: center;
+  display: flex;
+}
+
+.head-img image {
+  width: 80px;
+  height: 80px;
+  /* transform: rotate(-40deg); */
+}
+
+.search-input {
+  width: 95%;
+  margin: 0 auto;
+  border-radius: 50px;
+  border: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  background-color:#f8f8f8;
+  opacity: 0.5;
+   background: linear-gradient(to bottom, #f8f8f8, whitesmoke); 
+    z-index: 1;
+}
+
+.search-input input {
+  font-size: 15px;
+  height: 25px;
+  line-height: 25px;
+  /*display: inline-flex;*/
+  /* flex: 0 0 75%; */
+  /* margin-left: 10px; */
+  width:95%;
+}
+
+.search-input image {
+  width: 28px;
+  height: 28px;
+  /*display: inline-flex;*/
+}
+
+.placeholderstyle {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.filter-box {
+  height: 90rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* margin-top: 10rpx; */
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.filter-box view {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 120rpx; */
+  width: 100%;
+}
+
+.picker-view {
+  /* height: 100%;
+  width: 100%; */
+}
+
+/* goods-line-list start*/
+.goods-line-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.goods-line-list {
+  width: 96%;
+  display: flex;
+  flex-direction: column;
+}
+
+.goods-line-list-child {
+  display: flex;
+   justify-content: space-around;  
+  border-bottom: 1px solid #e6e6e6;
+  align-items: center;
+  height: 92rpx;
+  font-size: 30rpx;
+  color:#888
+}
+
+.goods-line-list-child text{
+  padding: 10rpx; 
+}
+
+.goods-image-clo {
+  flex: 0 0 11%;
+}
+
+.goods-name-clo {
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  flex: 0 0 70%; 
+}
+
+.goods-switch-clo{
+
+} 
+
+
+.goods-line-item image{
+  max-height: 75rpx;
+  max-width: 75rpx;
+  padding: 3rpx; 
+}
+
+/* goods-line-list end*/

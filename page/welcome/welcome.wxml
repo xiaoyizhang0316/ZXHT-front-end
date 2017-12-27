@@ -1,0 +1,3 @@
+<!--page/welcome/welcome.wxml-->
+<image style="width:100%;height:100%;" src="/image/splash.jpg">
+</image>

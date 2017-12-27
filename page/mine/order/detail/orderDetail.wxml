@@ -1,0 +1,148 @@
+<!-- <view class="explain-line" style="margin-top:1px;border-top:1px solid #eff3f4">
+    <view class="inner-explain-line">
+      <view class="explain-text" style="padding-top:3px;padding-bottom:3px;">{{status}}</view>
+       <view class="explain-value" style="justify-content:flex-end;">
+      <image style="height:23px;width:23px;" src="/images/arrow_down.png"></image>  
+      </view>
+    </view>
+  </view> -->
+
+<view style="display:flex;flex-direction:row;border-top:1px solid #eff3f4;align-items:center;">
+  <view style="display:flex;flex-direction:column;flex:3;">
+    <view class="inner-explain-line" style="padding-top:5px;padding-bottom:5px;">
+      <view class="explain-text" style="flex:3;padding-top:3px;padding-bottom:3px;padding-left:9px;">订单编号</view>
+      <view class="explain-value" style="align-items:center;flex:3.5;">{{orderId}}</view>
+      <view class="explain-value" style="align-items:center;border:1px solid #e6e6e6;justify-content:center;flex:1.5;border-radius:3px;" catchtap="copyOrderId">复制</view>
+    </view>
+    <view style="display:flex;">
+      <view class="explain-text" style="flex:2.7;padding-top:3px;padding-bottom:3px;padding-left:9px;">订单日期</view>
+      <view class="explain-value" style="align-items:center;">{{orderTime}}</view>
+    </view>
+  </view>
+
+  <view style="display:flex;align-items:center;justify-content:center;padding-right:3px;background-color:white;flex:1;">
+    <image style="width:75px;height:70px;" src="{{qrcode}}" class="qrcode" />
+  </view>
+</view>
+
+<view class="explain-line" style="flex-direction:column;border-top:1px solid #eff3f4">
+  <view class="inner-explain-line" style="padding-bottom:5px;">
+    <view class="explain-text" style="padding-top:3px;padding-bottom:3px;">商户名称</view>
+    <view class="explain-value">{{merchant}}</view>
+  </view>
+  <view class="inner-explain-line" style="padding-top:0px;">
+    <view class="explain-text" style="padding-top:3px;padding-bottom:3px;">配送方式</view>
+    <view class="explain-value">{{service.name}}</view>
+  </view>
+</view>
+
+<view class="explain-line" style="border-top:5px solid #eff3f4">
+  <view class="inner-explain-line">
+    <view class="explain-text" style="padding-top:3px;padding-bottom:3px;">
+      <!-- <image style="height:40px;width:40px;" src="../../../images/sender.png"></image>   -->
+      发件人
+    </view>
+    <view class="explain-value">
+      <text>{{sender.name}}</text>
+      <text style="border-bottom:1px solid #e8e8e8" catchtap="makeCall" data-mobile="{{sender.phone}}">{{sender.phone}}</text>
+    </view>
+  </view>
+</view>
+
+<view class="explain-line" style="border-top:1px solid #eff3f4">
+  <view class="inner-explain-line" style="padding-bottom:4px;">
+    <view class="explain-text">收件人</view>
+    <view class="explain-value">
+      <view>
+        <text>{{receiver.name}}</text>
+      </view>
+      <view class='explain-phone'>
+        <text style="border-bottom:1px solid #e8e8e8" catchtap="makeCall" data-mobile="{{receiver.phone}}">{{receiver.phone}}</text>
+      </view>
+
+      <view class="explain-line">
+        <view class="receiver-line">
+          <view class="explain-value">
+            <text>{{receiver.identityCard}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="explain-line" style="padding-bottom:5px;">
+        <view class="receiver-line">
+          <view class="explain-value" style="line-height:15px;">
+            {{receiver.city}} {{receiver.detail}}
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+<view class="explain-line" style="border-top:5px solid #eff3f4">
+  <view class="inner-explain-line">
+    <view class="explain-text">物品种类</view>
+  </view>
+</view>
+
+<block wx:key="idx" wx:for-index="idx" wx:for="{{items}}">
+  <view class="explain-line order-cate">
+    <view class="order-cate-image">
+      <image src="{{item.image}}"></image>
+    </view>
+    <view class="order-cate-desc">
+      <view class="order-cate-title">
+        <text>{{item.title}}</text>
+      </view>
+      <view class="order-cate-num">
+        <text>数量:{{item.num}}</text>
+      </view>
+      <view class="order-cate-price">
+        <text>${{item.price}}</text>
+        <button size='mini'>加购物车</button>
+      </view>
+    </view>
+  </view>
+  <!-- <view class="explain-line" style="padding-top:6px;padding-bottom:6px;background-color:{{idx%2==0? '#f6f6f6':''}}">
+      <view class="item-line">
+        <view class="explain-value" style="flex:0.4">
+          {{idx+1}}
+        </view>
+        <view class="explain-value" style="flex:5.5">
+          {{item.name}}
+        </view>
+        <view class="explain-value" style="flex:0.3">
+          X
+        </view>
+        <view class="explain-value" style="flex:0.5">
+          {{item.quantity}}
+        </view>
+        <view class="explain-value" style="flex:1">
+          {{item.weight}}g
+        </view>
+      </view>
+    </view> -->
+</block>
+
+<view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;">
+  <view class="inner-explain-line">
+    <view class="explain-text" style="flex:6">总计
+      <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(仅供参考)</text>
+    </view>
+    <view class="explain-value" style="flex:1">
+      {{totalQuantity}}件
+    </view>
+    <view class="explain-value" style="flex:1">
+      {{totalWeight}}kg
+    </view>
+  </view>
+
+
+  <view wx:if="{{!shared}}" style="display:flex;border-top:1px solid #f0f0f0;bottom:0px;align-items:center;justify-content:space-between;position:fixed;width:100%;height:50px;border:1px solid #f0f0f0;background-color:#f8f8f8">
+    <view style="margin-left:10px;font-size:12px;" data-order="{{orderId}}" bindtap="delOrder">删除订单</view>
+    <view style="margin-right:10px;display:flex;border:1px solid #e64949;color:#e64949;padding:7px;font-size:12px;border-radius:3px;" data-logo="{{logo}}" bindtap="placeOrder">
+      再次下单
+    </view>
+  </view>
+</view>

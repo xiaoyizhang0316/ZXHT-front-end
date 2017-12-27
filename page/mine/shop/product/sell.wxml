@@ -1,0 +1,110 @@
+<view class="main">
+
+  <view style="flex:1;display: flex;padding-top:10px;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;">
+    <view class="search-box">
+      <view class="search-input">
+        <view style="display:flex;flex:1;">
+          <view>
+            <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
+          </view>
+          <input focus="{{focus}}" placeholder="搜索已上架商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindinput="bindSearch" />
+        </view>
+        <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
+          <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+        </view>
+        <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
+          <image style="height:21px;width:21px; margin-right: 5px;" src="/image/public/scan.png"></image>
+        </view>
+      </view>
+    </view>
+    <view style="display:flex;margin-right:9px" catchtap="listProdsTemplate">
+      <image style="height:27px;width:27px;align-self:center" src="/image/add.png"></image>
+    </view>
+  </view>
+
+  <!--  split line -->
+  <view class='goods-line-list-container'>
+    <view class='goods-line-list'>
+      <view class="goods-line-list-child goods-line-list-top">
+        <text class='goods-image-clo'>图片</text>
+        <text class='goods-name-clo'>名称</text>
+        <text class='goods-stock-clo'>库存</text>
+        <text class='goods-price-clo'>价格</text>
+      </view>
+
+
+      <!-- <block wx:if="{{displayClear == false}}"> -->
+        <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
+          <image class='goods-image-clo' src="{{item.thumb}}"></image>
+          <text class='goods-name-clo'>{{item.title}}</text>
+          <text class='goods-stock-clo'>{{item.stock}}</text>
+          <text class='goods-price-clo'>$ {{item.vipPrice}} \n$ {{item.price}}</text>
+        </view>
+      <!-- </block>
+      <block wx:else>
+        <view bindtap="showModal" wx:for="{{searchResult}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
+          <image class='goods-image-clo' src="{{item.thumb}}"></image>
+          <text class='goods-name-clo'>{{item.title}}</text>
+          <text class='goods-stock-clo'>{{item.stock}}</text>
+          <text class='goods-price-clo'>$ {{item.vipPrice}} \n$ {{item.price}}</text>
+        </view>
+      </block> -->
+
+    </view>
+
+  </view>
+
+
+  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">
+  </view>
+  <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
+    <view class='bottom-window-detail'>
+      <view class='bottom-window-detail-left'>
+        <image src='{{selectedProduct.thumb}}'></image>
+      </view>
+
+
+      <view class='bottom-window-detail-right'>
+        <!-- <text class='goods-name-label'>商品名:</text> -->
+        <text class='goods-name'>{{selectedProduct.title}}</text>
+
+        <view style="display:flex;font-size:35rpx;align-items:center;color:#888;">
+          <text>库存:</text>
+          <view class='stock-edit'>
+            <text bindtap='decreaseStock' data-stock="{{selectedProduct.stock}}">-</text>
+            <input type="number" bindinput='updateStock' value='{{selectedProduct.stock}}'></input>
+            <text bindtap='increaseStock' data-stock="{{selectedProduct.stock}}">+</text>
+          </view>
+        </view>
+
+      </view>
+
+
+
+      <image bindtap="hideModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
+
+
+
+    </view>
+    <view class='bottom-window-price'>
+      <view>
+        <text>会员价: $</text>
+        <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
+      </view>
+      <view>
+        <text>普通价: $</text>
+        <input type="digit" bindinput='updatePrice' value='{{selectedProduct.price}}'></input>
+      </view>
+
+    </view>
+    <view class='bottom-window-stock' bindtap='bindExtra'>
+      <view style='color:#888;font-size:35rpx;margin-left:10px;'>额外信息:
+        <text style="text-overflow: ellipsis;">{{memo}}</text>
+      </view>
+
+    </view>
+    <view class='bottom-window-btn' bindtap='priceValidation'>
+      <text>保存信息</text> </view>
+  </view>
+
+</view>

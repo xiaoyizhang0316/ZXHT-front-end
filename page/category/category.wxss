@@ -1,0 +1,110 @@
+@import '../common/common.wxss';
+
+page,.main{
+    height: 100%;
+}
+.categroy-left{
+    position: fixed;
+    /* float: left; */
+    width: 150rpx;
+    height: 100%;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.categroy-left .cate-list{
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    border-left: 3px solid #fff;
+}
+.categroy-left .cate-list.on{
+    color: #AB956D;
+    border-color: #AB956D;
+    background-color: #f1f3f3;
+}
+.categroy-right{
+    float: right;
+    width: 600rpx;
+    height: 100%;
+    overflow: hidden;
+    
+}
+.cate-box{
+    height: 100%;
+    padding:40rpx;
+    box-sizing: border-box;
+     /* background-color: #fbfbfb;  */
+}
+.cate-box .cate-banner image{
+    display: block;
+    width: 100%;
+    height: 190rpx;
+}
+.cate-title{
+    position: relative;
+    height: 30rpx;
+    line-height: 30rpx;
+    padding:30rpx 0 45rpx;
+    text-align: center;
+    color: #AB956D;
+    font-size: 28rpx;
+}
+.cate-title::before{
+    position: absolute;
+    left: 130rpx;
+    top: 43rpx;
+    content: '';
+    width: 70rpx;
+    height: 4rpx;
+    background: #AB956D;
+}
+.cate-title::after{
+    position: absolute;
+    right: 130rpx;
+    top: 43rpx;
+    content: '';
+    width: 70rpx;
+    height: 4rpx;
+    background: #AB956D;
+}
+
+.cate-box .product {
+  display: flex;
+  width: 580rpx;
+  /* height: 150px; */
+  flex-flow: row wrap;
+  align-content: flex-start;
+}
+
+.sub-cate-title {
+  padding-bottom: 15rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  font-family: Microsoft YaHei;
+}
+.product-list{
+    height: 210rpx;
+    text-align: center;
+    /* margin:0 20rpx 20rpx 0; */
+    font-size: 24rpx;
+
+    box-sizing: border-box;
+    background-color: white;
+    flex: 0 0 28%;
+    /* border: 1px solid red; */
+    padding-bottom: 8rpx;
+    padding-left: 8rpx; 
+}
+.product-list image{
+    width: 100%;
+    height: 150rpx;
+    margin-bottom: 5rpx;
+}
+.product-list:nth-child(3n){
+    margin-right: 0;
+}
+
+.product-list .goods-image{
+    width: 100%;
+    height: 160rpx;
+}

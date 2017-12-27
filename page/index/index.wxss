@@ -1,0 +1,115 @@
+@import '../common/common.wxss';
+@import '/page/common/templates/goodsList/goodsList-block/goodsList-block.wxss';
+
+swiper {
+    height: 421.5rpx;
+}
+swiper-item image {
+    width: 100%;
+    height: 100%;
+}
+
+.search-box {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.head-img  {
+  justify-content: center;
+  display: flex;
+}
+
+.head-img image {
+  width: 80px;
+  height: 80px;
+  /* transform: rotate(-40deg); */
+}
+
+.search-input {
+  width: 95%;
+  margin: 0 auto;
+  border-radius: 50px;
+  border: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  background-color:#f8f8f8;
+  opacity: 0.5;
+   background: linear-gradient(to bottom, #f8f8f8, whitesmoke); 
+   position: relative;
+    bottom: 50px;
+    z-index: 1;
+}
+
+.search-input input {
+  font-size: 15px;
+  height: 25px;
+  line-height: 25px;
+  /*display: inline-flex;*/
+  /* flex: 0 0 75%; */
+  /* margin-left: 10px; */
+  width:95%;
+}
+
+.search-input image {
+  width: 28px;
+  height: 28px;
+  /*display: inline-flex;*/
+}
+
+.placeholderstyle {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+
+.select-title,.newest-title{
+    width: 100%;
+    padding:30rpx 0;
+    height: 40rpx;
+    color: #AB956D;
+    text-align: center;
+}
+.select-top-small{
+    width: 375rpx;
+    height: 375rpx;
+    float: left;
+}
+.select-bottom,.select-top{
+    width: 100%;
+    height: 375rpx;
+}
+.select-top-small image,.select-bottom image,.select-top-small navigator,.select-bottom navigator{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.newest-box{
+    padding:0 40rpx;
+    background-color: #f5f6f5;
+}
+.newest-box .newest-list{
+    display: inline-block;
+    width: 325rpx;
+    height: 325rpx;
+    margin:10rpx 20rpx 10rpx 0;
+    border-radius: 10px;
+    text-align: center;
+    background: white;
+}
+.newest-box .newest-list:nth-child(2n){
+    margin-right: 0;
+}
+.newest-box .newest-list image{
+    width: 175rpx;
+    height: 175rpx;
+    margin: 20rpx 0 10rpx;
+}
+.newest-box .newest-list .newest-text{
+    font-size: 32rpx;
+}

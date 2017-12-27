@@ -1,0 +1,11 @@
+<import src="/page/common/templates/goodsList/goodsList.wxml"/>
+
+<view class="main">
+    <!-- <view class="banner">
+        <image src="/image/list1.png"></image>
+    </view> -->
+
+    <view class="container">
+        <template is="goodsList" data="{{goodsList}}"/>
+      </view>
+</view>
