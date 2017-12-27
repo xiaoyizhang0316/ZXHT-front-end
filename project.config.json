@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.6.4",
-	"appid": "wx9c917450295208e7",
-	"projectname": "%E5%95%86%E5%9F%8E",
+	"appid": "wx9bfdbcc805b0c5e0",
+	"projectname": "wx_mall",
 	"condition": {
 		"search": {
 			"current": -1,

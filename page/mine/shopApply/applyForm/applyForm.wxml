@@ -16,11 +16,45 @@
               <text class='pay-text'>支付方式</text>
               <radio-group class="radio-group" bindchange="radioChange">
                 <label class="radio" wx:for="{{payItems}}">
-                  <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+                  <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
                 </label>
               </radio-group>
           </view>
-
+          <view class='payment-tips'>
+            <block wx:if="{{shop.payment == 'RMB'}}">
+                <text>↓↓ 请填写对应的支付信息 ↓↓</text>
+            </block>
+            <block wx:else>
+                <text>↓↓ Please fill in the payment information. ↓↓</text>
+            </block>
+          </view>
+          <view class="top-input-box flex-col">
+            <block wx:if="{{shop.payment == 'RMB'}}">
+                 <text>开户行：</text>
+            </block>
+            <block wx:else>
+                <text>BSB:</text>
+            </block>
+              <input  name="text" value="{{shop.bankName}}"/>
+          </view>
+          <view class="top-input-box flex-col">
+            <block wx:if="{{shop.payment == 'RMB'}}">
+                 <text>户名：</text>
+            </block>
+            <block wx:else>
+                <text>AccountNbr:</text>
+            </block>
+            <input name="phone" value="{{shop.accountNbr}}"/>
+          </view>
+          <view class="top-input-box flex-col">
+            <block wx:if="{{shop.payment == 'RMB'}}">
+                 <text class='account'>账户：</text>
+            </block>
+            <block wx:else>
+                <text class='account'>AccountName:</text>
+            </block>
+            <input  name="phone" value="{{shop.accountName}}"/>
+          </view>
     </view>
 
     <view class="bottom-contaniner">

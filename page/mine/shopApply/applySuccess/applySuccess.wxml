@@ -14,18 +14,24 @@
         <view class='success-operation'>
           <text class='success-operation-text'>请选择您要做的操作：</text>
           <view class='success-image-list'>
-              <view class='success-image-item'>
+              <button class='opt-btn' bindtap='toAddGoods'>
+              <view class='success-image-item' >
                   <image class='add-goods' src='/image/public/addGoods.png'></image>
                   <text>前去上货</text>
               </view>
+              </button>
+              <button class='opt-btn' open-type="share">
               <view class='success-image-item share-item'>
                   <image class='add-goods' src='/image/public/share.png'></image>
                   <text>分享店铺</text>
               </view>
+              </button>
+              <button class='opt-btn' bindtap='toIndex'>
               <view class='success-image-item back-item'>
                   <image class='add-goods' src='/image/public/backIndex.png'></image>
                   <text>返回首页</text>
               </view>
+              </button>
           </view>
         </view>
     </view>

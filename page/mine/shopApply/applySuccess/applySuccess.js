@@ -8,6 +8,28 @@ Page({
   
   },
 
+  onShareAppMessage: function () {
+    return {
+      title: '欢迎，这是xx的海淘店铺',
+      desc: '分享的店铺编号是xxx',
+      path: '/page/index/index?shopid=xxx'
+    }
+  },
+
+  toAddGoods: function (e) {
+    console.log('to add goods')
+    wx.redirectTo({
+      url: '/page/mine/shop/product/sell'
+    })
+  },
+
+  toIndex: function (e) {
+    console.log('to index')
+    wx.switchTab({
+      url: '/page/index/index'
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -56,11 +78,4 @@ Page({
   onReachBottom: function () {
   
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

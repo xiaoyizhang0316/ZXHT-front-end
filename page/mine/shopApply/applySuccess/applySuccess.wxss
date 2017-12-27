@@ -71,4 +71,13 @@ page{
 .success-image-item image{
   height: 80rpx;
   width: 80rpx;
+  padding-top:5px!important;
 }
+
+/* .opt-btn {
+  position: none;
+  margin: 0;
+  padding: 0;
+  height: 136rpx;
+  width: 136rpx;
+} */

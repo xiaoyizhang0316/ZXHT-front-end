@@ -51,15 +51,27 @@ form {
   width: 180rpx;
 }
 
+.account {
+  width: 210rpx!important;
+}
+
 .pay-text {
   width: 100rpx;
 }
 .top-input-box input{
   padding-left: 25rpx;
-  height: 90rpx;
+  height: 84rpx;
   width: 100%;
 }
 
+.payment-tips {
+  height: 70rpx;
+  background-color: #e3e3e3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+}
 .bottom-contaniner {
   align-self: flex-start;
   display: flex;

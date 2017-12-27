@@ -8,25 +8,56 @@ Page({
     shop:{
       name: '',
       sign: '',
-      payment: ''
+      payment: 'RMB',//默认支付方式为人民币
+      bankName: '',
+      accountNbr: '',
+      accountName:''
     },
     payItems:[
-      { name: 'BankPay', value: '银行转账' },
-      { name: 'WeiXinPay', value: '微信支付', checked: 'true' },
-    ]
+      { name: '人民币', value: 'RMB', checked: 'true'},
+      { name: 'Australian Dollar', value: 'AusDollar' },
+    ],
+    tips:{
+      zh_cn :'请填写对应的支付信息',
+      en : 'Please fill in the payment information.'
+    }
+
   },
 
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+    this.setData({
+      'shop.payment': e.detail.value,
+      'shop.bankName': '',
+      'shop.accountNbr' : '',
+      'shop.accountName' : ''
+    })
+    console.log(this.data.shop)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    self = this
+    wx.getUserInfo({
+      success: function (res) {
+        self.setData({
+          'shop.name': res.userInfo.nickName + '的澳洲直邮店',
+          'shop.sign':'我们只是澳洲正品的搬运工~'
+        })
+      }
+    }),
+
+    this.setData({
+      payment: 'RMB',
+    })
   },
 
+  formSubmit: function(e) {
+    wx.redirectTo({
+      url: '/page/mine/shopApply/applySuccess/applySuccess'
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
