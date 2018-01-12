@@ -24,7 +24,7 @@
                     <view class="product-list" wx:for="{{items}}" wx:key="index" wx:for-item="val">
                         <navigator url="./brand/list?id='+ {{val.id}}">
 
-                              <image class="brand-image" src="https://ozexpress.cn/{{val.title}}.jpg"></image>                             
+                              <image wx:if="{{val.title}}"class="brand-image" src="https://ozexpress.cn/{{val.title}}.jpg"></image>                             
                              <view class="classname">
                                 <text>{{val.title}}</text>
                              </view>

@@ -1,34 +1,61 @@
 <!--page/mine/shopSwitch/shopSwitch.wxml-->
 <view class='container'>
-    <view class='top-bar'>
-      您已关注 <text class='shop-num'>{{shopList.length}}</text>个店铺
-    </view>
-    <view class='shop-list'>
-      <radio-group class="shop-radio-group" bindchange="radioChange">
-        <view class='shop-item' wx:for="{{shopList}}">
-            <radio class='shop-item-radio' value="{{index}}"/>
-            <image class='shop-item-image' src="{{item.shop_logo}}"></image>
-            <view class='shop-item-desc'>
-              <view class='shop-item-name'>{{item.shop_name}}</view>
-              <view class='shop-item-sign'>{{item.shop_sign}}</view>
-            </view>
-        </view>
-      </radio-group>
-    </view>
-    <view class='invisible-brick'>
-    </view>
-    <view class='bottom-bar'>
-      <view class='bottom-bar-desc'>
-            <!-- <text>当前选择:</text> -->
-            <block wx:if="{{isSelect}}">
-                <image class='shop-icon' src='/image/shop-color.png'></image>
-                <text class='selected-shop-name'>{{selectedShop.shop_name}}</text>
-            </block>
-            <block wx:else>
-                <!-- <text class='selected-shop-name-none'>暂无</text> -->
-                <image class='shop-icon' src='/image/shop-grey.png'></image>
-            </block>
+  <view class="top-swiper-containerbar">
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
+        已关注
+        <text class='shop-num'>{{shopList.length}}</text>个店铺
       </view>
-      <button type='warn' size='mini'>切换</button>
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+        已关注
+        <text class='shop-num'>{{shopList.length}}</text>个好友
+      </view>
     </view>
+  </view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+    <!-- 关注的店铺 -->
+    <swiper-item>
+      <scroll-view scroll-y='true' style='300px'>
+        <view class='shop-list'>
+          <radio-group class="shop-radio-group" bindchange="radioChange">
+            <view class='shop-item' wx:for="{{shopList}}">
+              <radio class='shop-item-radio' value="{{index}}" />
+              <image class='shop-item-image' src="{{item.shop_logo}}"></image>
+              <view class='shop-item-desc'>
+                <view class='shop-item-name'>{{item.shop_name}}</view>
+                <view class='shop-item-sign'>{{item.shop_sign}}</view>
+              </view>
+            </view>
+          </radio-group>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <!-- 关注的好友 -->
+    <swiper-item>
+      <scroll-view>
+        <view>我是好友</view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+
+
+  <view class='invisible-brick'>
+  </view>
+  <view class='invisible-brick'>
+  </view>
+  
+
+
+  <view class='bottom-bar'>
+    <view class='bottom-bar-desc'>
+      <block wx:if="{{isSelect}}">
+        <image class='shop-icon' src='/image/shop-color.png'></image>
+        <text class='selected-shop-name'>{{selectedShop.shop_name}}</text>
+      </block>
+      <block wx:else>
+        <image class='shop-icon' src='/image/shop-grey.png'></image>
+      </block>
+    </view>
+    <button type='warn' size='mini'>切换</button>
+  </view>
 </view>

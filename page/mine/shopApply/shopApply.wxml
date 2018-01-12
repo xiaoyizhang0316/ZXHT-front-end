@@ -12,7 +12,7 @@
         <text>2. 您推荐的客户和客户所推荐的会直接成为您的客户</text>
         <text>3. 欢迎您来开店，我们需要对您的手机号进行验证，请点击下面进行验证</text>
     </view>
-    <view class='apply-btn'>
+    <view class='apply-btn' style="margin-top:10px">
           <button bindtap='doApply' type='warn'>确认申请</button>
     </view>
   </view>

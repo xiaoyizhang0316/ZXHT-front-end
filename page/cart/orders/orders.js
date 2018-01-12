@@ -28,7 +28,6 @@ Page({
                 break;
             }
           }
-
           self.setData({
             address: res.data[index],
             hasAddress: true

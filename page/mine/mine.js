@@ -1,47 +1,54 @@
 // page/component/new-pages/user/user.js
+var app = getApp()
+var COM = require('../../utils/common.js')
+
 Page({
-  data:{
-    thumb:'',
-    nickname:'',
-    orders:[],
-    hasAddress:false,
-    address:{},
+  data: {
+    thumb: '',
+    nickname: '',
+    orders: [],
+    hasAddress: false,
+    address: {},
     touched: [],
+    openShopButton: false,
   },
-  onLoad(){
+  onLoad() {
     var self = this;
     /**
      * 获取用户信息
      */
-    wx.getUserInfo({
-      success: function(res){
-        self.setData({
-          thumb: res.userInfo.avatarUrl,
-          nickname: res.userInfo.nickName
-        })
-      }
-    }),
+    self.setData({
+      thumb: app.globalData.avatarUrl,
+      nickname: app.globalData.nickName
+    })
+    console.log(self.data.thumb)
 
+    //如果没开过店则显示按钮
+    if (app.globalData.shopOpened == false) {
+      self.setData({
+        openShopButton: true
+      })
+    }
     /**
-     * 发起请求获取订单列表信息
-     */
+     *发起请求获取订单列表信息
+    */
     wx.request({
       url: 'http://www.gdfengshuo.com/api/wx/orders.txt',
-      success(res){
+      success(res) {
         self.setData({
           orders: res.data
         })
       }
     })
   },
-  onShow(){
+  onShow() {
     var self = this;
     /**
      * 获取本地缓存 地址信息
      */
     wx.getStorage({
       key: 'address',
-      success: function(res){
+      success: function (res) {
         self.setData({
           hasAddress: true,
           address: res.data
@@ -49,7 +56,7 @@ Page({
       }
     })
   },
- 
+
 
   touchstart: function (e) {
     var id = e.currentTarget.dataset.id;
@@ -75,7 +82,7 @@ Page({
     })
   },
 
-  consignee: function(event) {
+  consignee: function (event) {
     wx.navigateTo({
       url: '/page/mine/addressList/addressList'
     })
@@ -104,4 +111,7 @@ Page({
       url: '/page/mine/about/us'
     })
   },
+
+
+
 })

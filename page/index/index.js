@@ -19,7 +19,10 @@ Page({
     duration: 800,
     focus:false,
     displayClear: false,
+    userinfo: ''
   },
+
+
 
   onShow: function () {
     setTimeout(function () {
@@ -34,8 +37,10 @@ Page({
    * load the recomemded products by the shop id
    */
   loadRecommendedProducts: function(event) {
-    let shopOpenId = app.globalData.shopOpenId;
-    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + shopOpenId;
+    let openId = app.globalData.openId;
+    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + 'david';
+    // let url = COM.load('CON').PRODUCT_URL + "all";
+    console.log("用openId申請商店商品訊息的url: "+url)
     let products = wx.getStorageSync("products");
 
     // NetUtil.netUtil(url, "GET", "", (shopProducts) => {
@@ -55,7 +60,6 @@ Page({
               "thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
             }
           }
-        }
         this.setData({
           goodsList: this.data.goodsList
         })
@@ -63,6 +67,7 @@ Page({
           key: 'shopProductIds',
           data: shopProductIds,
         })
+      }
       }
     });
     

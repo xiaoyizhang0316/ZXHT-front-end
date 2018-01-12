@@ -19,7 +19,6 @@ Page({
   onLoad: function (options) {
     COM.load('Util').loadBrands();
     COM.load('Util').loadProducts();
-
     let products = wx.getStorageSync("products");
     let brands = wx.getStorageSync("brands");
     // if (brands && products) {

@@ -28,37 +28,36 @@
                 <text>↓↓ Please fill in the payment information. ↓↓</text>
             </block>
           </view>
+
           <view class="top-input-box flex-col">
             <block wx:if="{{shop.payment == 'RMB'}}">
-                 <text>开户行：</text>
+                 <text >开户行: </text><input bindinput="bindbankName" name="name" value="{{shop.name}}"/>    
             </block>
             <block wx:else>
-                <text>BSB:</text>
+                 <text >Bank: </text><input bindinput="bindbankName" name="name" value="{{shop.name}}"/>    
             </block>
-              <input  name="text" value="{{shop.bankName}}"/>
+            <!-- <input  name="phone" value="{{shop.accountName}}"/>  -->
           </view>
           <view class="top-input-box flex-col">
             <block wx:if="{{shop.payment == 'RMB'}}">
-                 <text>户名：</text>
+                 <text>户名：</text><input bindinput="bindaccountNbr" name="AccountNbr" value="{{shop.accountNbr}}"/>
             </block>
             <block wx:else>
-                <text>AccountNbr:</text>
+                <text>AccountNbr:</text><input bindinput="bindaccountNbr" name="AccountNbr" value="{{shop.accountNbr}}"/>
             </block>
-            <input name="phone" value="{{shop.accountNbr}}"/>
           </view>
           <view class="top-input-box flex-col">
             <block wx:if="{{shop.payment == 'RMB'}}">
-                 <text class='account'>账户：</text>
+                <text class='account'>账户：</text><input bindinput="bindaccountName" name="AccountName" value="{{shop.accountName}}"/>
             </block>
             <block wx:else>
-                <text class='account'>AccountName:</text>
+                <text class='account'>AccountName:</text><input bindinput="bindaccountName" name="AccountName" value="{{shop.accountName}}"/>
             </block>
-            <input  name="phone" value="{{shop.accountName}}"/>
           </view>
     </view>
 
     <view class="bottom-contaniner">
-        <button type='primary' class='confirmBtn' form-type="submit">提交</button>
+        <button type='primary' class='confirmBtn' bindtap="formSubmit">提交</button>
     </view>
   </form>
 </view>
