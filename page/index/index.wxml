@@ -2,7 +2,6 @@
 <view class="main">
 
 <view class="search-box">
-
    <swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
         <block wx:for="{{imgUrls}}" wx:key="{{index}}">
             <swiper-item>
@@ -10,7 +9,6 @@
             </swiper-item>
         </block>
     </swiper>
-
 
     <view class="search-input">
       <view style="display:flex;flex:1;">

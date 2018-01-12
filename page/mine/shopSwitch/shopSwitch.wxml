@@ -12,11 +12,10 @@
       </view>
     </view>
   </view>
-  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+  <swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight-88}}px" bindchange="bindChange">
     <!-- 关注的店铺 -->
     <swiper-item>
-      <scroll-view scroll-y='true' style='300px'>
-        <view class='shop-list'>
+        <scroll-view class = 'shop-list' scroll-y="{{true}}" >
           <radio-group class="shop-radio-group" bindchange="radioChange">
             <view class='shop-item' wx:for="{{shopList}}">
               <radio class='shop-item-radio' value="{{index}}" />
@@ -27,9 +26,9 @@
               </view>
             </view>
           </radio-group>
-        </view>
-      </scroll-view>
+        </scroll-view>
     </swiper-item>
+    
     <!-- 关注的好友 -->
     <swiper-item>
       <scroll-view>
@@ -37,13 +36,6 @@
       </scroll-view>
     </swiper-item>
   </swiper>
-
-
-  <view class='invisible-brick'>
-  </view>
-  <view class='invisible-brick'>
-  </view>
-  
 
 
   <view class='bottom-bar'>
