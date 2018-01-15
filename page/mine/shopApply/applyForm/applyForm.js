@@ -70,15 +70,18 @@ Page({
       this.setData({
         payment: 'RMB',
       })
+
+    console.log(app.globalData)
   },
 
   formSubmit: function (e) {
     console.log("pushed")
     self = this
     let url = "https://a5f93900.ngrok.io/api/mall/shops/create"
+    //let url = "https://mini.zhenxianghaitao.com/api/mall/shops/create"
     // let url = COM.load('CON').shopisOpenOrNot;
     COM.load('NetUtil').netUtil(url, "POST", {
-      "open_id": app.globalData.shopOpenId,
+      "open_id": app.globalData.openId,
       "owner": self.data.shop.name,
       "sign": self.data.shop.sign,
       "payment": self.data.shop.payment,

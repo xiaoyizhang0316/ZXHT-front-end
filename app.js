@@ -61,32 +61,36 @@ App({
           key: 'avatarUrl',
           data: self.globalData.avatarUrl
         })
+
+        //然后访问后台得到用户开店信息
+        //访问后端获取openid
+        // let url = COM.load('CON').tryCode_URL + code;
+        let url = "https://a5f93900.ngrok.io/api/mall/test/appid/" + code
+        COM.load('NetUtil').netUtil(url, "GET", "", (openId) => {
+          self.globalData.openId = self.jsonToMap(openId).get("openid")
+
+          //储存用户信息
+          if (self.globalData.userId == false) {
+            self.saveOrUserData()
+          }
+          //查看并设定用户是否开过店
+          self.setShopisOpenedOrNot(self.globalData.openId)
+
+          //把openId存入缓存
+          wx.setStorage(
+            {
+              key: "openId",
+              data: self.globalData.openId
+            }
+          )
+        })
+
       },
       fail: function (res) { },
       complete: function (res) { },
     })
 
-    //访问后端获取openid
-    // let url = COM.load('CON').tryCode_URL + code;
-    let url = "https://a5f93900.ngrok.io/api/mall/test/appid/" + code
-    COM.load('NetUtil').netUtil(url, "GET", "", (openId) => {
-      self.globalData.openId = self.jsonToMap(openId).get("openid")
-
-      //储存用户信息
-      if (self.globalData.userId == false) {
-        self.saveOrUserData()
-      }
-      //查看并设定用户是否开过店
-      self.setShopisOpenedOrNot(self.globalData.openId)
-
-      //把openId存入缓存
-      wx.setStorage(
-        {
-          key: "openId",
-          data: self.globalData.openId
-        }
-      )
-    })
+    
   },
 
   //用户登录后把用户储存在user表里, 把用户是否注册状态存入缓存

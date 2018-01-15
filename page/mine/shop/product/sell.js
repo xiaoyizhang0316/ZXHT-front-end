@@ -40,7 +40,7 @@ Page({
   },
 
   filterProducts: function () {
-    let shopOpenId = app.globalData.shopOpenId;
+    let shopOpenId = app.globalData.openId;
     let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + shopOpenId;
     let products = wx.getStorageSync("products");
 
@@ -53,8 +53,8 @@ Page({
           {
             "productId": shopProduct.productId,
             "title": products[shopProduct.productId].title,
-            "price": shopProduct.price,
-            "vipPrice": shopProduct.vipPrice,
+            "price": shopProduct.nonVipPrice,
+            "vipPrice": shopProduct.vip1Price,
             "stock": shopProduct.stock == 0 ? 10 : shopProduct.stock,
             "thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
             "memo": shopProduct.memo,
