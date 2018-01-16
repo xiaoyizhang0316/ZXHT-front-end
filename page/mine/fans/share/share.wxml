@@ -5,7 +5,7 @@
     <text class="nickname">{{nickname}}</text>
   </view>
 
-  <text class="sign">{{openId}}</text>
+  <text class="sign">{{sign}}</text>
 
   <button open-type="share" class="button">
         分享好友

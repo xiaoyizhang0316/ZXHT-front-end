@@ -6,22 +6,27 @@ Page({
   data: {
     thumb: '',
     nickname: '',
-    openId:'',
+    openId: '',
+    shopId:'',
+    sign:'',
+    shopName:'',
   },
 
   /**
-   * 生命周期函数--监听页面加载
-   */
+  * 生命周期函数--监听页面加载
+  */
   onLoad() {
     var self = this;
     /**
-     * 获取用户信息
-     */
+    * 获取用户信息
+    */
     self.setData({
       thumb: app.globalData.avatarUrl,
       nickname: app.globalData.nickName,
-      openId:app.globalData.openId,
+      openId: app.globalData.openId,
+      shopId: app.globalData.shopId,
     })
+<<<<<<< HEAD
     //let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + 'david';
     // let url = COM.load('CON').PRODUCT_URL + "all";
     console.log(self);
@@ -35,53 +40,62 @@ Page({
           //   goodsList: this.data.goodsList
           // })
        
+=======
+    
+    console.log(self);
+    //let url = COM.load('CON').ShopInfo + self.data.openId;
+    let url = "https://a5f93900.ngrok.io/api/mall/shops/getShopInfo/" + self.data.openId
+    COM.load('NetUtil').netUtil(url, "GET", "", (shopInfo) => {
+      if (shopInfo) {
+        console.log(shopInfo)
+        self.setData({
+        sign: shopInfo.sign
+        //shopName: shopInfo.shopName
+        })
+>>>>>>> 95287ce294621f181f6c96eae460414ae3621bef
       }
     });
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
+  * 生命周期函数--监听页面显示
+  */
   onShow: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
-   */
+  * 生命周期函数--监听页面隐藏
+  */
   onHide: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面卸载
-   */
+  * 生命周期函数--监听页面卸载
+  */
   onUnload: function () {
 
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+  * 页面相关事件处理函数--监听用户下拉动作
+  */
   onPullDownRefresh: function () {
 
   },
 
   /**
-   * 页面上拉触底事件的处理函数
-   */
+  * 页面上拉触底事件的处理函数
+  */
   onReachBottom: function () {
 
   },
 
   /**
-   * 用户点击右上角分享
-   */
+  * 用户点击右上角分享
+  */
   onShareAppMessage: function () {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
     return {
       title: '真享 海淘',
       path: '/page/user?id=123',

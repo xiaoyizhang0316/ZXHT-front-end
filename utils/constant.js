@@ -15,8 +15,8 @@ const tryCode_URL = BASE_URL + "/api/mall/test/appid/";
 const tryAddUser_URL = BASE_URL + "/api/mall/users/saveOrUpdateUserData";
 
 //获得个人用户页面信息
-const shopisOpenOrNot = BASE_URL + "/api/mall/shops/checkOpenShop/"
-const shopSign = BASE_URL + "/api/mall/shops/getShopInfo/"
+const shopisOpenOrNot = BASE_URL + "/api/mall/shops/checkOpenShop/";
+const ShopInfo = BASE_URL + "/api/mall/shops/getShopInfo/";
 
 
 const HEADERS = {
