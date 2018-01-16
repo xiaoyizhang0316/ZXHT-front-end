@@ -20,8 +20,13 @@ App({
     var timestamp = Date.parse(new Date());
     timestamp = timestamp / 1000;
     console.log('App Launch at: ' + timestamp)
-    self.globalData.targetShopId = e.query.targetShopId
+
+    if (e.query.targetShopId != null)
+    {
+      self.globalData.targetShopId = e.query.targetShopId
+    }
     
+
    
     console.log("targetShopId:"+self.globalData.targetShopId)
     wx.getStorage(

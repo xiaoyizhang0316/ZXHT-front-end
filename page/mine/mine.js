@@ -24,33 +24,18 @@ Page({
     console.log(self.data.thumb)
 
    
-    let url = "https://a5f93900.ngrok.io/api/mall/shops/checkOpenShop/" + openId
+    let url = "https://a5f93900.ngrok.io/api/mall/shops/checkOpenShop/" + app.globalData.openId
       
-    COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
-      if (callbackdata == 0) {
-        self.globalData.shopOpened = false
-      } else {
-        self.globalData.shopOpened = true
-        self.globalData.shopId = callbackdata
-        //储存shopID进缓存
-        wx.setStorage({
-          key: 'shopId',
-          data: self.globalData.shopId,
-        })
-      }
-      wx.setStorage({
-        key: 'shopOpened',
-        data: self.globalData.shopOpened
-      })
-    })
-   
+    
+        //如果没开过店则显示按钮
+        if (app.globalData.shopOpened == false) {
+          self.setData({
+            openShopButton: true
+          })
+        }
+     
 
-    //如果没开过店则显示按钮
-    if (app.globalData.shopOpened == false) {
-      self.setData({
-        openShopButton: true
-      })
-    }
+    
     /**
      *发起请求获取订单列表信息
     */
