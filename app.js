@@ -11,15 +11,17 @@ App({
     nickName: null,
     shopOpened: null,
     shopId: null,
-    avatarUrl: null
+    avatarUrl: null,
+    targetShopId: null
   },
 
-  onLaunch: function () {
+  onLaunch: function (e) {
     var self = this
     var timestamp = Date.parse(new Date());
     timestamp = timestamp / 1000;
     console.log('App Launch at: ' + timestamp)
-
+    self.globalData.targetShopId = e.targetShopId
+    console.log(self.globalData.targetShopId)
     wx.getStorage(
       {
         key: "openId",

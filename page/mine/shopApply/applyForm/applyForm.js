@@ -80,9 +80,11 @@ Page({
     let url = "https://a5f93900.ngrok.io/api/mall/shops/create"
     //let url = "https://mini.zhenxianghaitao.com/api/mall/shops/create"
     // let url = COM.load('CON').shopisOpenOrNot;
+    console.log(app.globalData);
     COM.load('NetUtil').netUtil(url, "POST", {
       "open_id": app.globalData.openId,
-      "owner": self.data.shop.name,
+      "owner": app.globalData.nickName,
+      "shopName": self.data.shop.name,
       "sign": self.data.shop.sign,
       "payment": self.data.shop.payment,
       "bankName": self.data.shop.bankName,
@@ -91,6 +93,7 @@ Page({
     }, (callbackdata) => {
       if (callbackdata == true) {
         console.log("成功")
+        app.globalData.shopId = app.globalData.openId
         wx.showModal({
           title: '开店成功',
           content: '您的店铺已开启',

@@ -38,7 +38,8 @@ Page({
    */
   loadRecommendedProducts: function(event) {
     let openId = app.globalData.openId;
-    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + 'david';
+    //let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + 'david';
+    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + app.globalData.openId;
     // let url = COM.load('CON').PRODUCT_URL + "all";
     console.log("用openId申請商店商品訊息的url: "+url)
     let products = wx.getStorageSync("products");

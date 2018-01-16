@@ -22,7 +22,21 @@ Page({
       nickname: app.globalData.nickName,
       openId:app.globalData.openId,
     })
-    console.log(self.data.thumb)
+    //let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + 'david';
+    // let url = COM.load('CON').PRODUCT_URL + "all";
+    console.log(self);
+    let url = "https://a5f93900.ngrok.io/api/mall/shops/getShopInfo/"+self.data.openId
+  
+    // NetUtil.netUtil(url, "GET", "", (shopProducts) => {
+    COM.load('NetUtil').netUtil(url, "GET", "", (shopInfo) => {
+      if (shopInfo) {
+      console.log(shopInfo)
+          // this.setData({
+          //   goodsList: this.data.goodsList
+          // })
+       
+      }
+    });
   },
 
   /**
