@@ -26,21 +26,21 @@ Page({
       openId: app.globalData.openId,
       shopId: app.globalData.shopId,
     })
-<<<<<<< HEAD
-    //let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + 'david';
-    // let url = COM.load('CON').PRODUCT_URL + "all";
-    console.log(self);
-    let url = "https://a5f93900.ngrok.io/api/mall/shops/getShopInfo/"+self.data.openId
+
+    // //let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + 'david';
+    // // let url = COM.load('CON').PRODUCT_URL + "all";
+    // console.log(self);
+    // let url = "https://a5f93900.ngrok.io/api/mall/shops/getShopInfo/"+self.data.openId
   
-    // NetUtil.netUtil(url, "GET", "", (shopProducts) => {
-    COM.load('NetUtil').netUtil(url, "GET", "", (shopInfo) => {
-      if (shopInfo) {
-      console.log(shopInfo)
-          // this.setData({
-          //   goodsList: this.data.goodsList
-          // })
+    // // NetUtil.netUtil(url, "GET", "", (shopProducts) => {
+    // COM.load('NetUtil').netUtil(url, "GET", "", (shopInfo) => {
+    //   if (shopInfo) {
+    //   console.log(shopInfo)
+    //       // this.setData({
+    //       //   goodsList: this.data.goodsList
+    //       // })
        
-=======
+
     
     console.log(self);
     //let url = COM.load('CON').ShopInfo + self.data.openId;
@@ -52,7 +52,7 @@ Page({
         sign: shopInfo.sign
         //shopName: shopInfo.shopName
         })
->>>>>>> 95287ce294621f181f6c96eae460414ae3621bef
+
       }
     });
   },
