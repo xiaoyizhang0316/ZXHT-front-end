@@ -20,8 +20,10 @@ App({
     var timestamp = Date.parse(new Date());
     timestamp = timestamp / 1000;
     console.log('App Launch at: ' + timestamp)
-    self.globalData.targetShopId = e.targetShopId
-    console.log(self.globalData.targetShopId)
+    self.globalData.targetShopId = e.query.targetShopId
+    
+   
+    console.log("targetShopId:"+self.globalData.targetShopId)
     wx.getStorage(
       {
         key: "openId",
