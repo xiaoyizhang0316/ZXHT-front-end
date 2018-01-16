@@ -1,0 +1,16 @@
+<!--page/mine/fans/fans.wxml-->
+<view class='container'>
+  <view bindtap='share' class="top-containerbar">
+        + 添加粉丝
+  </view>
+
+  <scroll-view  scroll-y="{{true}}" >
+      <view class='fan-item' wx:for="{{fans}}">
+        <image class='fan-image' src="{{item.fan_avatar}}"></image>
+        <view class='fan-item-desc'>
+          <view class='fan-item-name'>{{item.fan_name}}</view>
+        </view>
+      </view>
+  </scroll-view>
+  
+  </view>

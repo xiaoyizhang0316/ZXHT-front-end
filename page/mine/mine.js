@@ -112,6 +112,10 @@ Page({
     })
   },
 
-
+  fans: function (event) {
+    wx.navigateTo({
+      url: '/page/mine/fans/fans'
+    })
+  },
 
 })

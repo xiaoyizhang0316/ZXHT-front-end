@@ -24,7 +24,9 @@
     "page/common/templates/textArea/textArea",
     "page/mine/shopApply/shopApply",
     "page/mine/shopApply/applySuccess/applySuccess",
-    "page/mine/shopApply/applyForm/applyForm"
+    "page/mine/shopApply/applyForm/applyForm",
+    "page/mine/fans/fans",
+    "page/mine/fans/share/share"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",

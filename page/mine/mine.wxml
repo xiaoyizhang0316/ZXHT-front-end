@@ -57,6 +57,7 @@
         <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
       </view>
     </view>
+    
     <view class="explain-line" style="background-color:{{touched[5] ? '#e9e9e9':''}}" data-id="5" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="switchShop">
       <view class="explain-block">
         <image style="height:22px;width:22px;" src="../../image/shop.png"></image>
@@ -67,6 +68,7 @@
       </view>
     </view>
   </block>
+  
   <block wx:else>
     <view class="explain-line" style="margin-top:10px;background-color:{{touched[4] ? '#e9e9e9':''}}" data-id="5" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="switchShop">
       <view class="explain-block">
@@ -77,6 +79,17 @@
         <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
       </view>
     </view>
+    
+    <view class="explain-line" style="background-color:{{touched[8] ? '#e9e9e9':''}}" data-id="8" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="fans">
+      <view class="explain-block">
+        <image style="height:22px;width:22px;" src="../../image/fans.png"></image>
+      </view>
+      <view class="explain-text">我的粉丝</view>
+      <view class="explain-block">
+        <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
+      </view>
+    </view>
+
      <view class="explain-line" style="background-color:{{touched[6] ? '#e9e9e9':''}}" data-id="6" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="product">
       <view class="explain-block">
         <image style="height:22px;width:22px;" src="../../image/product.png"></image>

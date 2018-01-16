@@ -1,0 +1,14 @@
+<!--page/mine/fans/share.wxml-->
+<view class='container'>
+  <view class='top-container'>
+    <image src="{{thumb}}" class="thumb"></image>
+    <text class="nickname">{{nickname}}</text>
+  </view>
+
+  <text class="sign">{{openId}}</text>
+
+  <button open-type="share" class="button">
+        分享好友
+  </button>
+
+</view>

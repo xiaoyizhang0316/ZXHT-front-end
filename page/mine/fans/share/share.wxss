@@ -1,0 +1,53 @@
+/* page/mine/fans/share */
+
+page {
+  height: 100%;
+}
+
+.container {
+  background-color: #fafafa;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+}
+
+.top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.thumb{
+    border-radius: 50%;
+    height: 160rpx;
+    width: 160rpx;
+    margin-top:50rpx;
+    margin-bottom: 50rpx;
+}
+
+.nickname{
+  font-size: 40rpx;
+  text-align: center;
+  margin-bottom:50rpx;
+  color:#000;
+}
+
+.sign{
+  font-size: 40rpx;
+  text-align: center;
+  margin-bottom:300rpx;
+  color:#000;
+}
+
+.button{
+  background-color: #09bb07;
+  width:500rpx;
+  color:#fafafa;
+}
+
+
+
