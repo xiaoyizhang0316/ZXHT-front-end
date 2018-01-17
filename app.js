@@ -21,14 +21,7 @@ App({
     timestamp = timestamp / 1000;
     console.log('App Launch at: ' + timestamp)
 
-    if (e.query.targetShopId != null)
-    {
-      self.globalData.targetShopId = e.query.targetShopId
-    }
     
-
-   
-    console.log("targetShopId:"+self.globalData.targetShopId)
     wx.getStorage(
       {
         key: "openId",
@@ -39,17 +32,21 @@ App({
           wx.login({
             success: function (res) {
               self.setuserinfo(res.code)
+
             }
           })
         }
       })
+    
     self.globalData.shopId = wx.getStorageSync('shopId')
     self.globalData.nickName = wx.getStorageSync('nickname')
     self.globalData.shopOpened = wx.getStorageSync('shopOpened')
     self.globalData.userId = wx.getStorageSync('userId')
     self.globalData.avatarUrl = wx.getStorageSync('avatarUrl')
-
+    self.globalData.targetShopId = wx.getStorageSync('targetShopId')   
   },
+
+  
   //使用授权code获得并储存openid与nickname
   setuserinfo: function (code) {
     var self = this
@@ -92,6 +89,7 @@ App({
               data: self.globalData.openId
             }
           )
+
         })
 
       },
@@ -152,6 +150,7 @@ App({
 
   onShow: function () {
     console.log('App Show')
+    console.log(this.globalData)
   },
   onHide: function () {
     console.log('App Hide')
