@@ -66,12 +66,9 @@ Page({
         })
       }
     }),
-
       this.setData({
         payment: 'RMB',
       })
-
-    console.log(app.globalData)
   },
 
   formSubmit: function (e) {
@@ -101,6 +98,12 @@ Page({
         wx.redirectTo({
           url: '/page/mine/shopApply/applySuccess/applySuccess'
         })
+        app.globalData.shopOpened = true
+        wx.setStorage({
+          key: 'shopOpened',
+          data: true
+        })
+        
       }
       else {
         console.log("失败")
@@ -110,6 +113,7 @@ Page({
         })
       }
     })
+    
   },
       /**
        * 生命周期函数--监听页面初次渲染完成

@@ -18,6 +18,9 @@ const tryAddUser_URL = BASE_URL + "/api/mall/users/saveOrUpdateUserData";
 const shopisOpenOrNot = BASE_URL + "/api/mall/shops/checkOpenShop/";
 const ShopInfo = BASE_URL + "/api/mall/shops/getShopInfo/";
 
+//获得，更新关于自己店铺的信息
+const getMyShopInfo = BASE_URL + "/api/mall/shops/openId/{openId}"
+const updateMyShopInfo = BASE_URL + "/api/mall/shops/openId/update"
 
 const HEADERS = {
     'content-type': 'application/json',

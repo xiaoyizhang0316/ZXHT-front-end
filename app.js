@@ -48,7 +48,7 @@ App({
     self.globalData.shopOpened = wx.getStorageSync('shopOpened')
     self.globalData.userId = wx.getStorageSync('userId')
     self.globalData.avatarUrl = wx.getStorageSync('avatarUrl')
-
+    console.log(self.globalData)
   },
   //使用授权code获得并储存openid与nickname
   setuserinfo: function (code) {
@@ -98,8 +98,6 @@ App({
       fail: function (res) { },
       complete: function (res) { },
     })
-
-    
   },
 
   //用户登录后把用户储存在user表里, 把用户是否注册状态存入缓存
