@@ -1,7 +1,8 @@
 <!--page/mine/fans/fans.wxml-->
 <view class='container'>
   <view bindtap='share' class="top-containerbar">
-        + 添加粉丝
+        <image class='fan-image' src="/image/add_user.png"></image>
+        添加粉丝
   </view>
 
   <scroll-view  scroll-y="{{true}}" >
@@ -13,4 +14,4 @@
       </view>
   </scroll-view>
   
-  </view>
+</view>

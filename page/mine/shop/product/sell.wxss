@@ -70,16 +70,16 @@
 
 .goods-line-list-child {
   display: flex;
-   justify-content: space-around;  
+  justify-content: space-around;  
   border-bottom: 1px solid #e6e6e6;
   align-items: center;
   height: 90rpx;
-  font-size: 30rpx;
+  font-size: 29rpx;
   color: #888;
 }
 
 .goods-line-list-child text{
-  padding: 10rpx; 
+  padding: 0rpx; 
 }
 
 .goods-line-list-top {
@@ -89,18 +89,18 @@
 }
 
 .goods-image-clo {
-  flex: 1;
+  flex: 0.6;
 }
 
 .goods-name-clo {
   overflow:hidden;
   white-space:nowrap;
   text-overflow:ellipsis;
-  flex: 4; 
+  flex: 3; 
 }
 
  .goods-stock-clo {
-  flex: 1;
+  flex: 0.8;
 }
 
 .goods-price-clo {
@@ -201,9 +201,16 @@
   padding: 10rpx;
 }
 
+.bottom-price {
+  border-top: 1px solid #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 96%;
+}
+
 .bottom-window-price {
   border-bottom: 1px solid #e6e6e6;
-  border-top: 1px solid #e6e6e6;
   display: flex;
   align-items: center;
   width: 96%;
@@ -211,27 +218,46 @@
 
 .bottom-window-price view {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   height: 90rpx;
-  font-size: 35rpx;
+  font-size: 33rpx;
   color:#888;
 }
+
 
 .bottom-window-price view>text {
   width: 280rpx;
   margin-left:10px;
 }
 
-.bottom-window-stock {
-  width: 94%;
-  height: 120rpx;
-  font-size: 40rpx;
+.bottom-window-price-start {
+  border-bottom: 1px solid #e6e6e6;
   display: flex;
   align-items: center;
+  width: 96%;
+}
+
+.bottom-window-price-start view {
+  display: flex;
+  align-items: center;
+  height: 90rpx;
+  font-size: 33rpx;
+  color:#888;
+}
+
+.bottom-window-price-start view>text {
+  width: 147rpx;
+  margin-left:10px;
+}
+
+.bottom-window-stock {
+  width: 94%;
+  height: 400rpx;
+  font-size: 40rpx;
+  display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 5rpx;
+  margin-top:10rpx;
+  margin-bottom: 10rpx;
 }
 
 .stock-edit{

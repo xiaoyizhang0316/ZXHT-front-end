@@ -1,12 +1,13 @@
 
 page {
-  background-color: #f8f8f8;
+  background-color: #efeff4;
 }
 .search-textarea {
   width: 95%;
   margin: 0 auto;
   border-radius: 3px;
-  border: 1px solid #4fbdfa;
+  border: 1px solid #efeff4;
+  background-color: white;
   display: flex;
   flex-direction: row;
   height: 320rpx;
@@ -18,21 +19,20 @@ page {
 }
 
 .bottom-view {
-  border:0px solid #ef6282;
   border-radius: 8rpx;
   flex-direction: column;
-  background-color:#f8f8f8;
+  background-color:#efeff4;
   padding-top: 10px;
   display: flex;
   flex:1;
   font-size: 15px;
   align-self:center;
-  width:99%;
+  justify-content: center;
 }
 
 .button {
-  height:33px;
-  font-size:0.9em;
+  height:44px;
+  font-size:1em;
   margin:10px;
   justify-content: center;
 }
