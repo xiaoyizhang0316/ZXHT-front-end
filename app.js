@@ -45,6 +45,36 @@ App({
     self.globalData.avatarUrl = wx.getStorageSync('avatarUrl')
     self.globalData.targetShopId = wx.getStorageSync('targetShopId')   
   },
+  setTargetShop: function () {
+    //得到传输过来的目标商铺
+    if (e.query.targetShopId != null) {
+      let fan = "o0_gG0SMh2lLuCKHw-xHDmNU0WtQ"
+      let shop = "o0_gG0WhaJLavpnNZq9Il-LVAKdY"
+      let url = "https://a5f93900.ngrok.io/api/mall/users/applyToShop/"
+      COM.load('NetUtil').netUtil(url, "POST", { "open_id": fan, "shop_id": shop }, (callback) => {
+        if (callback == false) {
+          //通知用户显示自己或者什么都不显示或者显示访问上一个商店
+          wx.showToast({
+            title: "已申请进入本店铺，或正在审核中，请稍等后再尝试",
+            duration: 1500,
+            mask: true
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 1000)
+          //to--do
+        } else {
+          //将得到的shopid 写入缓存并改写global shopid
+          wx.setStorage({
+            key: 'targetShopId',
+            data: shop,
+          })
+          self.globalData.targetShopId = e.query.targetShopId
+        }
+      })
+
+    }
+  },
 
   
   //使用授权code获得并储存openid与nickname
