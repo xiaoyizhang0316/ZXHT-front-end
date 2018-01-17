@@ -14,6 +14,7 @@ Page({
   },
   onLoad() {
     var self = this;
+    
     /**
      * 获取用户信息
      */
@@ -21,21 +22,15 @@ Page({
       thumb: app.globalData.avatarUrl,
       nickname: app.globalData.nickName
     })
-    console.log(self.data.thumb)
 
-   
-    let url = "https://a5f93900.ngrok.io/api/mall/shops/checkOpenShop/" + app.globalData.openId
-      
-    
-        //如果没开过店则显示按钮
-        if (app.globalData.shopOpened == false) {
-          self.setData({
-            openShopButton: true
-          })
-        }
-     
 
-    
+    //如果没开过店则显示按钮
+    if (app.globalData.shopOpened == false) {
+      self.setData({
+        openShopButton: true
+      })
+    }
+
     /**
      *发起请求获取订单列表信息
     */
@@ -53,6 +48,7 @@ Page({
     /**
      * 获取本地缓存 地址信息
      */
+
     wx.getStorage({
       key: 'address',
       success: function (res) {
@@ -62,6 +58,11 @@ Page({
         })
       }
     })
+    if (app.globalData.shopOpened == true) (
+      self.setData({
+        openShopButton: false
+      })
+    )
   },
 
 
@@ -124,5 +125,11 @@ Page({
       url: '/page/mine/fans/fans'
     })
   },
+
+  myShop: function(event){
+    wx.navigateTo({
+      url: '/page/mine/myShop/myShop'
+    })
+  }
 
 })

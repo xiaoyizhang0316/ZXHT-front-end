@@ -86,17 +86,38 @@
 
 
     </view>
-    <view class='bottom-window-price'>
-      <view>
-        <text>会员价: $</text>
-        <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
-      </view>
-      <view>
-        <text>普通价: $</text>
-        <input type="digit" bindinput='updatePrice' value='{{selectedProduct.price}}'></input>
+
+    <view class='bottom-price'>
+      <view class='bottom-window-price-start'>
+          <view>
+            <text>普通价: $</text>
+            <input type="digit" bindinput='updatePrice' value='{{selectedProduct.price}}'></input>
+          </view>
       </view>
 
+      <view class='bottom-window-price'>
+        <view>
+          <text>青铜价: $</text>
+          <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
+        </view>
+        <view>
+          <text>白银价: $</text>
+          <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
+        </view>
+      </view>
+
+      <view class='bottom-window-price'>
+        <view>
+          <text>黄金价: $</text>
+          <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
+        </view>
+        <view>
+          <text>王者价: $</text>
+          <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
+        </view>
+      </view>
     </view>
+
     <view class='bottom-window-stock' bindtap='bindExtra'>
       <view style='color:#888;font-size:35rpx;margin-left:10px;'>额外信息:
         <text style="text-overflow: ellipsis;">{{memo}}</text>

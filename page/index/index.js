@@ -9,9 +9,10 @@ Page({
   data: {
     goodsList: {},
     imgUrls: [
-      '/image/index/b1.jpg',
-      '/image/index/b2.jpg',
-      '/image/index/b3.jpg'
+      'https://s18.postimg.org/hbwxwiwmx/image.png',
+      'https://s18.postimg.org/v5lalkhih/image.png',
+      'https://s18.postimg.org/5zkcept2x/image.png',
+      'https://s18.postimg.org/hbwxwih7d/image.png'
     ],
     indicatorDots: false,
     autoplay: false,

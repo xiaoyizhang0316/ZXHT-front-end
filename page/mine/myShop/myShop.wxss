@@ -1,4 +1,4 @@
-@import '../common/common.wxss';
+@import '../../common/common.wxss';
 page {
   background-color: #eff3f4;
 }
@@ -53,4 +53,16 @@ page {
   align-items:center;
 }
 
+.bottom-contaniner {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 68%;
+}
 
+.confirmBtn {
+  width: 90%;
+  margin-top: 27rpx;
+}

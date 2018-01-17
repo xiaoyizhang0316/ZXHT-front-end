@@ -97,8 +97,8 @@ Page({
   */
   onShareAppMessage: function () {
     return {
-      title: '真享 海淘22222',
-      path: '/page/index/index?targetShopId=123',
+      title: '真享 海淘',
+      path: '/page/mine/fans/share/share?targetShopId=123',
       success: function (res) {
         // 转发成功
       },
