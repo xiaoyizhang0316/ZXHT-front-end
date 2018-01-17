@@ -14,7 +14,7 @@ Page({
   },
   onLoad() {
     var self = this;
-
+    
     /**
      * 获取用户信息
      */
@@ -108,9 +108,9 @@ Page({
     })
   },
 
-  myShop: function (event) {
+  product: function (event) {
     wx.navigateTo({
-      url: '/page/mine/myShop/myShop'
+      url: '/page/mine/shop/product/sell'
     })
   },
 
@@ -118,9 +118,18 @@ Page({
     wx.navigateTo({
       url: '/page/mine/about/us'
     })
+  },
+
+  fans: function (event) {
+    wx.navigateTo({
+      url: '/page/mine/fans/fans'
+    })
+  },
+
+  myShop: function(event){
+    wx.navigateTo({
+      url: '/page/mine/myShop/myShop'
+    })
   }
-
-
-
 
 })

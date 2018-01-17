@@ -35,13 +35,7 @@ Page({
     COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
       console.log("nihao")
       console.log(myShopInfo)
-<<<<<<< HEAD
-     })
-    
-     console.log("nihao")
-=======
     })
-
   },
 
 
@@ -73,7 +67,7 @@ Page({
     wx.navigateTo({
       url: '/page/mine/shop/product/sell'
     })
->>>>>>> 28d9508e58624a7c47c8c0d05c4901ae983cbc63
+
   },
 
   confirmChange(event) {
