@@ -21,14 +21,11 @@ App({
     timestamp = timestamp / 1000;
     console.log('App Launch at: ' + timestamp)
 
-    if (e.query.targetShopId != null)
-    {
+    if (e.query.targetShopId != null) {
       self.globalData.targetShopId = e.query.targetShopId
     }
-    
 
-   
-    console.log("targetShopId:"+self.globalData.targetShopId)
+    console.log("targetShopId:" + self.globalData.targetShopId)
     wx.getStorage(
       {
         key: "openId",
@@ -105,11 +102,19 @@ App({
     var self = this
     let url = "https://a5f93900.ngrok.io/api/mall/users/saveOrUpdateUserData"
     // let url = COM.load('CON').tryAddUser_URL;
-    COM.load('NetUtil').netUtil(url, "POST", { "open_id": self.globalData.openId, "name": self.globalData.nickName }, (callback) => {
-      wx.setStorage({
-        key: 'userId',
-        data: callback,
-      })
+    wx.getUserInfo({
+      success: function (res) {
+        let avatarUrl = res.userInfo.avatarUrl
+        let country = res.userInfo.country
+        let province = res.userInfo.province
+        let city = res.userInfo.city
+        COM.load('NetUtil').netUtil(url, "POST", { "open_id": self.globalData.openId, "name": self.globalData.nickName, "avatarUrl": avatarUrl, "country": country, "province": province, "city": city }, (callback) => {
+          wx.setStorage({
+            key: 'userId',
+            data: callback,
+          })
+        })
+      }
     })
   },
 

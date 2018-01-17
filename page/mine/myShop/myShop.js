@@ -10,6 +10,7 @@ Page({
     paymentMethod: null,
     thumb: null,
     nickName: null,
+    touched: [],
     accountDetail:
     {
       //开户行
@@ -30,11 +31,42 @@ Page({
     let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + wx.getStorageSync("openId")
     console.log(url)
     COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
+      console.log("nihao")
       console.log(myShopInfo)
-     })
-     console.log("nihao")
+    })
+
   },
-  
+
+
+  touchstart: function (e) {
+    var id = e.currentTarget.dataset.id;
+    var array = this.data.touched;
+    array[id] = true;
+    this.setData({
+      touched: array
+    })
+  },
+
+  touchend: function (e) {
+    var id = e.currentTarget.dataset.id;
+    var array = this.data.touched;
+    array[id] = false;
+    this.setData({
+      touched: array
+    })
+  },
+
+  fans: function (event) {
+    wx.navigateTo({
+      url: '/page/mine/fans/fans'
+    })
+  },
+
+  product: function (event) {
+    wx.navigateTo({
+      url: '/page/mine/shop/product/sell'
+    })
+  },
 
   confirmChange(event) {
 
