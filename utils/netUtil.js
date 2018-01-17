@@ -35,9 +35,11 @@ function netUtil(url, method,body, callBack) {
           duration: 1500,
           mask: true
         })
+        
       }
       setTimeout(function () {
         wx.hideToast()
+        wx.hideLoading()
       }, 1000)
       
     },

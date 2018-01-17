@@ -22,6 +22,7 @@ Page({
   },
 
   onLoad() {
+    
     var self = this;
     self.setData({
       thumb: wx.getStorageSync("avatarUrl"),
@@ -29,9 +30,11 @@ Page({
     })
     let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + wx.getStorageSync("openId")
     console.log(url)
+    
     COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
       console.log(myShopInfo)
      })
+    
      console.log("nihao")
   },
   
