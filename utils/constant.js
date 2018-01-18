@@ -21,7 +21,9 @@ const ShopInfo = BASE_URL + "/api/mall/shops/getShopInfo/";
 //获得，更新关于自己店铺的信息
 const getMyShopInfo = BASE_URL + "/api/mall/shops/openId/{openId}"
 const updateMyShopInfo = BASE_URL + "/api/mall/shops/openId/update"
-
+const FANS_LIST_URL = BASE_URL + "/api/mall/users/getFansApplyToShop/"
+const FANS_ACCESS_URL = BASE_URL + "/api/mall/users/updateFansAccess"
+const FANS_VIP_URL = BASE_URL + "/api/mall/users/updateFansVipLevel"
 const HEADERS = {
     'content-type': 'application/json',
     'Authorization': 'Basic ZXhwcmVzczozeTZGUkAyRw=='
@@ -43,7 +45,9 @@ module.exports = {
   tryAddUser_URL: tryAddUser_URL,
   shopisOpenOrNot: shopisOpenOrNot,
   HEADERS: HEADERS,
-
+  FANS_LIST_URL: FANS_LIST_URL,
+	FANS_VIP_URL: FANS_VIP_URL,
+	FANS_ACCESS_URL : FANS_ACCESS_URL,
   BAR_CODE_URL: BAR_CODE_URL,
   SEARCH_URL: SEARCH_URL
 }
