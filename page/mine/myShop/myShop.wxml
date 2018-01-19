@@ -1,8 +1,7 @@
 <view class="main">
   <view style='background-color:white;padding:10px;'>
     <view class="header">
-      <image src="{{thumb}}" class="thumb"></image>
-      <text class="nickname">{{nickName}}</text>
+      <text class="shoptitle">{{shopName}}</text>
     </view>
   </view>
 
@@ -36,37 +35,15 @@
   </view>
 
 
-  <view class="explain-line" style="margin-top:10px;background-color:{{touched[4] ? '#e9e9e9':''}}" data-id="4" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="order">
+  <view class="explain-line" style="margin-top:10px;background-color:{{touched[4] ? '#e9e9e9':''}}" data-id="4" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="accountDetail">
     <view class="explain-block">
       <image style="height:22px;width:22px;" src="../../../image/spending.png"></image>
     </view>
-    <view class="explain-text">店铺名称</view>
+    <view class="explain-text">店铺信息</view>
     <view class="explain-block">
       <image style="height:23px;width:23px;" src="../../../image/arrow_down.png"></image>
     </view>
   </view>
 
-  <view class="explain-line" style="background-color:{{touched[5] ? '#e9e9e9':''}}" data-id="5" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="pendingPay">
-    <view class="explain-block">
-      <image style="height:22px;width:22px;" src="../../../image/product.png"></image>
-    </view>
-    <view class="explain-text">店铺签名</view>
-    <view class="explain-block">
-      <image style="height:23px;width:23px;" src="../../../image/arrow_down.png"></image>
-    </view>
-  </view>
-
-  <view class="explain-line" style="background-color:{{touched[6] ? '#e9e9e9':''}}" data-id="6" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="receive">
-    <view class="explain-block">
-      <image style="height:22px;width:22px;" src="../../../image/courier.png"></image>
-    </view>
-    <view class="explain-text">收款账户</view>
-    <view class="explain-block">
-      <image style="height:23px;width:23px;" src="../../../image/arrow_down.png"></image>
-    </view>
-  </view>
-
-  <view class="bottom-contaniner">
-    <button type='primary' class='confirmBtn' bindtap="confirmChange">保存并确认</button>
-  </view>
+  
 </view>

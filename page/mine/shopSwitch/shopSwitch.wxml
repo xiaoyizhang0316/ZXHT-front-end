@@ -4,9 +4,9 @@
       已关注<text class='shop-num'>{{shopLineList.length}}</text>个店铺
   </view>
 
-  <scroll-view class = 'shop-list' scroll-y="{{true}}" style="height:{{scrollHeight}}px" >
+  <scroll-view class = 'shop-list' scroll-y="{{true}}" style="height:{{winHeight-88}}px" >
     <radio-group class="shop-radio-group" bindchange="radioChange">
-      <view class='shop-item' wx:for="{{shopLineList}}" wx:key="{{index}}" data-id="{{item.id}}">
+      <view class='shop-item' wx:for="{{shopList}}" wx:key="{{index}}" data-id="{{item.id}}">
         <radio class='shop-item-radio' value="{{index}}" />
         <image class='shop-item-image' src="{{item.shop_logo}}"></image>
         <view class='shop-item-desc'>
