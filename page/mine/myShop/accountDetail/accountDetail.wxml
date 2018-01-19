@@ -6,10 +6,10 @@
     <view class="top-contaniner">
 
           <view class="top-input-box flex-col">
-              <text>店铺名</text><input placeholder="请输入店铺名称" name="name" value="{{shop.name}}"/>
+              <text>店铺名</text><input bindinput="bindShopName" placeholder="请输入店铺名称" name="name" value="{{shop.name}}"/>
           </view>
           <view class="top-input-box flex-col">
-              <text>店铺签名</text><input placeholder="请输入店铺签名" name="phone" value="{{shop.sign}}"/>
+              <text>店铺签名</text><input bindinput="bindShopSign" placeholder="请输入店铺签名" name="phone" value="{{shop.sign}}"/>
           </view>
           <view class="top-input-box flex-col">
               <text class='pay-text'>支付方式</text>

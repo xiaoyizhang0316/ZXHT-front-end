@@ -90,3 +90,10 @@ form {
   width: 90%;
   margin-top: 27rpx;
 }
+
+/* .explain-text {
+  display: flex;
+  flex:9;
+  justify-content:flex-start;
+  align-items:center;
+} */

@@ -1,5 +1,4 @@
 <view class="main">
-
   <view style="flex:1;display: flex;padding-top:10px;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;">
     <view class="search-box">
       <view class="search-input">
@@ -34,12 +33,12 @@
 
 
       <!-- <block wx:if="{{displayClear == false}}"> -->
-        <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
-          <image class='goods-image-clo' src="{{item.thumb}}"></image>
-          <text class='goods-name-clo'>{{item.title}}</text>
-          <text class='goods-stock-clo'>{{item.stock}}</text>
-          <text class='goods-price-clo'>$ {{item.vipPrice}} \n$ {{item.price}}</text>
-        </view>
+      <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
+        <image class='goods-image-clo' src="{{item.thumb}}"></image>
+        <text class='goods-name-clo'>{{item.title}}</text>
+        <text class='goods-stock-clo'>{{item.stock}}</text>
+        <text class='goods-price-clo'>$ {{item.vipPrice}} \n$ {{item.price}}</text>
+      </view>
       <!-- </block>
       <block wx:else>
         <view bindtap="showModal" wx:for="{{searchResult}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
@@ -49,14 +48,11 @@
           <text class='goods-price-clo'>$ {{item.vipPrice}} \n$ {{item.price}}</text>
         </view>
       </block> -->
-
     </view>
-
   </view>
 
 
-  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">
-  </view>
+  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
   <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
     <view class='bottom-window-detail'>
       <view class='bottom-window-detail-left'>
@@ -84,15 +80,14 @@
       <image bindtap="hideModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
 
 
-
     </view>
 
     <view class='bottom-price'>
       <view class='bottom-window-price-start'>
-          <view>
-            <text>市场价: $</text>
-            <input type="digit" bindinput='updatePrice' value='{{selectedProduct.price}}'></input>
-          </view>
+        <view>
+          <text>市场价: $</text>
+          <input type="digit" bindinput='updatePrice' value='{{selectedProduct.price}}'></input>
+        </view>
       </view>
 
       <view class='bottom-window-price'>

@@ -26,7 +26,16 @@ Page({
     }
 
   },
-
+  bindShopName: function (e) {
+    this.setData({
+      'shop.name': e.detail.value
+    })
+  },
+  bindShopSign: function (e) {
+    this.setData({
+      'shop.sign': e.detail.value
+    })
+  },
   bindbankName: function (e) {
     this.setData({
       'shop.bankName': e.detail.value
@@ -68,7 +77,6 @@ Page({
         'shop.accountNbr': myShopInfo.accountNbr,
         'shop.accountName': myShopInfo.accountName,
         'shop.shopId': wx.getStorageSync('shopId')
-      
       })
       console.log(self.data.shop)
 
@@ -121,7 +129,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

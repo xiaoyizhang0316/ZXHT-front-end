@@ -23,7 +23,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let self = this
     this.listProducts();
+
+    //获得所有品牌
+    let allbrands = []
+    let urlbrands = COM.load('CON').BRAND_URL + '/all'
+    COM.load('NetUtil').netUtil(urlbrands, 'GET', "", brands => {
+      for (var x in brands) {
+        allbrands.push(brands[x].title)
+      }
+      self.setData({
+        brandList: allbrands
+      });
+    });
+    //获得所有分类
+    let urlcates = COM.load('CON').CATEGORY_URL + '/all'
+    let allcategories = []
+    COM.load('NetUtil').netUtil(urlcates, 'GET', "", categories => {
+      for (var x in categories) {
+        allcategories.push(categories[x].name);
+      };
+      self.setData({
+        cateList: allcategories
+      });
+    });
   },
 
   listProducts: function () {
@@ -58,28 +82,28 @@ Page({
             COM.load('NetUtil').netUtil(url, 'DELETE', product, function (res) {
               let shopProductIds = wx.getStorageSync("shopProductIds");
               shopProductIds = shopProductIds.filter(o => o != e.currentTarget.dataset.id),
-              wx.setStorage({
-                key: 'shopProductIds',
-                data: shopProductIds,
-                success:function() {
-                  for (let i = 0; i < self.data.goodsLineList.length; i++) {
-                    if (self.data.goodsLineList[i].id == e.currentTarget.dataset.id) {
-                      self.data.goodsLineList[i].selected = false;
+                wx.setStorage({
+                  key: 'shopProductIds',
+                  data: shopProductIds,
+                  success: function () {
+                    for (let i = 0; i < self.data.goodsLineList.length; i++) {
+                      if (self.data.goodsLineList[i].id == e.currentTarget.dataset.id) {
+                        self.data.goodsLineList[i].selected = false;
+                      }
                     }
-                  }
-                  for (let i = 0; i < self.data.searchResult.length; i++) {
-                    if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
-                      self.data.searchResult[i].selected = false;
+                    for (let i = 0; i < self.data.searchResult.length; i++) {
+                      if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
+                        self.data.searchResult[i].selected = false;
+                      }
                     }
+                    // self.data.goodsLineList[e.currentTarget.dataset.id - 1].selected = false;
+                    // self.data.searchResult[e.currentTarget.dataset.id - 1].selected = false;
+                    self.setData({
+                      goodsLineList: self.data.goodsLineList,
+                      searchResult: self.data.searchResult
+                    });
                   }
-                  // self.data.goodsLineList[e.currentTarget.dataset.id - 1].selected = false;
-                  // self.data.searchResult[e.currentTarget.dataset.id - 1].selected = false;
-                  self.setData({
-                    goodsLineList: self.data.goodsLineList,
-                    searchResult: self.data.searchResult
-                  });
-                }
-              })
+                })
             })
           } else if (res.cancel) {
             self.setData({ goodsLineList: self.data.goodsLineList });
@@ -121,7 +145,8 @@ Page({
     //once something changed should force refresh goods list page
     wx.setStorage({
       key: 'refreshGoodsList',
-      data: true,})
+      data: true,
+    })
   },
 
 
@@ -157,7 +182,7 @@ Page({
    */
   bindSearch: function (e) {
     var query = e;
-    if (e instanceof Object){
+    if (e instanceof Object) {
       query = e.detail.value
     }
 
@@ -166,7 +191,7 @@ Page({
     });
 
     this.updateSearchResult()
-   
+
   },
 
   /**
@@ -176,12 +201,12 @@ Page({
     var query = this.data.lastQuery, self = this;
     if (query.length === 0) {
       return false;
-    }else{
+    } else {
       let shopProductIds = wx.getStorageSync("shopProductIds");
       let url = COM.load('CON').PRODUCT_URL + '/title/';
       let searchResult = [];
-      COM.load('NetUtil').netUtil(url + query, 'GET',"", function (res) {
-        res.forEach(function(p) {
+      COM.load('NetUtil').netUtil(url + query, 'GET', "", function (res) {
+        res.forEach(function (p) {
           p.thumb = COM.load('Util').image(p.barcode);
           p.selected = shopProductIds.includes(p.id);
           searchResult.push(p);
@@ -198,6 +223,17 @@ Page({
     this.setData({ search: '', displayClear: false })
   },
 
+  bindBrandChange: function (e) {
+    console.log(e.detail)
+    console.log(this.data.goodsLineList)
+  },
+
+  goodsByBrands: function(brandId){
+    goodsList = []
+    goodsList
+
+    return 
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
