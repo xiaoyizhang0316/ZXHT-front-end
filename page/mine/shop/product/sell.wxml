@@ -37,17 +37,8 @@
         <image class='goods-image-clo' src="{{item.thumb}}"></image>
         <text class='goods-name-clo'>{{item.title}}</text>
         <text class='goods-stock-clo'>{{item.stock}}</text>
-        <text class='goods-price-clo'>$ {{item.vipPrice}} \n$ {{item.price}}</text>
+        <text class='goods-price-clo'>$ {{item.vip1Price}} \n$ {{item.price}}</text>
       </view>
-      <!-- </block>
-      <block wx:else>
-        <view bindtap="showModal" wx:for="{{searchResult}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
-          <image class='goods-image-clo' src="{{item.thumb}}"></image>
-          <text class='goods-name-clo'>{{item.title}}</text>
-          <text class='goods-stock-clo'>{{item.stock}}</text>
-          <text class='goods-price-clo'>$ {{item.vipPrice}} \n$ {{item.price}}</text>
-        </view>
-      </block> -->
     </view>
   </view>
 
@@ -83,32 +74,25 @@
     </view>
 
     <view class='bottom-price'>
-      <view class='bottom-window-price-start'>
+      <view class='bottom-window-price'>
         <view>
           <text>市场价: $</text>
-          <input type="digit" bindinput='updatePrice' value='{{selectedProduct.price}}'></input>
+          <input type="digit" bindinput='updatePrice' value="{{selectedProduct.price}}"></input>
         </view>
-      </view>
-
-      <view class='bottom-window-price'>
         <view>
           <text>青铜价: $</text>
-          <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
-        </view>
-        <view>
-          <text>白银价: $</text>
-          <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
+          <input type="digit" bindinput='updateVip1Price' value="{{selectedProduct.vip1Price}}"></input>
         </view>
       </view>
 
       <view class='bottom-window-price'>
         <view>
-          <text>黄金价: $</text>
-          <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
+          <text>白银价: $</text>
+          <input type="digit" bindinput='updateVip2Price' value="{{selectedProduct.vip2Price}}"></input>
         </view>
         <view>
-          <text>王者价: $</text>
-          <input type="digit" bindinput='updateVipPrice' value="{{selectedProduct.vipPrice}}"></input>
+          <text>黄金价: $</text>
+          <input type="digit" bindinput='updateVip3Price' value="{{selectedProduct.vip3Price}}"></input>
         </view>
       </view>
     </view>
