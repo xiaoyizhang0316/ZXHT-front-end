@@ -56,7 +56,6 @@ Page({
         self.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight,
-          scrollHeight: parseInt(res.windowHeight) + 800
         });
       }
     });

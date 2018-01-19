@@ -7,15 +7,15 @@
     </view>
   </view> -->
 
-<view style="display:flex;flex-direction:row;border-top:1px solid #eff3f4;align-items:center;">
-  <view style="display:flex;flex-direction:column;flex:3;">
-    <view class="inner-explain-line" style="padding-top:5px;padding-bottom:5px;">
-      <view class="explain-text" style="flex:3;padding-top:3px;padding-bottom:3px;padding-left:9px;">订单编号</view>
-      <view class="explain-value" style="align-items:center;flex:3.5;">{{orderId}}</view>
-      <view class="explain-value" style="align-items:center;border:1px solid #e6e6e6;justify-content:center;flex:1.5;border-radius:3px;" catchtap="copyOrderId">复制</view>
+<view class='contain'>
+  <view style="display:flex;flex-direction:column;flex:10;">
+    <view class="inner-explain-line">
+       <view class="explain-text" style="padding-left:9px">订单编号</view> 
+       <view class="explain-value"style="margin-right:5px">{{orderId}}</view>
+       <view class="explain-value" style="align-items:center;justify-content: center;border:1px solid #e6e6e6;flex:1;border-radius:3px;" catchtap="copyOrderId">复制</view>
     </view>
     <view style="display:flex;">
-      <view class="explain-text" style="flex:2.7;padding-top:3px;padding-bottom:3px;padding-left:9px;">订单日期</view>
+      <view class="explain-text" style="padding-left:9px">订单日期</view>
       <view class="explain-value" style="align-items:center;">{{orderTime}}</view>
     </view>
   </view>
@@ -27,22 +27,22 @@
 
 <view class="explain-line" style="flex-direction:column;border-top:1px solid #eff3f4">
   <view class="inner-explain-line" style="padding-bottom:5px;">
-    <view class="explain-text" style="padding-top:3px;padding-bottom:3px;">商户名称</view>
+    <view class="explain-text" >商户名称</view>
     <view class="explain-value">{{merchant}}</view>
   </view>
   <view class="inner-explain-line" style="padding-top:0px;">
-    <view class="explain-text" style="padding-top:3px;padding-bottom:3px;">配送方式</view>
+    <view class="explain-text" >配送方式</view>
     <view class="explain-value">{{service.name}}</view>
   </view>
 </view>
 
-<view class="explain-line" style="border-top:5px solid #eff3f4">
-  <view class="inner-explain-line">
-    <view class="explain-text" style="padding-top:3px;padding-bottom:3px;">
+<view class="explain-line" style="border-top:20px solid #eff3f4">
+  <view class="inner-explain-line" >
+    <view class="explain-text">
       <!-- <image style="height:40px;width:40px;" src="../../../images/sender.png"></image>   -->
       发件人
     </view>
-    <view class="explain-value">
+    <view class="explain-value" style="justify-content:space-between">
       <text>{{sender.name}}</text>
       <text style="border-bottom:1px solid #e8e8e8" catchtap="makeCall" data-mobile="{{sender.phone}}">{{sender.phone}}</text>
     </view>
@@ -50,7 +50,7 @@
 </view>
 
 <view class="explain-line" style="border-top:1px solid #eff3f4">
-  <view class="inner-explain-line" style="padding-bottom:4px;">
+  <view class="inner-explain-line">
     <view class="explain-text">收件人</view>
     <view class="explain-value">
       <view>
@@ -80,7 +80,7 @@
   </view>
 </view>
 
-<view class="explain-line" style="border-top:5px solid #eff3f4">
+<view class="explain-line" style="border-top:20px solid #eff3f4">
   <view class="inner-explain-line">
     <view class="explain-text">物品种类</view>
   </view>
@@ -127,7 +127,7 @@
 
 <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;">
   <view class="inner-explain-line">
-    <view class="explain-text" style="flex:6">总计
+    <view class="explain-text" style="flex:5">总计
       <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(仅供参考)</text>
     </view>
     <view class="explain-value" style="flex:1">
@@ -140,9 +140,9 @@
 
 
   <view wx:if="{{!shared}}" style="display:flex;border-top:1px solid #f0f0f0;bottom:0px;align-items:center;justify-content:space-between;position:fixed;width:100%;height:50px;border:1px solid #f0f0f0;background-color:#f8f8f8">
-    <view style="margin-left:10px;font-size:12px;" data-order="{{orderId}}" bindtap="delOrder">删除订单</view>
-    <view style="margin-right:10px;display:flex;border:1px solid #e64949;color:#e64949;padding:7px;font-size:12px;border-radius:3px;" data-logo="{{logo}}" bindtap="placeOrder">
-      再次下单
+    <view style="margin-left:10px;font-size:15px;" data-order="{{orderId}}" bindtap="delOrder">删除订单</view>
+    <view style="margin-right:10px;display:flex;border:1px solid #e64949;background-color:#e64949;padding:7px;border-radius:3px;" data-logo="{{logo}}" bindtap="placeOrder">
+      <text style="color:#fff;font-size:15px">再次下单</text>
     </view>
   </view>
 </view>

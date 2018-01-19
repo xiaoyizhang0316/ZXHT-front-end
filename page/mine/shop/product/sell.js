@@ -53,8 +53,10 @@ Page({
           {
             "productId": shopProduct.productId,
             "title": products[shopProduct.productId].title,
-            "price": shopProduct.nonVipPrice,
-            "vipPrice": shopProduct.vip1Price,
+            "price": shopProduct.price,
+            "vip1Price": shopProduct.vip1Price,
+            "vip2Price": shopProduct.vip2Price,
+            "vip3Price": shopProduct.vip3Price,
             "stock": shopProduct.stock == 0 ? 10 : shopProduct.stock,
             "thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
             "memo": shopProduct.memo,
@@ -217,10 +219,24 @@ Page({
     }
   },
 
-  updateVipPrice: function (e) {
+  updateVip1Price: function (e) {
     let price = e.detail.value;
     if (price > 0.1) {
-      this.setData({ 'tmp.vipPrice': price });
+      this.setData({ 'tmp.vip1Price': price });
+    }
+  },
+
+  updateVip2Price: function (e) {
+    let price = e.detail.value;
+    if (price > 0.1) {
+      this.setData({ 'tmp.vip2Price': price });
+    }
+  },
+
+  updateVip3Price: function (e) {
+    let price = e.detail.value;
+    if (price > 0.1) {
+      this.setData({ 'tmp.vip3Price': price });
     }
   },
 
