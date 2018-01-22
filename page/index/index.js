@@ -7,7 +7,12 @@ var COM = require('../../utils/common.js')
 
 Page({
   data: {
-    goodsList: {},
+		page: 1,
+		pageSize: 30,
+		hasMoreData: true,
+		
+    goodsList: [],
+		shop: [],
     imgUrls: [
       'https://s18.postimg.org/hbwxwiwmx/image.png',
       'https://s18.postimg.org/v5lalkhih/image.png',
@@ -22,7 +27,12 @@ Page({
     displayClear: false,
     userinfo: ''
   },
-
+  
+	onLoad: function (options) {
+		// 页面初始化 options为页面跳转所带来的参数
+		
+		this.loadRecommendedProducts()
+	},
 
 
   onShow: function () {
@@ -30,7 +40,7 @@ Page({
       wx.hideLoading()
     }, 100);
     this.resetSearch();
-    this.loadRecommendedProducts();
+    //this.loadRecommendedProducts();
   },
 
 
@@ -38,14 +48,22 @@ Page({
    * load the recomemded products by the shop id
    */
   loadRecommendedProducts: function(event) {
-    let openId = app.globalData.openId;
-    //let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + 'david';
-    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + app.globalData.openId;
-    // let url = COM.load('CON').PRODUCT_URL + "all";
-    console.log("用openId申請商店商品訊息的url: "+url)
+		var that = this
+		console.log(app.globalData);
+		//如果有targetShopId 则优先展示
+		let openId = ""
+		if (app.globalData.targetShopId != "")
+		{
+			openId = app.globalData.targetShopId;
+		}else{
+			openId = app.globalData.openId;
+		}
+    console.log(openId)
+    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + openId;
     let products = wx.getStorageSync("products");
+		
+		
 
-    // NetUtil.netUtil(url, "GET", "", (shopProducts) => {
     COM.load('NetUtil').netUtil(url, "GET", "",  (shopProducts) => {
       if (shopProducts) {
         var shopProductIds = [];

@@ -20,7 +20,7 @@ const ShopInfo = BASE_URL + "/api/mall/shops/getShopInfo/";
 
 //获得，更新关于自己店铺的信息
 const getMyShopInfo = BASE_URL + "/api/mall/shops/openId/{openId}"
-const updateMyShopInfo = BASE_URL + "/api/mall/shops/openId/update"
+const updateMyShopInfo = BASE_URL + "/api/mall/shops/update"
 const FANS_LIST_URL = BASE_URL + "/api/mall/users/getFansApplyToShop/"
 const FANS_ACCESS_URL = BASE_URL + "/api/mall/users/updateFansAccess"
 const FANS_VIP_URL = BASE_URL + "/api/mall/users/updateFansVipLevel"
