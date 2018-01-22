@@ -38,9 +38,9 @@ function netUtil(url, method,body, callBack) {
         
       }
       setTimeout(function () {
-        wx.hideToast()
+       
         wx.hideLoading()
-      }, 1000)
+      }, 1500)
     },
     fail: function (res) {
       if (res.errMsg.includes("timeout")) {

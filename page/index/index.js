@@ -11,7 +11,7 @@ Page({
 		pageSize: 30,
 		hasMoreData: true,
 		
-    goodsList: [],
+    goodsList: {},
 		shop: [],
     imgUrls: [
       'https://s18.postimg.org/hbwxwiwmx/image.png',
@@ -30,8 +30,9 @@ Page({
   
 	onLoad: function (options) {
 		// 页面初始化 options为页面跳转所带来的参数
-		
-		this.loadRecommendedProducts()
+	
+	
+		//this.loadRecommendedProducts()
 	},
 
 
@@ -40,16 +41,16 @@ Page({
       wx.hideLoading()
     }, 100);
     this.resetSearch();
-    //this.loadRecommendedProducts();
+    this.loadRecommendedProducts();
   },
 
-
+	
   /**
    * load the recomemded products by the shop id
    */
   loadRecommendedProducts: function(event) {
 		var that = this
-		console.log(app.globalData);
+		
 		//如果有targetShopId 则优先展示
 		let openId = ""
 		if (app.globalData.targetShopId != "")
@@ -58,7 +59,7 @@ Page({
 		}else{
 			openId = app.globalData.openId;
 		}
-    console.log(openId)
+    
     let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + openId;
     let products = wx.getStorageSync("products");
 		
@@ -66,6 +67,7 @@ Page({
 
     COM.load('NetUtil').netUtil(url, "GET", "",  (shopProducts) => {
       if (shopProducts) {
+				
         var shopProductIds = [];
         for (var x in shopProducts) {
           let shopProduct = shopProducts[x];
@@ -75,19 +77,22 @@ Page({
               "id": shopProduct.productId,
               "title": products[shopProduct.productId].title,
               "price": shopProduct.price,
-              "vipPrice": shopProduct.vipPrice,
+              "vipPrice": shopProduct.vip1Price,
               "stock": shopProduct.stock,
-              "thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
+              //"thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
+							"thumb": "https://pic1.zhimg.com/v2-28d55dc8b4c44e5542be2def2ff1d76f_xs.jpg"
             }
           }
-        this.setData({
-          goodsList: this.data.goodsList
-        })
-        wx.setStorage({
-          key: 'shopProductIds',
-          data: shopProductIds,
-        })
+				
       }
+				
+				this.setData({
+					goodsList: this.data.goodsList
+				})
+				wx.setStorage({
+					key: 'shopProductIds',
+					data: shopProductIds,
+				})
       }
     });
     
@@ -148,16 +153,16 @@ Page({
       searchHistoryList = [];
     };
 
-    console.log(COM.load('CON').BAR_CODE_URL+barcode)
+   // console.log(COM.load('CON').BAR_CODE_URL+barcode)
 
     COM.load('NetUtil').netUtil(COM.load('CON').BAR_CODE_URL + barcode, "GET", "", function (res) {
       item = res;
-      console.info(item);
+     // console.info(item);
 
       if (item) {
         //目前historyList中只存title
         for (var x in searchHistoryList) {
-          console.log(x)
+          //console.log(x)
           if (searchHistoryList[x].name == item.title) {
             searchHistoryList.splice(x, 1)
             break;

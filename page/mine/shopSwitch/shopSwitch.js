@@ -71,12 +71,13 @@ Page({
         console.log(shops)
         for (var x in shops) {
           let shop = shops[x];
-          shopMap.set(shop.id,
+          shopMap.set(shop.shop.id,
             {
               "id": shop.shop.id,
               "shop_name": shop.shop.shopName,
               "shop_logo": shop.user.avatarUrl,
               "shop_sign": shop.shop.sign,
+							"shop_openId": shop.shop.openId
             })
         }
         self.setData({
@@ -107,6 +108,18 @@ Page({
       })
     }
   },
+
+	switchShop: function(e)
+	{
+		console.log(e)
+		let targetShopId = e.currentTarget.dataset.id
+		console.log(targetShopId);
+		wx.navigateTo({
+			url: '../../welcome/welcome?targetShopId='+targetShopId,
+		})
+		
+	},
+	
 
   /**
    * 生命周期函数--监听页面初次渲染完成

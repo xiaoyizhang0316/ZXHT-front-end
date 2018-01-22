@@ -17,6 +17,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+		this.setTargetShop(options)
     COM.load('Util').loadBrands();
     COM.load('Util').loadProducts();
     let products = wx.getStorageSync("products");
@@ -26,22 +28,86 @@ Page({
     //     url: '../index/index',
     //   })
     // } else {
-      var interval = setInterval(function () {
-        console.info('checking the storage');
-        let products = wx.getStorageSync("products");
-        let brands = wx.getStorageSync("brands");
-        if (brands && products) {
-          clearInterval(interval);
-          wx.switchTab({
-            url: '../index/index',
-          })
-        }
-      }, 12500);
+		
+		
+
+		
    // }
 
 
   },
 
+
+	//获得访问的商店
+	setTargetShop: function (e) {
+		//得到传输过来的目标商铺
+
+		
+		if (Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
+
+			let fan = app.globalData.openId
+			let shop = e.targetShopId
+			let url = "https://a5f93900.ngrok.io/api/mall/users/applyToShop/"
+			COM.load('NetUtil').netUtil(url, "POST", { "open_id": fan, "shop_id": shop }, (callback) => {
+			
+				console.log(callback)
+				console.log (callback == false)
+				if (callback == false) {
+					//通知用户显示自己或者什么都不显示或者显示访问上一个商店
+					// wx.showToast({
+					// 	title: "请等待商店管理员认证",
+					// 	duration: 1500,
+					// 	icon: 'none',
+					// 	mask: true
+					// })
+
+					wx.showModal({
+						title: '提示',
+						content: '请等待商店管理员认证后进入商铺',
+						success: function (res) {
+							if (res.confirm) {
+								console.log('用户点击确定')
+							} else if (res.cancel) {
+								console.log('用户点击取消')
+							}
+						}
+					})
+
+				
+					
+					
+					//to--do
+				} else {
+					//将得到的shopid 写入缓存并改写global shopid
+					wx.setStorage({
+						key: 'targetShopId',
+						data: e.targetShopId,
+					})
+					app.globalData.targetShopId = e.targetShopId
+					console.log("glo: "+ app.globalData)
+					this.navigatorToIndex();
+				
+				}
+			})
+
+		}else{
+			this.navigatorToIndex()
+		}
+	},
+	navigatorToIndex:function(){
+		var interval = setInterval(function () {
+			console.info('checking the storage');
+			let products = wx.getStorageSync("products");
+			let brands = wx.getStorageSync("brands");
+			if (brands && products) {
+				clearInterval(interval);
+				wx.switchTab({
+					url: '../index/index',
+				})
+			}
+		}, 5000);
+
+	},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
