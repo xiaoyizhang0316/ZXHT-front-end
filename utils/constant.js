@@ -25,8 +25,8 @@ const FANS_LIST_URL = BASE_URL + "/api/mall/users/getFansApplyToShop/"
 const FANS_ACCESS_URL = BASE_URL + "/api/mall/users/updateFansAccess"
 const FANS_VIP_URL = BASE_URL + "/api/mall/users/updateFansVipLevel"
 const HEADERS = {
-    'content-type': 'application/json',
-    'Authorization': 'Basic ZXhwcmVzczozeTZGUkAyRw=='
+  'content-type': 'application/json',
+  'Authorization': 'Basic ZXhwcmVzczozeTZGUkAyRw=='
 };
 
 //二维码扫描和商品搜索
@@ -44,10 +44,11 @@ module.exports = {
   tryCode_URL: tryCode_URL,
   tryAddUser_URL: tryAddUser_URL,
   shopisOpenOrNot: shopisOpenOrNot,
+  updateMyShopInfo: updateMyShopInfo,
   HEADERS: HEADERS,
   FANS_LIST_URL: FANS_LIST_URL,
-	FANS_VIP_URL: FANS_VIP_URL,
-	FANS_ACCESS_URL : FANS_ACCESS_URL,
+  FANS_VIP_URL: FANS_VIP_URL,
+  FANS_ACCESS_URL: FANS_ACCESS_URL,
   BAR_CODE_URL: BAR_CODE_URL,
   SEARCH_URL: SEARCH_URL
 }

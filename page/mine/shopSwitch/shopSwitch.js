@@ -1,10 +1,15 @@
 // page/mine/shopSwitch/shopSwitch.js
+var app = getApp()
+var COM = require('../../../utils/common.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    openId:'',
+    shopLineList: {},
+    shopMap: Object,
     shopList: [
       { shop_id: 1, shop_name: '店铺名称1', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart1.png' },
       { shop_id: 2, shop_name: '店铺名称2', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart2.png' },
@@ -32,26 +37,52 @@ Page({
 
   radioChange: function (e) {
     this.setData({
-      selectedShop: this.data.shopList[e.detail.value],
+      selectedShop: this.data.shopLineList[e.detail.value],
       isSelect: true
     });
-
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    var that = this
-
+  onLoad() {
+    var self = this;
+    self.loadShop();
     /** 
     * 获取系统信息 
     */
     wx.getSystemInfo({
       success: function (res) {
-        that.setData({
+        self.setData({
           winWidth: res.windowWidth,
-          winHeight: res.windowHeight
+          winHeight: res.windowHeight,
         });
+      }
+    });
+  },
+
+  loadShop:function (e){
+    var self = this
+    let openId = app.globalData.openId;
+    let url = "https://a5f93900.ngrok.io/api/mall/users/getShopsApplyToShop/" + openId;
+    COM.load('NetUtil').netUtil(url, "GET", "", (shops) => {
+      let shopMap = new Map();
+      if (shops) {
+        console.log(shops)
+        for (var x in shops) {
+          let shop = shops[x];
+          shopMap.set(shop.id,
+            {
+              "id": shop.shop.id,
+              "shop_name": shop.shop.shopName,
+              "shop_logo": shop.user.avatarUrl,
+              "shop_sign": shop.shop.sign,
+            })
+        }
+        self.setData({
+          shopLineList: Array.from(shopMap.values()),
+          shopMap: shopMap
+        })
       }
     });
   },
@@ -88,7 +119,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.loadShop();
   },
 
   /**

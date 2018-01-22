@@ -1,6 +1,5 @@
 <!--page/mine/fans/fans.wxml-->
 
-
 <view class="main">
 
   <view style="flex:1;display: flex;padding-top:10px;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;">
@@ -27,22 +26,23 @@
 
   <view bindtap='share' class="top-containerbar">
         <image class='fan-image' src="/image/add_user.png"></image>
-        添加粉丝
+        <view class='fan-item-name'>添加粉丝</view>
   </view>
 
   <!--  split line -->
   <view class="fans-line-list-top">
         <text class='fans-image-clo'>图片</text>
         <text class='fans-name-clo'>名称</text>
-        <text class='fans-viplevel-clo'>Vip等级（点击编辑）</text>
+        <text class='fans-viplevel-clo'>Vip等级（可编辑）</text>
         <text class='fans-access-clo'>允许</text>
   </view>
 
   <view class='fan-item' wx:for="{{fansLineList}}" wx:key="{{index}}" data-id="{{item.id}}">
     <image class='fan-image' src="{{item.avatarUrl}}"></image>    
       <view class='fan-item-name'>{{item.name}}</view>    
-        
+        <view class='fan-viplevel'>
         <input type="digit" bindblur='updateVipLevel' value='{{item.vipLevel}}' data-id="{{item.id}}" ></input>
+        </view>
       <switch checked="{{item.access}}" data-id="{{item.id}}" bindchange="switchChange" />    
   </view>
 </view>

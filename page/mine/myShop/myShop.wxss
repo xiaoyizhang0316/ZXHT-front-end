@@ -25,6 +25,9 @@ page {
 .header .about{
     float: right;
 }
+.header .shoptitle{
+  font-size: 40rpx;
+}
 
 .explain-line {
   width: 100%;

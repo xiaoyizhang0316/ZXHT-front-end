@@ -27,6 +27,7 @@
     "page/mine/shopApply/applyForm/applyForm",
     "page/mine/fans/fans",
     "page/mine/myShop/myShop",
+    "page/mine/myShop/accountDetail/accountDetail",
     "page/mine/fans/share/share"
   ],
   "window": {

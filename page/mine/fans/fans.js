@@ -267,6 +267,12 @@ Page({
   //   })
   // },
 
+  share: function (event) {
+    wx.navigateTo({
+      url: '/page/mine/fans/share/share'
+    })
+  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

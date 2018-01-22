@@ -57,7 +57,7 @@
          <view style="padding-left:20px;font-size:13px;color:#515151;"> 
            <!-- 距上次下单已有{{}}天 -->
         </view> 
-                <view style="margin-right:20rpx;display:flex;border:1px solid #e64949;color:#e64949;padding:4px;font-size:12px;border-radius:3px;" data-order="{{item.orderId}}" data-logo="{{item.logo}}" catchtap="placeOrder">
+                <view style="margin-right:20rpx;display:flex;border:1px solid #e64949;background-color:#e64949;color:#fff;padding:4px;font-size:15px;border-radius:3px;" data-order="{{item.orderId}}" data-logo="{{item.logo}}" catchtap="placeOrder">
          再次下单
        </view>
       </view>  

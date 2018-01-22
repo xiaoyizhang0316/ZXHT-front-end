@@ -1,41 +1,21 @@
 <!--page/mine/shopSwitch/shopSwitch.wxml-->
 <view class='container'>
-  <view class="top-swiper-containerbar">
-    <view class="swiper-tab">
-      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
-        已关注
-        <text class='shop-num'>{{shopList.length}}</text>个店铺
-      </view>
-      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
-        已关注
-        <text class='shop-num'>{{shopList.length}}</text>个好友
-      </view>
-    </view>
+  <view class="top-containerbar">
+      已关注<text class='shop-num'>{{shopLineList.length}}</text>个店铺
   </view>
-  <swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight-88}}px" bindchange="bindChange">
-    <!-- 关注的店铺 -->
-    <swiper-item>
-        <scroll-view class = 'shop-list' scroll-y="{{true}}" >
-          <radio-group class="shop-radio-group" bindchange="radioChange">
-            <view class='shop-item' wx:for="{{shopList}}">
-              <radio class='shop-item-radio' value="{{index}}" />
-              <image class='shop-item-image' src="{{item.shop_logo}}"></image>
-              <view class='shop-item-desc'>
-                <view class='shop-item-name'>{{item.shop_name}}</view>
-                <view class='shop-item-sign'>{{item.shop_sign}}</view>
-              </view>
-            </view>
-          </radio-group>
-        </scroll-view>
-    </swiper-item>
-    
-    <!-- 关注的好友 -->
-    <swiper-item>
-      <scroll-view>
-        <view>我是好友</view>
-      </scroll-view>
-    </swiper-item>
-  </swiper>
+
+  <scroll-view class = 'shop-list' scroll-y="{{true}}" style="height:{{winHeight-88}}px" >
+    <radio-group class="shop-radio-group" bindchange="radioChange">
+      <view class='shop-item' wx:for="{{shopList}}" wx:key="{{index}}" data-id="{{item.id}}">
+        <radio class='shop-item-radio' value="{{index}}" />
+        <image class='shop-item-image' src="{{item.shop_logo}}"></image>
+        <view class='shop-item-desc'>
+          <view class='shop-item-name'>{{item.shop_name}}</view>
+          <view class='shop-item-sign'>{{item.shop_sign}}</view>
+        </view>
+      </view>
+    </radio-group>
+  </scroll-view>
 
 
   <view class='bottom-bar'>

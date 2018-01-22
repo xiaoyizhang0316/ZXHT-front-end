@@ -76,11 +76,38 @@ page {
   font-size: 40rpx;
 }
 
+.fans-line-list-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20rpx;
+}
+
+.fans-image-clo{
+  flex:1;
+  font-size: 35rpx;
+}
+
+.fans-name-clo{
+  flex:2;
+  font-size: 35rpx;
+}
+
+.fans-viplevel-clo{
+  flex:3.2;
+  font-size: 35rpx;
+}
+
+.fans-access-clo{
+  flex:1;
+  font-size: 35rpx;
+}
+
 
 .fan-item {
-  height: 100rpx;
+  height: 120rpx;
   display: flex;
-  /* justify-content: center; */
+  justify-content: space-around; 
   align-items: center;
   background-color: #fff;
   border-bottom: 1px #e3e3e3 solid;
@@ -89,10 +116,12 @@ page {
 }
 
 .fan-image {
-  width: 80rpx;
-  height: 80rpx;
-  margin-right: 24rpx;
-  margin-left: 20rpx;
+  display:flex;
+  flex:1;
+  max-width: 80rpx;
+  max-height: 80rpx;
+  padding-right: 24rpx;
+  padding-left: 20rpx; 
 }
 
 .fan-item-desc {
@@ -101,8 +130,18 @@ page {
 }
 
 .fan-item-name {
+  display:flex;
+  flex:2;
   color: #000;
   font-size: 40rpx;
+  overflow:hidden;
+}
+
+.fan-viplevel{
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  flex:3;
 }
 
 

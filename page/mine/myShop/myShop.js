@@ -33,8 +33,11 @@ Page({
     console.log(url)
     
     COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
-      console.log("nihao")
-      console.log(myShopInfo)
+     self.setData({
+       shopName: myShopInfo.shopName,
+       shopSign: myShopInfo.sign
+     })
+     
     })
   },
 
@@ -68,6 +71,12 @@ Page({
       url: '/page/mine/shop/product/sell'
     })
 
+  },
+
+  accountDetail: function(event){
+    wx.navigateTo({
+      url: '/page/mine/myShop/accountDetail/accountDetail',
+    })
   },
 
   confirmChange(event) {
