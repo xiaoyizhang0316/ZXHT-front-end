@@ -28,6 +28,62 @@ page,.main{
     white-space:nowrap;
     text-overflow:ellipsis;
 }
+
+.search{
+  flex:1;
+  display:flex;
+  padding-top:10px;
+  padding-bottom:10px;
+  /* border-bottom:1px solid #e6e6e6; */
+  width:100%;
+  position: absolute;
+  top:0;
+}
+
+.search-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.search-input {
+  width: 95%;
+  margin: 0 auto;
+  border-radius: 50px;
+  border: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  background-color:#f8f8f8;
+  opacity: 0.7;
+   background: linear-gradient(to bottom, #f8f8f8, whitesmoke); 
+    z-index: 1;
+}
+
+.search-input input {
+  font-size: 15px;
+  height: 25px;
+  line-height: 25px;
+  /*display: inline-flex;*/
+  /* flex: 0 0 75%; */
+  /* margin-left: 10px; */
+  width:95%;
+}
+
+.search-input image {
+  width: 28px;
+  height: 28px;
+  /*display: inline-flex;*/
+}
+
+.placeholderstyle {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+  font-weight: 400;
+}
+
 .categroy-right{
     float: right;
     width: 600rpx;
@@ -37,7 +93,8 @@ page,.main{
 }
 .cate-box{
     height: 100%;
-    padding:40rpx;
+    padding:25rpx;
+    margin-top:70rpx;
     box-sizing: border-box;
      /* background-color: #fbfbfb;  */
 }
@@ -76,7 +133,7 @@ page,.main{
 
 .cate-box .product {
   display: flex;
-  width: 580rpx;
+  /* width: 580rpx; */
   /* height: 150px; */
   flex-flow: row wrap;
   align-content: flex-start;
@@ -108,17 +165,19 @@ page,.main{
 }
 
 .product-list{
-    height: 210rpx;
+    height: 250rpx;
     text-align: center;
     /* margin:0 20rpx 20rpx 0; */
     font-size: 24rpx;
 
     box-sizing: border-box;
     background-color: white;
-    flex: 0 0 28%;
+    flex: 0 0 50%;
     /* border: 1px solid red; */
-    padding-bottom: 8rpx;
-    padding-left: 8rpx; 
+    /* padding-bottom: 8rpx; */
+    padding-left:10rpx;
+    padding-right:10rpx;
+    margin-bottom: 110rpx; 
 }
 .product-list image{
     width: 100%;
@@ -131,5 +190,5 @@ page,.main{
 
 .product-list .goods-image{
     width: 100%;
-    height: 160rpx;
+    height: 250rpx;
 }
