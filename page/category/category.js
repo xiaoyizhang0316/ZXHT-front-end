@@ -27,7 +27,7 @@ Page({
 
   loadCategoies: function() {
     let self = this;
-    COM.load('NetUtil').netUtil(COM.load('CON').CATEGORY_URL + "/openId/" + app.globalData.shopOpenId, "GET", "", function (res) {
+    COM.load('NetUtil').netUtil(COM.load('CON').CATEGORY_URL + "openId/" + app.globalData.openId, "GET", "", function (res) {
         for(var x in res) {
           var cat = {
             name: res[x].name, 
@@ -40,6 +40,18 @@ Page({
     })
   },
 
+  // filterBrands: function () {
+  //   let shopBrands = new Set();
+  //   let brands = wx.getStorageSync("brands");
+  //   let products = wx.getStorageSync("products");
+  //   let shopProductIds = wx.getStorageSync("shopProductIds");
+  //   for (var x in shopProductIds) {
+  //     shopBrands.add(brands[products[shopProductIds[x]].brand]);
+  //   }
+
+  //   return Array.from(shopBrands);
+  // },
+  
   filterBrands: function () {
     let shopBrands = new Set();
     let brands = wx.getStorageSync("brands");
@@ -48,6 +60,7 @@ Page({
     for (var x in shopProductIds) {
       shopBrands.add(brands[products[shopProductIds[x]].brand]);
     }
+    console.log(shopBrands);
 
     return Array.from(shopBrands);
   },
@@ -65,6 +78,7 @@ Page({
 
     //key是undefined ???
     return productsMap;
+    console.log(productsMap)
   },
 
   switchTab(e) {
@@ -74,12 +88,15 @@ Page({
     const self = this;
     this.setData({
       isScroll: true,
+      curIndex: e.target.dataset.index,
       curName: this.data.leftCategory[e.target.dataset.index].name,
       curEName: this.data.leftCategory[e.target.dataset.index].ename,
       curBanner: this.data.leftCategory[e.target.dataset.index].banner,
     })
 
     if (e.target.dataset.index == 0) {
+      console.log(self.data)
+      console.log(this.data)
       this.setData({ items: this.data.brands, rightCategory: [this.data.brands] });
       console.log(this.data.brands)
     } else {
