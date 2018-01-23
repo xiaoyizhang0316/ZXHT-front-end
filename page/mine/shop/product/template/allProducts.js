@@ -15,8 +15,8 @@ Page({
     lastQuery: '',//最后一个查询的关键词
     page: 0,
     goodsLineList: [],
-    brandList: ['品牌1', '品牌2', '品牌3', '品牌4'],
-    cateList: ['分类1', '分类2', '分类3', '分类4']
+    brandList: [],
+    cateList: []
   },
 
   /**
@@ -71,7 +71,7 @@ Page({
    */
   switchChange: function (e) {
     let self = this;
-    let product = { "openId": app.globalData.shopOpenId, "productId": e.currentTarget.dataset.id };
+    let product = { "openId": app.globalData.openId, "productId": e.currentTarget.dataset.id };
     if (!e.detail.value) {
       wx.showModal({
         title: '提示',
