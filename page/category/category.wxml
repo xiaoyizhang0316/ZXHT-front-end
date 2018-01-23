@@ -2,7 +2,7 @@
     <view class="categroy-left">
         <view wx:for="{{leftCategory}}" wx:key="index" data-id="{{item.ename}}" data-index="{{index}}"
             bindtap="switchTab"
-            class="cate-list {{curIndex === index?'on':''}}">{{item.name}}</view>
+            class="cate-list {{curIndex === index?'on':''}}">{{item.name}}              </view>
     </view>
 
     <scroll-view class="categroy-right" scroll-y="{{isScroll}}" style='height:1000px;' scroll-into-view="{{toView}}" scroll-with-animation="true">
@@ -24,7 +24,8 @@
                     <view class="product-list" wx:for="{{items}}" wx:key="index" wx:for-item="val">
                         <navigator url="./brand/list?id='+ {{val.id}}">
 
-                              <image wx:if="{{val.title}}"class="brand-image" src="https://ozexpress.cn/{{val.title}}.jpg"></image>                             
+                              <!-- <image wx:if="{{val.title}}"class="brand-image" src="https://ozexpress.cn/{{val.title}}.jpg"></image>                              -->
+                              <image wx:if="{{val.title}}"class="brand-image" src="https://s18.postimg.org/hbwxwiwmx/image.png"></image>
                              <view class="classname">
                                 <text>{{val.title}}</text>
                              </view>
@@ -34,17 +35,22 @@
                 </view>
 
                 </block>
+                
                 <block wx:else>
 
                 <block wx:for="{{rightCategory}}">
-                  <view >
-                    <view class="sub-cate-title">{{item.name}}</view> 
+                  <view class="sub-cate">
+                    <text class="sub-cate-title-be">—</text>
+                    <text class="sub-cate-title">{{item.name}}</text>
+                    <text class="sub-cate-title-be">—</text>
                   </view>
                 <view class="product">
                     <view class="product-list" wx:for="{{item.productIds}}" wx:key="index" wx:for-item="val">
                         <navigator url="../details/details?id='+ {{val.id}}">
 
-                              <image class="goods-image" src="https://ozexpress.cn/{{val.barcode}}.jpg"></image>                         
+                              <!-- <image class="goods-image" src="https://ozexpress.cn/{{val.barcode}}.jpg"></image>   -->
+
+                              <image class="goods-image" src="https://images.moltonbrown.co.uk/MBExternalBinary/Molton-Brown-Papyrus-Reed-Repairing-Conditioner_LH040_16_L.jpg"></image>                          
                         </navigator>
                     </view>
                 </view>

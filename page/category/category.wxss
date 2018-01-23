@@ -16,11 +16,17 @@ page,.main{
     line-height: 90rpx;
     text-align: center;
     border-left: 3px solid #fff;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }
 .categroy-left .cate-list.on{
     color: #AB956D;
     border-color: #AB956D;
     background-color: #f1f3f3;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }
 .categroy-right{
     float: right;
@@ -47,7 +53,7 @@ page,.main{
     padding:30rpx 0 45rpx;
     text-align: center;
     color: #AB956D;
-    font-size: 28rpx;
+    font-size: 30rpx;
 }
 .cate-title::before{
     position: absolute;
@@ -76,12 +82,31 @@ page,.main{
   align-content: flex-start;
 }
 
-.sub-cate-title {
+.sub-cate {
+  flex-direction: row;
+  width:100%;
+  height: 70rpx;
+  justify-content: center;
+  align-content: center;
+  text-align:center;
   padding-bottom: 15rpx;
-  font-size: 28rpx;
-  font-weight: 600;
+}
+
+.sub-cate-title {
+  font-size: 30rpx;
+  font-weight: 500;
   font-family: Microsoft YaHei;
 }
+
+.sub-cate-title-be {
+  height:40rpx;
+  align-self: center;
+  font-size: 50rpx;
+  width:70rpx;
+  font-weight: 600;
+  color:#ddd;
+}
+
 .product-list{
     height: 210rpx;
     text-align: center;
