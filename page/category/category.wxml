@@ -2,17 +2,34 @@
     <view class="categroy-left">
         <view wx:for="{{leftCategory}}" wx:key="index" data-id="{{item.ename}}" data-index="{{index}}"
             bindtap="switchTab"
-            class="cate-list {{curIndex === index?'on':''}}">{{item.name}}              </view>
+            class="cate-list {{curIndex === index?'on':''}}">{{item.name}}
+            </view>
     </view>
 
     <scroll-view class="categroy-right" scroll-y="{{isScroll}}" style='height:1000px;' scroll-into-view="{{toView}}" scroll-with-animation="true">
+      <view class="search">
+        <view class="search-box">
+          <view class="search-input">
+            <view style="display:flex;flex:1;">
+              <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
+              <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindinput="bindSearch" />
+            </view>
+            <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
+              <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+            </view>
+            <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
+              <image style="height:21px;width:21px; margin-right: 5px;" src="/image/public/scan.png"></image>
+            </view>
+          </view>  
+        </view>
+      </view>
 
          <!-- <block wx:for="{{detail}}"  wx:key="idx"> -->
          
             <view id="{{curEName}}" class="cate-box">
-                <view class="cate-banner">
+                  <view class="cate-banner">
                     <image src="{{curBanner}}"></image>
-                </view>
+                </view>  
 
                  <view class="cate-title">
                     <text>{{curName}}</text>
@@ -37,7 +54,6 @@
                 </block>
                 
                 <block wx:else>
-
                 <block wx:for="{{rightCategory}}">
                   <view class="sub-cate">
                     <text class="sub-cate-title-be">—</text>
@@ -50,7 +66,11 @@
 
                               <!-- <image class="goods-image" src="https://ozexpress.cn/{{val.barcode}}.jpg"></image>   -->
 
-                              <image class="goods-image" src="https://images.moltonbrown.co.uk/MBExternalBinary/Molton-Brown-Papyrus-Reed-Repairing-Conditioner_LH040_16_L.jpg"></image>                          
+                              <image class="goods-image" src="https://images.moltonbrown.co.uk/MBExternalBinary/Molton-Brown-Papyrus-Reed-Repairing-Conditioner_LH040_16_L.jpg"></image>
+                              <view class="classname">
+                                <text>{{val.title}}</text>
+                             </view>
+
                         </navigator>
                     </view>
                 </view>
