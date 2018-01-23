@@ -22,6 +22,7 @@ Page({
       thumb: '',
       title: '',
       price: 0,
+			
       stock: '无货',
       detail: '',
       parameter: '规格:无',
@@ -180,29 +181,41 @@ Page({
    */
   onLoad: function (options) {
     this.setData({ productId : options.id});
-    let products = wx.getStorageSync("products");
-    if (products) {
-      this.data.goods["id"] = options.id;
-      this.data.goods["title"] = products[options.id].title;
-      this.data.goods["thumb"] = COM.load('Util').image(products[options.id].barcode);
-     
-      // http://101.178.98.25:8443/api/mall/products/242
-      let detailUrl = COM.load('CON').PRODUCT_URL + options.id;
-      COM.load('NetUtil').netUtil(detailUrl, "GET", "", (detail) => {
-        if (detail) {
-          console.log(detail)
-          this.setData({
-            detail: detail
-          })
-        }
-      });
+		//需要取得本店对于本位客人的价格信息
+		let url = COM.load('CON').TARGETSHOP_PRODUCT_URL +"/"+ app.globalData.openId+"/"+app.globalData.targetShopId+"/" + options.id
+		COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
+			if (shopProduct) {
+				let products = wx.getStorageSync("products");
 
-      this.setData({
-        goods: this.data.goods
-      })
+				if (products) {
+					this.data.goods["id"] = options.id;
+					this.data.goods["title"] = products[options.id].title;
+					this.data.goods["thumb"] = COM.load('Util').image(products[options.id].barcode);
+					this.data.goods["stock"] = shopProduct.stock;
+					this.data.goods["price"] = shopProduct.price;
 
-      this.updateTotalNum();
-    }
+					// http://101.178.98.25:8443/api/mall/products/242
+					let detailUrl = COM.load('CON').PRODUCT_URL + options.id;
+					COM.load('NetUtil').netUtil(detailUrl, "GET", "", (detail) => {
+						if (detail) {
+							console.log(detail)
+							this.setData({
+								detail: detail
+							})
+						}
+					});
+
+					this.setData({
+						goods: this.data.goods
+					})
+					console.log("goods: ------------------")
+					console.log(this.data.goods)
+					this.updateTotalNum();
+				}
+			}
+		});
+
+    
   
   },
 

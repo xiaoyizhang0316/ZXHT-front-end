@@ -33,6 +33,8 @@ const HEADERS = {
 const BAR_CODE_URL = PRODUCT_URL + "barcode/";
 const SEARCH_URL = PRODUCT_URL + "title/";
 
+//商品信息 购物车信息
+const TARGETSHOP_PRODUCT_URL = SHOP_PRODUCT_URL + "getTargetShopProduct";
 
 module.exports = {
   BASE_URL: BASE_URL,
@@ -50,5 +52,6 @@ module.exports = {
   FANS_VIP_URL: FANS_VIP_URL,
   FANS_ACCESS_URL: FANS_ACCESS_URL,
   BAR_CODE_URL: BAR_CODE_URL,
-  SEARCH_URL: SEARCH_URL
+  SEARCH_URL: SEARCH_URL,
+	TARGETSHOP_PRODUCT_URL : TARGETSHOP_PRODUCT_URL
 }
