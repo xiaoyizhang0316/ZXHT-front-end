@@ -39,6 +39,18 @@ Page({
         self.setData({ res: res, leftCategory: self.data.leftCategory});
     })
   },
+
+  // filterBrands: function () {
+  //   let shopBrands = new Set();
+  //   let brands = wx.getStorageSync("brands");
+  //   let products = wx.getStorageSync("products");
+  //   let shopProductIds = wx.getStorageSync("shopProductIds");
+  //   for (var x in shopProductIds) {
+  //     shopBrands.add(brands[products[shopProductIds[x]].brand]);
+  //   }
+
+  //   return Array.from(shopBrands);
+  // },
   
   filterBrands: function () {
     let shopBrands = new Set();
@@ -83,6 +95,8 @@ Page({
     })
 
     if (e.target.dataset.index == 0) {
+      console.log(self.data)
+      console.log(this.data)
       this.setData({ items: this.data.brands, rightCategory: [this.data.brands] });
       console.log(this.data.brands)
     } else {
@@ -118,76 +132,6 @@ Page({
       })
     }, 1)
 
-  },
-
-  resetDisplay: function (e) {
-    this.setData({
-      rightCategory: Array.from(this.data.subCategories.values()),
-    })
-  },
-
-  //搜索事件
-  bindSearch: function (e) {
-    var query = e;
-    if (e instanceof Object) {
-      query = e.detail.value;
-    }
-    if (query.length === 0) {
-      this.resetSearch();
-    } else {
-      let tmp = {};
-      let rightListCategory = Array.from(this.data.subCategories.values());
-      for (let i in rightListCategory) {
-        if (e instanceof Object) {
-          if (rightListCategory[i].title.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-            tmp[i] = rightListCategory[i]
-          }
-        } else {
-          if (rightListCategory[i].barcode == query) {
-            tmp[i] = rightListCategory[i];
-            break;
-          }
-        }
-      }
-
-      this.setData({
-        search: query,
-        displayClear: true,
-        rightCategory: tmp
-      });
-    }
-  },
-
-  //二维码搜索
-  scanCode() {
-    let self = this;
-    wx.scanCode({
-      success: (res) => {
-        if (res.result) {
-          self.bindSearch(COM.load('Util').trim(res.result));
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: '商品不能为空！',
-            showCancel: false,
-            success: function (res) {
-              if (res.confirm) {
-                self.setData({
-                  focus: true
-                })
-              }
-            }
-          })
-        }
-      }
-    })
-  },
-
-  //重置搜索
-  resetSearch: function (e) {
-    this.setData({ search: '', displayClear: false });
-    this.resetDisplay();
-  }, 
-  
+  }
 
 })

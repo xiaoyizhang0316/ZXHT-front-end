@@ -24,6 +24,7 @@ const updateMyShopInfo = BASE_URL + "/api/mall/shops/update"
 const FANS_LIST_URL = BASE_URL + "/api/mall/users/getFansApplyToShop/"
 const FANS_ACCESS_URL = BASE_URL + "/api/mall/users/updateFansAccess"
 const FANS_VIP_URL = BASE_URL + "/api/mall/users/updateFansVipLevel"
+const ADD_SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shops/addShopProduct"
 const HEADERS = {
   'content-type': 'application/json',
   'Authorization': 'Basic ZXhwcmVzczozeTZGUkAyRw=='
@@ -53,5 +54,6 @@ module.exports = {
   FANS_ACCESS_URL: FANS_ACCESS_URL,
   BAR_CODE_URL: BAR_CODE_URL,
   SEARCH_URL: SEARCH_URL,
-	TARGETSHOP_PRODUCT_URL : TARGETSHOP_PRODUCT_URL
+	TARGETSHOP_PRODUCT_URL : TARGETSHOP_PRODUCT_URL,
+	ADD_SHOP_PRODUCT_URL: ADD_SHOP_PRODUCT_URL
 }
