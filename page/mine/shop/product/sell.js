@@ -10,11 +10,12 @@ Page({
     focus: false,
     displayClear: false,
     goodsLineList: {},
-    goodsMap:Object,
+    goodsMap: Object,
     animationData: {},
     showModalStatus: false,
     selectedProduct: Object,
-    selectedIndex:0,
+    isRecommandChecked: [],
+    selectedIndex: 0,
     tmp: { 'price': '', 'vipPrice': '' },
     memo: '',
   },
@@ -50,20 +51,23 @@ Page({
         for (var x in shopProducts) {
           let shopProduct = shopProducts[x];
           goodsMap.set(shopProduct.productId,
-          {
-            "productId": shopProduct.productId,
-            "title": products[shopProduct.productId].title,
-            "price": shopProduct.price,
-            "vip1Price": shopProduct.vip1Price,
-            "vip2Price": shopProduct.vip2Price,
-            "vip3Price": shopProduct.vip3Price,
-            "stock": shopProduct.stock == 0 ? 10 : shopProduct.stock,
-            "thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
-            "memo": shopProduct.memo,
-            "openId": shopOpenId,
-            "id": shopProduct.id,
-            "barcode": products[shopProduct.productId].barcode
-          })
+            {
+              "productId": shopProduct.productId,
+              "title": products[shopProduct.productId].title,
+              "price": shopProduct.price,
+              "vip1Price": shopProduct.vip1Price,
+              "vip2Price": shopProduct.vip2Price,
+              "vip3Price": shopProduct.vip3Price,
+              "stock": shopProduct.stock == 0 ? 10 : shopProduct.stock,
+              "thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
+              "memo": shopProduct.memo,
+              "openId": shopOpenId,
+              "id": shopProduct.id,
+              "barcode": products[shopProduct.productId].barcode,
+              "recommend": shopProduct.recommend,
+              "hot": shopProduct.hot,
+              "hotSale": shopProduct.hotSale
+            })
         }
         this.setData({
           goodsLineList: Array.from(goodsMap.values()),
@@ -168,6 +172,8 @@ Page({
         animationData: animation.export()
       })
     }.bind(this), 200)
+
+    console.log(this.data.selectedProduct)
   },
 
   // 隐藏遮罩层
@@ -189,6 +195,17 @@ Page({
         showModalStatus: false
       })
     }.bind(this), 200)
+  },
+
+  addRecommandation: function (e) {
+    this.setData({
+      'selectedProduct.recommend': e.detail.value
+    })
+  },
+  addHot: function (e) {
+    this.setData({
+      'selectedProduct.hot': e.detail.value
+    })
   },
 
   increaseStock: function (e) {
@@ -240,6 +257,15 @@ Page({
     }
   },
 
+  updateHotSale: function(e){
+    let quantity = e.detail.value;
+    if(quantity > 0){
+      this.setData({
+        'selectedProduct.hotSale': quantity
+      })
+    }
+  },
+
   bindExtra: function () {
     wx.navigateTo({
       url: "/page/common/templates/textArea/textArea?content=" + this.data.memo
@@ -270,7 +296,7 @@ Page({
           }
           self.setData({
             goodsLineList: self.data.goodsLineList,
-            goodsMap : self.data.goodsMap,
+            goodsMap: self.data.goodsMap,
             tmp: Object
           });
 

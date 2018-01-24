@@ -63,7 +63,6 @@
             <text bindtap='increaseStock' data-stock="{{selectedProduct.stock}}">+</text>
           </view>
         </view>
-
       </view>
 
 
@@ -95,7 +94,19 @@
           <input type="digit" bindinput='updateVip3Price' value="{{selectedProduct.vip3Price}}"></input>
         </view>
       </view>
+      <view class='bottom-window-RecommandNHot'>
+        <view >
+          <text>店主推荐</text>
+          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="addRecommandation" />
+        </view>
+        <view>
+          <text style='width: 100rpx'>热卖</text>
+          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="addHot" />
+          <input type="number" bindinput='updateHotSale' value='{{selectedProduct.hotSale}}'></input>
+        </view>
+      </view>
     </view>
+
 
     <view class='bottom-window-stock' bindtap='bindExtra'>
       <view style='color:#888;font-size:30rpx;margin-left:13px;'>额外信息:

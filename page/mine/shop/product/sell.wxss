@@ -7,7 +7,7 @@
   justify-content: flex-end;
 }
 
-.head-img  {
+.head-img {
   justify-content: center;
   display: flex;
 }
@@ -27,20 +27,18 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
-  background-color:#f8f8f8;
+  background-color: #f8f8f8;
   opacity: 0.5;
-   background: linear-gradient(to bottom, #f8f8f8, whitesmoke); 
-    z-index: 1;
+  background: linear-gradient(to bottom, #f8f8f8, whitesmoke);
+  z-index: 1;
 }
 
 .search-input input {
   font-size: 15px;
   height: 25px;
   line-height: 25px;
-  /*display: inline-flex;*/
-  /* flex: 0 0 75%; */
-  /* margin-left: 10px; */
-  width:95%;
+  /*display: inline-flex;*//* flex: 0 0 75%; *//* margin-left: 10px; */
+  width: 95%;
 }
 
 .search-input image {
@@ -70,7 +68,7 @@
 
 .goods-line-list-child {
   display: flex;
-  justify-content: space-around;  
+  justify-content: space-around;
   border-bottom: 1px solid #e6e6e6;
   align-items: center;
   height: 90rpx;
@@ -78,14 +76,14 @@
   color: #888;
 }
 
-.goods-line-list-child text{
-  padding: 0rpx; 
+.goods-line-list-child text {
+  padding: 0rpx;
 }
 
 .goods-line-list-top {
   font-weight: 400;
   font-size: 30rpx;
-  color:black;
+  color: black;
 }
 
 .goods-image-clo {
@@ -93,28 +91,28 @@
 }
 
 .goods-name-clo {
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
-  flex: 3; 
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 3;
 }
 
- .goods-stock-clo {
+.goods-stock-clo {
   flex: 0.8;
 }
 
 .goods-price-clo {
   flex: 1;
-}  
-
-.goods-line-item image{
-  max-height: 75rpx;
-  max-width: 75rpx;
-  padding: 3rpx; 
 }
 
+.goods-line-item image {
+  max-height: 75rpx;
+  max-width: 75rpx;
+  padding: 3rpx;
+}
 
 /* 底部弹窗-start */
+
 .commodity_screen {
   width: 100%;
   height: 100%;
@@ -171,7 +169,7 @@
   align-items: center;
 }
 
-.bottom-window-detail-left image{
+.bottom-window-detail-left image {
   width: 250rpx;
   height: 250rpx;
 }
@@ -184,7 +182,7 @@
   border: 1px solid #e6e6e6; */
   display: flex;
   flex-direction: column;
-  justify-content:space-between;
+  justify-content: space-between;
 }
 
 .bottom-window-detail-right .goods-name-label {
@@ -193,7 +191,7 @@
 
 .bottom-window-detail-right .goods-name {
   margin: 10px 0 20px 0;
-  font-size:35rpx;
+  font-size: 35rpx;
 }
 
 .bottom-window-detail-right text {
@@ -221,14 +219,14 @@
   align-items: center;
   height: 90rpx;
   font-size: 33rpx;
-  color:#888;
+  color: #888;
 }
 
 
 .bottom-window-price view>text {
   width: 280rpx;
-  margin-left:10px;
-  font-size:30rpx;
+  margin-left: 10px;
+  font-size: 30rpx;
 }
 
 .bottom-window-price-start {
@@ -243,14 +241,51 @@
   align-items: center;
   height: 90rpx;
   font-size: 33rpx;
-  color:#888;
+  color: #888;
 }
 
 .bottom-window-price-start view>text {
   width: 147rpx;
-  margin-left:10px;
-  font-size:30rpx;
+  margin-left: 10px;
+  font-size: 30rpx;
 }
+
+.bottom-window-RecommandNHot{
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  width: 96%;
+}
+
+.bottom-window-RecommandNHot view{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  height: 90rpx;
+  font-size: 33rpx;
+  color: #888;
+}
+
+.bottom-window-RecommandNHot view>text {
+  width: 130rpx;
+  margin-left: 10px;
+  font-size: 30rpx;
+}
+.bottom-window-RecommandNHot view>switch{
+  margin-left: 20rpx;
+}
+.bottom-window-RecommandNHot view>input{
+  margin-right: 30rpx;
+  margin-left: 30rpx;
+  width:50rpx;
+  border: 1px solid #e6e6e6;
+  align-items: center;
+}
+
+/* 
+.bottom-window-price recommand switch{
+  padding-left: -60rpx;
+} */
 
 .bottom-window-stock {
   width: 94%;
@@ -258,11 +293,11 @@
   font-size: 40rpx;
   display: flex;
   justify-content: space-between;
-  margin-top:10rpx;
+  margin-top: 10rpx;
   margin-bottom: 10rpx;
 }
 
-.stock-edit{
+.stock-edit {
   display: flex;
 }
 
@@ -284,7 +319,7 @@
   border-bottom: 1px solid #e6e6e6;
   text-align: center;
   vertical-align: middle;
-  color:#888;
+  color: #888;
 }
 
 .bottom-window-btn {
@@ -301,5 +336,6 @@
 .bottom-window-btn text {
   font-size: 38rpx;
 }
+
 
 /* 底部弹窗-end */
