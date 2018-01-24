@@ -29,10 +29,7 @@ Page({
   },
   
 	onLoad: function (options) {
-		// 页面初始化 options为页面跳转所带来的参数
-	
-	
-		//this.loadRecommendedProducts()
+		
 	},
 
 
@@ -72,7 +69,7 @@ Page({
         for (var x in shopProducts) {
           let shopProduct = shopProducts[x];
           shopProductIds.push(shopProduct.productId);
-          if (shopProduct.stock > 0 && shopProduct.price > 0) {
+          if (shopProduct.stock >= 0 && shopProduct.price >= 0) {
             this.data.goodsList[shopProduct.productId] = {
               "id": shopProduct.productId,
               "title": products[shopProduct.productId].title,
@@ -85,7 +82,7 @@ Page({
           }
 				
       }
-				
+				console.log(this.data.goodsList);
 				this.setData({
 					goodsList: this.data.goodsList
 				})

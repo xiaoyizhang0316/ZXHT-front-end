@@ -112,7 +112,7 @@ Page({
       })
     } else {
       //上架商品
-      let url = COM.load('CON').SHOP_PRODUCT_URL + '/saveOrUpdate';
+			let url = COM.load('CON').ADD_SHOP_PRODUCT_URL;
       COM.load('NetUtil').netUtil(url, 'POST', product, function (res) {
         let shopProductIds = wx.getStorageSync("shopProductIds");
         if (!shopProductIds.includes(product.productId)) {

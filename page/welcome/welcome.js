@@ -53,14 +53,7 @@ Page({
 				console.log(callback)
 				console.log (callback == false)
 				if (callback == false) {
-					//通知用户显示自己或者什么都不显示或者显示访问上一个商店
-					// wx.showToast({
-					// 	title: "请等待商店管理员认证",
-					// 	duration: 1500,
-					// 	icon: 'none',
-					// 	mask: true
-					// })
-
+				
 					wx.showModal({
 						title: '提示',
 						content: '请等待商店管理员认证后进入商铺',
@@ -73,9 +66,6 @@ Page({
 						}
 					})
 
-				
-					
-					
 					//to--do
 				} else {
 					//将得到的shopid 写入缓存并改写global shopid
@@ -83,8 +73,7 @@ Page({
 						key: 'targetShopId',
 						data: e.targetShopId,
 					})
-					app.globalData.targetShopId = e.targetShopId
-					console.log("glo: "+ app.globalData)
+					app.globalData.targetShopId = e.targetShopId				
 					this.navigatorToIndex();
 				
 				}
@@ -99,13 +88,14 @@ Page({
 			console.info('checking the storage');
 			let products = wx.getStorageSync("products");
 			let brands = wx.getStorageSync("brands");
-			if (brands && products) {
+			let openId = wx.getStorageSync("openId");
+			if (brands && products && openId) {
 				clearInterval(interval);
 				wx.switchTab({
 					url: '../index/index',
 				})
 			}
-		}, 5000);
+		}, 3000);
 
 	},
   /**
