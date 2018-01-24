@@ -1,0 +1,27 @@
+<template name="hotList-block">
+        <view class="goods-contaniner">
+        <view class="goods-item" wx:for="{{hotList}}" wx:key="{{index}}">
+            <!-- <view > -->
+            <navigator url="/page/details/details?id={{item.id}}">
+            <image class="goods-image" src="{{item.thumb}}" background-size="cover"></image>
+            </navigator> 
+            <!-- </view> -->
+
+            <!-- <view class="goods-desc"> -->
+                 <view class="goods-name"> 
+                  <text>{{item.title}}</text>
+                 </view> 
+                <view class="goods-price">
+                    <text class="goods-price-strong goods-price-now">${{item.price}}澳元</text>
+                     <!-- <text class="goods-price-deleted">${{item.stock}}澳元</text>  -->
+                    <!-- <view class="goods-purchase-btn">
+                     <navigator url="/page/details/details?id={{item.id}}">
+                    <button class="purchase-btn">立即购买</button>
+                    </navigator> 
+                    </view> -->
+                </view>
+                
+            <!-- </view> -->
+        </view>
+      </view>
+</template>

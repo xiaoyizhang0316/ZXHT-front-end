@@ -1,4 +1,5 @@
 <import src="/page/common/templates/goodsList/goodsList-block/goodsList-block.wxml" />
+<import src="/page/common/templates/goodsList/hotList-block/hotList-block.wxml" />
 <view class="main">
 
   <view class="search-box">
@@ -53,23 +54,6 @@
     <view class="newest-title">
       <text>店主推荐</text>
     </view>
-    <!-- <view class="newest-box">
-            <view class="newest-list">
-                <navigator url="/page/details/details">
-                    <image src="/image/product/cranberry.jpg"></image>
-                    <view class="newest-text"><text>Swisse 蔓越莓</text></view>
-                    <view class="newest-text"><text>$10.99</text></view>
-                </navigator>
-            </view>
-            <view class="newest-list">
-                <navigator url="/page/details/details">
-                    <image src="/image/product/liver.jpg"></image>
-                    <view class="newest-text"><text>Swisse 护肝片</text></view>
-                    <view class="newest-text"><text>$120</text></view>
-                </navigator>
-            </view>
-        </view> -->
-
 
     <view class="container">
       <!-- <template is="goodsList" data="{{goodsList}}"/> -->
@@ -83,7 +67,7 @@
     </view>
 
     <view class="container">
-      <template is="goodsList-block" data="{{hotList}}" />
+      <template is="hotList-block" data="{{hotList}}" />
     </view>
   </view>
 </view>

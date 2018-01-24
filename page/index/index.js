@@ -7,12 +7,12 @@ var COM = require('../../utils/common.js')
 
 Page({
   data: {
-		page: 1,
-		pageSize: 30,
-		hasMoreData: true,
-		
+    page: 1,
+    pageSize: 30,
+    hasMoreData: true,
     goodsList: {},
-		shop: [],
+    hotList: {},
+    shop: [],
     imgUrls: [
       'https://s18.postimg.org/hbwxwiwmx/image.png',
       'https://s18.postimg.org/v5lalkhih/image.png',
@@ -23,14 +23,16 @@ Page({
     autoplay: false,
     interval: 3000,
     duration: 800,
-    focus:false,
+    focus: false,
     displayClear: false,
     userinfo: ''
+
   },
-  
-	onLoad: function (options) {
-		
-	},
+
+  onLoad: function (options) {
+    this.loadRecommendedProducts();
+    console.log(this.data)
+  },
 
 
   onShow: function () {
@@ -41,35 +43,29 @@ Page({
     this.loadRecommendedProducts();
   },
 
-	
+
   /**
    * load the recomemded products by the shop id
    */
-  loadRecommendedProducts: function(event) {
-		var that = this
-		
-		//如果有targetShopId 则优先展示
-		let openId = ""
-		if (app.globalData.targetShopId != "")
-		{
-			openId = app.globalData.targetShopId;
-		}else{
-			openId = app.globalData.openId;
-		}
-    
+  loadRecommendedProducts: function (event) {
+    let self = this
+    //如果有targetShopId 则优先展示
+    let openId = ""
+    if (app.globalData.targetShopId != "") {
+      openId = app.globalData.targetShopId;
+    } else {
+      openId = app.globalData.openId;
+    }
     let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + openId;
     let products = wx.getStorageSync("products");
-		
-		
 
-    COM.load('NetUtil').netUtil(url, "GET", "",  (shopProducts) => {
+    COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
       if (shopProducts) {
-				
         var shopProductIds = [];
         for (var x in shopProducts) {
           let shopProduct = shopProducts[x];
           shopProductIds.push(shopProduct.productId);
-          if (shopProduct.stock >= 0 && shopProduct.price >= 0) {
+          if (shopProduct.stock >= 0 && shopProduct.price >= 0 && shopProduct.recommend) {
             this.data.goodsList[shopProduct.productId] = {
               "id": shopProduct.productId,
               "title": products[shopProduct.productId].title,
@@ -77,22 +73,31 @@ Page({
               "vipPrice": shopProduct.vip1Price,
               "stock": shopProduct.stock,
               //"thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
-							"thumb": "https://pic1.zhimg.com/v2-28d55dc8b4c44e5542be2def2ff1d76f_xs.jpg"
+              "thumb": "https://pic1.zhimg.com/v2-28d55dc8b4c44e5542be2def2ff1d76f_xs.jpg"
             }
           }
-				
-      }
-				console.log(this.data.goodsList);
-				this.setData({
-					goodsList: this.data.goodsList
-				})
-				wx.setStorage({
-					key: 'shopProductIds',
-					data: shopProductIds,
-				})
+          if (shopProduct.stock >= 0 && shopProduct.price >= 0 && shopProduct.hot) {
+            this.data.hotList[shopProduct.productId] = {
+              "id": shopProduct.productId,
+              "title": products[shopProduct.productId].title,
+              "price": shopProduct.price,
+              "vipPrice": shopProduct.vip1Price,
+              "stock": shopProduct.stock,
+              //"thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
+              "thumb": "https://pic1.zhimg.com/v2-28d55dc8b4c44e5542be2def2ff1d76f_xs.jpg"
+            }
+          }
+        }
+        self.setData({
+          goodsList: this.data.goodsList,
+          hotList: this.data.hotList
+        })
+        wx.setStorage({
+          key: 'shopProductIds',
+          data: shopProductIds,
+        })
       }
     });
-    
   },
 
   bindSearch: function (event) {
@@ -132,12 +137,12 @@ Page({
           content: '扫码失败！',
           showCancel: false,
           success: function (res) {
-              console.log('scan code failed')
+            console.log('scan code failed')
           }
         })
       }
     })
-  }, 
+  },
 
   /**
    * search the barcode only from internet
@@ -150,11 +155,11 @@ Page({
       searchHistoryList = [];
     };
 
-   // console.log(COM.load('CON').BAR_CODE_URL+barcode)
+    // console.log(COM.load('CON').BAR_CODE_URL+barcode)
 
     COM.load('NetUtil').netUtil(COM.load('CON').BAR_CODE_URL + barcode, "GET", "", function (res) {
       item = res;
-     // console.info(item);
+      // console.info(item);
 
       if (item) {
         //目前historyList中只存title
@@ -167,7 +172,7 @@ Page({
         }
 
         //限制搜索记录为10个
-        while (searchHistoryList.length >= 10){
+        while (searchHistoryList.length >= 10) {
           searchHistoryList.shift()
         }
 
@@ -198,7 +203,7 @@ Page({
         })
       }
     });
-    
+
   },
 
   onShareAppMessage: function () {
@@ -209,9 +214,9 @@ Page({
     }
   },
 
-  onReady: function() {
+  onReady: function () {
     var timestamp = Date.parse(new Date());
-    timestamp = timestamp / 1000; 
+    timestamp = timestamp / 1000;
     console.log('index page ready at: ' + timestamp)
   }
 })
