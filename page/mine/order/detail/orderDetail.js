@@ -39,6 +39,7 @@ Page({
       sender: order[0].sender,
       receiver: order[0].receiver,
       items: order[0].items,
+      totalPrice: order[0].totalPrice,
       totalQuantity: order[0].totalQuantity,
       totalWeight: order[0].totalWeight,
       receiverName: order[0].receiver.name,

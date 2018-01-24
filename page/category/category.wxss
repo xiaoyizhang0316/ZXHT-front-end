@@ -29,22 +29,16 @@ page,.main{
     text-overflow:ellipsis;
 }
 
-.search{
+.search-box{
   flex:1;
   display:flex;
   padding-top:10px;
   padding-bottom:10px;
+  flex-direction:column;
   /* border-bottom:1px solid #e6e6e6; */
   width:100%;
   position: absolute;
   top:0;
-}
-
-.search-box {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 }
 
 .search-input {

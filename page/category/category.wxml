@@ -7,21 +7,19 @@
     </view>
 
     <scroll-view class="categroy-right" scroll-y="{{isScroll}}" style='height:1000px;' scroll-into-view="{{toView}}" scroll-with-animation="true">
-      <view class="search">
-        <view class="search-box">
-          <view class="search-input">
-            <view style="display:flex;flex:1;">
-              <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
-              <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindinput="bindSearch" />
-            </view>
-            <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
-              <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
-            </view>
-            <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
-              <image style="height:21px;width:21px; margin-right: 5px;" src="/image/public/scan.png"></image>
-            </view>
-          </view>  
-        </view>
+      <view class="search-box">
+        <view class="search-input">
+          <view style="display:flex;flex:1;">
+            <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
+            <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindfocus="bindSearch" />
+          </view>
+          <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
+            <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+          </view>
+          <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
+            <image style="height:21px;width:21px; margin-right: 5px;" src="/image/public/scan.png"></image>
+          </view>
+        </view>  
       </view>
 
          <!-- <block wx:for="{{detail}}"  wx:key="idx"> -->

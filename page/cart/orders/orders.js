@@ -60,11 +60,14 @@ Page({
   getTotalPrice() {
     let orders = this.data.orders;
     let total = 0;
+    let totalNum = 0;
     for(let i = 0; i < orders.length; i++) {
       total += orders[i].num * orders[i].price;
+      totalNum += orders[i].num;
     }
     this.setData({
-      total: total.toFixed(2)
+      total: total.toFixed(2),
+      totalNum: totalNum
     })
   },
 
@@ -85,7 +88,8 @@ Page({
       memo: this.data.memo,
       receiver: this.data.address,
       items: this.data.orders,
-      totalQuantity: this.data.total,
+      totalPrice: this.data.total,
+      totalQuantity: this.data.totalNum,
       status: '已提交',
     };
 

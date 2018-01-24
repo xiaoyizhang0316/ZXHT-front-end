@@ -81,6 +81,12 @@ Page({
     console.log(productsMap)
   },
 
+  bindSearch: function (event) {
+    wx.navigateTo({
+      url: '/page/index/search/search'
+    })
+  },
+
   switchTab(e) {
     //右侧的scroll-view回到顶部 todo
     // this.this.setData({ scrollTop: 0, })
