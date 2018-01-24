@@ -95,13 +95,13 @@
         </view>
       </view>
       <view class='bottom-window-RecommandNHot'>
-        <view >
+        <view>
           <text>店主推荐</text>
-          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="addRecommandation" />
+          <switch checked="{{isRecommandChecked}}" data-id="{{item.id}}" bindchange="addRecommandation" />
         </view>
         <view>
           <text style='width: 100rpx'>热卖</text>
-          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="addHot" />
+          <switch checked="{{isHotChecked}}" data-id="{{item.id}}" bindchange="addHot" />
           <input type="number" bindinput='updateHotSale' value='{{selectedProduct.hotSale}}'></input>
         </view>
       </view>

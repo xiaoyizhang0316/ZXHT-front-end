@@ -14,7 +14,8 @@ Page({
     animationData: {},
     showModalStatus: false,
     selectedProduct: Object,
-    isRecommandChecked: [],
+    isRecommandChecked: false,
+    isHotChecked:false,
     selectedIndex: 0,
     tmp: { 'price': '', 'vipPrice': '' },
     memo: '',
@@ -25,6 +26,7 @@ Page({
    */
   onLoad: function (options) {
     this.filterProducts();
+    
   },
 
   /**
@@ -165,6 +167,8 @@ Page({
       animationData: animation.export(),
       showModalStatus: true,
       selectedProduct: this.data.goodsMap.get(e.currentTarget.dataset.id),
+      isRecommandChecked: this.data.goodsMap.get(e.currentTarget.dataset.id).recommend,
+      isHotChecked: this.data.goodsMap.get(e.currentTarget.dataset.id).hot
     })
     setTimeout(function () {
       animation.translateY(0).step()
@@ -172,8 +176,6 @@ Page({
         animationData: animation.export()
       })
     }.bind(this), 200)
-
-    console.log(this.data.selectedProduct)
   },
 
   // 隐藏遮罩层
