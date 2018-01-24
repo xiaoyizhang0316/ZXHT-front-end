@@ -27,7 +27,14 @@ Page({
 
   loadCategoies: function() {
     let self = this;
-    COM.load('NetUtil').netUtil(COM.load('CON').CATEGORY_URL + "openId/" + app.globalData.openId, "GET", "", function (res) {
+		//如果有targetShopId 则优先展示
+		let openId = ""
+		if (app.globalData.targetShopId != "") {
+			openId = app.globalData.targetShopId;
+		} else {
+			openId = app.globalData.openId;
+		}
+    COM.load('NetUtil').netUtil(COM.load('CON').CATEGORY_URL + "openId/" + openId, "GET", "", function (res) {
         for(var x in res) {
           var cat = {
             name: res[x].name, 

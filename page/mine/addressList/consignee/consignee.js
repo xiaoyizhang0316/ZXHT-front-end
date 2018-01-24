@@ -27,6 +27,7 @@ Page({
   formSubmit(e) {
     const value = e.detail.value;
     console.log(value)
+		console.log(e)
 
     // if (value.name && value.phone && value.detail && value.city && value.identityCard && value.correctSidePic && value.oppositeSidePic) {
     if (value.name && value.phone && value.detail && value.city && value.identityCard) {
@@ -37,13 +38,12 @@ Page({
       this.data.address.city = value.city
       this.data.address.identityCard = value.identityCard
       var newarray = [this.data.address]
-
       this.setData({
         'addressList': this.data.addressList.concat(newarray)
       });
 
       console.log(this.data.addressList)
-
+			exit;
       wx.setStorage({
         key: 'addressList',
         data: this.data.addressList,
@@ -70,6 +70,7 @@ Page({
 
     //   }
     // })
+		
     wx.navigateTo({
       url: "./upload/uploadImg?from=address.correctSidePic",
     })
@@ -98,8 +99,7 @@ Page({
         that.setData({
           addressList: res.data
         })
-        console.log('aa')
-        console.log(res.data)
+        
       }
     })
   }
