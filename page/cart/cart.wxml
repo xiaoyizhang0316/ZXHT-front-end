@@ -31,14 +31,14 @@
             </view>
         </view>
 
-        <view class="cart-footer">
+        <view bindtap='orderConfirm' class="cart-footer">
             <view class="cart-toatl-price-box">
                   <text class="cart-toatl-msg-front">总计:</text>
                   <text class="cart-toatl-price">${{totalPrice}}</text>
                   <text class="cart-toatl-msg-behind">(不含运费)</text>
             </view>
-            <view bindtap='orderConfirm' class="order-icon">
-                <image src="/image/icon3.png"></image>
+            <view class="order-icon">
+                <image src="/image/right-arrow.png"></image>
                 <!-- <navigator url="/page/mine/orders/orders"></navigator> -->
             </view>
         </view>

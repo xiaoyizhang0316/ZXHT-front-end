@@ -7,7 +7,7 @@
     </view>
   </view>
 
-  <view class="explain-line" style="margin-top:10px;background-color:{{touched[0] ? '#e9e9e9':''}}" data-id="0" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="consignee">
+  <view class="explain-line" style="margin-top:20px;background-color:{{touched[0] ? '#e9e9e9':''}}" data-id="0" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="consignee">
     <view class="explain-block">
       <image style="height:22px;width:22px;" src="../../image/consignee.png"></image>
     </view>
@@ -17,7 +17,7 @@
     </view>
   </view>
 
-  <view class="explain-line" style="margin-top:10px;background-color:{{touched[1] ? '#e9e9e9':''}}" data-id="1" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="order">
+  <view class="explain-line" style="margin-top:20px;background-color:{{touched[1] ? '#e9e9e9':''}}" data-id="1" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="order">
     <view class="explain-block">
       <image style="height:22px;width:22px;" src="../../image/spending.png"></image>
     </view>
@@ -47,11 +47,11 @@
     </view>
   </view>
 
-  <view class="explain-line" style="margin-top:10px;background-color:{{touched[4] ? '#e9e9e9':''}}" data-id="4" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="switchShop">
+  <view class="explain-line" style="margin-top:20px;background-color:{{touched[4] ? '#e9e9e9':''}}" data-id="4" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="switchShop">
     <view class="explain-block">
       <image style="height:22px;width:22px;" src="../../image/shop.png"></image>
     </view>
-    <view class="explain-text">我的关注</view>
+    <view class="explain-text">关注店铺</view>
     <view class="explain-block">
       <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
     </view>
@@ -60,7 +60,7 @@
 
 
   <block wx:if="{{openShopButton}}">
-    <view class="explain-line" style="margin-top:10px;background-color:{{touched[5] ? '#e9e9e9':''}}" data-id="5" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="openShop">
+    <view class="explain-line" style="margin-top:20px;background-color:{{touched[5] ? '#e9e9e9':''}}" data-id="5" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="openShop">
       <view class="explain-block">
         <image style="height:22px;width:22px;" src="../../image/open.png"></image>
       </view>
@@ -72,7 +72,7 @@
   </block>
 
   <block wx:else>
-    <view class="explain-line" style="margin-top:10px;background-color:{{touched[6] ? '#e9e9e9':''}}" data-id="6" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="myShop">
+    <view class="explain-line" style="background-color:{{touched[6] ? '#e9e9e9':''}}" data-id="6" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="myShop">
       <view class="explain-block">
         <image style="height:22px;width:22px;" src="../../image/consignee.png"></image>
       </view>
@@ -84,7 +84,7 @@
   </block>
 
 
-  <view class="explain-line" style="margin-top:10px;background-color:{{touched[7] ? '#e9e9e9':''}}" data-id="7" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="aboutus">
+  <view class="explain-line" style="margin-top:20px;background-color:{{touched[7] ? '#e9e9e9':''}}" data-id="7" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="aboutus">
     <view class="explain-block">
       <image style="height:22px;width:22px;" src="../../image/service.png"></image>
     </view>
