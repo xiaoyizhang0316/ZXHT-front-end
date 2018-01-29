@@ -41,6 +41,22 @@ Page({
     }, 100);
     this.resetSearch();
     this.loadRecommendedProducts();
+
+    //设置页面标题
+    let self = this
+    var targetShopId = wx.getStorageSync('targetShopId')
+    let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + targetShopId
+    COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+      if (callbackdata == null) {
+        wx.setNavigationBarTitle({
+          title: '真享 海淘',
+        })
+      } else {
+        wx.setNavigationBarTitle({
+          title: callbackdata.shopName,
+        })
+      }
+    })
   },
 
 

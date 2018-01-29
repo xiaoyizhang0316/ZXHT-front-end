@@ -32,7 +32,7 @@
   </scroll-view>
 
   <view class="bottom-contaniner" bindtap='addConsignee'>
-      <text class='addAddressBtn'>新增收货地址</text>
+      <button type='warn'class='addAddressBtn'>新增收货地址</button> 
   </view>
 
 

@@ -30,7 +30,7 @@ page {
   /* justify-content: center; */
   align-items: center;
   border-top: 1px solid #e6e6e6;
-  border-bottom: 1px solid #e6e6e6;
+  /* border-bottom: 1px solid #e6e6e6; */
   padding-left: 20rpx;
 }
 
@@ -52,7 +52,7 @@ page {
 
 .apply-btn button {
   width: 95%;
-  font-size: 24rpx;
+  font-size: 18px;
 }
 
 

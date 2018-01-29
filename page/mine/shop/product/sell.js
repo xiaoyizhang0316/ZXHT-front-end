@@ -15,7 +15,7 @@ Page({
     showModalStatus: false,
     selectedProduct: Object,
     isRecommandChecked: false,
-    isHotChecked:false,
+    isHotChecked: false,
     selectedIndex: 0,
     tmp: { 'price': '', 'vipPrice': '' },
     memo: '',
@@ -26,7 +26,7 @@ Page({
    */
   onLoad: function (options) {
     this.filterProducts();
-    
+
   },
 
   /**
@@ -259,9 +259,9 @@ Page({
     }
   },
 
-  updateHotSale: function(e){
+  updateHotSale: function (e) {
     let quantity = e.detail.value;
-    if(quantity > 0){
+    if (quantity > 0) {
       this.setData({
         'selectedProduct.hotSale': quantity
       })
@@ -359,7 +359,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.filterProducts();
   },
 
 })
