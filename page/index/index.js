@@ -44,20 +44,27 @@ Page({
 
     //设置页面标题
     let self = this
-    var targetShopId = wx.getStorageSync('targetShopId')
+    var openId = "";
     //let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + targetShopId
-		let url = COM.load('CON').getMyShopInfo + targetShopId
-    COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
-      if (callbackdata == null) {
-        wx.setNavigationBarTitle({
-          title: '真享 海淘',
-        })
-      } else {
-        wx.setNavigationBarTitle({
-          title: callbackdata.shopName,
-        })
-      }
-    })
+		
+		if (app.globalData.targetShopId != null && app.globalData.targetShopId != "") {
+			openId = app.globalData.targetShopId;
+			let url = COM.load('CON').getMyShopInfo + targetShopId
+			COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+				if (callbackdata == null) {
+				
+				} else {
+					wx.setNavigationBarTitle({
+						title: callbackdata.shopName,
+					})
+				}
+			})
+		} else {
+			wx.setNavigationBarTitle({
+				title: '真享 海淘',
+			})
+		}
+	
   },
 
 

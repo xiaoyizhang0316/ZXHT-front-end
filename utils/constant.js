@@ -1,8 +1,8 @@
 //url相关
 // const BASE_URL = "http://101.178.98.25:8443"
-// const BASE_URL = "https://mini.zhenxianghaitao.com"
+const BASE_URL = "https://mini.zhenxianghaitao.com"
 // const BASE_URL = "https://localhost"
-const BASE_URL = "https://05c56a30.ngrok.io"
+//const BASE_URL = "https://05c56a30.ngrok.io"
 
 
 //登录
@@ -40,7 +40,7 @@ const SEARCH_URL = PRODUCT_URL + "title/";
 
 //商品信息 购物车信息
 const TARGETSHOP_PRODUCT_URL = SHOP_PRODUCT_URL + "getTargetShopProduct";
-const SAVE_CONSIGNEE_URL = BASE_URL + "/api/mall/shops/saveConsignee";
+const SAVE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/saveConsignee";
 
 
 //进入他人店铺

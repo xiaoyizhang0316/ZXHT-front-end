@@ -53,7 +53,8 @@ Page({
     let url = COM.load('CON').FANS_LIST_URL + shopOpenId;
     COM.load('NetUtil').netUtil(url, "GET", "", (fans) => {
       let fansMap = new Map();
-      if (fans) {
+			console.log(fans)
+      if (fans != "") {
      
         for (var x in fans) {
           let fan = fans[x];
@@ -267,11 +268,18 @@ Page({
   //   })
   // },
 
+  share: function (event) {
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
 
+  },
+
+  share: function (event) {
+    wx.navigateTo({
+      url: '/page/mine/fans/share/share'
+    })
   },
 
   /**

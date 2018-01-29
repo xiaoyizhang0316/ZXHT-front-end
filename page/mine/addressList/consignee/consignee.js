@@ -1,5 +1,6 @@
 //consignee.js
 var COM = require('../../../../utils/common.js')
+var app = getApp()
 Page({
   data: {
     addressList: [],
@@ -37,15 +38,37 @@ Page({
       this.setData({
         'addressList': this.data.addressList.concat(newarray)
       });
-			console.log(this.data.addressList)
+		
 			console.log(this.data.address)
+			let aData = this.data.address
+			aData.openId = app.globalData.openId
 			//发送地址到服务器
 			let url = COM.load('CON').SAVE_CONSIGNEE_URL;
-			COM.load('NetUtil').netUtil(url, "POST", this.data.addressList, (callback) => {
+			COM.load('NetUtil').netUtil(url, "POST", this.data.address, (callback) => {
 	
-					if(callback == true)
+					if(callback.suc == true)
 					{
+						let consignee_id = callback.id;
+						console.log(consignee_id)
+						let cData = [
+							{
+								"id": consignee_id,
+								"table": consignee,
+								"name": correctSidePic,
+								"file": this.data.address.correctSidePic
+							},
+							{
+								"id": consignee_id,
+								"table": consignee,
+								"name": oppositeSidePic,
+								"file": this.data.address.oppositeSidePic
+							}
+							]					
+						// let url = COM.load("CON").UPLOADFILE;
+						// COM.load('NetUtil').netUtil(url, "POST", cData, (res) => {
+						// 	console.log(res);
 
+						// })
 					}
 
 
