@@ -29,7 +29,7 @@ Page({
 
     console.log(self);
     //let url = COM.load('CON').ShopInfo + self.data.openId;
-    let url = "https://a5f93900.ngrok.io/api/mall/shops/getShopInfo/" + self.data.openId
+		let url = COM.load("CON").getMyShopInfo + self.data.openId
     COM.load('NetUtil').netUtil(url, "GET", "", (shopInfo) => {
       if (shopInfo) {
         console.log(shopInfo)

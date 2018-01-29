@@ -74,9 +74,9 @@ Page({
   formSubmit: function (e) {
     console.log("pushed")
     self = this
-    let url = "https://a5f93900.ngrok.io/api/mall/shops/create"
+    //let url = "https://a5f93900.ngrok.io/api/mall/shops/create"
     //let url = "https://mini.zhenxianghaitao.com/api/mall/shops/create"
-    // let url = COM.load('CON').shopisOpenOrNot;
+    let url = COM.load('CON').CREATE_SHOP;
     console.log(app.globalData);
     COM.load('NetUtil').netUtil(url, "POST", {
       "open_id": app.globalData.openId,

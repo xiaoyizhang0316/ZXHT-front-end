@@ -1,5 +1,5 @@
 //consignee.js
-
+var COM = require('../../../../utils/common.js')
 Page({
   data: {
     addressList: [],
@@ -26,12 +26,8 @@ Page({
 
   formSubmit(e) {
     const value = e.detail.value;
-    console.log(value)
-		console.log(e)
-
     // if (value.name && value.phone && value.detail && value.city && value.identityCard && value.correctSidePic && value.oppositeSidePic) {
     if (value.name && value.phone && value.detail && value.city && value.identityCard) {
-
       this.data.address.name = value.name
       this.data.address.phone = value.phone
       this.data.address.detail = value.detail
@@ -41,9 +37,21 @@ Page({
       this.setData({
         'addressList': this.data.addressList.concat(newarray)
       });
+			console.log(this.data.addressList)
+			console.log(this.data.address)
+			//发送地址到服务器
+			let url = COM.load('CON').SAVE_CONSIGNEE_URL;
+			COM.load('NetUtil').netUtil(url, "POST", this.data.addressList, (callback) => {
+	
+					if(callback == true)
+					{
 
-      console.log(this.data.addressList)
-			exit;
+					}
+
+
+				}),
+
+      
       wx.setStorage({
         key: 'addressList',
         data: this.data.addressList,

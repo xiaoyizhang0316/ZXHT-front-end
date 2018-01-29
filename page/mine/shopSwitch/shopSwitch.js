@@ -64,7 +64,8 @@ Page({
   loadShop:function (e){
     var self = this
     let openId = app.globalData.openId;
-    let url = "https://a5f93900.ngrok.io/api/mall/users/getShopsApplyToShop/" + openId;
+    //let url = "https://a5f93900.ngrok.io/api/mall/users/getShopsApplyToShop/" + openId;
+		let url = COM.load('CON').GET_SHOPS_APPLY_TO_SHOP + openId;
     COM.load('NetUtil').netUtil(url, "GET", "", (shops) => {
       let shopMap = new Map();
       if (shops) {

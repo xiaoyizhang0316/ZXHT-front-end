@@ -2,7 +2,7 @@
 // const BASE_URL = "http://101.178.98.25:8443"
 // const BASE_URL = "https://mini.zhenxianghaitao.com"
 // const BASE_URL = "https://localhost"
-const BASE_URL = "https://a5f93900.ngrok.io"
+const BASE_URL = "https://05c56a30.ngrok.io"
 
 
 //登录
@@ -13,18 +13,22 @@ const BRAND_URL = BASE_URL + "/api/mall/brands";
 const GET_OPEN_ID = BASE_URL + "/api/customers/openid";
 const tryCode_URL = BASE_URL + "/api/mall/test/appid/";
 const tryAddUser_URL = BASE_URL + "/api/mall/users/saveOrUpdateUserData";
+const CREATE_OR_UPDATE_USER = BASE_URL + "/api/mall/users/saveOrUpdateUserData";
 
 //获得个人用户页面信息
 const shopisOpenOrNot = BASE_URL + "/api/mall/shops/checkOpenShop/";
 const ShopInfo = BASE_URL + "/api/mall/shops/getShopInfo/";
 
+
 //获得，更新关于自己店铺的信息
-const getMyShopInfo = BASE_URL + "/api/mall/shops/openId/{openId}"
+const getMyShopInfo = BASE_URL + "/api/mall/shops/openId/"
 const updateMyShopInfo = BASE_URL + "/api/mall/shops/update"
 const FANS_LIST_URL = BASE_URL + "/api/mall/users/getFansApplyToShop/"
 const FANS_ACCESS_URL = BASE_URL + "/api/mall/users/updateFansAccess"
 const FANS_VIP_URL = BASE_URL + "/api/mall/users/updateFansVipLevel"
 const ADD_SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shops/addShopProduct"
+const APPLY_TO_SHOP = BASE_URL + "api/mall/users/applyToShop/"
+const CREATE_SHOP = BASE_URL + "/api/mall/shops/create"
 const HEADERS = {
   'content-type': 'application/json',
   'Authorization': 'Basic ZXhwcmVzczozeTZGUkAyRw=='
@@ -36,7 +40,11 @@ const SEARCH_URL = PRODUCT_URL + "title/";
 
 //商品信息 购物车信息
 const TARGETSHOP_PRODUCT_URL = SHOP_PRODUCT_URL + "getTargetShopProduct";
+const SAVE_CONSIGNEE_URL = BASE_URL + "/api/mall/shops/saveConsignee";
 
+
+//进入他人店铺
+const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/"
 module.exports = {
   BASE_URL: BASE_URL,
   CATEGORY_URL: CATEGORY_URL,
@@ -48,6 +56,7 @@ module.exports = {
   tryAddUser_URL: tryAddUser_URL,
   shopisOpenOrNot: shopisOpenOrNot,
   updateMyShopInfo: updateMyShopInfo,
+	getMyShopInfo: getMyShopInfo,
   HEADERS: HEADERS,
   FANS_LIST_URL: FANS_LIST_URL,
   FANS_VIP_URL: FANS_VIP_URL,
@@ -55,5 +64,10 @@ module.exports = {
   BAR_CODE_URL: BAR_CODE_URL,
   SEARCH_URL: SEARCH_URL,
 	TARGETSHOP_PRODUCT_URL : TARGETSHOP_PRODUCT_URL,
-	ADD_SHOP_PRODUCT_URL: ADD_SHOP_PRODUCT_URL
+	ADD_SHOP_PRODUCT_URL: ADD_SHOP_PRODUCT_URL,
+	SAVE_CONSIGNEE_URL: SAVE_CONSIGNEE_URL,
+	APPLY_TO_CODE: APPLY_TO_SHOP,
+	GET_SHOPS_APPLY_TO_SHOP: GET_SHOPS_APPLY_TO_SHOP,
+	CREATE_SHOP: CREATE_SHOP,
+	CREATE_OR_UPDATE_USER: CREATE_OR_UPDATE_USER
 }

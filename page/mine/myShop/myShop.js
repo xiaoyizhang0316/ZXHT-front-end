@@ -29,8 +29,9 @@ Page({
       thumb: wx.getStorageSync("avatarUrl"),
       nickName: wx.getStorageSync("nickname")
     })
-    let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + wx.getStorageSync("openId")
-    console.log(url)
+    //let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + wx.getStorageSync("openId")
+		let url = COM.load("CON").getMyShopInfo + wx.getStorageSync("openId")
+    //console.log(url)
     
     COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
      self.setData({

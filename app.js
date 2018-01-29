@@ -55,8 +55,8 @@ App({
 
 		//然后访问后台得到用户开店信息
 		//访问后端获取openid
-		// let url = COM.load('CON').tryCode_URL + code;
-		let url = "https://a5f93900.ngrok.io/api/mall/test/appid/" + code
+		let url = COM.load('CON').tryCode_URL + code;
+		//let url = "https://a5f93900.ngrok.io/api/mall/test/appid/" + code
 		COM.load('NetUtil').netUtil(url, "GET", "", (openId) => {
 			self.globalData.openId = self.jsonToMap(openId).get("openid")
 
@@ -103,8 +103,8 @@ App({
   //用户登录后把用户储存在user表里, 把用户是否注册状态存入缓存
   saveOrUserData: function (userInfo) {
     var self = this
-    let url = "https://a5f93900.ngrok.io/api/mall/users/saveOrUpdateUserData"
-    // let url = COM.load('CON').tryAddUser_URL;
+    //let url = "https://a5f93900.ngrok.io/api/mall/users/saveOrUpdateUserData"
+		let url = COM.load('CON').CREATE_OR_UPDATE_USER;
 		COM.load('NetUtil').netUtil(url, "POST", { "open_id": self.globalData.openId, "name": userInfo.nickName, "avatarUrl": userInfo.avatarUrl, "country":userInfo.country, "province": userInfo.province,	"city": userInfo.city }, (callback) => {
       wx.setStorage({
         key: 'userId',
@@ -116,8 +116,8 @@ App({
   //设定用户是否开过店以及商店ID
   setShopisOpenedOrNot: function (openId) {
     var self = this
-    let url = "https://a5f93900.ngrok.io/api/mall/shops/checkOpenShop/" + openId
-    // let url = COM.load('CON').shopisOpenOrNot;
+    //let url = "https://a5f93900.ngrok.io/api/mall/shops/checkOpenShop/" + openId
+    let url = COM.load('CON').shopisOpenOrNot+openId;
     COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
       if (callbackdata == 0) {
         self.globalData.shopOpened = false

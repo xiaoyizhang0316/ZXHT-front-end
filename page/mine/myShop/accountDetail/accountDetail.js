@@ -66,7 +66,8 @@ Page({
    */
   onLoad: function (options) {
     var self = this;
-    let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + wx.getStorageSync("openId")
+    //let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + wx.getStorageSync("openId")
+		let url = COM.load("CON").getMyShopInfo
 
     COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
       self.setData({
