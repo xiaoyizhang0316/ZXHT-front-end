@@ -45,7 +45,8 @@ Page({
     //设置页面标题
     let self = this
     var targetShopId = wx.getStorageSync('targetShopId')
-    let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + targetShopId
+    //let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + targetShopId
+		let url = COM.load('CON').getMyShopInfo + targetShopId
     COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
       if (callbackdata == null) {
         wx.setNavigationBarTitle({
