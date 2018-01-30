@@ -28,7 +28,9 @@
     "page/mine/fans/fans",
     "page/mine/myShop/myShop",
     "page/mine/myShop/accountDetail/accountDetail",
-    "page/mine/fans/share/share"
+    "page/mine/fans/share/share",
+    "page/mine/sell_order/sell_orderHistory",
+    "page/mine/sell_order/sell_detail/sell_orderDetail"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",

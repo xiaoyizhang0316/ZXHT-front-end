@@ -140,9 +140,7 @@
 
 
   <view wx:if="{{!shared}}" class="footer">
-    <view style="margin-left:10px;font-size:15px;" data-order="{{orderId}}" bindtap="delOrder">删除订单</view>
-    <view style="margin-right:10px;display:flex;border:1px solid #e64949;background-color:#e64949;padding:7px;border-radius:3px;" data-logo="{{logo}}" bindtap="placeOrder">
-      <text style="color:#fff;font-size:15px">再次下单</text>
-    </view>
+    <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">删除订单</button>
+    <button type="default" class='button'>查看物流</button>
   </view>
 </view>

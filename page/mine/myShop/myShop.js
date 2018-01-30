@@ -67,6 +67,12 @@ Page({
     })
   },
 
+  sell_order: function (event) {
+    wx.navigateTo({
+      url: '/page/mine/sell_order/sell_orderHistory'
+    })
+  },
+
   product: function (event) {
     wx.navigateTo({
       url: '/page/mine/shop/product/sell'

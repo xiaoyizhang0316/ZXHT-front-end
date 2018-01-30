@@ -1,10 +1,8 @@
  <view style="background-color:#f8f8f8;flex-direction:column;{{magnify?'display:none':'display:flex'}};">
-  <view style="flex-direction:row;justify-content:space-between;flex:1;display: flex;margin-bottom: 10px;padding-top:10px;">
+  <view class="search">
     <view class="search-input" style="height:25px;">
-       <view>
-          <image style="height:25px;width:25px;" src="/image/public/find.png"></image>  
-        </view>
-       <input focus="{{focus}}" value="{{search}}" placeholder="搜索收件人姓名、手机、商品" placeholder-class="placeholderstyle" cursor-spacing="50px"  confirm-type="search" type="text" 
+        <image style="height:25px;width:25px;" src="/image/public/find.png"></image>  
+        <input focus="{{focus}}" value="{{search}}" placeholder="搜索收件人姓名、手机、商品" placeholder-class="placeholderstyle" cursor-spacing="50px"  confirm-type="search" type="text" 
         bindinput="searchOrder" focus="{{isFocus}}" auto-focus="{{isFocus}}"/>
         <view class="{{displayClear?'':'hidden'}}" bindtap="reset">
           <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>   
@@ -14,11 +12,11 @@
  </view>  
 
 <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend"> 
-  <view class="explain-line" style="border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;flex-direction:column;padding-top:6px;margin-bottom:10px;" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderId}}">
+  <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderId}}">
       <!-- <view style="position:absolute;margin-top:-45px;margin-left:75px;">
          <image style="height:80px;width:80px;" src="/images/done-order.png"></image> 
       </view>  -->
-      <view style="width:100%;height:30px;align-items:center;flex-direction:row;display:flex;align-items:center;justify-content:space-between;background-color:white;">
+      <view class="item-top">
         <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderTime}}</view>
         <view style="font-size:14px;flex:2;">{{item.receiver.name}}</view> 
         <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderId}}" catchtap="delOrder">
@@ -53,13 +51,5 @@
           <text class='middle-tip'>实付款:</text>
           <text class='order-price'>${{item.totalPrice}}</text>
       </view> 
-       <view style="border-top:1px solid #eff3f4;width:100%;height:35px;align-items:center;display:flex;flex-direction:row;background-color:white;justify-content:space-between;">
-         <view style="padding-left:20px;font-size:13px;color:#515151;"> 
-           <!-- 距上次下单已有{{}}天 -->
-        </view> 
-                <view style="margin-right:20rpx;display:flex;border:1px solid #e64949;background-color:#e64949;color:#fff;padding:4px;font-size:15px;border-radius:3px;" data-order="{{item.orderId}}" data-logo="{{item.logo}}" catchtap="placeOrder">
-         再次下单
-       </view>
-      </view>  
   </view>
 </view>

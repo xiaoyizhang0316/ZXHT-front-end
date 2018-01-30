@@ -5,10 +5,10 @@
 .top-tab {
     display: flex;
     width: 750rpx;
-    height: 38px;
+    height: 40px;
     background: #f6f8f9;
     color: #353535;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 38px;
     /* box-shadow: 0 2px 2px #bebebe; */
     margin: 0 0 8rpx 0;

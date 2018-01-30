@@ -60,7 +60,7 @@
 
 
   <block wx:if="{{openShopButton}}">
-    <view class="explain-line" style="margin-top:20px;background-color:{{touched[5] ? '#e9e9e9':''}}" data-id="5" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="openShop">
+    <view class="explain-line" style="background-color:{{touched[5] ? '#e9e9e9':''}}" data-id="5" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="openShop">
       <view class="explain-block">
         <image style="height:22px;width:22px;" src="../../image/open.png"></image>
       </view>
