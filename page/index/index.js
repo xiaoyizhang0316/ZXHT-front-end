@@ -30,8 +30,7 @@ Page({
   },
 
   onLoad: function (options) {
-    this.loadRecommendedProducts();
-    console.log(this.data)
+    this.loadRecommendedProducts();   
   },
 
 
@@ -40,7 +39,7 @@ Page({
       wx.hideLoading()
     }, 100);
     this.resetSearch();
-    this.loadRecommendedProducts();
+    
 
     //设置页面标题
     let self = this
@@ -75,7 +74,8 @@ Page({
     let self = this
     //如果有targetShopId 则优先展示
     let openId = ""
-    if (app.globalData.targetShopId != "") {
+		
+		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
       openId = app.globalData.targetShopId;
     } else {
       openId = app.globalData.openId;

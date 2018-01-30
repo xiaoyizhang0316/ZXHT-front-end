@@ -23,7 +23,7 @@
         
   </view>
 
-
+<!--
   <view class="middle-contaniner">
 
         <view class="middle-info">
@@ -55,11 +55,11 @@
                   <image style="width:300rpx;height:240rpx" src="{{address.oppositeSidePic}}"/>
                 </block>  
               </view>
-
+			
         </view>
         
   </view>
-
+	-->
   <view class="bottom-contaniner">
       <button form-type="submit" class='saveBtn'>添加收货人</button>
   </view>
