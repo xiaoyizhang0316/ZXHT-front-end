@@ -182,11 +182,16 @@ Page({
   onLoad: function (options) {
     this.setData({ productId : options.id});
 		//需要取得本店对于本位客人的价格信息
-		let url = COM.load('CON').TARGETSHOP_PRODUCT_URL +"/"+ app.globalData.openId+"/"+app.globalData.targetShopId+"/" + options.id
+		let url = ""
+		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
+			url = COM.load('CON').TARGETSHOP_PRODUCT_URL + "/" + app.globalData.openId + "/" + app.globalData.targetShopId + "/" + options.id			
+		} else {
+			url = COM.load('CON').TARGETSHOP_PRODUCT_URL + "/" + app.globalData.openId + "/" + app.globalData.openId + "/" + options.id		
+		}
+		console.log(url)
 		COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
 			if (shopProduct) {
 				let products = wx.getStorageSync("products");
-
 				if (products) {
 					this.data.goods["id"] = options.id;
 					this.data.goods["title"] = products[options.id].title;
@@ -214,9 +219,6 @@ Page({
 				}
 			}
 		});
-
-    
-  
   },
 
 

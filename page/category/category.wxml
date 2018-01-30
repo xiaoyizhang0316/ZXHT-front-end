@@ -37,7 +37,7 @@
 
                 <view class="product">
                     <view class="product-list" wx:for="{{items}}" wx:key="index" wx:for-item="val">
-                        <navigator url="./brand/list?id='+ {{val.id}}">
+                        <navigator url="./brand/list?id={{val.id}}">
 
                               <!-- <image wx:if="{{val.title}}"class="brand-image" src="https://ozexpress.cn/{{val.title}}.jpg"></image>                              -->
                               <image wx:if="{{val.title}}"class="brand-image" src="https://s18.postimg.org/hbwxwiwmx/image.png"></image>
@@ -60,7 +60,7 @@
                   </view>
                 <view class="product">
                     <view class="product-list" wx:for="{{item.productIds}}" wx:key="index" wx:for-item="val">
-                        <navigator url="../details/details?id='+ {{val.id}}">
+                        <navigator url="../details/details?id={{val.id}}">
 
                               <!-- <image class="goods-image" src="https://ozexpress.cn/{{val.barcode}}.jpg"></image>   -->
 
@@ -81,7 +81,7 @@
                
                 <view class="product">
                     <view class="product-list" wx:for="{{items}}" wx:key="index" wx:for-item="val">
-                        <navigator url="{{curEName == 'brands' ? './brand/list?id='+val.id : '../details/details?id='+val.id }}">
+                        <navigator url="{{curEName == 'brands' ? './brand/list?id=val.id : '../details/details?id='+val.id }}">
 
                               <image class="{{curEName == 'brands' ? 'brand-image' : 'goods-image'}}" src="https://ozexpress.cn/{{val.title}}.jpg"></image>                             
                              <view wx:if="{{curEName == 'brands'}}" class="classname">

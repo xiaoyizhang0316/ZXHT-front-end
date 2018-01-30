@@ -48,7 +48,7 @@ Page({
 		
 		if (app.globalData.targetShopId != null && app.globalData.targetShopId != "") {
 			openId = app.globalData.targetShopId;
-			let url = COM.load('CON').getMyShopInfo + targetShopId
+			let url = COM.load('CON').getMyShopInfo + openId
 			COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
 				if (callbackdata == null) {
 				

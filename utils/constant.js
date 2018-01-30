@@ -27,7 +27,7 @@ const FANS_LIST_URL = BASE_URL + "/api/mall/users/getFansApplyToShop/"
 const FANS_ACCESS_URL = BASE_URL + "/api/mall/users/updateFansAccess"
 const FANS_VIP_URL = BASE_URL + "/api/mall/users/updateFansVipLevel"
 const ADD_SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shops/addShopProduct"
-const APPLY_TO_SHOP = BASE_URL + "api/mall/users/applyToShop/"
+const APPLY_TO_SHOP = BASE_URL + "/api/mall/users/applyToShop/"
 const CREATE_SHOP = BASE_URL + "/api/mall/shops/create"
 const HEADERS = {
   'content-type': 'application/json',
@@ -45,6 +45,7 @@ const SAVE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/saveConsignee";
 
 //进入他人店铺
 const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/"
+
 module.exports = {
   BASE_URL: BASE_URL,
   CATEGORY_URL: CATEGORY_URL,
@@ -66,7 +67,7 @@ module.exports = {
 	TARGETSHOP_PRODUCT_URL : TARGETSHOP_PRODUCT_URL,
 	ADD_SHOP_PRODUCT_URL: ADD_SHOP_PRODUCT_URL,
 	SAVE_CONSIGNEE_URL: SAVE_CONSIGNEE_URL,
-	APPLY_TO_CODE: APPLY_TO_SHOP,
+	APPLY_TO_SHOP: APPLY_TO_SHOP,
 	GET_SHOPS_APPLY_TO_SHOP: GET_SHOPS_APPLY_TO_SHOP,
 	CREATE_SHOP: CREATE_SHOP,
 	CREATE_OR_UPDATE_USER: CREATE_OR_UPDATE_USER

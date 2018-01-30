@@ -1,6 +1,5 @@
 var app = getApp();
-// var Util = require('../../utils/util.js')
-var CON = require('../../utils/constant.js')
+
 var COM = require('../../utils/common.js')
 
 Page({
@@ -47,7 +46,9 @@ Page({
 			let fan = app.globalData.openId
 			let shop = e.targetShopId
 			//let url = "https://a5f93900.ngrok.io/api/mall/users/applyToShop/"
+
 			let url = COM.load('CON').APPLY_TO_SHOP;
+		
 			COM.load('NetUtil').netUtil(url, "POST", { "open_id": fan, "shop_id": shop }, (callback) => {
 			
 				console.log(callback)
