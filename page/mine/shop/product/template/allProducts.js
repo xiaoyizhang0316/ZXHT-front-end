@@ -60,23 +60,22 @@ Page({
 		let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + app.globalData.openId;	
 	
 		COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
-			if (callbackdata == null) {
-
-			} else {
+		
 				for (var x in callbackdata) {
 					let shopProduct = callbackdata[x];
 					self.data.myShopProductIds.push(shopProduct.productId);
-					products.slice(this.data.page * size, ++this.data.page * size).forEach(function (p) {
-						p.thumb = COM.load('Util').image(p.barcode);
-						p.selected = self.data.myShopProductIds.includes(p.id);
-						self.data.goodsLineList.push(p);
-					});
-
-					this.setData({
-						page: this.data.page, goodsLineList: this.data.goodsLineList
-					})
+					
 				}
-			}
+				products.slice(this.data.page * size, ++this.data.page * size).forEach(function (p) {
+					p.thumb = COM.load('Util').image(p.barcode);
+					p.selected = self.data.myShopProductIds.includes(p.id);
+					self.data.goodsLineList.push(p);
+				});
+				
+				this.setData({
+					page: this.data.page, goodsLineList: this.data.goodsLineList
+				})
+			
 		})
    
   },
