@@ -25,7 +25,8 @@ Page({
     duration: 800,
     focus: false,
     displayClear: false,
-    userinfo: ''
+    userinfo: '',
+    targetShopId:null
 
   },
 
@@ -39,7 +40,6 @@ Page({
       wx.hideLoading()
     }, 100);
     this.resetSearch();
-    
 
     //设置页面标题
     let self = this
@@ -54,8 +54,9 @@ Page({
 				
 				} else {
 					wx.setNavigationBarTitle({
-						title: callbackdata.shopName,
+						title: callbackdata.shopName
 					})
+          self.loadRecommendedProducts();
 				}
 			})
 		} else {
@@ -74,12 +75,16 @@ Page({
     let self = this
     //如果有targetShopId 则优先展示
     let openId = ""
-		
+		self.setData({
+      goodsList: {},
+      hotList: {}
+    })
 		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
       openId = app.globalData.targetShopId;
     } else {
       openId = app.globalData.openId;
     }
+    
     let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + openId;
     let products = wx.getStorageSync("products");
 
@@ -120,6 +125,8 @@ Page({
           key: 'shopProductIds',
           data: shopProductIds,
         })
+        console.log(self.data.goodsList)
+        console.log(self.data.hotList)
       }
     });
   },
