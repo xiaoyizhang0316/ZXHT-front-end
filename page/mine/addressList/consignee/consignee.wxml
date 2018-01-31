@@ -23,7 +23,7 @@
         
   </view>
 
-<!--
+
   <view class="middle-contaniner">
 
         <view class="middle-info">
@@ -59,7 +59,7 @@
         </view>
         
   </view>
-	-->
+	
   <view class="bottom-contaniner">
       <button form-type="submit" class='saveBtn'>添加收货人</button>
   </view>
