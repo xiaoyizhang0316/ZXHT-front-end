@@ -16,7 +16,8 @@ Page({
     page: 0,
     goodsLineList: [],
     brandList: [],
-    cateList: []
+    cateList: [],
+		myShopProductIds:[]
   },
 
   /**
@@ -54,16 +55,30 @@ Page({
     //let shopOpenId = app.globalData.shopOpenId;
     let self = this;
     let products = Object.values(wx.getStorageSync("products"));
-    let shopProductIds = wx.getStorageSync("shopProductIds");
-    products.slice(this.data.page * size, ++this.data.page * size).forEach(function (p) {
-      p.thumb = COM.load('Util').image(p.barcode);
-      p.selected = shopProductIds.includes(p.id);
-      self.data.goodsLineList.push(p);
-    });
 
-    this.setData({
-      page: this.data.page, goodsLineList: this.data.goodsLineList
-    })
+    //let shopProductIds = wx.getStorageSync("shopProductIds");
+		let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + app.globalData.openId;	
+	
+		COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+			if (callbackdata == null) {
+
+			} else {
+				for (var x in callbackdata) {
+					let shopProduct = callbackdata[x];
+					self.data.myShopProductIds.push(shopProduct.productId);
+					products.slice(this.data.page * size, ++this.data.page * size).forEach(function (p) {
+						p.thumb = COM.load('Util').image(p.barcode);
+						p.selected = self.data.myShopProductIds.includes(p.id);
+						self.data.goodsLineList.push(p);
+					});
+
+					this.setData({
+						page: this.data.page, goodsLineList: this.data.goodsLineList
+					})
+				}
+			}
+		})
+   
   },
 
   /**

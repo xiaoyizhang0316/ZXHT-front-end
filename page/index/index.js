@@ -80,7 +80,7 @@ Page({
     } else {
       openId = app.globalData.openId;
     }
-    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + openId;
+    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + openId;	
     let products = wx.getStorageSync("products");
 
     COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
