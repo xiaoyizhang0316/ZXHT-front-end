@@ -53,14 +53,14 @@ Page({
 						let cData = [
 							{
 								"id": consignee_id,
-								"table": consignee,
-								"name": correctSidePic,
+								"table": "consignee",
+								"name": "correctSidePic",
 								"file": this.data.address.correctSidePic
 							},
 							{
 								"id": consignee_id,
-								"table": consignee,
-								"name": oppositeSidePic,
+								"table": "consignee",
+								"name": "oppositeSidePic",
 								"file": this.data.address.oppositeSidePic
 							}
 							]					
