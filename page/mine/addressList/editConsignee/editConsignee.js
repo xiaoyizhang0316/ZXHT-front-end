@@ -1,5 +1,6 @@
 //editConsignee.js
-
+var COM = require('../../../../utils/common.js')
+var app = getApp()
 Page({
   data: {
     index: -1,
@@ -27,7 +28,7 @@ Page({
   formSubmit(e) {
     const value = e.detail.value;
     console.log(value)
-    
+
     if (value.name && value.phone && value.detail && value.city) {
       this.data.addressList[this.data.index].name = value.name
       this.data.addressList[this.data.index].phone = value.phone
@@ -39,7 +40,8 @@ Page({
         addressList: this.data.addressList,
       });
 
-      console.log(this.data.addressList)
+      let url = COM.load('CON').SAVE_CONSIGNEE_URL;
+      COM.load('NetUtil').netUtil(url, "POST", this.data.addressList[this.data.index], (callback) => {})
 
       wx.setStorage({
         key: 'addressList',
@@ -66,18 +68,24 @@ Page({
         if (res.confirm) {
           // console.log('用户点击确定')
           self.data.addressList.splice(self.data.index, 1)
-
+          let addressList = wx.getStorageSync('addressList')
+          console.log(addressList)
+          let consigneeId = addressList[self.data.index].id
           self.setData({
             addressList: self.data.addressList,
           });
-
-          wx.setStorage({
-            key: 'addressList',
-            data: self.data.addressList,
-            success() {
-              wx.navigateBack();
-            }
-          })
+          let url = COM.load('CON').DELETE_CONSIGNEE_URL + consigneeId;
+          COM.load('NetUtil').netUtil(url, "DELETE", {}, (callback) => {
+            console.log(callback)
+          }
+          ),
+            wx.setStorage({
+              key: 'addressList',
+              data: self.data.addressList,
+              success() {
+                wx.navigateBack();
+              }
+            })
 
         } else {
           // console.log('用户点击取消')

@@ -5,6 +5,7 @@ Page({
   data: {
     addressList: [],
     address: {
+      id:'',
       isDefault: false,
       name: '',
       phone: '',
@@ -26,6 +27,7 @@ Page({
   },
 
   formSubmit(e) {
+    let self = this
     const value = e.detail.value;
     // if (value.name && value.phone && value.detail && value.city && value.identityCard && value.correctSidePic && value.oppositeSidePic) {
     if (value.name && value.phone && value.detail && value.city && value.identityCard) {
@@ -34,54 +36,49 @@ Page({
       this.data.address.detail = value.detail
       this.data.address.city = value.city
       this.data.address.identityCard = value.identityCard
-      var newarray = [this.data.address]
-      this.setData({
-        'addressList': this.data.addressList.concat(newarray)
-      });
-		
-			console.log(this.data.address)
+      
+      
 			let aData = this.data.address
 			aData.openId = app.globalData.openId
 			//发送地址到服务器
 			let url = COM.load('CON').SAVE_CONSIGNEE_URL;
-			COM.load('NetUtil').netUtil(url, "POST", this.data.address, (callback) => {
-	
+			COM.load('NetUtil').netUtil(url, "POST", aData, (callback) => {
 					if(callback.suc == true)
 					{
-						let consignee_id = callback.id;
-						console.log(consignee_id)
-						let cData = [
-							{
-								"id": consignee_id,
-								"table": "consignee",
-								"name": "correctSidePic",
-								"file": this.data.address.correctSidePic
-							},
-							{
-								"id": consignee_id,
-								"table": "consignee",
-								"name": "oppositeSidePic",
-								"file": this.data.address.oppositeSidePic
-							}
-							]					
+            console.log(callback.id)
+            self.data.address.id = callback.id
+            var newarray = [this.data.address]
+            this.setData({
+              'addressList': this.data.addressList.concat(newarray)
+            });
+            wx.setStorage({
+              key: 'addressList',
+              data: this.data.addressList,
+              success() {
+                wx.navigateBack();
+              }
+            })
+						// let cData = [
+						// 	{
+						// 		"id": consignee_id,
+						// 		"table": "consignee",
+						// 		"name": "correctSidePic",
+						// 		"file": this.data.address.correctSidePic
+						// 	},
+						// 	{
+						// 		"id": consignee_id,
+						// 		"table": "consignee",
+						// 		"name": "oppositeSidePic",
+						// 		"file": this.data.address.oppositeSidePic
+						// 	}
+						// 	]					
 						// let url = COM.load("CON").UPLOADFILE;
 						// COM.load('NetUtil').netUtil(url, "POST", cData, (res) => {
 						// 	console.log(res);
 
 						// })
 					}
-
-
-				}),
-
-      
-      wx.setStorage({
-        key: 'addressList',
-        data: this.data.addressList,
-        success() {
-          wx.navigateBack();
-        }
-      })
+				})
     } else {
       wx.showModal({
         title: '提示',

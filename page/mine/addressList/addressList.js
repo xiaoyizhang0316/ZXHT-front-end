@@ -1,5 +1,5 @@
 //addressList.js
-
+var COM = require('../../../utils/common.js')
 Page({
   action: '',
   data: {
@@ -56,6 +56,11 @@ Page({
 
           self.data.addressList[index].isDefault = true;
 
+          //设置后端默认地址
+          let adList = wx.getStorageSync("addressList")
+          let url = COM.load('CON').SET_DEFAULT_CONSIGNEE_URL + adList[index].id;
+          COM.load('NetUtil').netUtil(url, "PUT", {}, (callback) => {})
+
           self.setData({
             addressList: self.data.addressList
           })
@@ -76,7 +81,7 @@ Page({
     wx.navigateTo({
       url: "consignee/consignee",
       //接口调用成功的回调方法
-      fuccess: function () {
+      success: function () {
         console.log('succ')
         // wx.showToast({
         //   title: '添加成功',

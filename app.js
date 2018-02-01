@@ -15,7 +15,8 @@ App({
     targetShopId: null,
     country: null,
     provice: null,
-    city: null
+    city: null,
+    addressList:[]
   },
 
   onLaunch: function (e) {
@@ -36,6 +37,7 @@ App({
           self.globalData.userId = wx.getStorageSync('userId')
           self.globalData.avatarUrl = wx.getStorageSync('avatarUrl')
           self.globalData.targetShopId = wx.getStorageSync('targetShopId')
+          self.globalData.addressList = wx.getStorageSync("addressList")
         },
         fail() {
           wx.login({
@@ -60,7 +62,8 @@ App({
 		//let url = "https://a5f93900.ngrok.io/api/mall/test/appid/" + code
 		COM.load('NetUtil').netUtil(url, "GET", "", (openId) => {
 			self.globalData.openId = self.jsonToMap(openId).get("openid")
-
+      console.log("haha")
+      self.getAddressList(self.globalData.openId)
 			//储存用户信息
 			if (self.globalData.userId == false) {
 				//访问微信获取nickname
@@ -114,7 +117,7 @@ App({
       })
     })
   },
-
+ 
   //设定用户是否开过店以及商店ID
   setShopisOpenedOrNot: function (openId) {
     var self = this
@@ -139,6 +142,16 @@ App({
     })
   },
 
+  getAddressList: function(openId){
+    let self = this
+    let url = COM.load('CON').GET_MY_CONSIGNEES_URL + openId
+    COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+      wx.setStorage({
+        key: "addressList",
+        data: callbackdata
+      })
+    })
+  },
   jsonToMap: function (jsonStr) {
     return this.objToStrMap(JSON.parse(jsonStr));
   },
