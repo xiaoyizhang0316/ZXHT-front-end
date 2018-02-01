@@ -81,7 +81,7 @@ Page({
     wx.navigateTo({
       url: "consignee/consignee",
       //接口调用成功的回调方法
-      success: function () {
+      fuccess: function () {
         console.log('succ')
         // wx.showToast({
         //   title: '添加成功',
