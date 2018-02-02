@@ -141,6 +141,6 @@
 
   <view wx:if="{{!shared}}" class="footer">
     <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">删除订单</button>
-    <button type="default" class='button'>查看物流</button>
+    <button type="default" class='button'>手动发货</button>
   </view>
 </view>

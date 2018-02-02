@@ -9,6 +9,9 @@ Page({
     displayClear: false,
     orderHistoryList: [],
     rowFocusFlagArray: [],
+    animationData: {},
+    showModalStatus: false,
+    selectedOrder: Object,
   },
 
   /**
@@ -127,6 +130,51 @@ Page({
       touch_end: e.timeStamp,
       rowFocusFlagArray: rowFocusFlagArray
     })
+  },
+
+  // 显示遮罩层
+  showModal: function (e) {
+    let orderList = wx.getStorageSync('orderHistoryList').reverse();
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    console.log(orderList[e.currentTarget.dataset.order])
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: true,
+      selectedOrder: orderList[e.currentTarget.dataset.order],
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+
+  // 隐藏遮罩层
+  hideModal: function () {
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
   },
 
   /**

@@ -31,7 +31,7 @@
 
     <view class="orders-footer">
         <view class="orders-footer-total">付款合计：${{total}}</view>
-        <view class="orders-footer-btn" bindtap="showModal">提交订单</view>
+        <view class="orders-footer-btn" bindtap="placeOrder">提交订单</view>
     </view>
 
 
