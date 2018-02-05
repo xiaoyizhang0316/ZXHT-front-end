@@ -40,10 +40,16 @@ App({
           self.globalData.addressList = wx.getStorageSync("addressList")
         },
         fail() {
+				
           wx.login({
+						
             success: function (res) {
+							console.log("login ok")
               self.setuserinfo(res.code)
-            }
+            },
+						fail: function (res){
+							console.log(res)
+						}
           })
         }
       })

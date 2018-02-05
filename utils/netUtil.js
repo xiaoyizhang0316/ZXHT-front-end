@@ -43,6 +43,7 @@ function netUtil(url, method,body, callBack) {
       }, 2500)
     },
     fail: function (res) {
+			console.log(res)
       if (res.errMsg.includes("timeout")) {
         wx.showToast({
           title: "服务器忙,请稍后再试",
@@ -50,8 +51,9 @@ function netUtil(url, method,body, callBack) {
           mask: true
         })
       } else {
+				console.log(res)
       wx.showToast({
-        title: "请检查网络",
+        title: "please check ",
         duration: 3000,
         mask: true
       })}

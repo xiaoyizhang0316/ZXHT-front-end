@@ -86,14 +86,17 @@ function loadProducts() {
  */
 function cacheOrLoad(storageKey, url){
   let cache = wx.getStorageSync(storageKey);
+	console.log(cache)
   if (!cache) {
     NetUtil.netUtil(url, 'GET', '', (ret) => {
+			console.log(storageKey + "OK!")
       wx.setStorage({
         key: storageKey,
         data: ret,
       }) 
     });
   } else {
+		console.log("fking cache")
       return cache;
   } 
 }
