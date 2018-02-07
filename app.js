@@ -15,8 +15,7 @@ App({
     targetShopId: null,
     country: null,
     provice: null,
-    city: null,
-    addressList:[]
+    city: null
   },
 
   onLaunch: function (e) {

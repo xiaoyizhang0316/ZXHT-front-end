@@ -19,7 +19,6 @@ Page({
 
         //上一个页面实例对象
         var prevPage = pages[pages.length - 2];
-
         //更新上个页面的address数据
         prevPage.setData({
           address: this.data.addressList[index]

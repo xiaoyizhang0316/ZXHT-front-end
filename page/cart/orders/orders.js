@@ -1,12 +1,12 @@
 var COM = require('../../../utils/common.js')
-
+var app = getApp()
 Page({
-  data:{
-    address:{},
+  data: {
+    address: {},
     hasAddress: false,
-    memo:'',
-    total:0,
-    orders:[],
+    memo: '',
+    total: 0,
+    orders: [],
     animationData: {},
     showModalStatus: false,
   },
@@ -14,45 +14,42 @@ Page({
   onReady() {
     this.getTotalPrice();
   },
-  
+
   //如果为onShow那么会即时显示默认地址
-  onLoad:function(){
+  onLoad: function () {
     const self = this;
     wx.getStorage({
-      key:'addressList',
+      key: 'addressList',
       success(res) {
-        if(res.data.length >= 1) {
+        if (res.data.length >= 1) {
 
           var index = 0;//默认使用第一个
           for (let i = 0; i < res.data.length; i++) {
             if (res.data[i].isDefault == true) {
-                index = i;
-                break;
+              index = i;
+              break;
             }
           }
           self.setData({
             address: res.data[index],
             hasAddress: true
           })
-        }else{
-          // hasAddress: false
         }
       }
-    })
+    }),
+      wx.getStorage({
+        key: 'orderInfo',
+        success(res) {
+          console.log(res.data)
+          self.setData({
+            orders: res.data.data,
+          })
 
-    wx.getStorage({
-      key: 'orderInfo',
-      success(res) {
-        console.log(res.data)
-        self.setData({
-          orders: res.data.data,
-        })
-
-      },
-      fail(){
-        console.log('fail')
-      }
-    })
+        },
+        fail() {
+          console.log('fail')
+        }
+      })
 
   },
 
@@ -63,7 +60,7 @@ Page({
     let orders = this.data.orders;
     let total = 0;
     let totalNum = 0;
-    for(let i = 0; i < orders.length; i++) {
+    for (let i = 0; i < orders.length; i++) {
       total += orders[i].num * orders[i].price;
       totalNum += orders[i].num;
     }
@@ -73,29 +70,37 @@ Page({
     })
   },
 
-  bindExtra:function() {
+  bindExtra: function () {
     wx.navigateTo({
       url: "/page/common/templates/textArea/textArea?content=" + this.data.memo + "&placeHolder=告诉卖家是否需要拍照签字等服务"
     })
   },
 
   placeOrder() {
-    let orderTime = COM.load('Util').formatTime(new Date());
-    let sender = {"name":'david',"phone":'0416520213'};
-    let orderHistory = {
-      orderId: COM.load('Util').guid(),
-      merchant: '店铺名称',
-      orderTime: orderTime,
-      sender: sender,
-      memo: this.data.memo,
-      receiver: this.data.address,
-      items: this.data.orders,
-      totalPrice: this.data.total,
-      totalQuantity: this.data.totalNum,
-      status: '已提交',
-    };
+    //let orderTime = COM.load('Util').formatTime(new Date());
+    let productinfo = wx.getStorageSync("orderInfo")
+    var index = 0
 
-    this.saveToOrderHistory(orderHistory);
+    for (index = 0; index < Object.keys(productinfo).length; index++) {
+      productinfo.data[index].productId = productinfo.data[index].id
+      delete(productinfo.data[index].id)
+    }
+    console.log(this.data.address)
+    let order = {
+      orderInfo: {
+        openId: app.globalData.openId,
+        shopId: app.globalData.targetShopId,
+        consigneeId: this.data.address.id,
+        goodsCost: this.data.total,
+        orderMessage: this.data.memo
+      },
+      orderGoods: productinfo.data
+    };
+    let url = COM.load('CON').SAVE_ORDER_URL;
+
+    COM.load('NetUtil').netUtil(url, "POST", order, (callback) => { })
+
+    this.saveToOrderHistory(order);
     wx.removeStorageSync("cartList");
 
     wx.showToast({
@@ -108,7 +113,6 @@ Page({
         })
       }
     })
-   
   },
 
   saveToOrderHistory: function (data) {
@@ -165,5 +169,4 @@ Page({
       })
     }.bind(this), 200)
   },
-
 })

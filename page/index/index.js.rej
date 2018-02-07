@@ -1,9 +1,0 @@
-diff a/page/index/index.js b/page/index/index.js	(rejected hunks)
-@@ -80,6 +80,7 @@
-     } else {
-       openId = app.globalData.openId;
-     }
-+    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + openId;	
-     let products = wx.getStorageSync("products");
- 
-     COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
