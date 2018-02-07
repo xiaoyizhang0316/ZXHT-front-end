@@ -39,8 +39,8 @@
                     <view class="product-list" wx:for="{{items}}" wx:key="index" wx:for-item="val">
                         <navigator url="./brand/list?id={{val.id}}">
 
-                              <!-- <image wx:if="{{val.title}}"class="brand-image" src="https://ozexpress.cn/{{val.title}}.jpg"></image>                              -->
-                              <image wx:if="{{val.title}}"class="brand-image" src="https://s18.postimg.org/hbwxwiwmx/image.png"></image>
+                               <image wx:if="{{val.title}}"class="brand-image" src="https://ozexpress.cn/{{val.title}}.jpg"></image>                              
+                              <!-- <image wx:if="{{val.title}}"class="brand-image" src="https://s18.postimg.org/hbwxwiwmx/image.png"></image> -->
                              <view class="classname">
                                 <text>{{val.title}}</text>
                              </view>
@@ -62,9 +62,8 @@
                     <view class="product-list" wx:for="{{item.productIds}}" wx:key="index" wx:for-item="val">
                         <navigator url="../details/details?id={{val.id}}">
 
-                              <!-- <image class="goods-image" src="https://ozexpress.cn/{{val.barcode}}.jpg"></image>   -->
+                               <image class="goods-image" src="https://ozexpress.cn/{{val.barcode}}.jpg"></image>   
 
-                              <image class="goods-image" src="https://images.moltonbrown.co.uk/MBExternalBinary/Molton-Brown-Papyrus-Reed-Repairing-Conditioner_LH040_16_L.jpg"></image>
                               <view class="classname">
                                 <text>{{val.title}}</text>
                              </view>

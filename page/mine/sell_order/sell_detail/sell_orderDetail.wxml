@@ -30,9 +30,19 @@
     <view class="explain-text" >商户名称</view>
     <view class="explain-value">{{merchant}}</view>
   </view>
-  <view class="inner-explain-line" style="padding-top:0px;">
+  <view class="inner-explain-line">
     <view class="explain-text" >配送方式</view>
     <view class="explain-value">{{service.name}}</view>
+  </view>
+  <view class="inner-explain-line" style="padding-top:0px;">
+    <view class="explain-text" >配送费用</view>
+    <text class="explain-text" style='margin-right:0px' >$</text>
+    <input focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" bindinput='updateDeliveryPrice' class="explain-text" ></input>
+  </view>
+  <view class="inner-explain-line" style="padding-top:0px;">
+    <view class="explain-text" >折扣价格</view>
+    <text class="explain-text" style='margin-right:0px' >-$</text>
+    <input focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" bindinput='updateDiscountPrice' class="explain-text" ></input>
   </view>
 </view>
 
@@ -100,7 +110,7 @@
       </view>
       <view class="order-cate-price">
         <text>${{item.price}}</text>
-        <button size='mini'>加购物车</button>
+        <!-- <button size='mini'>加购物车</button> -->
       </view>
     </view>
   </view>
@@ -128,7 +138,7 @@
 <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;">
   <view class="inner-explain-line">
     <view class="explain-text" style="flex:5">总计: ${{totalPrice}}
-      <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(仅供参考)</text>
+      <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(不包括运送费)</text>
     </view>
     <view class="explain-value" style="flex:1">
       {{totalQuantity}}件
@@ -141,6 +151,6 @@
 
   <view wx:if="{{!shared}}" class="footer">
     <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">删除订单</button>
-    <button type="default" class='button'>手动发货</button>
+    <button type="default" class='button'>确认订单</button>
   </view>
 </view>

@@ -1,12 +1,14 @@
 // var Util = require('../../../../utils/util.js');
 
 var COM = require('../../../../utils/common.js');
+var app = getApp()
 
 Page({
 
   data: {
     orderId: '',
     order:{},
+    ordersMap: Object,
     receiverName:'',
     status:'已提交',
   },
@@ -47,6 +49,7 @@ Page({
     let s= JSON.stringify(this.data.order);
     console.log(JSON.parse(s));
   },
+
 
   delOrder: function (e) {
     var self = this;
@@ -112,6 +115,20 @@ Page({
     wx.redirectTo({
       url: '/pages/send/' + this.data.logo + '/send?order=' + this.data.orderId,
     })
+  },
+
+  updateDeliveryPrice: function (e) {
+    let DeliverPrice = e.detail.value;
+    if (DeliverPrice > 0.1) {
+      this.setData({ 'DeliverPrice': DeliverPrice });
+    }
+  },
+
+  updateDiscountPrice: function (e) {
+    let DiscountPrice = e.detail.value;
+    if (DiscountPrice > 0.1) {
+      this.setData({ 'DiscountPrice': DiscountPrice });
+    }
   },
 
   /**

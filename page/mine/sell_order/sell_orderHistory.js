@@ -1,3 +1,5 @@
+var app = getApp();
+var COM = require('../../../utils/common.js')
 var Util = require('../../../utils/util.js');
 
 Page({
@@ -9,6 +11,8 @@ Page({
     displayClear: false,
     orderHistoryList: [],
     rowFocusFlagArray: [],
+    ordersList: {},
+    ordersMap: Object,
     currentTab: 0,
   },
 
@@ -70,7 +74,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.showOrderList();
+    this.filterOrders();
+    // this.showOrderList();
   },
 
   showOrderList: function(e) {
@@ -83,6 +88,52 @@ Page({
         });
       }
     })
+  },
+
+  filterOrders: function () {
+    let self = this;
+    let shopId = app.globalData.openId;
+    let url = 'https://00dc6464.ngrok.io/api/mall/orders/getOrders/2/' + shopId;
+    COM.load('NetUtil').netUtil(url, "GET", "", (orders) => {
+      let ordersMap = new Map();
+      console.log(orders)
+      if (orders != "") {
+
+        for (var x in orders) {
+          let order = orders[x];
+          let Info = order.orderInfo;
+          let Goods = order.orderGoods;
+          ordersMap.set(Info.id,
+            {
+              order: order[0],
+              orderId: Info.id,
+              // logo: order[0].logo,
+              // shared: shared,
+              // orderTime: order[0].orderTime,
+              // merchant: order[0].merchant,
+              // service: order[0].service,
+              // sender: Info.senderId,
+              // receiver: order[0].receiver,
+              items: Goods,
+              // totalPrice: order[0].totalPrice,
+              // totalQuantity: order[0].totalQuantity,
+              // totalWeight: order[0].totalWeight,
+              // receiverName: order[0].receiver.name,
+            })
+        }
+        this.setData({
+          ordersList: Array.from(ordersMap.values()),
+          ordersMap: ordersMap
+        })
+        wx.setStorage({
+          key: "sellOrderList",
+          data: ordersList,
+          success: function () {
+            self.showOrderList();
+          }
+        })
+      }
+    });
   },
 
   clickOrder: function (e) {
