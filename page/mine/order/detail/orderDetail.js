@@ -6,45 +6,53 @@ Page({
 
   data: {
     orderId: '',
-    order:{},
-    receiverName:'',
-    status:'已提交',
+    order: {},
+    receiverName: '',
+    status: '已提交',
+    orderTime: null,
+    merchant: null,
+    totalweight: null
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var order;
-    let shared = options.shared;
     console.log("****order:" + options.order);
-    if(options.order) {
-       order = JSON.parse(options.order);
+    if (options.order) {
+      order = JSON.parse(options.order);
     } else {
       var orderId = options.orderId;
-      let orderList = wx.getStorageSync('orderHistoryList');
-       order = orderList.filter(function (val) {
-        return (val.orderId == orderId);
+      var prevPage = pages[pages.length - 2]
+      let orderList = prevPage.data.orderHistoryList
+      order = orderList.filter(function (val) {
+        if (val.orderInfo.orderId == orderId) {
+          return val
+        }
       });
     }
-  
+
+    for (var x in order.orderGoods) {
+
+    }
+
     this.setData({
-      order: order[0],
-      orderId: orderId,
-      logo: order[0].logo,
-      shared: shared,
-      orderTime: order[0].orderTime,
-      merchant: order[0].merchant,
-      service: order[0].service,
-      sender: order[0].sender,
-      receiver: order[0].receiver,
+      order: order,
+      orderId: options.orderId,
+      orderTime: order.orderInfo.addTime,
+      merchant: order.orderInfo.shopId,
+      // service: order.orderInfo.service,
+      // sender: order[0].sender,
       items: order[0].items,
-      totalPrice: order[0].totalPrice,
+      totalPrice: order.orderInfo.goodsCost,
       totalQuantity: order[0].totalQuantity,
-      totalWeight: order[0].totalWeight,
-      receiverName: order[0].receiver.name,
+      // totalWeight: order[0].totalWeight,
+      receiverName: order.consignee.name
     });
-    let s= JSON.stringify(this.data.order);
+    let s = JSON.stringify(this.data.order);
     console.log(JSON.parse(s));
   },
 
@@ -85,7 +93,7 @@ Page({
   //   })
   // },
 
-  copyOrderId:function(e) {
+  copyOrderId: function (e) {
     let self = this;
     wx.setClipboardData({
       data: self.data.orderId,
@@ -118,42 +126,42 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**

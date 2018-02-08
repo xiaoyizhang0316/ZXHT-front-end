@@ -81,10 +81,11 @@ Page({
     let productinfo = wx.getStorageSync("orderInfo")
     var index = 0
 
-    for (index = 0; index < Object.keys(productinfo).length; index++) {
+    for (index = 0; index <= Object.keys(productinfo).length; index++) {
       productinfo.data[index].productId = productinfo.data[index].id
       delete(productinfo.data[index].id)
     }
+    console.log(productinfo)
     console.log(this.data.address)
     let order = {
       orderInfo: {

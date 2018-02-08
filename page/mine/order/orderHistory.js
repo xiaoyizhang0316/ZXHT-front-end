@@ -113,6 +113,7 @@ Page({
     let products = wx.getStorageSync("products");
     return COM.load('Util').image(products[productId].barcode)
   },
+
   mytouchstart: function (e) {
     let self = this;
     let rowFocusFlagArray = [];
@@ -137,7 +138,7 @@ Page({
 
   // 显示遮罩层
   showModal: function (e) {
-    let orderList = wx.getStorageSync('orderHistoryList').reverse();
+    let orderList = this.data.orderHistoryList;
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
