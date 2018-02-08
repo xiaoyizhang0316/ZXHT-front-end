@@ -46,10 +46,10 @@
   </view>
 </view>
 
-<view class="explain-line" style="border-top:20px solid #eff3f4">
+  <view class="explain-line" style="border-top:20px solid #eff3f4">
   <view class="inner-explain-line" >
     <view class="explain-text">
-      <!-- <image style="height:40px;width:40px;" src="../../../images/sender.png"></image>   -->
+       <!-- <image style="height:40px;width:40px;" src="../../../images/sender.png"></image>    -->
       发件人
     </view>
     <view class="explain-value" style="justify-content:space-between">
@@ -57,7 +57,7 @@
       <text style="border-bottom:1px solid #e8e8e8" catchtap="makeCall" data-mobile="{{sender.phone}}">{{sender.phone}}</text>
     </view>
   </view>
-</view>
+</view>  
 
 <view class="explain-line" style="border-top:1px solid #eff3f4">
   <view class="inner-explain-line">
@@ -150,7 +150,7 @@
 
 
   <view wx:if="{{!shared}}" class="footer">
-    <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">删除订单</button>
+    <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">取消订单</button>
     <button type="default" class='button'>确认订单</button>
   </view>
 </view>

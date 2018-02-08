@@ -15,20 +15,20 @@
     <!-- 未支付 -->
     <swiper-item>
       <scroll-view  scroll-y="{{true}}" style="height:{{winHeight-44}}px">
-        <view wx:key="idx" wx:for-index="idx" wx:for="{{ordersList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend"> 
+        <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend"> 
           <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderId}}">
               <view class="item-top">
                 <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderTime}}</view>
-                <view style="font-size:14px;flex:2;">{{item.receiver.name}}</view> 
-                <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderId}}" catchtap="delOrder">
+                <view style="font-size:14px;flex:2;">{{item.receiverName}}</view> 
+                <!-- <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderId}}" catchtap="delOrder">
                     <image style="height:20px;width:20px;" src="/image/public/clear.png"></image> 
-                </view>
+                </view> -->
               </view>
 
               <scroll-view class="order-item-scroll" scroll-x>
                   
                   <view class="order-item-scroll-box" wx:for="{{item.items}}" wx:for-item="val">
-                    <image src="{{val.image}}" class="order-item-image"></image>
+                    <image src="{{item.image}}" class="order-item-image"></image>
                   </view>
 
                   <block wx:if="{{item.items.length == 1}}">
@@ -45,9 +45,9 @@
                   <text class='middle-tip'>实付款:</text>
                   <text class='order-price'>${{item.totalPrice}}</text>
               </view>
-              <!-- <view class="order-send">
-                <view class='button'>手动发货</view>
-              </view>  -->
+               <view class="order-send">
+                <view class='button'catchtap="cancelOrder">取消订单</view>
+              </view>  
           </view>
         </view>
       </scroll-view>

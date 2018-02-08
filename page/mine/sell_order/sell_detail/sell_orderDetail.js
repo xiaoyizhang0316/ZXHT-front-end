@@ -33,7 +33,7 @@ Page({
     this.setData({
       order: order[0],
       orderId: orderId,
-      logo: order[0].logo,
+      // logo: order[0].logo,
       shared: shared,
       orderTime: order[0].orderTime,
       merchant: order[0].merchant,

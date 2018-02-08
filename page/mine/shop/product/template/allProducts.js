@@ -39,7 +39,7 @@ Page({
       });
     });
     //获得所有分类
-    let urlcates = COM.load('CON').CATEGORY_URL + '/all'
+    let urlcates = COM.load('CON').CATEGORY_URL + 'all'
     let allcategories = []
     COM.load('NetUtil').netUtil(urlcates, 'GET', "", categories => {
       for (var x in categories) {
@@ -241,6 +241,12 @@ Page({
     console.log(e.detail)
     console.log(this.data.goodsLineList)
   },
+
+  bindCateChange: function (e) {
+    console.log(e.detail)
+    console.log(this.data.goodsLineList)
+  },
+
 
   goodsByBrands: function(brandId){
     goodsList = []
