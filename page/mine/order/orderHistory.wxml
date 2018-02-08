@@ -25,9 +25,18 @@
       </view>
     </view>
 
-    <!-- <view style="justify-content:flex-end;width:100%;height:30px;align-items:center;display:flex;flex-direction:row;background-color:white;">
-        <view style="padding-right:40px;font-size:14px;color:#515151;">共{{item.totalQuantity}}件商品</view>
-      </view>  -->
+    <scroll-view class="order-item-scroll" scroll-x>
+      <view class="order-item-scroll-box" wx:for="{{item.orderGoods}}" wx:for-item="val">
+        <image src="{{val.image}}" class="order-item-image"></image>
+      </view>
+      <block wx:if="{{item.orderGoods.length == 1}}">
+        <view class="order-item-title">
+          <view class="order-item-title-box">
+            <text>{{item.orderGoods[0].title}}</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
 
     <view class='order-item-desc'>
       <text>共{{item.orderGoods.length}}种商品</text>
