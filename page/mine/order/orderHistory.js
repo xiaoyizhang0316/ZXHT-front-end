@@ -12,14 +12,14 @@ Page({
     rowFocusFlagArray: [],
     animationData: {},
     showModalStatus: false,
-    selectedOrder: Object,
+    selectedOrder: Object
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   reset: function (e) {
@@ -27,21 +27,22 @@ Page({
     this.setData({ search: '', displayClear: false });
   },
 
-  searchOrder: function(e) {
+  //搜索还没做完
+  searchOrder: function (e) {
     let orderHistoryList = wx.getStorageSync('orderHistoryList');
     let text = Util.trim(e.detail.value);
     let rows = [];
     for (var key in orderHistoryList) {
       let order = orderHistoryList[key];
-      let name = order.receiver.name;
-      let phone = order.receiver.phone;
-      let items = order.items;
-      if (name.search(text) !== -1|| phone.search(text) !== -1) {
+      let name = order.consignee.name;
+      let phone = order.consignee.phone;
+      let items = order.orderGoods;
+      if (name.search(text) !== -1 || phone.search(text) !== -1) {
         rows.push(order);
       } else {
         for (let x in items) {
-          if (items[x].title.toUpperCase().search(text.toUpperCase()) !== -1){ 
-            rows.push(order); 
+          if (items[x].title.toUpperCase().search(text.toUpperCase()) !== -1) {
+            rows.push(order);
             break;
           }
         }
@@ -57,7 +58,7 @@ Page({
     this.showOrderList();
   },
 
-  showOrderList: function(e) { 
+  showOrderList: function (e) {
     let self = this
     let url = COM.load('CON').GET_ALL_ORDERS_BUYER + app.globalData.openId;
     COM.load('NetUtil').netUtil(url, "GET", {}, (callback) => {
@@ -77,17 +78,21 @@ Page({
   delOrder: function (e) {
     var self = this;
     wx.showModal({
-      content: '确定删除此订单?',
+      content: '确定取消此订单?',
       showCancel: true,
-      confirmText:'删除',
+      confirmText: '确认',
       success: function (res) {
         if (res.confirm) {
           try {
-            let orderList = wx.getStorageSync('orderHistoryList');
-            let newList = orderList.filter(function (val) {
-              return (val.orderId != e.currentTarget.dataset.order);
-            });
 
+            let orderList = self.data.orderHistoryList;
+            let newList = orderList.filter(function (val) {
+              return (val.orderInfo.orderId != e.currentTarget.dataset.order);
+            });
+            let url = COM.load('CON').CANCEL_ORDER_BUYER + e.currentTarget.dataset.order;
+            COM.load('NetUtil').netUtil(url, "PUT", {}, (callback) => {
+              console.log(callback)
+            })
             wx.setStorage({
               key: "orderHistoryList",
               data: newList,
@@ -103,13 +108,13 @@ Page({
     })
   },
 
-  placeOrder: function(e) {
+  placeOrder: function (e) {
     wx.redirectTo({
       url: '/pages/send/' + e.currentTarget.dataset.logo + '/send?order=' + e.currentTarget.dataset.order,
 
     })
   },
-  getLogo: function (productId){
+  getLogo: function (productId) {
     let products = wx.getStorageSync("products");
     return COM.load('Util').image(products[productId].barcode)
   },
@@ -192,34 +197,34 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-   
+
   },
 
   // /**
   //  * 用户点击右上角分享
   //  */
   // onShareAppMessage: function () {
-  
+
   // }
 })

@@ -7,11 +7,13 @@ Page({
   data: {
     orderId: '',
     order: {},
-    receiverName: '',
+    receiver: null,
     status: '已提交',
     orderTime: null,
     merchant: null,
-    totalweight: null
+    totalweight: null,
+    totalPrice: null,
+    totalQuantity: null
 
   },
 
@@ -19,49 +21,50 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     var order;
-    console.log("****order:" + options.order);
     if (options.order) {
       order = JSON.parse(options.order);
     } else {
       var orderId = options.orderId;
+      let pages = getCurrentPages();
       var prevPage = pages[pages.length - 2]
       let orderList = prevPage.data.orderHistoryList
       order = orderList.filter(function (val) {
-        if (val.orderInfo.orderId == orderId) {
+        if (val.orderInfo.id == orderId) {
           return val
         }
       });
     }
-
-    for (var x in order.orderGoods) {
-
+    var numofGoods = 0;
+    console.log(order[0].orderGoods[0].num)
+    for (var index = 0; index < order[0].orderGoods.length; index++) {
+      console.log("hahahah")
+      numofGoods = numofGoods + order[0].orderGoods[index].num
     }
-
+    console.log(numofGoods)
     this.setData({
-      order: order,
+      order: order[0],
       orderId: options.orderId,
-      orderTime: order.orderInfo.addTime,
-      merchant: order.orderInfo.shopId,
+      orderTime: order[0].orderInfo.addTime,
+      merchant: order[0].orderInfo.shopId,
       // service: order.orderInfo.service,
       // sender: order[0].sender,
-      items: order[0].items,
-      totalPrice: order.orderInfo.goodsCost,
-      totalQuantity: order[0].totalQuantity,
+      // items: order[0].items,
+      totalPrice: order[0].orderInfo.goodsCost,
+      totalQuantity: numofGoods,
       // totalWeight: order[0].totalWeight,
-      receiverName: order.consignee.name
+      receiver: order[0].consignee
     });
     let s = JSON.stringify(this.data.order);
     console.log(JSON.parse(s));
   },
 
-  delOrder: function (e) {
+  cancelOrder: function (e) {
     var self = this;
     wx.showModal({
-      content: '确定删除此订单?',
+      content: '确定取消此订单?',
       showCancel: true,
-      confirmText: '删除',
+      confirmText: '取消',
       success: function (res) {
         if (res.confirm) {
           try {
