@@ -65,7 +65,7 @@ function guid() {
 }
 
 function image(pic) {
-  return "https://ozexpress.cn/"+pic+".jpg";
+  return "https://img.zhenxianghaitao.com/mini"+pic+".jpg";
 }
 
 /**
