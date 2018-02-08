@@ -1,5 +1,6 @@
 var Util = require('../../../utils/util.js');
-
+var app = getApp()
+var COM = require('../../../utils/common.js')
 Page({
 
   /**
@@ -56,15 +57,14 @@ Page({
     this.showOrderList();
   },
 
-  showOrderList: function(e) {
-    let self = this;
-    wx.getStorage({
-      key: 'orderHistoryList',
-      success: function (res) {
-        self.setData({
-          orderHistoryList: res.data.reverse(),
-        });
-      }
+  showOrderList: function(e) { 
+    let self = this
+    let url = COM.load('CON').GET_ALL_ORDERS_BUYER + app.globalData.openId;
+    COM.load('NetUtil').netUtil(url, "GET", {}, (callback) => {
+      console.log(callback)
+      self.setData({
+        orderHistoryList: callback
+      })
     })
   },
 
@@ -109,7 +109,10 @@ Page({
 
     })
   },
-
+  getLogo: function (productId){
+    let products = wx.getStorageSync("products");
+    return COM.load('Util').image(products[productId].barcode)
+  },
   mytouchstart: function (e) {
     let self = this;
     let rowFocusFlagArray = [];
