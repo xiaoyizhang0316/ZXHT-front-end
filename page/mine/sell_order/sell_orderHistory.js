@@ -93,7 +93,8 @@ Page({
   filterOrders: function () {
     let self = this;
     let shopId = app.globalData.openId;
-    let url = 'https://00dc6464.ngrok.io/api/mall/orders/getOrders/2/' + shopId;
+    let url = COM.load('CON').GET_ALL_ORDERS_SELLER + shopId;
+    // let url = 'https://00dc6464.ngrok.io/api/mall/orders/getOrders/2/' + shopId;
     COM.load('NetUtil').netUtil(url, "GET", "", (orders) => {
       let ordersMap = new Map();
       console.log(orders)

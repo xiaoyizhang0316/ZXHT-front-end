@@ -49,9 +49,9 @@ const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/
 
 //订单
 const SAVE_ORDER_URL = BASE_URL+ "/api/mall/orders/saveOrder"
-const GET_ALL_ORDERS_SELLER = BASE_URL + "/getOrders/2"
-const GET_ONE_ORDER_SELLERorSELLER = BASE_URL + "/getOrder"
-const GET_ALL_ORDERS_BUYER = BASE_URL + "/getOrders/1/"
+const GET_ALL_ORDERS_SELLER = BASE_URL + "/api/mall/orders/getOrders/2/"
+const GET_ONE_ORDER_SELLERorSELLER = BASE_URL + "/api/mall/orders/getOrder"
+const GET_ALL_ORDERS_BUYER = BASE_URL + "/api/mall/orders/getOrders/1/"
 
 
 module.exports = {
