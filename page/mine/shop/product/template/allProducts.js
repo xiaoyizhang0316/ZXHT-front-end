@@ -29,14 +29,20 @@ Page({
 
     //获得所有品牌
     let allbrands = []
+    let brandIds =[]
     let urlbrands = COM.load('CON').BRAND_URL + '/all'
     COM.load('NetUtil').netUtil(urlbrands, 'GET', "", brands => {
       for (var x in brands) {
         allbrands.push(brands[x].title)
+        brandIds.push(brands[x].id)
       }
       self.setData({
         brandList: allbrands
       });
+      wx.setStorage({
+        key: 'brandIds',
+        data: brandIds,
+      })
     });
     //获得所有分类
     let urlcates = COM.load('CON').CATEGORY_URL + 'all'
@@ -240,11 +246,17 @@ Page({
   bindBrandChange: function (e) {
     console.log(e.detail)
     console.log(this.data.goodsLineList)
+    let products = wx.getStorageSync("products");
+    let brandIds = wx.getStorageSync("brandIds");
+
   },
 
   bindCateChange: function (e) {
     console.log(e.detail)
     console.log(this.data.goodsLineList)
+    this.setData({
+      goodsLineList: this.data.goodsLineList
+    })
   },
 
 

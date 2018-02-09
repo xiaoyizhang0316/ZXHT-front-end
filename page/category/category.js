@@ -35,6 +35,7 @@ Page({
 			openId = app.globalData.openId;
 		}
     COM.load('NetUtil').netUtil(COM.load('CON').CATEGORY_URL + "openId/" + openId, "GET", "", function (res) {
+      console.log(res)
         for(var x in res) {
           var cat = {
             name: res[x].name, 
