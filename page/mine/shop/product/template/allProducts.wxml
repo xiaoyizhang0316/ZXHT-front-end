@@ -21,13 +21,13 @@
 
   <view class="filter-box">
     <view>
-      <picker bindchange="bindBrandChange" value="{{index}}">
+      <picker bindchange="bindBrandChange" value="{{index}}" range="{{brandList}}">
         <view class='picker-view'>品牌</view>
       </picker>
     </view>
 
     <view>
-      <picker bindchange="bindCateChange" value="{{index}}">
+      <picker bindchange="bindCateChange" value="{{index}}" range="{{cateList}}">
         <view class='picker-view'>分类</view>
       </picker>
     </view>
@@ -37,26 +37,26 @@
     <view class='goods-line-list'>
 
       <block wx:if="{{displayClear == false}}">
-        <view class="goods-line-item goods-line-list-child" wx:for="{{goodsLineList}}" wx:key="{{index}}">
-          <image class='goods-image-clo' src="{{item.thumb}}"></image>
+      <view class="goods-line-item goods-line-list-child" wx:for="{{goodsLineList}}" wx:key="{{index}}">
+        <image class='goods-image-clo' src="{{item.thumb}}"></image>
 
-          <text class='goods-name-clo'>{{item.title}}</text>
+        <text class='goods-name-clo'>{{item.title}}</text>
 
-          <view class="goods-switch-clo">
-            <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
-          </view>
+        <view class="goods-switch-clo">
+          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
         </view>
+      </view>
       </block>
       <block wx:else>
-        <view class="goods-line-item goods-line-list-child" wx:for="{{searchResult}}" wx:key="{{index}}">
-          <image class='goods-image-clo' src="{{item.thumb}}"></image>
+      <view class="goods-line-item goods-line-list-child" wx:for="{{searchResult}}" wx:key="{{index}}">
+        <image class='goods-image-clo' src="{{item.thumb}}"></image>
 
-          <text class='goods-name-clo'>{{item.title}}</text>
+        <text class='goods-name-clo'>{{item.title}}</text>
 
-          <view class="goods-switch-clo">
-            <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
-          </view>
+        <view class="goods-switch-clo">
+          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
         </view>
+      </view>
       </block>
 
     </view>

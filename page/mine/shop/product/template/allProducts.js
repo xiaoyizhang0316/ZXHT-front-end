@@ -253,7 +253,7 @@ Page({
 
   bindBrandChange: function (e) {
     console.log(this.data.allGoodsList)
-    console.log(this.data.brandList[e.detail.value])
+    console.log(this.data.brandList)
     this.setData({
       goodsLineList: this.data.allGoodsList
     })
