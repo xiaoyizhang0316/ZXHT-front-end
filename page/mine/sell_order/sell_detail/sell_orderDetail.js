@@ -7,10 +7,14 @@ Page({
 
   data: {
     orderId: '',
-    order:{},
-    ordersMap: Object,
-    receiverName:'',
-    status:'已提交',
+    order: {},
+    receiver: null,
+    status: '已提交',
+    orderTime: null,
+    merchant: null,
+    totalweight: null,
+    totalPrice: null,
+    totalQuantity: null
   },
 
   /**
@@ -18,33 +22,40 @@ Page({
    */
   onLoad: function (options) {
     var order;
-    let shared = options.shared;
-    console.log("****order:" + options.order);
-    if(options.order) {
-       order = JSON.parse(options.order);
+    if (options.order) {
+      order = JSON.parse(options.order);
     } else {
       var orderId = options.orderId;
-      let orderList = wx.getStorageSync('orderHistoryList');
-       order = orderList.filter(function (val) {
-        return (val.orderId == orderId);
+      let pages = getCurrentPages();
+      var prevPage = pages[pages.length - 2]
+      let orderList = prevPage.data.orderHistoryList
+      order = orderList.filter(function (val) {
+        if (val.orderInfo.id == orderId) {
+          return val
+        }
       });
     }
+
+    var numofGoods = 0;
+    console.log(order[0].orderGoods[0].num)
+    for (var index = 0; index < order[0].orderGoods.length; index++) {
+      console.log("hahahah")
+      numofGoods = numofGoods + order[0].orderGoods[index].num
+    }
+    console.log(numofGoods)
   
     this.setData({
       order: order[0],
-      orderId: orderId,
-      // logo: order[0].logo,
-      shared: shared,
-      orderTime: order[0].orderTime,
-      merchant: order[0].merchant,
-      service: order[0].service,
-      sender: order[0].sender,
-      receiver: order[0].receiver,
-      items: order[0].items,
-      totalPrice: order[0].totalPrice,
-      totalQuantity: order[0].totalQuantity,
-      totalWeight: order[0].totalWeight,
-      receiverName: order[0].receiver.name,
+      orderId: options.orderId,
+      orderTime: order[0].orderInfo.addTime,
+      merchant: order[0].orderInfo.shopId,
+      // service: order.orderInfo.service,
+      // sender: order[0].sender,
+      items: order[0].orderGoods,
+      totalPrice: order[0].orderInfo.goodsCost,
+      totalQuantity: numofGoods,
+      // totalWeight: order[0].totalWeight,
+      receiver: order[0].consignee,
     });
     let s= JSON.stringify(this.data.order);
     console.log(JSON.parse(s));

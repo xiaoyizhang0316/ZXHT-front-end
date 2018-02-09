@@ -11,7 +11,6 @@ Page({
     displayClear: false,
     orderHistoryList: [],
     rowFocusFlagArray: [],
-    ordersList: {},
     ordersMap: Object,
     currentTab: 0,
   },
@@ -73,20 +72,20 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+
   onShow: function () {
-    this.filterOrders();
-    // this.showOrderList();
+    this.showOrderList();
   },
 
-  showOrderList: function(e) {
+  showOrderList: function (e) {
     let self = this;
-    wx.getStorage({
-      key: 'orderHistoryList',
-      success: function (res) {
-        self.setData({
-          orderHistoryList: res.data.reverse(),
-        });
-      }
+    let shopId = app.globalData.openId;
+    let url = COM.load('CON').GET_ALL_ORDERS_SELLER + shopId;
+    COM.load('NetUtil').netUtil(url, "GET", {}, (callback) => {
+      console.log(callback)
+      self.setData({
+        orderHistoryList: callback
+      })
     })
   },
 

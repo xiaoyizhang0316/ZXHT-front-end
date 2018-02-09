@@ -1,7 +1,5 @@
 // var Util = require('../../../../utils/util.js');
-
-var COM = require('../../../../utils/common.js');
-
+var COM = require('../../../../utils/common.js')
 Page({
 
   data: {
@@ -14,7 +12,6 @@ Page({
     totalweight: null,
     totalPrice: null,
     totalQuantity: null
-
   },
 
   /**
@@ -64,14 +61,21 @@ Page({
     wx.showModal({
       content: '确定取消此订单?',
       showCancel: true,
-      confirmText: '取消',
+      confirmText: '确认',
       success: function (res) {
         if (res.confirm) {
           try {
-            let orderList = wx.getStorageSync('orderHistoryList');
+            let pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]
+            let orderList = prevPage.data.orderHistoryList
             let newList = orderList.filter(function (val) {
               return (val.orderId != e.currentTarget.dataset.order);
             });
+
+            let url = COM.load('CON').CANCEL_ORDER_BUYER + e.currentTarget.dataset.order;
+            COM.load('NetUtil').netUtil(url, "PUT", {}, (callback) => {
+              console.log(callback)
+            })
 
             wx.setStorage({
               key: "orderHistoryList",

@@ -40,7 +40,6 @@
                         <navigator url="./brand/list?id={{val.id}}">
 
                                <image wx:if="{{val.title}}"class="brand-image" src="https://ozexpress.cn/{{val.title}}.jpg"></image>                              
-                              <!-- <image wx:if="{{val.title}}"class="brand-image" src="https://s18.postimg.org/hbwxwiwmx/image.png"></image> -->
                              <view class="classname">
                                 <text>{{val.title}}</text>
                              </view>
