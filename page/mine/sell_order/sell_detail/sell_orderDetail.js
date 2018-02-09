@@ -60,7 +60,8 @@ Page({
       // totalWeight: order[0].totalWeight,
       receiver: order[0].consignee,
       deliveryPrice: order[0].orderInfo.shippingCost,
-      discountValue: order[0].orderInfo.discount
+      discountValue: order[0].orderInfo.discount,
+      merchant: order[0].sellerShop.shopName
     });
     let s = JSON.stringify(this.data.order);
     console.log(JSON.parse(s));
