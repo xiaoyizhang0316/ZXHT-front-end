@@ -135,8 +135,8 @@ Page({
     console.log(this.data.order)
     this.data.order.orderInfo.discount = this.data.discountValue
     this.data.order.orderInfo.shippingCost = this.data.deliveryPrice
-    let url = COM.load('CON').UPDATE_ORDER_URL
-    COM.load('NetUtil').netUtil(url, "PUT", this.data.order, (callback) => {
+    let url = COM.load('CON').CONFRIM_ORDER_URL
+    COM.load('NetUtil').netUtil(url, "PUT", this.data.order.orderInfo, (callback) => {
       console.log(callback)
     })
     wx.redirectTo({

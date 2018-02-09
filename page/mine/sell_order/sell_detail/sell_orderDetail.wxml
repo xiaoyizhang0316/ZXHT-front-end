@@ -148,11 +148,10 @@
     </view>
   </view>
 
-
-  <view wx:if="{{!shared}}" class="footer">
-    <block wx:if="{{order.orderInfo.orderStatus != 9}}">
+  <block wx:if="{{order.orderInfo.orderStatus != 9}}">
+    <view wx:if="{{!shared}}" class="footer">
       <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">取消订单</button>
       <button type="default" class='button' bindtap="placeOrder">确认订单</button>
-    </block>
-  </view>
+    </view>
+  </block>
 </view>

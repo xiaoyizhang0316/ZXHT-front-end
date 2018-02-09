@@ -54,6 +54,7 @@ const GET_ONE_ORDER_SELLERorSELLER = BASE_URL + "/api/mall/orders/getOrder"
 const GET_ALL_ORDERS_BUYER = BASE_URL + "/api/mall/orders/getOrders/1/"
 const CANCEL_ORDER_BUYER = BASE_URL + "/api/mall/orders/cancelOrder/"
 const UPDATE_ORDER_URL = BASE_URL + "/api/mall/orders/updateOrder"
+const CONFRIM_ORDER_URL = BASE_URL + "/api/mall/orders/confirmOrder"
 
 module.exports = {
   BASE_URL: BASE_URL,
@@ -88,5 +89,6 @@ module.exports = {
   GET_ONE_ORDER_SELLERorSELLER: GET_ONE_ORDER_SELLERorSELLER,
   GET_ALL_ORDERS_BUYER: GET_ALL_ORDERS_BUYER,
   CANCEL_ORDER_BUYER: CANCEL_ORDER_BUYER,
-  UPDATE_ORDER_URL: UPDATE_ORDER_URL
+  UPDATE_ORDER_URL: UPDATE_ORDER_URL,
+  CONFRIM_ORDER_URL: CONFRIM_ORDER_URL
 }
