@@ -23,10 +23,10 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-            winWidth: res.windowWidth,
-            winHeight: res.windowHeight
-          });
-        }
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        });
+      }
     });
   },
 
@@ -46,7 +46,7 @@ Page({
     this.setData({ search: '', displayClear: false });
   },
 
-  searchOrder: function(e) {
+  searchOrder: function (e) {
     let orderHistoryList = wx.getStorageSync('orderHistoryList');
     let text = Util.trim(e.detail.value);
     let rows = [];
@@ -55,12 +55,12 @@ Page({
       let name = order.receiver.name;
       let phone = order.receiver.phone;
       let items = order.items;
-      if (name.search(text) !== -1|| phone.search(text) !== -1) {
+      if (name.search(text) !== -1 || phone.search(text) !== -1) {
         rows.push(order);
       } else {
         for (let x in items) {
-          if (items[x].title.toUpperCase().search(text.toUpperCase()) !== -1){ 
-            rows.push(order); 
+          if (items[x].title.toUpperCase().search(text.toUpperCase()) !== -1) {
+            rows.push(order);
             break;
           }
         }
@@ -147,18 +147,22 @@ Page({
 
   cancelOrder: function (e) {
     var self = this;
+    console.log(e)
     wx.showModal({
       content: '确定取消此订单?',
       showCancel: true,
-      confirmText:'取消',
+      confirmText: '确认',
       success: function (res) {
         if (res.confirm) {
           try {
-            let orderList = wx.getStorageSync('orderHistoryList');
+            let orderList = self.data.orderHistoryList;
             let newList = orderList.filter(function (val) {
               return (val.orderId != e.currentTarget.dataset.order);
             });
-
+            let url = COM.load('CON').CANCEL_ORDER_BUYER + e.currentTarget.dataset.order;
+            COM.load('NetUtil').netUtil(url, "PUT", {}, (callback) => {
+              console.log(callback)
+            })
             wx.setStorage({
               key: "orderHistoryList",
               data: newList,
@@ -174,7 +178,7 @@ Page({
     })
   },
 
-  placeOrder: function(e) {
+  placeOrder: function (e) {
     wx.redirectTo({
       url: '/pages/send/' + e.currentTarget.dataset.logo + '/send?order=' + e.currentTarget.dataset.order,
 
@@ -214,34 +218,34 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-   
+
   },
 
   // /**
   //  * 用户点击右上角分享
   //  */
   // onShareAppMessage: function () {
-  
+
   // }
 })

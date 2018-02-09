@@ -127,7 +127,7 @@
     </view> -->
 </block>
 
-<view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;">
+<view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;flex-direction: column">
   <view class="inner-explain-line">
     <view class="explain-text" style="flex:5">总计: ${{totalPrice}}
       <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(仅供参考)</text>
@@ -139,6 +139,21 @@
       {{totalWeight}}kg
     </view>
   </view>
+
+
+  <block wx:if = "{{orderConfirmed}}">
+    <view class="inner-explain-line">
+      <view class="explain-text" style="flex:5">折扣: ${{discount}}
+        <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(仅供参考)</text>
+      </view>
+    </view>
+    <view class="inner-explain-line">
+      <view class="explain-text" style="flex:5">邮费: ${{postalFee}}
+        <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(仅供参考)</text>
+      </view>
+    </view>
+  </block>
+
 
 
   <view wx:if="{{!shared}}" class="footer">

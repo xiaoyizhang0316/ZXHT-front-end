@@ -10,9 +10,9 @@
 <view class='contain'>
   <view style="display:flex;flex-direction:column;flex:10;">
     <view class="inner-explain-line">
-       <view class="explain-text" style="padding-left:9px">订单编号</view> 
-       <view class="explain-value"style="margin-right:5px">{{orderId}}</view>
-       <view class="explain-value" style="align-items:center;justify-content: center;border:1px solid #e6e6e6;flex:1;border-radius:3px;" catchtap="copyOrderId">复制</view>
+      <view class="explain-text" style="padding-left:9px">订单编号</view>
+      <view class="explain-value" style="margin-right:5px">{{orderId}}</view>
+      <view class="explain-value" style="align-items:center;justify-content: center;border:1px solid #e6e6e6;flex:1;border-radius:3px;" catchtap="copyOrderId">复制</view>
     </view>
     <view style="display:flex;">
       <view class="explain-text" style="padding-left:9px">订单日期</view>
@@ -26,30 +26,30 @@
 </view>
 
 <view class="explain-line" style="flex-direction:column;border-top:1px solid #eff3f4">
-  <view class="inner-explain-line" style="padding-bottom:5px;">
-    <view class="explain-text" >商户名称</view>
+  <view class="inner-explain-line">
+    <view class="explain-text">商户名称</view>
     <view class="explain-value">{{merchant}}</view>
   </view>
   <view class="inner-explain-line">
-    <view class="explain-text" >配送方式</view>
+    <view class="explain-text">配送方式</view>
     <view class="explain-value">{{service.name}}</view>
   </view>
-  <view class="inner-explain-line" style="padding-top:0px;">
-    <view class="explain-text" >配送费用</view>
-    <text class="explain-text" style='margin-right:0px' >$</text>
-    <input focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" bindinput='updateDeliveryPrice' class="explain-text" ></input>
+  <view class="inner-explain-line">
+    <view class="explain-text">配送费用</view>
+    <text class="explain-text" style='margin-right:0px'>$</text>
+    <input placeholder='{{deliveryPrice}}' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" font-size="1 2px" bindinput='updateDeliveryPrice'></input>
   </view>
-  <view class="inner-explain-line" style="padding-top:0px;">
-    <view class="explain-text" >折扣价格</view>
-    <text class="explain-text" style='margin-right:0px' >-$</text>
-    <input focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" bindinput='updateDiscountPrice' class="explain-text" ></input>
+  <view class="inner-explain-line">
+    <view class="explain-text">折扣价格</view>
+    <text class="explain-text" style='margin-right:0px'>-$</text>
+    <input placeholder='{{discountValue}}' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" font-size="1 2px" bindinput='updateDiscountValue'></input>
   </view>
 </view>
 
-  <view class="explain-line" style="border-top:20px solid #eff3f4">
-  <view class="inner-explain-line" >
+<view class="explain-line" style="border-top:20px solid #eff3f4">
+  <view class="inner-explain-line">
     <view class="explain-text">
-       <!-- <image style="height:40px;width:40px;" src="../../../images/sender.png"></image>    -->
+      <!-- <image style="height:40px;width:40px;" src="../../../images/sender.png"></image>    -->
       发件人
     </view>
     <view class="explain-value" style="justify-content:space-between">
@@ -57,7 +57,7 @@
       <text style="border-bottom:1px solid #e8e8e8" catchtap="makeCall" data-mobile="{{sender.phone}}">{{sender.phone}}</text>
     </view>
   </view>
-</view>  
+</view>
 
 <view class="explain-line" style="border-top:1px solid #eff3f4">
   <view class="inner-explain-line">
@@ -150,7 +150,9 @@
 
 
   <view wx:if="{{!shared}}" class="footer">
-    <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">取消订单</button>
-    <button type="default" class='button'>确认订单</button>
+    <block wx:if="{{order.orderInfo.orderStatus != 9}}">
+      <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">取消订单</button>
+      <button type="default" class='button' bindtap="placeOrder">确认订单</button>
+    </block>
   </view>
 </view>

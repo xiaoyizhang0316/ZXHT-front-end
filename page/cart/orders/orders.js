@@ -98,7 +98,6 @@ Page({
       orderGoods: productinfo.data
     };
     let url = COM.load('CON').SAVE_ORDER_URL;
-
     COM.load('NetUtil').netUtil(url, "POST", order, (callback) => { })
 
     this.saveToOrderHistory(order);

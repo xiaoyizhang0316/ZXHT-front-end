@@ -14,7 +14,9 @@ Page({
     merchant: null,
     totalweight: null,
     totalPrice: null,
-    totalQuantity: null
+    totalQuantity: null,
+    deliveryPrice: 0,
+    discountValue: 0
   },
 
   /**
@@ -35,6 +37,7 @@ Page({
         }
       });
     }
+    
 
     var numofGoods = 0;
     console.log(order[0].orderGoods[0].num)
@@ -43,7 +46,7 @@ Page({
       numofGoods = numofGoods + order[0].orderGoods[index].num
     }
     console.log(numofGoods)
-  
+
     this.setData({
       order: order[0],
       orderId: options.orderId,
@@ -56,8 +59,10 @@ Page({
       totalQuantity: numofGoods,
       // totalWeight: order[0].totalWeight,
       receiver: order[0].consignee,
+      deliveryPrice: order[0].orderInfo.shippingCost,
+      discountValue: order[0].orderInfo.discount
     });
-    let s= JSON.stringify(this.data.order);
+    let s = JSON.stringify(this.data.order);
     console.log(JSON.parse(s));
   },
 
@@ -67,7 +72,7 @@ Page({
     wx.showModal({
       content: '确定删除此订单?',
       showCancel: true,
-      confirmText: '删除',
+      confirmText: '确认',
       success: function (res) {
         if (res.confirm) {
           try {
@@ -75,7 +80,10 @@ Page({
             let newList = orderList.filter(function (val) {
               return (val.orderId != e.currentTarget.dataset.order);
             });
-
+            let url = COM.load('CON').CANCEL_ORDER_BUYER + e.currentTarget.dataset.order;
+            COM.load('NetUtil').netUtil(url, "PUT", {}, (callback) => {
+              console.log(callback)
+            })
             wx.setStorage({
               key: "orderHistoryList",
               data: newList,
@@ -99,7 +107,7 @@ Page({
   //   })
   // },
 
-  copyOrderId:function(e) {
+  copyOrderId: function (e) {
     let self = this;
     wx.setClipboardData({
       data: self.data.orderId,
@@ -123,22 +131,32 @@ Page({
   },
 
   placeOrder: function (e) {
+    console.log(e)
+    console.log(this.data.order)
+    this.data.order.orderInfo.discount = this.data.discountValue
+    this.data.order.orderInfo.shippingCost = this.data.deliveryPrice
+    let url = COM.load('CON').UPDATE_ORDER_URL
+    COM.load('NetUtil').netUtil(url, "PUT", this.data.order, (callback) => {
+      console.log(callback)
+    })
     wx.redirectTo({
-      url: '/pages/send/' + this.data.logo + '/send?order=' + this.data.orderId,
+      url: '/page/mine/sell_order/sell_orderHistory'
     })
   },
 
   updateDeliveryPrice: function (e) {
-    let DeliverPrice = e.detail.value;
-    if (DeliverPrice > 0.1) {
-      this.setData({ 'DeliverPrice': DeliverPrice });
+    if (e.detail.value > 0) {
+      this.setData({
+        deliveryPrice: e.detail.value
+      });
     }
   },
 
-  updateDiscountPrice: function (e) {
-    let DiscountPrice = e.detail.value;
-    if (DiscountPrice > 0.1) {
-      this.setData({ 'DiscountPrice': DiscountPrice });
+  updateDiscountValue: function (e) {
+    if (e.detail.value > 0) {
+      this.setData({
+        discountValue: e.detail.value
+      });
     }
   },
 
@@ -146,42 +164,42 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**

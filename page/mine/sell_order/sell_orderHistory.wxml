@@ -1,53 +1,75 @@
 <view class='container'>
-    <view class="swiper-tab">
-      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
-        未支付
-      </view>
-      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
-        已支付
-      </view>
-      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">
-        已发货
-      </view>
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
+      未支付
     </view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+      已支付
+    </view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">
+      已发货
+    </view>
+  </view>
 
-      <swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight}}px" bindchange="bindChange">
+  <swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight}}px" bindchange="bindChange">
     <!-- 未支付 -->
     <swiper-item>
-      <scroll-view  scroll-y="{{true}}" style="height:{{winHeight-44}}px">
-        <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend"> 
+      <scroll-view scroll-y="{{true}}" style="height:{{winHeight-44}}px">
+        <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
           <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
-              <view class="item-top">
-                <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
-                <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view> 
-                <!-- <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
+            <view class="item-top">
+              <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
+              <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view>
+              <!-- <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
                     <image style="height:20px;width:20px;" src="/image/public/clear.png"></image> 
                 </view> -->
+            </view>
+
+            <scroll-view class="order-item-scroll" scroll-x>
+
+              <view class="order-item-scroll-box" wx:for="{{item.orderGoods}}" wx:for-item="val">
+                <image src="{{val.image}}" class="order-item-image"></image>
               </view>
 
-              <scroll-view class="order-item-scroll" scroll-x>
-                  
-                  <view class="order-item-scroll-box" wx:for="{{item.orderGoods}}" wx:for-item="val">
-                    <image src="{{val.image}}" class="order-item-image"></image>
-                  </view>
-
-                  <block wx:if="{{item.orderGoods.length == 1}}">
-                    <view class="order-item-title">
-                    <view class="order-item-title-box">
+              <block wx:if="{{item.orderGoods.length == 1}}">
+                <view class="order-item-title">
+                  <view class="order-item-title-box">
                     <text>{{item.orderGoods[0].title}}</text>
-                    </view>
-                    </view>
-                  </block>
-              </scroll-view>
-
-              <view class='order-item-desc'>
-                  <text>共{{item.orderGoods.length}}件商品</text>
-                  <text class='middle-tip'>实付款:</text>
-                  <text class='order-price'>${{item.orderInfo.goodsCost}}</text>
-              </view>
-               <view class="order-send">
-                <view class='button'catchtap="cancelOrder">取消订单</view>
-              </view>  
+                  </view>
+                </view>
+              </block>
+            </scroll-view>
+            <view class='order-item-desc'>
+              <text>共{{item.orderGoods.length}}件商品</text>
+              <text class='middle-tip'>实付款:</text>
+              <text class='order-price'>${{item.orderInfo.goodsCost}}</text>
+            </view>
+            <view class="order-send">
+              <block wx:if="{{item.orderInfo.orderStatus == 2}}">
+                <text class='button'>已确认</text>
+              </block>
+              <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
+                <text class='button'>已下单</text>
+              </block>
+              <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
+                <text class='button'>发货中</text>
+              </block>
+              <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
+                <text class='button'>已支付</text>
+              </block>
+              <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
+                <text class='button'>已收货</text>
+              </block>
+              <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
+                <text class='button'>已取消</text>
+              </block>
+              <block wx:else>
+                <text class='button'>处理中</text>
+              </block>
+              <block wx:if="{{item.orderInfo.orderStatus != 9}}">
+                <view class='button' data-order="{{item.orderInfo.id}}" catchtap="cancelOrder">取消订单</view>
+              </block>
+            </view>
           </view>
         </view>
       </scroll-view>
@@ -55,48 +77,48 @@
 
     <!-- 已支付 -->
     <swiper-item>
-      <scroll-view  scroll-y="{{true}}" style="height:{{winHeight-44}}px">
-        <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend"> 
+      <scroll-view scroll-y="{{true}}" style="height:{{winHeight-44}}px">
+        <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
           <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderId}}">
-              <view class="item-top">
-                <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderTime}}</view>
-                <view style="font-size:14px;flex:2;">{{item.receiver.name}}</view> 
-                <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderId}}" catchtap="delOrder">
-                    <image style="height:20px;width:20px;" src="/image/public/clear.png"></image> 
-                </view>
+            <view class="item-top">
+              <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderTime}}</view>
+              <view style="font-size:14px;flex:2;">{{item.receiver.name}}</view>
+              <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderId}}" catchtap="delOrder">
+                <image style="height:20px;width:20px;" src="/image/public/clear.png"></image>
+              </view>
+            </view>
+
+            <scroll-view class="order-item-scroll" scroll-x>
+
+              <view class="order-item-scroll-box" wx:for="{{item.items}}" wx:for-item="val">
+                <image src="{{val.image}}" class="order-item-image"></image>
               </view>
 
-              <scroll-view class="order-item-scroll" scroll-x>
-                  
-                  <view class="order-item-scroll-box" wx:for="{{item.items}}" wx:for-item="val">
-                    <image src="{{val.image}}" class="order-item-image"></image>
-                  </view>
-
-                  <block wx:if="{{item.items.length == 1}}">
-                    <view class="order-item-title">
-                    <view class="order-item-title-box">
+              <block wx:if="{{item.items.length == 1}}">
+                <view class="order-item-title">
+                  <view class="order-item-title-box">
                     <text>{{item.items[0].title}}</text>
-                    </view>
-                    </view>
-                  </block>
+                  </view>
+                </view>
+              </block>
 
-              </scroll-view>
+            </scroll-view>
 
-              <view class='order-item-desc'>
-                  <text>共{{item.items.length}}件商品</text>
-                  <text class='middle-tip'>实付款:</text>
-                  <text class='order-price'>${{item.totalPrice}}</text>
-              </view>
-              <view class="order-send">
-                <!-- <view class='button'>扫码发货</view> -->
-                <view class='button'>手动发货</view>
-              </view> 
+            <view class='order-item-desc'>
+              <text>共{{item.items.length}}件商品</text>
+              <text class='middle-tip'>实付款:</text>
+              <text class='order-price'>${{item.totalPrice}}</text>
+            </view>
+            <view class="order-send">
+              <!-- <view class='button'>扫码发货</view> -->
+              <view class='button'>手动发货</view>
+            </view>
           </view>
         </view>
       </scroll-view>
     </swiper-item>
 
-        <!-- 已发货 -->
+    <!-- 已发货 -->
     <swiper-item>
       <scroll-view>
         <view>已发货订单</view>
@@ -105,4 +127,4 @@
 
   </swiper>
 
-  </view>
+</view>

@@ -11,7 +11,10 @@ Page({
     merchant: null,
     totalweight: null,
     totalPrice: null,
-    totalQuantity: null
+    totalQuantity: null,
+    orderConfirmed: false,
+    discount: null,
+    postalFee: null
   },
 
   /**
@@ -33,10 +36,14 @@ Page({
       });
     }
     var numofGoods = 0;
-    console.log(order[0].orderGoods[0].num)
     for (var index = 0; index < order[0].orderGoods.length; index++) {
       console.log("hahahah")
       numofGoods = numofGoods + order[0].orderGoods[index].num
+    }
+    if (order[0].orderInfo.orderStatus == 2) {
+      this.setData({
+        orderConfirmed: true
+      })
     }
     console.log(numofGoods)
     this.setData({
@@ -49,6 +56,8 @@ Page({
       // items: order[0].items,
       totalPrice: order[0].orderInfo.goodsCost,
       totalQuantity: numofGoods,
+      discount: order[0].orderInfo.discount,
+      postalFee: order[0].orderInfo.shippingCost,
       // totalWeight: order[0].totalWeight,
       receiver: order[0].consignee
     });
