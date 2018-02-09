@@ -129,27 +129,32 @@
 
 <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;flex-direction: column">
   <view class="inner-explain-line">
-    <view class="explain-text" style="flex:5">总计: ${{totalPrice}}
-      <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(仅供参考)</text>
+    <view class="explain-text" style="flex:5,margin-right:0px">商品总计
+      <text class="price">${{totalGoodsPrice}}</text>
     </view>
-    <view class="explain-value" style="flex:1">
+    <!-- <view class="explain-value" style="flex:1">
       {{totalQuantity}}件
     </view>
     <view class="explain-value" style="flex:1">
       {{totalWeight}}kg
-    </view>
+    </view> -->
   </view>
 
 
   <block wx:if = "{{orderConfirmed}}">
     <view class="inner-explain-line">
-      <view class="explain-text" style="flex:5">折扣: ${{discount}}
-        <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(仅供参考)</text>
+      <view class="explain-text" style="flex:5,margin-right:0px">店铺优惠 
+        <text class="price">- ${{discount}}</text>
       </view>
     </view>
     <view class="inner-explain-line">
-      <view class="explain-text" style="flex:5">邮费: ${{postalFee}}
-        <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(仅供参考)</text>
+      <view class="explain-text" style="flex:5,margin-right:0px">运费(快递) 
+        <text class="price">${{postalFee}}</text>
+      </view>
+    </view>
+        <view class="inner-explain-line">
+      <view class="explain-text" style="flex:5,margin-right:0px">订单总价
+        <text class="totalPrice">${{totalPrice}}</text>
       </view>
     </view>
   </block>
