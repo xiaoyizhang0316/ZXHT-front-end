@@ -14,10 +14,11 @@ Page({
     searchResult: [],
     lastQuery: '',//最后一个查询的关键词
     page: 0,
+    allGoodsList: [],
     goodsLineList: [],
     brandList: [],
     cateList: [],
-		myShopProductIds:[]
+    myShopProductIds: []
   },
 
   /**
@@ -29,7 +30,7 @@ Page({
 
     //获得所有品牌
     let allbrands = []
-    let brandIds =[]
+    let brandIds = []
     let urlbrands = COM.load('CON').BRAND_URL + '/all'
     COM.load('NetUtil').netUtil(urlbrands, 'GET', "", brands => {
       for (var x in brands) {
@@ -63,27 +64,34 @@ Page({
     let products = Object.values(wx.getStorageSync("products"));
 
     //let shopProductIds = wx.getStorageSync("shopProductIds");
-		let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + app.globalData.openId;	
-	
-		COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
-		
-				for (var x in callbackdata) {
-					let shopProduct = callbackdata[x];
-					self.data.myShopProductIds.push(shopProduct.productId);
-					
-				}
-				products.slice(this.data.page * size, ++this.data.page * size).forEach(function (p) {
-					p.thumb = COM.load('Util').image(p.barcode);
-					p.selected = self.data.myShopProductIds.includes(p.id);
-					self.data.goodsLineList.push(p);
-				});
-				
-				this.setData({
-					page: this.data.page, goodsLineList: this.data.goodsLineList
-				})
-			
-		})
-   
+    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + app.globalData.openId;
+
+    COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+      for (var x in callbackdata) {
+        let shopProduct = callbackdata[x];
+        self.data.myShopProductIds.push(shopProduct.productId);
+
+      }
+      // products.slice(this.data.page * size, ++this.data.page * size).forEach(function (p) {
+      products.slice(this.data.page * size, ++this.data.page * size).forEach(function (p) {
+        p.thumb = COM.load('Util').image(p.barcode);
+        p.selected = self.data.myShopProductIds.includes(p.id);
+        self.data.goodsLineList.push(p);
+      });
+
+      products.slice(0, products.length).forEach(function (p) {
+        p.thumb = COM.load('Util').image(p.barcode);
+        p.selected = self.data.myShopProductIds.includes(p.id);
+        self.data.allGoodsList.push(p);
+      });
+
+      this.setData({
+        goodsLineList: this.data.goodsLineList,
+        allGoodsList: this.data.allGoodsList
+      })
+
+    })
+
   },
 
   /**
@@ -132,7 +140,7 @@ Page({
       })
     } else {
       //上架商品
-			let url = COM.load('CON').ADD_SHOP_PRODUCT_URL;
+      let url = COM.load('CON').ADD_SHOP_PRODUCT_URL;
       COM.load('NetUtil').netUtil(url, 'POST', product, function (res) {
         let shopProductIds = wx.getStorageSync("shopProductIds");
         if (!shopProductIds.includes(product.productId)) {
@@ -244,27 +252,28 @@ Page({
   },
 
   bindBrandChange: function (e) {
-    console.log(e.detail)
-    console.log(this.data.goodsLineList)
-    let products = wx.getStorageSync("products");
-    let brandIds = wx.getStorageSync("brandIds");
+    console.log(this.data.allGoodsList)
+    console.log(this.data.brandList[e.detail.value])
+    this.setData({
+      goodsLineList: this.data.allGoodsList
+    })
 
   },
 
   bindCateChange: function (e) {
-    console.log(e.detail)
+    console.log(this.data.cateList[e.detail.value])
     console.log(this.data.goodsLineList)
     this.setData({
-      goodsLineList: this.data.goodsLineList
+      goodsLineList: this.data.allGoodsList
     })
   },
 
 
-  goodsByBrands: function(brandId){
+  goodsByBrands: function (brandId) {
     goodsList = []
     goodsList
 
-    return 
+    return
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
