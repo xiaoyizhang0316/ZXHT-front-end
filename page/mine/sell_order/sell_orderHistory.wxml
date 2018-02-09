@@ -42,7 +42,7 @@
             <view class='order-item-desc'>
               <text>共{{item.orderGoods.length}}件商品</text>
               <text class='middle-tip'>实付款:</text>
-              <text class='order-price'>${{item.orderInfo.goodsCost}}</text>
+              <text class='order-price'>${{item.orderInfo.totalCost}}</text>
             </view>
             <view class="order-send">
               <block wx:if="{{item.orderInfo.orderStatus == 2}}">
