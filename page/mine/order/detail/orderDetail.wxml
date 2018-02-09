@@ -88,7 +88,7 @@
   </view>
 </view>
 
-<block wx:key="idx" wx:for-index="idx" wx:for="{{items}}">
+<block wx:key="idx" wx:for-index="idx" wx:for="{{order.orderGoods}}">
   <view class="explain-line order-cate">
     <view class="order-cate-image">
       <image src="{{item.image}}"></image>
