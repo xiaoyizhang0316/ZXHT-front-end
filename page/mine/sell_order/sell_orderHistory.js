@@ -89,55 +89,6 @@ Page({
     })
   },
 
-  filterOrders: function () {
-    let self = this;
-    let shopId = app.globalData.openId;
-    let products = wx.getStorageSync("products");
-
-    let url = COM.load('CON').GET_ALL_ORDERS_SELLER + shopId;
-    COM.load('NetUtil').netUtil(url, "GET", "", (orders) => {
-      let ordersMap = new Map();
-      if (orders != "") {
-        for (var x in orders) {
-          let order = orders[x];
-          let Info = order.orderInfo;
-          let consignee = order.consignee;
-          let Goods = order.orderGoods;
-          for (var x in Goods) {
-            let good = Goods[x];
-            console.log(good.productId)
-            console.log(products[good.productId].barcode)
-            ordersMap.set(Info.id,
-              {
-                order: order[0],
-                orderId: Info.id,
-                orderMessage: Info.orderMessage,
-                orderSN: Info.orderSN,
-                orderStatus: Info.orderStatus,
-                // logo: order[0].logo,
-                // shared: shared,
-                orderTime: Info.addTime,
-                // merchant: order[0].merchant,
-                // service: order[0].service,
-                // sender: Info.senderId,
-                receiverName: consignee.name,
-                items: Goods,
-                totalPrice: Info.goodsCost,
-                productId: good.productId,
-                barcode: products[good.productId].barcode,
-                image: COM.load('Util').image(products[good.productId].barcode)
-                // totalQuantity: order[0].totalQuantity,
-                // totalWeight: order[0].totalWeight,
-              })
-          }
-        }
-        self.setData({
-          orderHistoryList: Array.from(ordersMap.values()),
-          ordersMap: ordersMap
-        })
-      }
-    });
-  },
 
   clickOrder: function (e) {
     wx.navigateTo({

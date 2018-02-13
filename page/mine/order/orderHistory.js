@@ -188,6 +188,18 @@ Page({
     }.bind(this), 200)
   },
 
+  //确认支付
+  payOrder: function (e) {
+    var self = this;
+    let orderList = self.data.orderHistoryList;
+    console.log(e.currentTarget.dataset.order)
+    let url = COM.load('CON').PAY_ORDER_URL + e.currentTarget.dataset.order;
+    console.log(url)
+    COM.load('NetUtil').netUtil(url, "GET", {}, (callback) => {
+      console.log(callback)
+    })          
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

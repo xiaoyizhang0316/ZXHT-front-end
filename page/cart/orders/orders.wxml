@@ -33,31 +33,4 @@
         <view class="orders-footer-total">付款合计：${{total}}</view>
         <view class="orders-footer-btn" bindtap="placeOrder">提交订单</view>
     </view>
-
-
-    <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
-  <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
-  <view class='bottom-window'>
-    <view class='bottom-window-detail'>
-    <text>付款详情</text>
-    <image bindtap="hideModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
-    </view>
-
-    <view class='bottom-window-price'>
-     <text>付款方式</text>
-     <view style='display:flex;align-content: center;align-items:center;padding-right:15rpx'>
-        <text>微信支付</text>
-        <image class='bottom-window-detail-arrow' src='/image/arrow_down.png'></image>
-     </view>
-    </view>
-    
-    <view class='bottom-window-pay'>
-     <text>需付款</text>
-     <text>${{total}}</text>
-    </view>
-
-    <button bindtap="placeOrder" class='bottom-window-button' type='primary'>确认付款</button>
-  </view>
-
-  </view>
 </view>

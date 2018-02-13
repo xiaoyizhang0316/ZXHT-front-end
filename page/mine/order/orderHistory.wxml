@@ -49,8 +49,7 @@
     <view class="order-pay">
       <view class='button' data-order="{{item.orderInfo.id}}" data-logo="getLogo({{item.orderGoods.productId}})">
         <block wx:if="{{item.orderInfo.orderStatus == 2}}">
-	
-          <text data-id="{{idx}}" catchtap='showModal'>立即支付</text>
+          <text data-order="{{item.orderInfo.id}}"data-id="{{idx}}" catchtap='showModal'>立即支付</text>
         </block>
         <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
           <text>已下单</text>
@@ -97,7 +96,7 @@
         <text>${{selectedOrder.orderInfo.totalCost}}</text>
       </view>
 
-      <button class='bottom-window-button' type='primary'>确认付款</button>
+      <button data-order="{{selectedOrder.orderInfo.id}}" bindtap='payOrder' class='bottom-window-button' type='primary'>确认付款</button>
     </view>
   </view>
 </view>
