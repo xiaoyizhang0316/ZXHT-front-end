@@ -47,9 +47,10 @@
          再次下单
        </view> -->
     <view class="order-pay">
-      <view class='button' data-order="{{idx}}" data-logo="getLogo({{item.orderGoods.productId}})">
+      <view class='button' data-order="{{item.orderInfo.id}}" data-logo="getLogo({{item.orderGoods.productId}})">
         <block wx:if="{{item.orderInfo.orderStatus == 2}}">
-          <text catchtap='showModal'>立即支付</text>
+	
+          <text data-id="{{idx}}" catchtap='showModal'>立即支付</text>
         </block>
         <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
           <text>已下单</text>

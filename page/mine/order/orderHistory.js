@@ -151,11 +151,13 @@ Page({
     })
     this.animation = animation
     animation.translateY(300).step()
-    console.log(orderList[e.currentTarget.dataset.order])
+		console.log(orderList)
+		console.log(e.currentTarget.dataset)
+    console.log(orderList[e.currentTarget.dataset.id])
     this.setData({
       animationData: animation.export(),
       showModalStatus: true,
-      selectedOrder: orderList[e.currentTarget.dataset.order],
+      selectedOrder: orderList[e.currentTarget.dataset.id],
     })
     setTimeout(function () {
       animation.translateY(0).step()
