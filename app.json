@@ -30,7 +30,8 @@
     "page/mine/myShop/accountDetail/accountDetail",
     "page/mine/fans/share/share",
     "page/mine/sell_order/sell_orderHistory",
-    "page/mine/sell_order/sell_detail/sell_orderDetail"
+    "page/mine/sell_order/sell_detail/sell_orderDetail",
+    "page/mine/sell_order/send_detail/send_orderDetail"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",

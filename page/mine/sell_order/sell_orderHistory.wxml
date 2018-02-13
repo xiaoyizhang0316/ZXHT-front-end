@@ -87,9 +87,6 @@
             <view class="item-top">
               <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
               <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view>
-              <!-- <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
-                    <image style="height:20px;width:20px;" src="/image/public/clear.png"></image> 
-                </view> -->
             </view>
 
             <scroll-view class="order-item-scroll" scroll-x>
@@ -132,6 +129,9 @@
               </block>
               <block wx:else>
                 <text class='button'>处理中</text>
+              </block>
+              <block wx:if="{{item.orderInfo.orderStatus == 3}}">
+                <view class='button' data-order="{{item.orderInfo.id}}" catchtap="sendOrder">手动发货</view>
               </block>
               <block wx:if="{{item.orderInfo.orderStatus != 9}}">
                 <view class='button' data-order="{{item.orderInfo.id}}" catchtap="cancelOrder">取消订单</view>
