@@ -27,7 +27,7 @@ Page({
       shopId: app.globalData.shopId,
     })      
 
-    console.log(self);
+   
     //let url = COM.load('CON').ShopInfo + self.data.openId;
 		let url = COM.load("CON").getMyShopInfo + self.data.openId
     COM.load('NetUtil').netUtil(url, "GET", "", (shopInfo) => {
@@ -81,9 +81,10 @@ Page({
   * 用户点击右上角分享
   */
   onShareAppMessage: function () {
+		let openId = app.globalData.openId; 
     return {
       title: '真享 海淘',
-      path: '/page/welcome/welcome?targetShopId=123',
+      path: '/page/welcome/welcome?targetShopId='+openId,
       success: function (res) {
         // 转发成功
       },

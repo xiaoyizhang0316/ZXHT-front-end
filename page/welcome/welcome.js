@@ -15,8 +15,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-		options.targetShopId = "o0_gG0droClKPXW1k8gii-BLE_m4"
-		console.log(options)
+	
+		console.log("options: "+options)
 		this.setTargetShop(options)	
     COM.load('Util').loadBrands();
     COM.load('Util').loadProducts();
@@ -40,12 +40,10 @@ Page({
 	//获得访问的商店
 	setTargetShop: function (e) {
 		//得到传输过来的目标商铺
-
+		console.log("-----------------------------")
 		console.log(e)
 		if (Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
-			console.log("-----------------------------")
-			console.log(e.targetId)
-
+		
 			let fan = app.globalData.openId
 			let shop = e.targetShopId
 			//let url = "https://a5f93900.ngrok.io/api/mall/users/applyToShop/"
