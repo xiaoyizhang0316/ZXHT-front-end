@@ -1,0 +1,101 @@
+<view style="background-color:#f8f8f8;flex-direction:column;{{magnify?'display:none':'display:flex'}};">
+  <view style="flex-direction:row;justify-content:space-between;flex:1;display: flex;margin-bottom: 10px;padding-top:10px;">
+    <view class="search-input" style="height:25px;">
+      <view>
+        <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
+      </view>
+      <input focus="{{focus}}" value="{{search}}" placeholder="搜索收件人姓名、手机、商品" placeholder-class="placeholderstyle" cursor-spacing="50px" confirm-type="search" type="text" bindinput="searchOrder" focus="{{isFocus}}" auto-focus="{{isFocus}}" />
+      <view class="{{displayClear?'':'hidden'}}" bindtap="reset">
+        <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
+  <block wx:if="{{item.orderInfo.orderStatus == 5}}">
+    <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
+      <view class="item-top">
+        <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
+        <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view>
+        <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
+          <image style="height:20px;width:20px;" src="/image/public/clear.png"></image>
+        </view>
+      </view>
+
+      <scroll-view class="order-item-scroll" scroll-x>
+        <view class="order-item-scroll-box" wx:for="{{item.orderGoods}}" wx:for-item="val">
+          <image src="{{val.image}}" class="order-item-image"></image>
+        </view>
+        <block wx:if="{{item.orderGoods.length == 1}}">
+          <view class="order-item-title">
+            <view class="order-item-title-box">
+              <text>{{item.orderGoods[0].title}}</text>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+
+      <view class='order-item-desc'>
+        <text>共{{item.orderGoods.length}}种商品</text>
+        <text class='middle-tip'>实付款:</text>
+        <text class='order-price'>${{item.orderInfo.totalCost}}</text>
+      </view>
+      <!-- <view style="margin-right:20rpx;display:flex;border:1px solid #e64949;background-color:#e64949;color:#fff;padding:4px;font-size:15px;border-radius:3px;" data-order="{{item.orderId}}" data-logo="{{item.logo}}" catchtap="placeOrder">
+          再次下单
+        </view> -->
+      <view class="order-pay">
+        <view class='button' data-order="{{item.orderInfo.id}}" data-logo="getLogo({{item.orderGoods.productId}})">
+          <block wx:if="{{item.orderInfo.orderStatus == 2}}">
+            <text data-order="{{item.orderInfo.id}}" data-id="{{idx}}" catchtap='showModal'>立即支付</text>
+          </block>
+          <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
+            <text>已下单</text>
+          </block>
+          <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
+            <text>发货中</text>
+          </block>
+          <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
+            <text>已支付</text>
+          </block>
+          <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
+            <text>已收货</text>
+          </block>
+          <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
+            <text>已取消</text>
+          </block>
+          <block wx:else>
+            <text>处理中</text>
+          </block>
+        </view>
+        <view class='button' data-order="{{item.orderGoods.orderId}}" data-logo="getLogo({{item.orderGoods.productId}})" catchtap="placeOrder">再次下单</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 遮罩层 -->
+  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+  <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
+    <view class='bottom-window'>
+      <view class='bottom-window-detail'>
+        <text>付款详情</text>
+        <image bindtap="hideModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
+      </view>
+
+      <view class='bottom-window-price'>
+        <text>付款方式</text>
+        <view style='display:flex;align-content: center;align-items:center;padding-right:15rpx'>
+          <text>微信支付</text>
+          <image class='bottom-window-detail-arrow' src='/image/arrow_down.png'></image>
+        </view>
+      </view>
+
+      <view class='bottom-window-pay'>
+        <text>需付款</text>
+        <text>${{selectedOrder.orderInfo.totalCost}}</text>
+      </view>
+
+      <button data-order="{{selectedOrder.orderInfo.id}}" bindtap='payOrder' class='bottom-window-button' type='primary'>确认付款</button>
+    </view>
+  </view>
+</view>

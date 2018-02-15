@@ -37,7 +37,7 @@
     </view>
   </view>
 
-  <view class="explain-line" style="background-color:{{touched[3] ? '#e9e9e9':''}}" data-id="3" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="receive">
+  <view class="explain-line" style="background-color:{{touched[3] ? '#e9e9e9':''}}" data-id="3" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="order_receive">
     <view class="explain-block">
       <image style="height:22px;width:22px;" src="../../image/courier.png"></image>
     </view>

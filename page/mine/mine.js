@@ -130,6 +130,18 @@ Page({
     wx.navigateTo({
       url: '/page/mine/myShop/myShop'
     })
+  },
+
+  pendingPay: function (event) {
+    wx.navigateTo({
+      url: '/page/mine/order_pay/orderHistory_pay'
+    })
+  },
+
+  order_receive: function (event) {
+    wx.navigateTo({
+      url: '/page/mine/order_receive/orderHistory_receive'
+    })
   }
 
 })
