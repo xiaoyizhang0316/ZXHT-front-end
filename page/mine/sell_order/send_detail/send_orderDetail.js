@@ -16,7 +16,8 @@ Page({
     totalPrice: null,
     totalQuantity: null,
     deliveryPrice: 0,
-    discountValue: 0
+    discountValue: 0,
+		
   },
 
   /**
@@ -130,6 +131,40 @@ Page({
     let number = e.currentTarget.dataset.mobile;
     COM.load('Util').makeCall(number);
   },
+	formSubmit: function(e)
+	{
+		let ship = {}
+		let shipGoods = []
+		console.log(e.detail)
+		ship.orderId = this.data.orderId;
+		ship.agentId = e.detail.value.agentId
+		ship.receiptNumber = e.detail.value.receiptNumber
+		ship.senderId = app.globalData.openId
+		// TODO 暂时一个订单一个发货单
+		ship.shippingCost = this.data.deliveryPrice;
+
+		//TODO 商品也暂时都放在一个单里
+		for(var i = 0; i < this.data.items.length; i++)
+		{
+			let shipGood = {}
+			
+			console.log(this.data.items[i].productId)
+			shipGood.productId = this.data.items[i].productId;
+			shipGood.sendNumber = this.data.items[i].num;
+			shipGoods.push(shipGood);
+		}
+		let shipFull = []
+		shipFull.push({ship,shipGoods})
+		let url = COM.load('CON').SAVE_SHIPORDER;
+		console.log(shipFull)
+		COM.load('NetUtil').netUtil(url, "POST", shipFull, (callback) => {
+			console.log(callback)
+			wx.redirectTo({
+				url: '/page/mine/sell_order/sell_orderHistory'
+			})
+
+		})
+	},
 
   placeOrder: function (e) {
     console.log(e)
@@ -139,10 +174,12 @@ Page({
     let url = COM.load('CON').CONFRIM_ORDER_URL
     COM.load('NetUtil').netUtil(url, "PUT", this.data.order.orderInfo, (callback) => {
       console.log(callback)
+			wx.redirectTo({
+				url: '/page/mine/sell_order/sell_orderHistory'
+			})
+
     })
-    wx.redirectTo({
-      url: '/page/mine/sell_order/sell_orderHistory'
-    })
+   
   },
 
   updateDeliveryPrice: function (e) {

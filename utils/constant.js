@@ -1,6 +1,6 @@
 //url相关
 // const BASE_URL = "http://101.178.98.25:8443"
-//const BASE_URL = "https://mini.zhenxianghaitao.com"
+// const BASE_URL = "https://mini.zhenxianghaitao.com"
 // const BASE_URL = "https://localhost"
 const BASE_URL = "https://986708da.ngrok.io"
 
@@ -57,6 +57,8 @@ const UPDATE_ORDER_URL = BASE_URL + "/api/mall/orders/updateOrder"
 const CONFRIM_ORDER_URL = BASE_URL + "/api/mall/orders/confirmOrder"
 const PAY_ORDER_URL = BASE_URL + "/api/mall/orders/payOrder/"
 
+//发货单
+const SAVE_SHIPORDER = BASE_URL +"/api/mall/orders/saveShipOrder"
 module.exports = {
   BASE_URL: BASE_URL,
   CATEGORY_URL: CATEGORY_URL,
@@ -92,5 +94,6 @@ module.exports = {
   CANCEL_ORDER_BUYER: CANCEL_ORDER_BUYER,
   UPDATE_ORDER_URL: UPDATE_ORDER_URL,
   CONFRIM_ORDER_URL: CONFRIM_ORDER_URL,
-  PAY_ORDER_URL: PAY_ORDER_URL
+  PAY_ORDER_URL: PAY_ORDER_URL,
+	SAVE_SHIPORDER: SAVE_SHIPORDER
 }

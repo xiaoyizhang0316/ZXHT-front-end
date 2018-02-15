@@ -15,8 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-		this.setTargetShop(options)
+		options.targetShopId = "o0_gG0droClKPXW1k8gii-BLE_m4"
+		console.log(options)
+		this.setTargetShop(options)	
     COM.load('Util').loadBrands();
     COM.load('Util').loadProducts();
     let products = wx.getStorageSync("products");
@@ -40,8 +41,10 @@ Page({
 	setTargetShop: function (e) {
 		//得到传输过来的目标商铺
 
-		
+		console.log(e)
 		if (Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
+			console.log("-----------------------------")
+			console.log(e.targetId)
 
 			let fan = app.globalData.openId
 			let shop = e.targetShopId
