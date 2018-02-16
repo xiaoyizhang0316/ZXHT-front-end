@@ -20,7 +20,7 @@
                   <text>前去上货</text>
               </view>
               </button>
-              <button class='opt-btn' open-type="share">
+              <button class='opt-btn' bindtap="toShare">
               <view class='success-image-item share-item'>
                   <image class='add-goods' src='/image/public/share.png'></image>
                   <text>分享店铺</text>

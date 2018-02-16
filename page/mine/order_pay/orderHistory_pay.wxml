@@ -46,7 +46,7 @@
       <view class="order-pay">
         <view class='button' data-order="{{item.orderInfo.id}}" data-logo="getLogo({{item.orderGoods.productId}})">
           <block wx:if="{{item.orderInfo.orderStatus == 2}}">
-            <text data-order="{{item.orderInfo.id}}"data-id="{{idx}}" catchtap='showModal'>立即支付</text>
+            <view class='button-red' data-order="{{item.orderInfo.id}}"data-id="{{idx}}" catchtap='showModal'>立即支付</view>
           </block>
           <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
             <text>已下单</text>
@@ -61,7 +61,7 @@
             <text>已收货</text>
           </block>
           <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
-            <text>已取消</text>
+            <view class='button-grey'>已取消</view>
           </block>
           <block wx:else>
             <text>处理中</text>

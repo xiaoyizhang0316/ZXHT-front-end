@@ -17,7 +17,7 @@ Page({
     totalQuantity: null,
     deliveryPrice: 0,
     discountValue: 0,
-		
+    checkbox: [],
   },
 
   /**
@@ -66,6 +66,24 @@ Page({
     });
     let s = JSON.stringify(this.data.order);
     console.log(JSON.parse(s));
+  },
+
+  insert: function () {
+    var cb = this.data.checkbox;
+    console.log(cb);
+    cb.push(this.data.checkbox.length);
+    this.setData({
+      checkbox: cb
+    });
+  },
+
+  delBind: function () {
+    var cb = this.data.checkbox;
+    console.log(cb);
+    cb.pop(this.data.checkbox.length);
+    this.setData({
+      checkbox: cb
+    });
   },
 
 

@@ -27,6 +27,14 @@ page{
   justify-content: center;
 }
 
+.add{
+  height:25px;
+  width:25px;
+  align-self:center;
+  display:flex;
+  justify-content: flex-end;
+}
+
 .explain-line {
   width: 100%;
   background-color: white;

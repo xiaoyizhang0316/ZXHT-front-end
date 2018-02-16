@@ -63,7 +63,7 @@
                   <text class='button'>已收货</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
-                  <text class='button'>已取消</text>
+                  <text class='button-grey'>已取消</text>
                 </block>
                 <block wx:else>
                   <text class='button'>处理中</text>
@@ -83,7 +83,7 @@
       <scroll-view scroll-y="{{true}}" style="height:{{winHeight-44}}px">
         <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
          <block wx:if="{{item.orderInfo.orderStatus == 3}}"><!-- 已支付 -->
-          <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
+          <view class="explain-line" bindtap="sendOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
             <view class="item-top">
               <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
               <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view>
@@ -144,9 +144,68 @@
     </swiper-item>
 
     <!-- 已发货 -->
-    <swiper-item>
-      <scroll-view>
-        <view>已发货订单</view>
+<swiper-item>
+      <scroll-view scroll-y="{{true}}" style="height:{{winHeight-44}}px">
+        <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
+        
+           <block wx:if="{{item.orderInfo.orderStatus == 7}}"> 
+            <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
+              <view class="item-top">
+                <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
+                <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view>
+                <!-- <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
+                      <image style="height:20px;width:20px;" src="/image/public/clear.png"></image> 
+                  </view> -->
+              </view>
+
+              <scroll-view class="order-item-scroll" scroll-x>
+
+                <view class="order-item-scroll-box" wx:for="{{item.orderGoods}}" wx:for-item="val">
+                  <image src="{{val.image}}" class="order-item-image"></image>
+                </view>
+
+                <block wx:if="{{item.orderGoods.length == 1}}">
+                  <view class="order-item-title">
+                    <view class="order-item-title-box">
+                      <text>{{item.orderGoods[0].title}}</text>
+                    </view>
+                  </view>
+                </block>
+              </scroll-view>
+              <view class='order-item-desc'>
+                <text>共{{item.orderGoods.length}}件商品</text>
+                <text class='middle-tip'>实付款:</text>
+                <text class='order-price'>${{item.orderInfo.totalCost}}</text>
+              </view>
+              <view class="order-send">
+                <block wx:if="{{item.orderInfo.orderStatus == 2}}">
+                  <text class='button'>已确认</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
+                  <text class='button'>已下单</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
+                  <text class='button'>发货中</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
+                  <text class='button'>已支付</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
+                  <text class='button'>已收货</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
+                  <text class='button'>已取消</text>
+                </block>
+                <block wx:else>
+                  <text class='button'>处理中</text>
+                </block>
+                <block wx:if="{{item.orderInfo.orderStatus != 9}}">
+                  <view class='button' data-order="{{item.orderInfo.id}}" catchtap="cancelOrder">取消订单</view>
+                </block>
+              </view>
+            </view>
+           </block> 
+        </view>
       </scroll-view>
     </swiper-item>
 

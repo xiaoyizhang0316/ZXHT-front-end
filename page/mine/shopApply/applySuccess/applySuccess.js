@@ -16,6 +16,13 @@ Page({
     }
   },
 
+  toShare: function (e) {
+    console.log('to add goods')
+    wx.redirectTo({
+      url: '/page/mine/fans/share/share'
+    })
+  },
+
   toAddGoods: function (e) {
     console.log('to add goods')
     wx.redirectTo({
