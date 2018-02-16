@@ -1,18 +1,7 @@
 <form class="page__bd" catchsubmit="formSubmit" catchreset="formReset">
-  <view class="contain" style="flex-direction:column">
-    <view class="inner-explain-line">
-      <view class="explain-text">物流公司</view>
-      <text class="explain-text" style='margin-right:0px'></text>
-      <input class='explain-text' style="flex:2" placeholder='请输入快递公司名称' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="agentId"></input>
-      <view bindtap="insert">
-        <image class="add" src="/image/plus.png"></image>
-      </view>
-    </view>
-    <view class="inner-explain-line">
-      <view class="explain-text">物流条码</view>
-      <text class="explain-text" style='margin-right:0px'></text>
-      <input class='explain-text' placeholder='请输入快递单号' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="receiptNumber"></input>
-    </view>
+  <view class='top' bindtap="insert">
+     添加物流单 +
+    <!-- <image class="add" src="/image/plus.png"></image> -->
   </view>
 
   <!-- 添加物流订单 -->
