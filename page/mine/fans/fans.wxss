@@ -73,7 +73,7 @@ page {
   display: flex;
   align-items: center;
   color: #000;
-  font-size: 40rpx;
+  font-size: 30rpx;
 }
 
 .fans-line-list-top{
@@ -133,7 +133,7 @@ page {
   display:flex;
   flex:2;
   color: #000;
-  font-size: 40rpx;
+  font-size: 30rpx;
   overflow:hidden;
 }
 
