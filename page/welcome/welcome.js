@@ -8,15 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+		targetShopId:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	
-		console.log("options: "+options)
+		
+		console.log(options)
 		this.setTargetShop(options)	
     COM.load('Util').loadBrands();
     COM.load('Util').loadProducts();
@@ -43,7 +43,7 @@ Page({
 		console.log("-----------------------------")
 		console.log(e)
 		if (Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
-		
+		console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbb")
 			let fan = app.globalData.openId
 			let shop = e.targetShopId
 			//let url = "https://a5f93900.ngrok.io/api/mall/users/applyToShop/"
@@ -58,12 +58,18 @@ Page({
 				
 					wx.showModal({
 						title: '提示',
-						content: '请等待商店管理员认证后进入商铺',
+						content: '请等待目标商店管理员认证后进入商铺，点击取消退出小程序，点击确定进入总店 ',
 						success: function (res) {
 							if (res.confirm) {
 								console.log('用户点击确定')
+								wx.navigateTo({
+									url: '/page/welcome/welcome?targetShopId=o0_gG0RDvF6ESSQSFZJKuOyB2bDE',
+								})
 							} else if (res.cancel) {
 								console.log('用户点击取消')
+								wx.navigateBack({
+									delta: 2
+								})
 							}
 						}
 					})

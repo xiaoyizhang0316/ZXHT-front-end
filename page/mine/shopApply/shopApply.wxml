@@ -8,9 +8,11 @@
         开店注意事项如下：
     </view>
     <view class='apply-desc'>
-        <text>1. 开店后请联系管理员申请付款方式并在卖家中心进行设置</text>
-        <text>2. 您推荐的客户和客户所推荐的会直接成为您的客户</text>
-        <text>3. 欢迎您来开店，我们需要对您的手机号进行验证，请点击下面进行验证</text>
+        <text>1. 开店后您可轻松一键销售几千件宝贝</text>
+        <text>2. 您可以选择收款为人民币或者澳币，货款直接到您银行账号（收款方式为澳币请开店后联系管理员微信 qqinoz）</text>
+        <text>3. 开店后可一键分享店铺，您的客户、代理在微信超便捷购物，超方便分享你的店铺给朋友</text>
+				<text>4. 多针对于代购的功能，可关注 [真享海淘订阅号] 看如何快速拓展客户和代理，高效率接单、采购、发货、订单跟踪</text>
+				<text>5. 任何疑问或问题，请联系管理员 微信 qqinoz</text>
     </view>
     <view class='apply-btn' style="margin-top:10px">
           <button bindtap='doApply' type='primary'>确认申请</button>
