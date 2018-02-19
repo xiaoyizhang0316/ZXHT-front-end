@@ -33,7 +33,7 @@
   <view class="fans-line-list-top">
         <text class='fans-image-clo'>图片</text>
         <text class='fans-name-clo'>名称</text>
-        <text class='fans-viplevel-clo'>Vip等级（可编辑）</text>
+        <text class='fans-viplevel-clo'>VIP等级（可编辑）</text>
         <text class='fans-access-clo'>允许</text>
   </view>
 

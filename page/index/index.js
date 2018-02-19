@@ -111,8 +111,8 @@ Page({
               "price": shopProduct.price,
               "vipPrice": shopProduct.vip1Price,
               "stock": shopProduct.stock,
-              //"thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
-              "thumb": "https://pic1.zhimg.com/v2-28d55dc8b4c44e5542be2def2ff1d76f_xs.jpg"
+              "thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
+              // "thumb": "https://pic1.zhimg.com/v2-28d55dc8b4c44e5542be2def2ff1d76f_xs.jpg"
             }
           }
           if (shopProduct.stock >= 0 && shopProduct.price >= 0 && shopProduct.hot) {

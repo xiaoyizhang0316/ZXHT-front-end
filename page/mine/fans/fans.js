@@ -93,7 +93,7 @@ Page({
       this.resetSearch();
     } else {
       let tmp = [];
-			let fansList = this.data.fansLineList;
+      let fansList = Array.from(this.data.fansMap.values());
       for (let i in fansList) {
         if (e instanceof Object) {
           if (fansList[i].name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
