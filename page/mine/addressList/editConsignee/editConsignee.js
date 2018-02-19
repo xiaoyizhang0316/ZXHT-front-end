@@ -28,8 +28,24 @@ Page({
   formSubmit(e) {
     const value = e.detail.value;
     console.log(value)
-
-    if (value.name && value.phone && value.detail && value.city) {
+    if (value.name.indexOf(" ") == -1) {
+      wx.showModal({
+        title: '添加收货人失败',
+        content: '姓名填写错误'
+      })
+    }
+    else if (value.phone.indexOf(" ") == -1 || this.checkdigit(value.phone)) {
+      wx.showModal({
+        title: '添加收货人失败',
+        content: '手机号填写错误'
+      })
+    }
+    else if (value.identityCard.indexOf(" ") == -1 || this.checkdigit(value.identityCard)) {
+      wx.showModal({
+        title: '添加收货人失败',
+        content: '身份证号填写错误'
+      })
+    } else if (value.name && value.phone && value.detail && value.city) {
       this.data.addressList[this.data.index].name = value.name
       this.data.addressList[this.data.index].phone = value.phone
       this.data.addressList[this.data.index].detail = value.detail
@@ -41,7 +57,7 @@ Page({
       });
 
       let url = COM.load('CON').SAVE_CONSIGNEE_URL;
-      COM.load('NetUtil').netUtil(url, "POST", this.data.addressList[this.data.index], (callback) => {})
+      COM.load('NetUtil').netUtil(url, "POST", this.data.addressList[this.data.index], (callback) => { })
 
       wx.setStorage({
         key: 'addressList',
@@ -50,6 +66,7 @@ Page({
           wx.navigateBack();
         }
       })
+
     } else {
       wx.showModal({
         title: '提示',
@@ -109,5 +126,12 @@ Page({
 
       }
     })
+  },
+  checkdigit: function (input) {
+    if (NaN(input)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 })

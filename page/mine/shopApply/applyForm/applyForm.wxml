@@ -7,10 +7,10 @@
     <view class="top-contaniner">
 
           <view class="top-input-box flex-col">
-              <text>店铺名</text><input placeholder="请输入店铺名称" name="name" value="{{shop.name}}"/>
+              <text>店铺名</text><input placeholder="请输入店铺名称" bindinput="bindName" name="name" value="{{shop.name}}"/>
           </view>
           <view class="top-input-box flex-col">
-              <text>店铺签名</text><input placeholder="请输入店铺签名" name="phone" value="{{shop.sign}}"/>
+              <text>店铺签名</text><input placeholder="请输入店铺签名" bindinput="bindSign" name="phone" value="{{shop.sign}}"/>
           </view>
           <view class="top-input-box flex-col">
               <text class='pay-text'>支付方式</text>
@@ -31,10 +31,10 @@
 
           <view class="top-input-box flex-col">
             <block wx:if="{{shop.payment == 'RMB'}}">
-                 <text >开户行: </text><input bindinput="bindbankName" name="name" value="{{shop.name}}"/>    
+                 <text >开户行: </text><input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}"/>    
             </block>
             <block wx:else>
-                 <text >Bank: </text><input bindinput="bindbankName" name="name" value="{{shop.name}}"/>    
+                 <text >Bank: </text><input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}"/>    
             </block>
             <!-- <input  name="phone" value="{{shop.accountName}}"/>  -->
           </view>

@@ -44,6 +44,8 @@ const SAVE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/saveConsignee";
 const DELETE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/deleteConsignee/";
 const GET_MY_CONSIGNEES_URL = BASE_URL + "/api/mall/users/getMyConsignees/"
 const SET_DEFAULT_CONSIGNEE_URL = BASE_URL + "/api/mall/users/setDefaultConsignee/"
+const GET_ALL_PRODUCT_BY_CATEGORYID_URL = BASE_URL + "/api/mall/products/category/"
+
 //进入他人店铺
 const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/"
 
@@ -58,7 +60,9 @@ const CONFRIM_ORDER_URL = BASE_URL + "/api/mall/orders/confirmOrder"
 const PAY_ORDER_URL = BASE_URL + "/api/mall/orders/payOrder/"
 
 //发货单
-const SAVE_SHIPORDER = BASE_URL +"/api/mall/orders/saveShipOrder"
+const SAVE_SHIPORDER = BASE_URL + "/api/mall/orders/saveShipOrder"
+
+
 module.exports = {
   BASE_URL: BASE_URL,
   CATEGORY_URL: CATEGORY_URL,
@@ -95,5 +99,6 @@ module.exports = {
   UPDATE_ORDER_URL: UPDATE_ORDER_URL,
   CONFRIM_ORDER_URL: CONFRIM_ORDER_URL,
   PAY_ORDER_URL: PAY_ORDER_URL,
-	SAVE_SHIPORDER: SAVE_SHIPORDER
+  SAVE_SHIPORDER: SAVE_SHIPORDER,
+  GET_ALL_PRODUCT_BY_CATEGORYID_URL: GET_ALL_PRODUCT_BY_CATEGORYID_URL
 }

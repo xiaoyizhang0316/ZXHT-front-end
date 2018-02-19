@@ -56,6 +56,7 @@ Page({
           self.data.addressList[index].isDefault = true;
 
           //设置后端默认地址
+          //目前用缓存，需要修改-Edric
           let adList = wx.getStorageSync("addressList")
           let url = COM.load('CON').SET_DEFAULT_CONSIGNEE_URL + adList[index].id;
           COM.load('NetUtil').netUtil(url, "PUT", {}, (callback) => {})

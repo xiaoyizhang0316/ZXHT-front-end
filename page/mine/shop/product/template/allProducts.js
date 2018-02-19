@@ -18,6 +18,7 @@ Page({
     goodsLineList: [],
     brandList: [],
     cateList: [],
+    cateListWithId: {},
     myShopProductIds: []
   },
 
@@ -48,12 +49,15 @@ Page({
     //获得所有分类
     let urlcates = COM.load('CON').CATEGORY_URL + 'all'
     let allcategories = []
+    let allcategoriesWithId = {}
     COM.load('NetUtil').netUtil(urlcates, 'GET', "", categories => {
       for (var x in categories) {
-        allcategories.push(categories[x].name);
+        allcategories.push(categories[x].name)
+        allcategoriesWithId[categories[x].name] = categories[x].id
       };
       self.setData({
-        cateList: allcategories
+        cateList: allcategories,
+        cateListWithId: allcategoriesWithId
       });
     });
   },
@@ -261,20 +265,20 @@ Page({
   },
 
   bindCateChange: function (e) {
-    console.log(this.data.cateList[e.detail.value])
-    console.log(this.data.goodsLineList)
-    this.setData({
-      goodsLineList: this.data.allGoodsList
+    let self = this
+    //goodslinelist是显示的
+    let url = COM.load('CON').GET_ALL_PRODUCT_BY_CATEGORYID_URL + self.data.cateListWithId[self.data.cateList[e.detail.value]]
+    console.log(url)
+    COM.load('NetUtil').netUtil(url, 'GET', "", callback => {
+      console.log(callback)
+      self.setData({
+        goodsLineList: callback
+      })
     })
   },
 
 
-  goodsByBrands: function (brandId) {
-    goodsList = []
-    goodsList
 
-    return
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
