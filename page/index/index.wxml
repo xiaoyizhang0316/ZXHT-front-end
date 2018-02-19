@@ -1,6 +1,7 @@
 <import src="/page/common/templates/goodsList/goodsList-block/goodsList-block.wxml" />
 <import src="/page/common/templates/goodsList/hotList-block/hotList-block.wxml" />
-<view class="main">
+<scroll-view scroll-y="true" style="height:{{winHeight}}px">
+  <!-- <view class='main'> -->
 
   <view class="search-box">
     <swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
@@ -70,4 +71,5 @@
       <template is="hotList-block" data="{{hotList}}" />
     </view>
   </view>
-</view>
+  <!-- </view> -->
+</scroll-view>

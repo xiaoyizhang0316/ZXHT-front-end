@@ -31,7 +31,17 @@ Page({
   },
 
   onLoad: function (options) {
-    this.loadRecommendedProducts();   
+    var self = this;
+    self.loadRecommendedProducts();
+
+    wx.getSystemInfo({
+      success: function (res) {
+        self.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight,
+        });
+      }
+    });
   },
 
 

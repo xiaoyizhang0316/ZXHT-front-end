@@ -7,7 +7,7 @@
     </view>
   </view> -->
 
-<scroll-view scroll-y="{{true}}" style="height:{{winHeight-44}}px">
+<scroll-view scroll-y="{{true}}" style="height:{{winHeight-50}}px">
   <view class='contain'>
     <view style="display:flex;flex-direction:column;flex:10;">
       <view class="inner-explain-line">

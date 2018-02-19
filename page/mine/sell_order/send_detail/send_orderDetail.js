@@ -66,6 +66,16 @@ Page({
     });
     let s = JSON.stringify(this.data.order);
     console.log(JSON.parse(s));
+
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight,
+        });
+      }
+    });
   },
 
   insert: function () {

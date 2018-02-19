@@ -46,6 +46,15 @@ Page({
         }
         self.setData({ res: res, leftCategory: self.data.leftCategory});
     })
+
+    wx.getSystemInfo({
+      success: function (res) {
+        self.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight,
+        });
+      }
+    });
   },
 
   // filterBrands: function () {
