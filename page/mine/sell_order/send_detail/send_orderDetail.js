@@ -166,13 +166,11 @@ Page({
     console.log(e.detail)
     var i = 0
     for (i = 0; i < numOfShippingform; i++) {
-      console.log("everytime")
       let shipdetail = {}
       shipdetail.orderId = self.data.orderId
-      console.log(e.detail.value["agentId[" + i + "]"])
       shipdetail.agentId = e.detail.value["agentId[]"]
       shipdetail.receiptNumber = e.detail.value["receiptNumber[" + i + "]"]
-      shipdetail.senderId = app.globalData.openIds
+      shipdetail.senderId = app.globalData.openId
       shipdetail.shippingCost = e.detail.value["shipFee[" + i + "]"]
       shipAll[i] = shipdetail
       console.log("***********")
@@ -183,7 +181,6 @@ Page({
         shipGoodsAll[i] = shipGood
       }
     }
-    console.log("hahahha")
     console.log(shipGoodsAll)
     console.log(shipAll)
 
