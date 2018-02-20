@@ -1,5 +1,7 @@
 //editConsignee.js
 var COM = require('../../../../utils/common.js')
+import WxValidate from "../../../../utils/Validate/WxValidate.js"
+var Validate = ""
 var app = getApp()
 Page({
   data: {
@@ -17,6 +19,23 @@ Page({
     },
     region: ['广东省', '广州市', '海珠区'],
   },
+  onLoad: function (options) {
+    console.log(options)
+    var index = options.index;
+    var that = this
+    wx.getStorage({
+      key: 'addressList',
+      success: function (res) {
+        that.setData({
+          addressList: res.data,
+          index: options.index,
+          address: res.data[index]
+        })
+
+      }
+    })
+  },
+
   //事件处理函数
   bindRegionChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -28,24 +47,60 @@ Page({
   formSubmit(e) {
     const value = e.detail.value;
     console.log(value)
-    if (value.name.indexOf(" ") == -1) {
-      wx.showModal({
-        title: '添加收货人失败',
-        content: '姓名填写错误'
-      })
+    // 验证字段的规则
+    const rules = {
+      name: {
+        required: true,
+        name: true
+      },
+      phone: {
+        required: true,
+        tel: true,
+      },
+      identityCard: {
+        required: true,
+        idcard: true
+      },
+      detail: {
+        required: true
+      },
+      city: {
+        required: true
+      }
     }
-    else if (value.phone.indexOf(" ") == -1 || this.checkdigit(value.phone)) {
-      wx.showModal({
-        title: '添加收货人失败',
-        content: '手机号填写错误'
-      })
+
+    // 验证字段的提示信息，若不传则调用默认的信息
+    const messages = {
+      name: {
+        required: '请输入姓名',
+        name: '请输入正确的姓名'
+      },
+      phone: {
+        required: '请输入手机号',
+        tel: '请输入正确的手机号',
+      },
+      identityCard: {
+        required: '请输入身份证号码',
+        idcard: '请输入正确的身份证号码',
+      },
+      detail: {
+        required: '请输入完整地址信息'
+      },
+      city: {
+        required: '请输入地址信息'
+      }
     }
-    else if (value.identityCard.indexOf(" ") == -1 || this.checkdigit(value.identityCard)) {
+    // 创建实例对象
+    this.WxValidate = new WxValidate(rules, messages)
+
+    // 传入表单数据，调用验证方法
+    if (!this.WxValidate.checkForm(e)) {
+      const error = this.WxValidate.errorList[0]
       wx.showModal({
         title: '添加收货人失败',
-        content: '身份证号填写错误'
+        content: error.msg
       })
-    } else if (value.name && value.phone && value.detail && value.city) {
+    } else {
       this.data.addressList[this.data.index].name = value.name
       this.data.addressList[this.data.index].phone = value.phone
       this.data.addressList[this.data.index].detail = value.detail
@@ -57,7 +112,7 @@ Page({
       });
 
       let url = COM.load('CON').SAVE_CONSIGNEE_URL;
-      COM.load('NetUtil').netUtil(url, "POST", this.data.addressList[this.data.index], (callback) => { })
+      COM.load('NetUtil').netUtil(url, "POST", this.data.addressList[this.data.index], (callback) => { console.log(callback) })
 
       wx.setStorage({
         key: 'addressList',
@@ -67,12 +122,6 @@ Page({
         }
       })
 
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '请填写完整资料',
-        showCancel: false
-      })
     }
   },
 
@@ -111,27 +160,4 @@ Page({
       }
     })
   },
-  onLoad: function (options) {
-    console.log(options)
-    var index = options.index;
-    var that = this
-    wx.getStorage({
-      key: 'addressList',
-      success: function (res) {
-        that.setData({
-          addressList: res.data,
-          index: options.index,
-          address: res.data[index]
-        })
-
-      }
-    })
-  },
-  checkdigit: function (input) {
-    if (NaN(input)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
 })

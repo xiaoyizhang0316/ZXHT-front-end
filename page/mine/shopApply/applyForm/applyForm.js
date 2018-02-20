@@ -1,7 +1,8 @@
 // page/mine/shopApply/applyForm/applyForm.js
 var app = getApp()
 var COM = require('../../../../utils/common.js')
-
+import WxValidate from "../../../../utils/Validate/WxValidate.js"
+var Validate = ""
 Page({
 
   /**
@@ -85,34 +86,64 @@ Page({
     //let url = "https://a5f93900.ngrok.io/api/mall/shops/create"
     //let url = "https://mini.zhenxianghaitao.com/api/mall/shops/create"
     let url = COM.load('CON').CREATE_SHOP;
-    if (self.data.shop.name == null || self.data.shop.name == '') {
-      wx.showModal({
-        title: '开店失败',
-        content: '店铺名不能为空'
-      })
+    // if (self.data.shop.name == null || self.data.shop.name == '') {
+    //   wx.showModal({
+    //     title: '开店失败',
+    //     content: '店铺名不能为空'
+    //   })
+    // }
+  
+
+  
+   
+    // 验证字段的规则
+    const rules = {
+      name: {
+        required: true
+      },
+      sign: {
+        required: true
+      },
+      bankName: {
+        required: true
+      },
+      accountNbr: {
+        required: true,
+        digit: true
+      },
+      accountName: {
+        required: true
+      }
     }
-    else if (self.data.shop.sign == null || self.data.shop.sign == '') {
-      wx.showModal({
-        title: '开店失败',
-        content: '店铺签名不能为空'
-      })
+
+    // 验证字段的提示信息，若不传则调用默认的信息
+    const messages = {
+      name: {
+        required: '请输入店名'
+      },
+      sign: {
+        required: '请输入店铺签名'
+      },
+      bankName: {
+        required: '请输入开户行'
+      },
+      accountNbr: {
+        required: '请输入户名',
+        digit: '请输入正确的户名'
+      },
+      accountName: {
+        required: '请输入账户'
+      }
     }
-    else if (self.data.shop.bankName == null || self.data.shop.bankName == '') {
+    // 创建实例对象
+    this.WxValidate = new WxValidate(rules, messages)
+
+    // 传入表单数据，调用验证方法
+    if (!this.WxValidate.checkForm(e)) {
+      const error = this.WxValidate.errorList[0]
       wx.showModal({
-        title: '开店失败',
-        content: '开户行不能为空'
-      })
-    }
-    else if (self.data.shop.accountNbr == null || self.data.shop.accountNbr == '') {
-      wx.showModal({
-        title: '开店失败',
-        content: '户名不能为空'
-      })
-    }
-    else if (self.data.shop.accountName == null || self.data.shop.accountName == '') {
-      wx.showModal({
-        title: '开店失败',
-        content: '账户不能为空'
+        title: '添加收货人失败',
+        content: error.msg
       })
     } else {
       COM.load('NetUtil').netUtil(url, "POST", {

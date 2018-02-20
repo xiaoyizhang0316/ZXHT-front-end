@@ -1,11 +1,13 @@
 //consignee.js
 var COM = require('../../../../utils/common.js')
+import WxValidate from "../../../../utils/Validate/WxValidate.js"
+var Validate = ""
 var app = getApp()
 Page({
   data: {
     addressList: [],
     address: {
-      id:'',
+      id: '',
       isDefault: false,
       name: '',
       phone: '',
@@ -29,61 +31,107 @@ Page({
   formSubmit(e) {
     let self = this
     const value = e.detail.value;
-    // if (value.name && value.phone && value.detail && value.city && value.identityCard && value.correctSidePic && value.oppositeSidePic) {
-    if (value.name && value.phone && value.detail && value.city && value.identityCard) {
+
+    // 验证字段的规则
+    const rules = {
+      name: {
+        required: true,
+        name: true
+      },
+      phone: {
+        required: true,
+        tel: true,
+      },
+      identityCard: {
+        required: true,
+        idcard: true
+      },
+      detail: {
+        required: true
+      },
+      city: {
+        required: true
+      }
+    }
+
+    // 验证字段的提示信息，若不传则调用默认的信息
+    const messages = {
+      name: {
+        required: '请输入姓名',
+        name: '请输入正确的姓名'
+      },
+      phone: {
+        required: '请输入手机号',
+        tel: '请输入正确的手机号',
+      },
+      identityCard: {
+        required: '请输入身份证号码',
+        idcard: '请输入正确的身份证号码',
+      },
+      detail: {
+        required: '请输入完整地址信息'
+      },
+      city:{
+        required: '请输入地址信息'
+      }
+    }
+    // 创建实例对象
+    this.WxValidate = new WxValidate(rules, messages)
+
+    // 传入表单数据，调用验证方法
+    if (!this.WxValidate.checkForm(e)) {
+      const error = this.WxValidate.errorList[0]
+      wx.showModal({
+        title: '添加收货人失败',
+        content: error.msg
+      })
+    }
+    else {
       this.data.address.name = value.name
       this.data.address.phone = value.phone
       this.data.address.detail = value.detail
       this.data.address.city = value.city
       this.data.address.identityCard = value.identityCard
-      
-      
-			let aData = this.data.address
-			aData.openId = app.globalData.openId
-			//发送地址到服务器
-			let url = COM.load('CON').SAVE_CONSIGNEE_URL;
-			COM.load('NetUtil').netUtil(url, "POST", aData, (callback) => {
-					if(callback.suc == true)
-					{
-            console.log(callback.id)
-            self.data.address.id = callback.id
-            var newarray = [this.data.address]
-            this.setData({
-              'addressList': this.data.addressList.concat(newarray)
-            });
-            wx.setStorage({
-              key: 'addressList',
-              data: this.data.addressList,
-              success() {
-                wx.navigateBack();
-              }
-            })
-						// let cData = [
-						// 	{
-						// 		"id": consignee_id,
-						// 		"table": "consignee",
-						// 		"name": "correctSidePic",
-						// 		"file": this.data.address.correctSidePic
-						// 	},
-						// 	{
-						// 		"id": consignee_id,
-						// 		"table": "consignee",
-						// 		"name": "oppositeSidePic",
-						// 		"file": this.data.address.oppositeSidePic
-						// 	}
-						// 	]					
-						// let url = COM.load("CON").UPLOADFILE;
-						// COM.load('NetUtil').netUtil(url, "POST", cData, (res) => {
-						// 	console.log(res);
 
-						// })
-					}
-				})
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '请填写完整资料',
-        showCancel: false
+      let aData = this.data.address
+      aData.openId = app.globalData.openId
+      //发送地址到服务器
+      let url = COM.load('CON').SAVE_CONSIGNEE_URL;
+      COM.load('NetUtil').netUtil(url, "POST", aData, (callback) => {
+        if (callback.suc == true) {
+          console.log(callback.id)
+          self.data.address.id = callback.id
+          var newarray = [this.data.address]
+          this.setData({
+            'addressList': this.data.addressList.concat(newarray)
+          });
+          wx.setStorage({
+            key: 'addressList',
+            data: this.data.addressList,
+            success() {
+              wx.navigateBack();
+            }
+          })
+          // let cData = [
+          // 	{
+          // 		"id": consignee_id,
+          // 		"table": "consignee",
+          // 		"name": "correctSidePic",
+          // 		"file": this.data.address.correctSidePic
+          // 	},
+          // 	{
+          // 		"id": consignee_id,
+          // 		"table": "consignee",
+          // 		"name": "oppositeSidePic",
+          // 		"file": this.data.address.oppositeSidePic
+          // 	}
+          // 	]					
+          // let url = COM.load("CON").UPLOADFILE;
+          // COM.load('NetUtil').netUtil(url, "POST", cData, (res) => {
+          // 	console.log(res);
+
+          // })
+        }
       })
     }
   },
@@ -98,7 +146,7 @@ Page({
 
     //   }
     // })
-		
+
     wx.navigateTo({
       url: "./upload/uploadImg?from=address.correctSidePic",
     })
@@ -127,7 +175,7 @@ Page({
         that.setData({
           addressList: res.data
         })
-        
+
       }
     })
   }
