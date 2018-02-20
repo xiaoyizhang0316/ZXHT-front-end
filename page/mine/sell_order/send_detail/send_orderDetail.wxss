@@ -146,6 +146,7 @@ page {
 
 .order-cate {
   display: flex;
+  width:95%;
   justify-content: space-around;
   border-top: 1rpx solid #e8e8e8;
   padding-top: 20rpx;

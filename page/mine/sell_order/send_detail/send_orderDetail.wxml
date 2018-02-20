@@ -22,7 +22,7 @@
 
 		<block wx:key="idx" wx:for-index="idx" wx:for="{{items}}">
     <view class="explain-line order-cate">
-      <view class="explain-text">{{item.title}}</view>
+      <view class="explain-text" style='overflow:hidden; white-space:nowrap;text-overflow:ellipsis;'>{{item.title}}</view>
       <text class="explain-text" style='margin-right:0px'></text>
       <input class='explain-text' placeholder='发货数量' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipGoods[{{id}}][{{item.id}}]"></input>
     </view>

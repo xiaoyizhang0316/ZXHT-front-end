@@ -153,6 +153,7 @@
 <view wx:if="{{!shared}}" class="footer">
   <block wx:if="{{(order.orderInfo.orderStatus != 9)&&(order.orderInfo.orderStatus != 2)}}">
     <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">取消订单</button>
+    <button type="default" class='button' open-type="share">分享代理人</button>
     <button type="default" class='button' bindtap="placeOrder">确认订单</button>
   </block>
   <block wx:elif="{{order.orderInfo.orderStatus == 2}}">
