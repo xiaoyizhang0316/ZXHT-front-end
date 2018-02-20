@@ -1,26 +1,43 @@
 <form class="page__bd" catchsubmit="formSubmit" catchreset="formReset">
-  <scroll-view scroll-y="true" style="height:{{winHeight-50}}px">
-    <view class='top' bindtap="insert">
-      添加物流单 +
-      <!-- <image class="add" src="/image/plus.png"></image> -->
+  <view class='top' bindtap="insert">
+     添加物流单 +
+    <!-- <image class="add" src="/image/plus.png"></image> -->
+  </view>
+
+  <!-- 添加物流订单 -->
+  <view wx:for="{{checkbox}}" wx:key="id" wx:for-index="id" class="contain" style="flex-direction:column">
+    <view class="inner-explain-line">
+      <view class="explain-text">物流公司</view>
+      <text class="explain-text" style='margin-right:0px'></text>
+      <input class='explain-text' style="flex:2" placeholder='请输入快递公司名称' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="agentId[{{id}}]"></input>
+      <view bindtap="delBind">
+        <image class="add" src="/image/minus.png"></image>
+      </view>
+    </view>
+    <view class="inner-explain-line">
+      <view class="explain-text">物流条码</view>
+      <text class="explain-text" style='margin-right:0px'></text>
+      <input class='explain-text' placeholder='请输入快递单号' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="receiptNumber[{{id}}]"></input>
     </view>
 
-    <!-- 添加物流订单 -->
-    <view wx:for="{{checkbox}}" class="contain" style="flex-direction:column">
-      <view class="inner-explain-line">
-        <view class="explain-text">物流公司</view>
-        <text class="explain-text" style='margin-right:0px'></text>
-        <input class='explain-text' style="flex:2" placeholder='请输入快递公司名称' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="agentId"></input>
-        <view bindtap="delBind">
-          <image class="add" src="/image/minus.png"></image>
-        </view>
-      </view>
-      <view class="inner-explain-line">
-        <view class="explain-text">物流条码</view>
-        <text class="explain-text" style='margin-right:0px'></text>
-        <input class='explain-text' placeholder='请输入快递单号' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="receiptNumber"></input>
-      </view>
+		<block wx:key="idx" wx:for-index="idx" wx:for="{{items}}">
+    <view class="explain-line order-cate">
+      <view class="explain-text">{{item.title}}</view>
+      <text class="explain-text" style='margin-right:0px'></text>
+      <input class='explain-text' placeholder='发货数量' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipGoods[{{id}}][{{item.id}}]"></input>
     </view>
+  	</block>
+
+		<view class="inner-explain-line">
+      <view class="explain-text">本单发货费用</view>
+      <text class="explain-text" style='margin-right:0px'></text>
+      <input class='explain-text' placeholder='发货的费用' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipFee[{{id}}]"></input>
+    </view>
+
+  </view>
+
+  <scroll-view scroll-y="true" style="height:{{winHeight-50}}px">
+    
 
     <view class="explain-line" style='background:#eff3f4;justify-content:flex-start'>
       <view class="text">订单详情</view>
