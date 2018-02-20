@@ -9,7 +9,7 @@
     <view class="inner-explain-line">
       <view class="explain-text">物流公司</view>
       <text class="explain-text" style='margin-right:0px'></text>
-      <input class='explain-text' style="flex:2" placeholder='请输入快递公司名称' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="agentId[{{id}}]"></input>
+      <input class='explain-text' style="flex:2" placeholder='请输入快递公司名称' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="agentId[{{id}}]"    ></input>
       <view bindtap="delBind">
         <image class="add" src="/image/minus.png"></image>
       </view>

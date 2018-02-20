@@ -66,12 +66,12 @@ Page({
     //let shopOpenId = app.globalData.shopOpenId;
     let self = this;
     let products = Object.values(wx.getStorageSync("products"));
+   
 
     //let shopProductIds = wx.getStorageSync("shopProductIds");
     let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + app.globalData.openId;
 
     COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
-      console.log(callbackdata)
       for (var x in callbackdata) {
         let shopProduct = callbackdata[x];
         self.data.myShopProductIds.push(shopProduct.productId);

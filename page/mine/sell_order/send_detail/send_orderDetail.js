@@ -38,12 +38,11 @@ Page({
         }
       });
     }
-    
+
 
     var numofGoods = 0;
     console.log(order[0].orderGoods[0].num)
     for (var index = 0; index < order[0].orderGoods.length; index++) {
-      console.log("hahahah")
       numofGoods = numofGoods + order[0].orderGoods[index].num
     }
     console.log(numofGoods)
@@ -159,40 +158,52 @@ Page({
     let number = e.currentTarget.dataset.mobile;
     COM.load('Util').makeCall(number);
   },
-	formSubmit: function(e)
-	{
-		let ship = {}
-		let shipGoods = []
-		console.log(e.detail)
-		ship.orderId = this.data.orderId;
-		ship.agentId = e.detail.value.agentId
-		ship.receiptNumber = e.detail.value.receiptNumber
-		ship.senderId = app.globalData.openId
-		// TODO 暂时一个订单一个发货单
-		ship.shippingCost = this.data.deliveryPrice;
+  formSubmit: function (e) {
+    let self = this
+    let numOfShippingform = self.data.checkbox.length
+    let shipAll = {}
+    let shipGoodsAll = {}
+    console.log(e.detail)
+    var i = 0
+    for (i = 0; i < numOfShippingform; i++) {
+      console.log("everytime")
+      let shipdetail = {}
+      shipdetail.orderId = self.data.orderId
+      console.log(e.detail.value["agentId[" + i + "]"])
+      shipdetail.agentId = e.detail.value["agentId[]"]
+      shipdetail.receiptNumber = e.detail.value["receiptNumber[" + i + "]"]
+      shipdetail.senderId = app.globalData.openIds
+      shipdetail.shippingCost = e.detail.value["shipFee[" + i + "]"]
+      shipAll[i] = shipdetail
+      console.log("***********")
+      for (var j = 0; j < self.data.items.length; j++) {
+        let shipGood = []
+        shipGood.productId = self.data.items[j].productId
+        shipGood.sendNumber = self.data.items[j].num
+        shipGoodsAll[i] = shipGood
+      }
+    }
+    console.log("hahahha")
+    console.log(shipGoodsAll)
+    console.log(shipAll)
 
-		//TODO 商品也暂时都放在一个单里
-		for(var i = 0; i < this.data.items.length; i++)
-		{
-			let shipGood = {}
-			
-			console.log(this.data.items[i].productId)
-			shipGood.productId = this.data.items[i].productId;
-			shipGood.sendNumber = this.data.items[i].num;
-			shipGoods.push(shipGood);
-		}
-		let shipFull = []
-		shipFull.push({ship,shipGoods})
-		let url = COM.load('CON').SAVE_SHIPORDER;
-		console.log(shipFull)
-		COM.load('NetUtil').netUtil(url, "POST", shipFull, (callback) => {
-			console.log(callback)
-			wx.redirectTo({
-				url: '/page/mine/sell_order/sell_orderHistory'
-			})
+    var i
+    let shipFull = []
+    for (i = 0; i < numOfShippingform; i++) {
+      let shipGoods = shipGoodsAll[i]
+      let ship = shipAll[i]
+      shipFull.push({ ship, shipGoods })
+    }
+    let url = COM.load('CON').SAVE_SHIPORDER;
+    console.log(shipFull)
+    COM.load('NetUtil').netUtil(url, "POST", shipFull, (callback) => {
+      console.log(callback)
+      wx.redirectTo({
+        url: '/page/mine/sell_order/sell_orderHistory'
+      })
 
-		})
-	},
+    })
+  },
 
   placeOrder: function (e) {
     console.log(e)
@@ -202,12 +213,12 @@ Page({
     let url = COM.load('CON').CONFRIM_ORDER_URL
     COM.load('NetUtil').netUtil(url, "PUT", this.data.order.orderInfo, (callback) => {
       console.log(callback)
-			wx.redirectTo({
-				url: '/page/mine/sell_order/sell_orderHistory'
-			})
+      wx.redirectTo({
+        url: '/page/mine/sell_order/sell_orderHistory'
+      })
 
     })
-   
+
   },
 
   updateDeliveryPrice: function (e) {
