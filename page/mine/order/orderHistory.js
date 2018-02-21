@@ -193,10 +193,30 @@ Page({
     var self = this;
     let orderList = self.data.orderHistoryList;
     console.log(e.currentTarget.dataset.order)
-    let url = COM.load('CON').PAY_ORDER_URL + e.currentTarget.dataset.order;
+    let url = COM.load('CON').PAY_ORDER_URL + e.currentTarget.dataset.order+"/"+app.globalData.openId;
     console.log(url)
     COM.load('NetUtil').netUtil(url, "GET", {}, (callback) => {
-      console.log(callback)
+      if(callback.flag == true)
+			{
+				let params = callback.params;
+				wx.requestPayment(
+					{
+						'timeStamp': params.timeStamp,
+						'nonceStr': params.nonceStr,
+						'package': params.package,
+						'signType': params.signType,
+						'paySign': params.paySign,
+						'success': function (res) {
+							console.log("yeah");
+						 },
+						'fail': function (res) { 
+							console.log("fuck");
+						},
+						'complete': function (res) { 
+							console.log("done");
+						}
+					})
+			}
     })          
   },
 
