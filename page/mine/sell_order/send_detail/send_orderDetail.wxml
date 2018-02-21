@@ -24,7 +24,7 @@
     <view class="explain-line order-cate">
       <view class="explain-text" style='overflow:hidden; white-space:nowrap;text-overflow:ellipsis;'>{{item.title}}</view>
       <text class="explain-text" style='margin-right:0px'></text>
-      <input class='explain-text' placeholder='发货数量' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipGoods[{{id}}][{{item.id}}]"></input>
+      <input class='explain-text' placeholder='发货数量' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipGoods[{{id}}][{{item.productId}}]"></input>
     </view>
   	</block>
 

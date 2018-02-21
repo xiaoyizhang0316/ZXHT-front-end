@@ -2,7 +2,7 @@
 // const BASE_URL = "http://101.178.98.25:8443"
 //const BASE_URL = "https://mini.zhenxianghaitao.com"
 // const BASE_URL = "https://localhost"
-const BASE_URL = "https://1a4faf65.ngrok.io"
+const BASE_URL = "https://ee953b0b.ngrok.io"
 
 
 //登录
