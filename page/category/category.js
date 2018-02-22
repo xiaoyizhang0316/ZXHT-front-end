@@ -29,7 +29,8 @@ Page({
     let self = this;
 		//如果有targetShopId 则优先展示
 		let openId = ""
-		if (app.globalData.targetShopId != "") {
+		console.log(app.globalData)
+		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
 			openId = app.globalData.targetShopId;
 		} else {
 			openId = app.globalData.openId;

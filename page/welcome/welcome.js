@@ -15,35 +15,40 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-		
-		console.log(options)
-		this.setTargetShop(options)	
-    COM.load('Util').loadBrands();
-    COM.load('Util').loadProducts();
-    let products = wx.getStorageSync("products");
-    let brands = wx.getStorageSync("brands");
-    // if (brands && products) {
-    //   wx.switchTab({
-    //     url: '../index/index',
-    //   })
-    // } else {
-		
-		
-
-		
-   // }
-
-
+		this.prepare(options)
   },
 
+	prepare: function(e){
+		self = this
+		console.log(e)
+
+		if (app.globalData.openId == null) {
+			setTimeout(function () {
+				self.prepare(e);
+
+			}, 1000)
+			return
+		}
+
+		this.setTargetShop(e)
+		COM.load('Util').loadBrands();
+		COM.load('Util').loadProducts();
+		let products = wx.getStorageSync("products");
+		let brands = wx.getStorageSync("brands");
+
+
+	},
 
 	//获得访问的商店
 	setTargetShop: function (e) {
+		let self = this
 		//得到传输过来的目标商铺
 		console.log("-----------------------------")
 		console.log(e)
 		if (Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
 		console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbb")
+
+		console.log(app.globalData.openId)
 			let fan = app.globalData.openId
 			let shop = e.targetShopId
 			//let url = "https://a5f93900.ngrok.io/api/mall/users/applyToShop/"
@@ -58,7 +63,7 @@ Page({
 				
 					wx.showModal({
 						title: '提示',
-						content: '请等待目标商店管理员认证后进入商铺，点击取消退出小程序，点击确定进入总店 ',
+						content: '您已申请进入本店铺, 请等待店主审核后可进店购物',
 						success: function (res) {
 							if (res.confirm) {
 								console.log('用户点击确定')
@@ -113,11 +118,15 @@ Page({
 
   },
 
+	testFun: function(){
+		console.log("OOOOOO");
+	},
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
 
+	
   },
 
   /**

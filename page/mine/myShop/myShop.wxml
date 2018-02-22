@@ -26,7 +26,7 @@
 
   <view class="explain-line" style="background-color:{{touched[3] ? '#e9e9e9':''}}" data-id="3" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="product">
     <view class="explain-block">
-      <image style="height:22px;width:22px;" src="../../../image/product.png"></image>
+      <image style="height:22px;width:22px;" src="../../../image/spending.png"></image>
     </view>
     <view class="explain-text">商品管理</view>
     <view class="explain-block">
@@ -37,7 +37,7 @@
 
   <view class="explain-line" style="margin-top:20px;background-color:{{touched[4] ? '#e9e9e9':''}}" data-id="4" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="accountDetail">
     <view class="explain-block">
-      <image style="height:22px;width:22px;" src="../../../image/spending.png"></image>
+      <image style="height:22px;width:22px;" src="../../../image/shop.png"></image>
     </view>
     <view class="explain-text">店铺信息</view>
     <view class="explain-block">

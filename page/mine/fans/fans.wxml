@@ -41,7 +41,12 @@
     <image class='fan-image' src="{{item.avatarUrl}}"></image>    
       <view class='fan-item-name'>{{item.name}}</view>    
         <view class='fan-viplevel'>
-        <input type="digit" bindblur='updateVipLevel' value='{{item.vipLevel}}' data-id="{{item.id}}" ></input>
+				<picker bindchange="updateVipLevel" value="{{item.vipLevel}}" range="{{vipArray}}" data-id="{{item.id}}">
+ 				<view class="picker">
+  			{{vipArray[item.vipLevel]}}
+ 				</view>
+				</picker>
+        <!-- <input type="digit" bindblur='updateVipLevel' value='{{item.vipLevel}}' data-id="{{item.id}}" ></input> -->
         </view>
       <switch checked="{{item.access}}" data-id="{{item.id}}" bindchange="switchChange" />    
   </view>

@@ -40,7 +40,7 @@ function netUtil(url, method,body, callBack) {
       setTimeout(function () {
        
         wx.hideLoading()
-      }, 2500)
+      }, 1500)
     },
     fail: function (res) {
 			console.log(res)

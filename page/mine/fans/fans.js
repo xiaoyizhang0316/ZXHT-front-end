@@ -17,8 +17,9 @@ Page({
     selectedFan: Object,
     selectedIndex: 0,
     tmp: { 'access': false, 'vipLevel': '1' },
-    memo: '',
+		memo: '',
 		searchResult: {},
+		vipArray: ["普通会员-无折扣","青铜会员-9折","白银会员-8折","黄金会员-7折"]
   },
 
 
@@ -116,11 +117,12 @@ Page({
     this.setData({ search: '', displayClear: false });
     this.resetDisplay();
   }, 
-
+	
   updateVipLevel: function (e) {
+		console.log(e.currentTarget)
 		let self = this;
     let vipLevel = e.detail.value.trim();
-    if ([1, 2, 3, 4].indexOf(parseInt(vipLevel)) !== -1) {
+    if ([0, 1, 2, 3].indexOf(parseInt(vipLevel)) !== -1) {
 			let targetOpenId = ""
 			console.log(Array.from(self.data.fansLineList).length)
 			console.log(Array.from(self.data.fansLineList))		
