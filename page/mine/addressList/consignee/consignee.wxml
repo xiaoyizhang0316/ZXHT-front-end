@@ -1,67 +1,66 @@
 <!--consignee.wxml-->
 <view class="container">
-  
-  <form bindsubmit="formSubmit">
-  <view class="top-contaniner">
 
-        <view class="top-input-box">
-            <input name="name" placeholder="收货人真实姓名" value="{{address.name}}"/>
-        </view>
-        <view class="top-input-box">
-            <input type="number" name="phone" placeholder="手机号" value="{{address.phone}}"/>
-        </view>
+  <form bindsubmit="formSubmit">
+    <view class="top-contaniner">
+      <view class="top-input-box">
+        <input name="name" placeholder="收货人真实姓名" value="{{address.name}}" />
+      </view>
+      <view class="top-input-box">
+        <input type="number" name="phone" placeholder="手机号" value="{{address.phone}}" />
+      </view>
 
       <view class="top-input-box">
         <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-          <input name="city" disabled placeholder="选择城市" value="{{address.city}}"/>
+          <input name="city" disabled placeholder="选择城市" value="{{address.city}}" />
         </picker>
       </view>
-      
-        <view class="top-input-box">
-            <input name="detail" placeholder="详细地址" value="{{address.detail}}"/>
-        </view>
-        
-  </view>
+
+      <view class="top-input-box">
+        <input name="detail" placeholder="详细地址" value="{{address.detail}}" />
+      </view>
+
+    </view>
 
 
-  <view class="middle-contaniner">
+    <view class="middle-contaniner">
 
-        <view class="middle-info">
-            <text>{{middleInfo}}</text> 
+      <view class="middle-info">
+        <text>{{middleInfo}}</text>
+      </view>
+      <view class="middle-input-box">
+        <text>收件人身份证号码:</text>
+        <input type="idcard" name="identityCard" placeholder="请填写收件人身份证" />
+      </view>
+      <view class="middle-pic-box">
+        <view bindtap='chooseCorrectPic' class="middle-pic">
+          <block wx:if="{{address.correctSidePic == 0}}">
+            <text>+</text>
+            <text>上传正面</text>
+            <input type="hidden" disabled name="correctSidePic" />
+          </block>
+          <block wx:else>
+            <image style="width:300rpx;height:240rpx" src="{{address.correctSidePic}}" />
+          </block>
         </view>
-        <view class="middle-input-box">
-            <text>收件人身份证号码:</text>
-            <input type="idcard" name="identityCard" placeholder="请填写收件人身份证"/>
-        </view>
-        <view class="middle-pic-box">
-              <view bindtap='chooseCorrectPic' class="middle-pic">
-                <block wx:if="{{address.correctSidePic == 0}}">
-                   <text>+</text>
-                  <text>上传正面</text>
-                  <input type="hidden" disabled name="correctSidePic"/> 
-                </block> 
-                <block wx:else>
-                  <image style="width:300rpx;height:240rpx" src="{{address.correctSidePic}}"/>
-                </block>  
-              </view>
 
-              <view bindtap='chooseOppositePic' class="middle-pic">
-                <block wx:if="{{address.oppositeSidePic == 0}}">
-                  <text>+</text>
-                  <text>上传反面</text>
-                  <input type="hidden" disabled name="oppositeSidePic"/>
-                </block>
-                <block wx:else>
-                  <image style="width:300rpx;height:240rpx" src="{{address.oppositeSidePic}}"/>
-                </block>  
-              </view>
-			
+        <view bindtap='chooseOppositePic' class="middle-pic">
+          <block wx:if="{{address.oppositeSidePic == 0}}">
+            <text>+</text>
+            <text>上传反面</text>
+            <input type="hidden" disabled name="oppositeSidePic" />
+          </block>
+          <block wx:else>
+            <image style="width:300rpx;height:240rpx" src="{{address.oppositeSidePic}}" />
+          </block>
         </view>
-        
-  </view>
-	
-  <view class="bottom-contaniner">
+
+      </view>
+
+    </view>
+
+    <view class="bottom-contaniner">
       <button form-type="submit" class='saveBtn'>添加收货人</button>
-  </view>
+    </view>
   </form>
 </view>

@@ -160,10 +160,64 @@ Page({
   },
   formSubmit: function (e) {
     let self = this
+    // 验证字段的规则
+    const rules = {
+      name: {
+        required: true,
+        name: true
+      },
+      phone: {
+        required: true,
+        tel: true,
+      },
+      identityCard: {
+        required: true,
+        idcard: true
+      },
+      detail: {
+        required: true
+      },
+      city: {
+        required: true
+      }
+    }
+
+    // 验证字段的提示信息，若不传则调用默认的信息
+    const messages = {
+      name: {
+        required: '请输入姓名',
+        name: '请输入正确的姓名'
+      },
+      phone: {
+        required: '请输入手机号',
+        tel: '请输入正确的手机号',
+      },
+      identityCard: {
+        required: '请输入身份证号码',
+        idcard: '请输入正确的身份证号码',
+      },
+      detail: {
+        required: '请输入完整地址信息'
+      },
+      city: {
+        required: '请输入地址信息'
+      }
+    }
+    // 创建实例对象
+    this.WxValidate = new WxValidate(rules, messages)
+
+    // 传入表单数据，调用验证方法
+    if (!this.WxValidate.checkForm(e)) {
+      const error = this.WxValidate.errorList[0]
+      wx.showModal({
+        title: '添加收货人失败',
+        content: error.msg
+      })
+    }
+
     let numOfShippingform = self.data.checkbox.length
     let shipAll = {}
     let shipGoodsAll = []
-    console.log(e.detail)
     var i = 0
     for (i = 0; i < numOfShippingform; i++) {
       let shipdetail = {}

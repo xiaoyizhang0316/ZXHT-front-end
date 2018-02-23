@@ -78,6 +78,7 @@ Page({
     // 创建实例对象
     this.WxValidate = new WxValidate(rules, messages)
 
+    console.log(e)
     // 传入表单数据，调用验证方法
     if (!this.WxValidate.checkForm(e)) {
       const error = this.WxValidate.errorList[0]

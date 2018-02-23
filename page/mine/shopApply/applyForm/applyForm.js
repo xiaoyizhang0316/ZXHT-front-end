@@ -10,7 +10,7 @@ Page({
    */
   data: {
     shop: {
-      name: '',
+      shopname: '',
       sign: '',
       payment: 'RMB',//默认支付方式为人民币
       bankName: '',
@@ -28,9 +28,11 @@ Page({
 
   },
   bindName: function (e) {
+    console.log(e)
     this.setData({
-      'shop.name': e.detail.value
+      'shop.shopname': e.detail.value
     })
+    console.log(this.data.shop.shopname)
   },
   bindSign: function (e) {
     this.setData({
@@ -70,7 +72,7 @@ Page({
     wx.getUserInfo({
       success: function (res) {
         self.setData({
-          'shop.name': res.userInfo.nickName + '的澳洲直邮店',
+          'shop.shopname': res.userInfo.nickName + '的澳洲直邮店',
           'shop.sign': '我们只是澳洲正品的搬运工~'
         })
       }
@@ -82,7 +84,7 @@ Page({
 
   formSubmit: function (e) {
     console.log("pushed")
-    self = this
+    let self = this
     //let url = "https://a5f93900.ngrok.io/api/mall/shops/create"
     //let url = "https://mini.zhenxianghaitao.com/api/mall/shops/create"
     let url = COM.load('CON').CREATE_SHOP;
@@ -92,13 +94,12 @@ Page({
     //     content: '店铺名不能为空'
     //   })
     // }
-  
 
-  
-   
+
+
     // 验证字段的规则
     const rules = {
-      name: {
+      shopname: {
         required: true
       },
       sign: {
@@ -118,7 +119,7 @@ Page({
 
     // 验证字段的提示信息，若不传则调用默认的信息
     const messages = {
-      name: {
+      shopname: {
         required: '请输入店名'
       },
       sign: {
@@ -142,14 +143,14 @@ Page({
     if (!this.WxValidate.checkForm(e)) {
       const error = this.WxValidate.errorList[0]
       wx.showModal({
-        title: '添加收货人失败',
+        title: '开店失败',
         content: error.msg
       })
     } else {
       COM.load('NetUtil').netUtil(url, "POST", {
         "open_id": app.globalData.openId,
         "owner": app.globalData.nickName,
-        "shopName": self.data.shop.name,
+        "shopName": self.data.shop.shopname,
         "sign": self.data.shop.sign,
         "payment": self.data.shop.payment,
         "bankName": self.data.shop.bankName,
