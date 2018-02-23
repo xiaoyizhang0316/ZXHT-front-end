@@ -88,7 +88,7 @@ page {
 }
 
 .explain-text {
-  display: flex;
+  /* display: flex; */
   color: #515151;
   font-size: 15px;
   justify-content: flex-start;

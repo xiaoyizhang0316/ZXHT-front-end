@@ -141,6 +141,7 @@ page {
   overflow:hidden;
   white-space:nowrap;
   text-overflow:ellipsis;
+  font-size:30rpx;
   flex:3;
 }
 
