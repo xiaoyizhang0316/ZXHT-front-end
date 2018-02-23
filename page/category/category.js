@@ -115,6 +115,7 @@ Page({
 							
 					}
 				}
+				}
 
 			console.log(products)
 			let shopProductIds = wx.getStorageSync("shopProductIds");
