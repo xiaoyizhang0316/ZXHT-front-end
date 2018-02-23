@@ -57,8 +57,7 @@
     </view>
 
     <view class="bottom-contaniner">
-        <button type='primary' class='confirmBtn' bindtap="formSubmit">提交</button>
-				<!-- <button formType="submit" class='confirmBtn'>提交</button> -->
+        <button type='primary' class='confirmBtn' bindtap="formSubmit">提交</button>			
     </view>
   </form>
 </view>

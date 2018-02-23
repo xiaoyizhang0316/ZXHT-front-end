@@ -46,7 +46,7 @@ Page({
 		console.log("-----------------------------")
 		console.log(e)
 		if (Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
-		console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbb")
+		
 
 		console.log(app.globalData.openId)
 			let fan = app.globalData.openId
