@@ -66,6 +66,8 @@
                               <view class="classname">
                                 <text>{{val.title}}</text>
                              </view>
+														 <view><text>售价: {{val.price}} 已售: {{val.sales}}</text></view>
+													
 
                         </navigator>
                     </view>

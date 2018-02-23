@@ -1,7 +1,5 @@
 //url相关
-// const BASE_URL = "http://101.178.98.25:8443"
 //const BASE_URL = "https://mini.zhenxianghaitao.com"
-// const BASE_URL = "https://localhost"
 const BASE_URL = "https://ee953b0b.ngrok.io"
 
 
@@ -45,6 +43,7 @@ const DELETE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/deleteConsignee/";
 const GET_MY_CONSIGNEES_URL = BASE_URL + "/api/mall/users/getMyConsignees/"
 const SET_DEFAULT_CONSIGNEE_URL = BASE_URL + "/api/mall/users/setDefaultConsignee/"
 const GET_ALL_PRODUCT_BY_CATEGORYID_URL = BASE_URL + "/api/mall/products/category/"
+const GET_ALL_SHOPPRODUCTS_URL = BASE_URL + "/api/mall/products/getAllShopProducts/"
 
 //进入他人店铺
 const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/"
@@ -100,5 +99,6 @@ module.exports = {
   CONFRIM_ORDER_URL: CONFRIM_ORDER_URL,
   PAY_ORDER_URL: PAY_ORDER_URL,
   SAVE_SHIPORDER: SAVE_SHIPORDER,
-  GET_ALL_PRODUCT_BY_CATEGORYID_URL: GET_ALL_PRODUCT_BY_CATEGORYID_URL
+  GET_ALL_PRODUCT_BY_CATEGORYID_URL: GET_ALL_PRODUCT_BY_CATEGORYID_URL,
+	GET_ALL_SHOPPRODUCTS_URL: GET_ALL_SHOPPRODUCTS_URL
 }

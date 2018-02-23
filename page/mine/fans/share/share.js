@@ -83,7 +83,8 @@ Page({
   onShareAppMessage: function () {
 		let openId = app.globalData.openId; 
     return {
-      title: '真享 海淘',
+      title: '真实澳洲直邮 朋友分享的海淘',
+			desc: "Dennis的澳洲直邮店铺",
       path: '/page/welcome/welcome?targetShopId='+openId,
       success: function (res) {
         // 转发成功

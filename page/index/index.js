@@ -46,9 +46,9 @@ Page({
 
 
   onShow: function () {
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 100);
+    // setTimeout(function () {
+    //   wx.hideLoading()
+    // }, 100);
     this.resetSearch();
 
     //设置页面标题
@@ -66,7 +66,7 @@ Page({
 					wx.setNavigationBarTitle({
 						title: callbackdata.shopName
 					})
-          self.loadRecommendedProducts();
+         // self.loadRecommendedProducts();
 				}
 			})
 		} else {

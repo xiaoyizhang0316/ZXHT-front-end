@@ -30,10 +30,10 @@
 
           <view class="top-input-box flex-col">
             <block wx:if="{{shop.payment == 'RMB'}}">
-                 <text >开户行: </text><input bindinput="bindbankName" name="name" value="{{shop.name}}"/>    
+                 <text >开户行: </text><input bindinput="bindbankName" name="name" />    
             </block>
             <block wx:else>
-                 <text >Bank: </text><input bindinput="bindbankName" name="name" value="{{shop.name}}"/>    
+                 <text >Bank: </text><input bindinput="bindbankName" name="name" />    
             </block>
             <!-- <input  name="phone" value="{{shop.accountName}}"/>  -->
           </view>

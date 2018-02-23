@@ -17,41 +17,46 @@ Page({
 
   //如果为onShow那么会即时显示默认地址
   onLoad: function () {
-    const self = this;
-    wx.getStorage({
-      key: 'addressList',
-      success(res) {
-        if (res.data.length >= 1) {
-
-          var index = 0;//默认使用第一个
-          for (let i = 0; i < res.data.length; i++) {
-            if (res.data[i].isDefault == true) {
-              index = i;
-              break;
-            }
-          }
-          self.setData({
-            address: res.data[index],
-            hasAddress: true
-          })
-        }
-      }
-    }),
-      wx.getStorage({
-        key: 'orderInfo',
-        success(res) {
-          console.log(res.data)
-          self.setData({
-            orders: res.data.data,
-          })
-
-        },
-        fail() {
-          console.log('fail')
-        }
-      })
+		
+   
 
   },
+
+	onShow: function(){
+		const self = this;
+		wx.getStorage({
+			key: 'addressList',
+			success(res) {
+				if (res.data.length >= 1) {
+
+					var index = 0;//默认使用第一个
+					for (let i = 0; i < res.data.length; i++) {
+						if (res.data[i].isDefault == true) {
+							index = i;
+							break;
+						}
+					}
+					self.setData({
+						address: res.data[index],
+						hasAddress: true
+					})
+				}
+			}
+		}),
+			wx.getStorage({
+				key: 'orderInfo',
+				success(res) {
+					console.log(res.data)
+					self.setData({
+						orders: res.data.data,
+					})
+
+				},
+				fail() {
+					console.log('fail')
+				}
+			})
+	},
 
   /**
    * 计算总价
@@ -78,6 +83,23 @@ Page({
 
   placeOrder() {
     //let orderTime = COM.load('Util').formatTime(new Date());
+		
+		if(this.data.address.id == null)
+		{
+			wx.showModal({
+				title: '错误',
+				content: '您还没有选择收货人',
+				success: function (res) {
+					if (res.confirm) {
+						return
+					} else if (res.cancel) {
+						return
+					}
+				}
+			})
+			return
+		}
+	
     let productinfo = wx.getStorageSync("orderInfo")
     var index = 0
 
@@ -98,21 +120,29 @@ Page({
       orderGoods: productinfo.data
     };
     let url = COM.load('CON').SAVE_ORDER_URL;
-    COM.load('NetUtil').netUtil(url, "POST", order, (callback) => { })
+    COM.load('NetUtil').netUtil(url, "POST", order, (callback) => {
+			wx.showModal({
+				title: '提交订单成功',
+				content: '订单已提交, 请等待店主确认邮费后进行支付',
+				success: function (res) {
+					if (res.confirm) {
+						wx.switchTab({
+							url: '/page/index/index',
+						})
+					} else if (res.cancel) {
+						wx.switchTab({
+							url: '/page/index/index',
+						})
+					}
+				}
+			})
+		 })
 
     this.saveToOrderHistory(order);
     wx.removeStorageSync("cartList");
 
-    wx.showToast({
-      title: '提交订单成功',
-      icon: 'loading',
-      duration: 2000,
-      success: function () {
-        wx.switchTab({
-          url: '/page/index/index',
-        })
-      }
-    })
+	
+   
   },
 
   saveToOrderHistory: function (data) {
