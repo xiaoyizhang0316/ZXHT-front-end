@@ -21,6 +21,20 @@ Page({
 	},
 
 	onLoad: function (options) {
+		
+	},
+	onShow: function(options)
+	{
+		let self = this
+		//每次进入 清空leftcate
+		if (self.data.leftCategory.length > 0) {
+			self.setData({
+				leftCategory: [
+					{ name: '所有品牌', ename: 'brands', banner: '/image/c1.png' },
+				],
+				rightCategory : []
+			});
+		}
 		//如果有targetShopId 则优先展示
 		let targetShopId = ""
 		console.log(app.globalData)
@@ -29,17 +43,22 @@ Page({
 		} else {
 			targetShopId = app.globalData.openId;
 		}
-		this.setData({ targetShopId: targetShopId })
-		this.loadCategoies();
-		this.setData({ brands: this.filterBrands(), products: this.filterProducts() });
-		this.setData({ items: this.data.brands });
+		self.setData({ targetShopId: targetShopId })
+		self.loadCategoies();
+		self.filterProducts();
+		self.setData({ brands: self.filterBrands() });
+		self.setData({ items: self.data.brands });
 	},
 
 	loadCategoies: function () {
 		let self = this;
+		
 		let targetShopId = this.data.targetShopId
-		let openId = app.globalData.openId
-		COM.load('NetUtil').netUtil(COM.load('CON').CATEGORY_URL + "openId/" + openId, "GET", "", function (res) {
+		let url = COM.load('CON').CATEGORY_URL + "openId/" + targetShopId
+		console.log("cate url here")
+		console.log(url)
+	
+		COM.load('NetUtil').netUtil(url, "GET", "", function (res) {
 			console.log(res)
 			for (var x in res) {
 				var cat = {
@@ -89,49 +108,57 @@ Page({
 	},
 
 	filterProducts: function () {
+		let self = this
 		let targetShopId = this.data.targetShopId
 		let productsMap = new Map();
+		let products = []
 		//let products = wx.getStorageSync("products");
-		// let p = wx.getStorageSync("products");
-		
+		//let p = wx.getStorageSync("products");
+
 		//修改 product为从服务器读取
 		let openId = app.globalData.openId
 
-		COM.load('NetUtil').netUtil(COM.load('CON').GET_ALL_SHOPPRODUCTS_URL + openId + "/" + targetShopId, "GET", "", function (shopProducts) {
+		COM.load('NetUtil').netUtil(COM.load('CON').GET_ALL_SHOPPRODUCTS_URL + openId + "/" + targetShopId, "GET", "",function (shopProducts) {
+			
 			if (shopProducts) {
-				var products = [];
+				console.log("shop products")
+				console.log(shopProducts);
+
 				for (var x in shopProducts) {
 					let shopProduct = shopProducts[x];
-					console.log("aaa")
-					console.log(shopProduct)
+
 					if (shopProduct.stock >= 0 && shopProduct.price >= 0) {
 						products[shopProduct.productId] = {
 							"id": shopProduct.productId,
-							"title": products[shopProduct.productId].title,
+							"title": shopProduct.title,
 							"price": shopProduct.price,
-							"vipPrice": shopProduct.vip1Price,
+							"vipPrice": shopProduct.price,
 							"stock": shopProduct.stock,
-							"thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
-							
+							"sales": shopProduct.sales,
+							"barcode": shopProduct.barcode,
+							"thumb": COM.load('Util').image(shopProduct.barcode),
+
+						}
 					}
 				}
-				}
 
-			console.log(products)
-			let shopProductIds = wx.getStorageSync("shopProductIds");
-			for (var x in shopProductIds) {
-				let key = undefined;
-				let list = productsMap.get(key) ? productsMap.get(key) : [];
-				list.push(products[shopProductIds[x]]);
-				productsMap.set(key, list);
+				// console.log(products)
+				// let shopProductIds = wx.getStorageSync("shopProductIds");
+				// for (var x in shopProductIds) {
+				// 	let key = undefined;
+				// 	let list = productsMap.get(key) ? productsMap.get(key) : [];
+				// 	list.push(products[shopProductIds[x]]);
+				// 	productsMap.set(key, list);
+				// }
+				// console.log("productsMap")
+				// console.log(productsMap)
+				//key是undefined ???
+
 			}
-			console.log("productsMap")
-			console.log(productsMap)
-			//key是undefined ???
-		
-			}
+			
+			self.setData({ products : products });
 		})
-		return productsMap;
+
 
 	},
 
@@ -163,11 +190,16 @@ Page({
 			let subCategories = this.data.res[e.target.dataset.index - 1].subCategories;
 			let rightCategory = [];
 
-			let products = wx.getStorageSync("products");
+			//let products = wx.getStorageSync("products");
+			let products = this.data.products
 			subCategories.forEach(function (subCat) {
 				subCat.productIds.forEach(function (val, index, arr) {
 					var id = (typeof val == 'object') ? val.id : val
+					console.log("id")
+					console.log(val)
+					console.log(products)
 					arr[index] = products[id]
+					console.log(arr[index])
 				})
 			})
 			this.setData({

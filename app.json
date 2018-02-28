@@ -40,7 +40,7 @@
     "navigationBarTitleText": "真享 海淘",
     "navigationBarBackgroundColor": "#AB956D",
     "backgroundColor": "#eeeeee",
-    "enablePullDownRefresh": false
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#b7b7b7",

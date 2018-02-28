@@ -10,12 +10,16 @@ Page({
     },
 
   },
+	onLoad(){},
 
   onShow() {
+		console.log("run on show")
     var self = this
     wx.getStorage({
       key: 'cartList',
       success: function (res) {
+				console.log("read stroage cartList")
+				console.log(res)
         if (res.data.length > 0) {
 
           self.setData({
@@ -28,11 +32,20 @@ Page({
             carts: [],
             hasCarts: false,
           })
+					
         }
         self.getTotalPrice();
       },
+			fail: function(res){
+				self.setData({
+					carts: [],
+					hasCarts: false,
+				})
+
+			},
     })
-    
+		console.log("cart here")
+		console.log(this.data.carts)
   },
 
   clearAll(e) {

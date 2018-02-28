@@ -82,7 +82,7 @@
     <swiper-item>
       <scroll-view scroll-y="{{true}}" style="height:{{winHeight-44}}px">
         <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
-         <block wx:if="{{item.orderInfo.orderStatus == 3}}"><!-- 已支付 -->
+         <block wx:if="{{(item.orderInfo.orderStatus == 3) || (item.orderInfo.orderStatus == 5)}}"><!-- 已支付 -->
           <view class="explain-line" bindtap="sendOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
             <view class="item-top">
               <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
@@ -148,7 +148,7 @@
       <scroll-view scroll-y="{{true}}" style="height:{{winHeight-44}}px">
         <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
         
-           <block wx:if="{{item.orderInfo.orderStatus == 5|| item.orderInfo.orderStatus == 6||item.orderInfo.orderStatus == 7}}"> 
+           <block wx:if="{{item.orderInfo.orderStatus == 6||item.orderInfo.orderStatus == 7}}"> 
             <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
               <view class="item-top">
                 <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>

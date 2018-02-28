@@ -1,7 +1,8 @@
 // var Util = require('../../../../utils/util.js');
-
+import WxValidate from "../../../../utils/Validate/WxValidate.js"
 var COM = require('../../../../utils/common.js');
 var app = getApp()
+
 
 Page({
 
@@ -160,60 +161,8 @@ Page({
   },
   formSubmit: function (e) {
     let self = this
-    // 验证字段的规则
-    const rules = {
-      name: {
-        required: true,
-        name: true
-      },
-      phone: {
-        required: true,
-        tel: true,
-      },
-      identityCard: {
-        required: true,
-        idcard: true
-      },
-      detail: {
-        required: true
-      },
-      city: {
-        required: true
-      }
-    }
+   
 
-    // 验证字段的提示信息，若不传则调用默认的信息
-    const messages = {
-      name: {
-        required: '请输入姓名',
-        name: '请输入正确的姓名'
-      },
-      phone: {
-        required: '请输入手机号',
-        tel: '请输入正确的手机号',
-      },
-      identityCard: {
-        required: '请输入身份证号码',
-        idcard: '请输入正确的身份证号码',
-      },
-      detail: {
-        required: '请输入完整地址信息'
-      },
-      city: {
-        required: '请输入地址信息'
-      }
-    }
-    // 创建实例对象
-    this.WxValidate = new WxValidate(rules, messages)
-
-    // 传入表单数据，调用验证方法
-    if (!this.WxValidate.checkForm(e)) {
-      const error = this.WxValidate.errorList[0]
-      wx.showModal({
-        title: '添加收货人失败',
-        content: error.msg
-      })
-    }
 
     let numOfShippingform = self.data.checkbox.length
     let shipAll = {}
@@ -226,6 +175,21 @@ Page({
       shipdetail.receiptNumber = e.detail.value["receiptNumber[" + i + "]"]
       shipdetail.senderId = app.globalData.openId
       shipdetail.shippingCost = e.detail.value["shipFee[" + i + "]"]
+			let checkRes = self.checkShipDetail(shipdetail)
+			if(!checkRes.flag)
+			{
+				wx.showModal({
+					content: checkRes.message,
+					showCancel: false,
+					confirmText: '确认',
+					success: function (res) {
+						return
+					}
+				})
+				return
+			}
+
+
       shipAll[i] = shipdetail
       console.log("***********")
       let shipGoodsOne = {}
@@ -292,6 +256,45 @@ Page({
       });
     }
   },
+	required(value) {
+	 if (typeof value === 'number') {
+			value = value.toString()
+		} else if (typeof value === 'boolean') {
+			return !0
+		}
+
+		return value.length > 0
+	},
+	digits: function (value) {
+		return that.optional(value) || /^\d+$/.test(value)
+	},
+	checkShipDetail: function(shipdetail){
+		let self = this
+		let res = {
+			"flag" : false,
+			"message" : ""
+		}
+
+		if (!self.required(shipdetail.agentId) || !self.digits(shipdetail.agentId) )
+		{
+			res.message = "快递公司必须为数字"
+			return res;
+		}
+
+		if (!self.required(shipdetail.receiptNumber))
+		{
+			res.message = "快递单号为必填"
+			return res;
+		}
+
+		if (!self.required(shipdetail.shippingCost) || !(shipdetail.shippingCost >= 0))
+		{
+			res.message = "发货费用为必填并且大于0"
+			return res;
+		}
+		res.flag=true;
+		return res;
+	},
 
   /**
    * 生命周期函数--监听页面初次渲染完成

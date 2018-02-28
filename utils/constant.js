@@ -1,6 +1,6 @@
 //url相关
 //const BASE_URL = "https://mini.zhenxianghaitao.com"
-const BASE_URL = "https://ee953b0b.ngrok.io"
+const BASE_URL = "https://3b11ec9e.ngrok.io"
 
 
 //登录
@@ -61,6 +61,8 @@ const PAY_ORDER_URL = BASE_URL + "/api/mall/orders/payOrder/"
 //发货单
 const SAVE_SHIPORDER = BASE_URL + "/api/mall/orders/saveShipOrder"
 
+//功能性
+const UPLOADFILE = BASE_URL + "/api/mall/test/uploadFile"
 
 module.exports = {
   BASE_URL: BASE_URL,
@@ -100,5 +102,6 @@ module.exports = {
   PAY_ORDER_URL: PAY_ORDER_URL,
   SAVE_SHIPORDER: SAVE_SHIPORDER,
   GET_ALL_PRODUCT_BY_CATEGORYID_URL: GET_ALL_PRODUCT_BY_CATEGORYID_URL,
-	GET_ALL_SHOPPRODUCTS_URL: GET_ALL_SHOPPRODUCTS_URL
+	GET_ALL_SHOPPRODUCTS_URL: GET_ALL_SHOPPRODUCTS_URL,
+	UPLOADFILE: UPLOADFILE
 }

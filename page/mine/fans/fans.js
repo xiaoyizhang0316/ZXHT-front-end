@@ -56,7 +56,7 @@ Page({
       let fansMap = new Map();
 			console.log(fans)
       if (fans != "") {
-     
+			
         for (var x in fans) {
           let fan = fans[x];
           let user = fan.user;         

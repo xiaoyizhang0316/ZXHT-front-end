@@ -159,4 +159,7 @@
   <block wx:elif="{{order.orderInfo.orderStatus == 2}}">
     <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">取消订单</button>
   </block>
+	<block wx:elif="{{order.orderInfo.orderStatus == 6}}">
+    <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">取消订单</button>
+  </block>
 </view>

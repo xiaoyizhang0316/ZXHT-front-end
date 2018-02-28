@@ -189,8 +189,9 @@ Page({
     wx.scanCode({
       success: (res) => {
         if (res.result) {
-          console.log(res.result)
-          self.bindSearch(COM.load('Util').trim(res.result));
+					self.searchByBarcode(COM.load('Util').trim(res.result));
+          // console.log(res.result)
+          // self.bindSearch(COM.load('Util').trim(res.result));
         } else {
           wx.showModal({
             title: '提示',
@@ -209,6 +210,47 @@ Page({
     })
   },
 
+	searchByBarcode: function (barcode) {
+		var self = this, item;
+
+		let searchHistoryList = wx.getStorageSync('searchHistoryList');
+		if (!searchHistoryList) {
+			searchHistoryList = [];
+		};
+
+		// console.log(COM.load('CON').BAR_CODE_URL+barcode)
+
+		COM.load('NetUtil').netUtil(COM.load('CON').BAR_CODE_URL + barcode, "GET", "", function (res) {
+			item = res;
+		
+			let searchResult = [];
+			if (item) {
+				//目前historyList中只存title
+				item.thumb = COM.load('Util').image(item.barcode);
+				searchResult.push(item);
+		
+				self.setData({
+					displayClear: true,
+					searchResult: searchResult
+				});
+
+			} else {
+				wx.showModal({
+					title: '提示',
+					content: '无法找到该商品',
+					showCancel: false,
+					success: function (res) {
+						if (res.confirm) {
+							self.addItem(e, barcode);
+						}
+					}
+				})
+			}
+
+		
+		});
+
+	},
 
   /**
    * search the product

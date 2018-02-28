@@ -20,7 +20,7 @@ Page({
 
 	prepare: function(e){
 		self = this
-		console.log(e)
+		
 
 		if (app.globalData.openId == null) {
 			setTimeout(function () {
@@ -29,8 +29,12 @@ Page({
 			}, 1000)
 			return
 		}
-
+		if (Object.prototype.toString.call(e) !== '[object Undefined]' && Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
 		this.setTargetShop(e)
+		} else {
+			this.navigatorToIndex()
+		}
+		
 		COM.load('Util').loadBrands();
 		COM.load('Util').loadProducts();
 		let products = wx.getStorageSync("products");
@@ -43,9 +47,8 @@ Page({
 	setTargetShop: function (e) {
 		let self = this
 		//得到传输过来的目标商铺
-		console.log("-----------------------------")
-		console.log(e)
-		if (Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
+	
+		
 		
 
 		console.log(app.globalData.openId)
@@ -92,9 +95,7 @@ Page({
 				}
 			})
 
-		}else{
-			this.navigatorToIndex()
-		}
+		
 	},
 	navigatorToIndex:function(){
 		var interval = setInterval(function () {
@@ -104,8 +105,14 @@ Page({
 			let openId = wx.getStorageSync("openId");
 			if (brands && products && openId) {
 				clearInterval(interval);
+			
 				wx.switchTab({
 					url: '../index/index',
+					success: function (e) {
+						var page = getCurrentPages().pop();
+						if (page == undefined || page == null) return;
+						page.onLoad();
+					} 
 				})
 			}
 		}, 3000);
