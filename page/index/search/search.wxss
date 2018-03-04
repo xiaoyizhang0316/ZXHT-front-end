@@ -130,12 +130,17 @@ page {
 }
 
 .title-line {
-  height: 65rpx;
+ 
   width: 90%;
   border-bottom: 1px #e3e3e3 solid;
-  display: flex;
-  align-items: center;
-  color: #888; 
+  
+	text-overflow: ellipsis;
+  height:75rpx;
+	white-space:nowrap;
+
+  color: #888;
+	overflow: hidden;
+
 }
 
 .high-light-font {

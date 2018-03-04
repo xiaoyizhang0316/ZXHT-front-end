@@ -63,10 +63,10 @@
 
                                <image class="goods-image" src="http://img.zhenxianghaitao.com/mini/{{val.barcode}}.jpg"></image>   
 
-                              <view class="classname">
+                              <view class="title-line">
                                 <text>{{val.title}}</text>
                              </view>
-														 <view><text>售价: {{val.price}} 已售: {{val.sales}}</text></view>
+														 <view><text>${{val.price}} 已售: {{val.sales}}</text></view>
 													
 
                         </navigator>

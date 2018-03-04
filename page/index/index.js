@@ -14,10 +14,12 @@ Page({
 		hotList: {},
 		shop: [],
 		imgUrls: [
-			'https://s18.postimg.org/hbwxwiwmx/image.png',
-			'https://s18.postimg.org/v5lalkhih/image.png',
-			'https://s18.postimg.org/5zkcept2x/image.png',
-			'https://s18.postimg.org/hbwxwih7d/image.png'
+			// 'https://s18.postimg.org/hbwxwiwmx/image.png',
+			// 'https://s18.postimg.org/v5lalkhih/image.png',
+			// 'https://s18.postimg.org/5zkcept2x/image.png',
+			// 'https://s18.postimg.org/hbwxwih7d/image.png'
+			'http://img.zhenxianghaitao.com/slide1.png',
+			'http://img.zhenxianghaitao.com/slide2.png'
 		],
 		indicatorDots: false,
 		autoplay: false,

@@ -29,5 +29,29 @@
         <button type='primary' class='confirmBtn' form-type="submit">确认</button>
         <button bindtap='deleteAddress' class='confirmBtn'>删除地址</button>
     </view>
+		<view class="middle-pic-box">
+        <view bindtap='chooseCorrectPic' class="middle-pic">
+          <block wx:if="{{address.correctSidePic == 0}}">
+            <text>+</text>
+            <text>上传正面</text>
+            <input type="hidden" disabled name="correctSidePic" />
+          </block>
+          <block wx:else>
+            <image style="width:300rpx;height:240rpx" src="{{address.correctSidePic}}" />
+          </block>
+        </view>
+
+        <view bindtap='chooseOppositePic' class="middle-pic">
+          <block wx:if="{{address.oppositeSidePic == 0}}">
+            <text>+</text>
+            <text>上传反面</text>
+            <input type="hidden" disabled name="oppositeSidePic" />
+          </block>
+          <block wx:else>
+            <image style="width:300rpx;height:240rpx" src="{{address.oppositeSidePic}}" />
+          </block>
+        </view>
+
+      </view>
   </form>
 </view>

@@ -24,25 +24,29 @@ Page({
 
 	onShow: function(){
 		const self = this;
-		wx.getStorage({
-			key: 'addressList',
-			success(res) {
-				if (res.data.length >= 1) {
+		if (Object.keys(self.data.address).length === 0)
+		{
+			wx.getStorage({
+				key: 'addressList',
+				success(res) {
+					if (res.data.length >= 1) {
 
-					var index = 0;//默认使用第一个
-					for (let i = 0; i < res.data.length; i++) {
-						if (res.data[i].isDefault == true) {
-							index = i;
-							break;
+						var index = 0;//默认使用第一个
+						for (let i = 0; i < res.data.length; i++) {
+							if (res.data[i].isDefault == true) {
+								index = i;
+								break;
+							}
 						}
+						self.setData({
+							address: res.data[index],
+							hasAddress: true
+						})
 					}
-					self.setData({
-						address: res.data[index],
-						hasAddress: true
-					})
 				}
-			}
-		}),
+			})
+		}
+		
 			wx.getStorage({
 				key: 'orderInfo',
 				success(res) {

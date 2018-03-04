@@ -3,6 +3,8 @@
 const BASE_URL = "https://3b11ec9e.ngrok.io"
 
 
+const IMG_BASE = "http://img.zhenxianghaitao.com/"
+
 //登录
 const CATEGORY_URL = BASE_URL + "/api/mall/categories/";
 const SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shopProducts/";
@@ -103,5 +105,6 @@ module.exports = {
   SAVE_SHIPORDER: SAVE_SHIPORDER,
   GET_ALL_PRODUCT_BY_CATEGORYID_URL: GET_ALL_PRODUCT_BY_CATEGORYID_URL,
 	GET_ALL_SHOPPRODUCTS_URL: GET_ALL_SHOPPRODUCTS_URL,
-	UPLOADFILE: UPLOADFILE
+	UPLOADFILE: UPLOADFILE,
+	IMG_BASE: IMG_BASE
 }

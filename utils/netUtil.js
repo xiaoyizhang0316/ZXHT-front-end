@@ -8,7 +8,8 @@ var CON = require('constant.js');
 function netUtil(url, method,body, callBack) {
   wx.showLoading({
     title: '加载中',
-    mask: false
+    mask: true,
+
   }) 
   var callBackData = {};
 
@@ -37,10 +38,7 @@ function netUtil(url, method,body, callBack) {
         })
         
       }
-      setTimeout(function () {
-       
-        wx.hideLoading()
-      }, 1000)
+     
     },
     fail: function (res) {
 			console.log(res)
@@ -58,21 +56,26 @@ function netUtil(url, method,body, callBack) {
         mask: true
       })}
        
-    }
+    },
+		complete: function(res){
+			console.log("加载结束")
+			wx.hideLoading()
+		}
   });
 }
 
 function uploadFile(url, method, list, callBack) {
-	wx.showLoading({
-		title: '正在上传',
-		mask: true
-	})
+	console.log("上传开始")
+	
 	var callBackData = {};
 
 	//微信请求 上传图片
 	list.forEach(function(ele){
-		console.log(ele)
-		console.log(url)
+		wx.showLoading({
+			title: '正在上传',
+			mask: true
+		})
+		
 		wx.uploadFile({
 			url: url,
 			filePath: ele.file,
@@ -101,10 +104,7 @@ function uploadFile(url, method, list, callBack) {
 					})
 
 				}
-				setTimeout(function () {
-
-					wx.hideLoading()
-				}, 1500)
+				
 			},
 			fail: function (res) {
 				console.log(res)
@@ -123,6 +123,10 @@ function uploadFile(url, method, list, callBack) {
 					})
 				}
 				
+			},
+			complete: function(res){
+				console.log("上传结束")
+				wx.hideToast()
 			}
 		})
 		})

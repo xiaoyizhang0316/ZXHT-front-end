@@ -91,6 +91,11 @@
       </view>
     </view>
 
+		<!-- 插入身份证下载  -->
+		<button type="primary" class='button' bindtap = "downloadIDs">下载本单收货人身份证正反面</button>
+
+
+
     <view class="explain-line" style="border-top:20px solid #eff3f4">
       <view class="inner-explain-line">
         <view class="explain-text">物品种类</view>

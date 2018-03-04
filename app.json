@@ -33,7 +33,8 @@
     "page/mine/sell_order/sell_detail/sell_orderDetail",
     "page/mine/sell_order/send_detail/send_orderDetail",
     "page/mine/order_pay/orderHistory_pay",
-    "page/mine/order_receive/orderHistory_receive"
+    "page/mine/order_receive/orderHistory_receive",
+		"page/share/customerConsignee/customerConsignee"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",

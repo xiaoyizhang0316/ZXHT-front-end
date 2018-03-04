@@ -1,5 +1,6 @@
 // var Util = require('../../../../utils/util.js');
 import WxValidate from "../../../../utils/Validate/WxValidate.js"
+import download from "../../../../utils/downloadFile.js"
 var COM = require('../../../../utils/common.js');
 var app = getApp()
 
@@ -224,6 +225,29 @@ Page({
       })
     })
   },
+
+	downloadIDs: function(e){
+		let imgBase = COM.load('CON').IMG_BASE
+
+		console.log(this.data.receiver)
+		let url1 = imgBase + "ID/" + this.data.receiver.correctSidePic + ".png";
+		let url2 = imgBase + "ID/" + this.data.receiver.oppositeSidePic + ".png";
+		console.log("++++++++++++++++++++++++++++++++++++++++++++")
+		
+		console.log(url2)
+		download.downloadSaveFiles({
+			urls: [url1, url2],
+			success: function (res) {
+				// console.dir(res);
+
+				console.info(res.get(url2).savedFilePath)
+			},
+			fail: function (e) {
+				console.info("下载失败");
+			}
+		});
+		
+	},
 
   placeOrder: function (e) {
     console.log(e)

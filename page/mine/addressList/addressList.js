@@ -1,5 +1,6 @@
 //addressList.js
 var COM = require('../../../utils/common.js')
+var app = getApp();
 Page({
   action: '',
   data: {
@@ -20,6 +21,7 @@ Page({
         //上一个页面实例对象
         var prevPage = pages[pages.length - 2];
         //更新上个页面的address数据
+				console.log(this.data.addressList[index])
         prevPage.setData({
           address: this.data.addressList[index]
         })
@@ -113,5 +115,23 @@ Page({
         // console.log(res.data)
       }
     })
-  }
+  },
+	onPullDownRefresh: function(e)
+	{
+		
+		let self = this
+		let url = COM.load('CON').GET_MY_CONSIGNEES_URL + app.globalData.openId
+		COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+			wx.setStorage({
+				key: "addressList",
+				data: callbackdata,
+				success:function(res){
+					wx.stopPullDownRefresh()
+					self.onShow()
+
+				}
+			})
+		})
+	},
+
 })
