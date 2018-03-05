@@ -18,17 +18,19 @@ Page({
 			// 'https://s18.postimg.org/v5lalkhih/image.png',
 			// 'https://s18.postimg.org/5zkcept2x/image.png',
 			// 'https://s18.postimg.org/hbwxwih7d/image.png'
-			'http://img.zhenxianghaitao.com/slide1.png',
-			'http://img.zhenxianghaitao.com/slide2.png'
+			'https://img.zhenxianghaitao.com/slide1.png',
+			'https://img.zhenxianghaitao.com/slide2.png'
 		],
 		indicatorDots: false,
 		autoplay: false,
-		interval: 3000,
-		duration: 800,
+		interval: 5000,
+		duration: 1000,
 		focus: false,
 		displayClear: false,
 		userinfo: '',
-		targetShopId: null
+		targetShopId: null,
+		sign:"",
+		shopImg:""
 
 	},
 
@@ -63,8 +65,13 @@ Page({
 
 				} else {
 					wx.setNavigationBarTitle({
-						title: callbackdata.shopName
+						title: callbackdata.shopName,
 					})
+					self.setData({
+						sign: callbackdata.sign,
+						shopImg: callbackdata.shopImg
+					})
+				
 					//self.loadRecommendedProducts();
 				}
 			})
