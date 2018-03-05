@@ -3,7 +3,7 @@
 const BASE_URL = "https://3b11ec9e.ngrok.io"
 
 
-const IMG_BASE = "http://img.zhenxianghaitao.com/"
+const IMG_BASE = "https://img.zhenxianghaitao.com/"
 
 //登录
 const CATEGORY_URL = BASE_URL + "/api/mall/categories/";

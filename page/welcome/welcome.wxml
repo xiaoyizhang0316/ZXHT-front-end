@@ -5,12 +5,12 @@
 
 <swiper indicator-dots="true"autoplay="true" interval="3000" duration="600" style="width:100%;height:100%;">
  <swiper-item>
- <image src="http://img.zhenxianghaitao.com/openImg2.png" style="width:100%;height:100%;"/> 
+ <image src="https://img.zhenxianghaitao.com/openImg2.png" style="width:100%;height:100%;"/> 
  </swiper-item>
  <swiper-item>
- <image src="http://img.zhenxianghaitao.com/4.jpg" style="width:100%;height:100%;"/> 
+ <image src="https://img.zhenxianghaitao.com/4.jpg" style="width:100%;height:100%;"/> 
  </swiper-item>
  <swiper-item>
- <image src="http://img.zhenxianghaitao.com/5.jpg" style="width:100%;height:100%;"/> 
+ <image src="https://img.zhenxianghaitao.com/5.jpg" style="width:100%;height:100%;"/> 
  </swiper-item>
 </swiper>
