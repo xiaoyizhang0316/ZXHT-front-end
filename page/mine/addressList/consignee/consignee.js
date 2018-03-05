@@ -52,7 +52,8 @@ Page({
       },
       city: {
         required: true
-      }
+      },
+			
     }
 
     // 验证字段的提示信息，若不传则调用默认的信息
@@ -74,21 +75,29 @@ Page({
       },
       city:{
         required: '请输入地址信息'
-      }
+      },
+		
     }
     // 创建实例对象
    this.WxValidate = new WxValidate(rules, messages)
 
     console.log(e)
     // 传入表单数据，调用验证方法
-    // 
 		if (!this.WxValidate.checkForm(e)) {
 			const error = this.WxValidate.errorList[0]
 			wx.showModal({
 				title: '添加收货人失败',
 				content: error.msg
 			})
-		}else {
+		} else if ( !this.checkImg()){
+			wx.showModal({
+				title: '添加收货人失败',
+				content: "身份证上传有误",
+
+			})
+		}
+		else {
+		
       this.data.address.name = value.name
       this.data.address.phone = value.phone
       this.data.address.detail = value.detail
@@ -122,6 +131,8 @@ Page({
 							"file": this.data.address.oppositeSidePic
 						}
 					]
+
+				
 					console.log("img data here")
 					console.log(cData)
 					let url = COM.load("CON").UPLOADFILE;
@@ -222,5 +233,31 @@ Page({
 		wx.navigateTo({
 			url: '/page/share/customerConsignee/customerConsignee?openId=' + app.globalData.openId,
 		})
+	},
+	url(value) {
+		return that.optional(value) || /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value)
+	},
+
+	checkImg(){
+		let self = this
+		let flag = true
+		let picData = [
+			{
+				"file": self.data.address.correctSidePic
+			},
+			{
+				"file": self.data.address.oppositeSidePic
+			}
+		]
+		console.log(picData)
+		// 验证图像上传
+		picData.forEach(function (element) {
+			if (element.file == 0 || self.url(element.file)) {
+			
+				flag = false				
+			}
+			console.log(flag)
+			return flag
+		});
 	}
 })

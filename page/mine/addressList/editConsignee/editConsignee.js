@@ -26,6 +26,16 @@ Page({
     wx.getStorage({
       key: 'addressList',
       success: function (res) {
+				console.log("------------------------")
+				console.log(res.data[index].correctSidePic)
+				console.log(res.data[index].oppositeSodePic)
+				console.log(res.data[index].correctSidePic != null && res.data[index].oppositeSidePic != null)
+				if (res.data[index].correctSidePic !=null && res.data[index].oppositeSidePic != null)
+				{
+					res.data[index].correctSidePic = COM.load('CON').IMG_BASE + "ID/" + res.data[index].correctSidePic + ".png";
+					res.data[index].oppositeSidePic = COM.load('CON').IMG_BASE + "ID/" + res.data[index].oppositeSidePic + ".png";
+					console.log(res.data)
+				}
         that.setData({
           addressList: res.data,
           index: options.index,

@@ -6,12 +6,12 @@
         <view
                 class="upload"
                 bindtap="uploadTap">
-            上传图片
+            选择图片
         </view>
         <view
                 class="getCropperImage"
                 bindtap="getCropperImage">
-            生成图片
+            确认
         </view>
     </view>
 </view>
