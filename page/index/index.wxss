@@ -41,7 +41,7 @@ swiper-item image {
   opacity:  0.9;
   background: linear-gradient(to bottom, #f8f8f8, whitesmoke);
   position: relative;
-  bottom: 50px;
+  bottom: 0px;
   z-index: 1;
 }
 
@@ -118,4 +118,24 @@ swiper-item image {
 
 .newest-box .newest-list .newest-text {
   font-size: 32rpx;
+}
+
+.main-profile{
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  background-color: #000;
+  opacity:  0.5;
+  width: 100%;
+  position: relative;
+  bottom: 5px;
+  z-index: 1;
+  height: 40px;
+}
+
+.main-profile text{
+  color:#f5f6f5;
+  position:center;
 }
