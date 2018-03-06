@@ -21,8 +21,7 @@ Page({
   },
 
 	prepare: function(e){
-		self = this
-		
+		let self = this	
 
 		if (app.globalData.openId == null) {
 			setTimeout(function () {
@@ -37,11 +36,7 @@ Page({
 			//this.navigatorToIndex()
 			e.targetShopId = "o0_gG0RDvF6ESSQSFZJKuOyB2bDE"
 			this.setTargetShop(e)
-		}
-		
-	
-		let products = wx.getStorageSync("products");
-		let brands = wx.getStorageSync("brands");
+		}		
 
 
 	},
@@ -54,15 +49,11 @@ Page({
 			let fan = app.globalData.openId
 			let shop = e.targetShopId
 			//let url = "https://a5f93900.ngrok.io/api/mall/users/applyToShop/"
-
-			let url = COM.load('CON').APPLY_TO_SHOP;
-		
-			COM.load('NetUtil').netUtil(url, "POST", { "open_id": fan, "shop_id": shop }, (callback) => {
-			
+			let url = COM.load('CON').APPLY_TO_SHOP;		
+			COM.load('NetUtil').netUtil(url, "POST", { "open_id": fan, "shop_id": shop }, (callback) => {			
 				console.log(callback)
 				console.log (callback == false)
-				if (callback == false) {
-				
+				if (callback == false) {				
 					wx.showModal({
 						title: '提示',
 						content: '已经为您向店主申请进入本店铺, 请等待店主审核, 点击确认进入展厅',
@@ -103,8 +94,7 @@ Page({
 			let brands = wx.getStorageSync("brands");
 			let openId = wx.getStorageSync("openId");
 			if (brands && products && openId) {
-				clearInterval(interval);
-			
+				clearInterval(interval);			
 				wx.switchTab({
 					url: '../index/index',
 					// success: function (e) {

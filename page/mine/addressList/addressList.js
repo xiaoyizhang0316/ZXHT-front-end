@@ -114,7 +114,7 @@ Page({
 				data: callbackdata,
 				success: function (res) {
 					self.setData({
-						addressList: res.data
+						addressList: callbackdata
 					})
 				}
 			})

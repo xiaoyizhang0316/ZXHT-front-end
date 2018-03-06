@@ -156,6 +156,8 @@ Page({
       if (res) {
         let fliteredTitleList = []; //只收录该店铺的商品
         let shopProductIds = wx.getStorageSync("shopProductIds");
+				console.log("-----------------------------------------")
+				console.log(res)
         for (let i = 0; i < res.length; i++) {
           if (shopProductIds.indexOf(res[i].id) > -1) { //只搜索该店铺上架商品,过滤掉未上架商品
             res[i].rendered = [];
@@ -167,7 +169,8 @@ Page({
             }
           }
         }
-
+				console.log("-----------------------------------------")
+				console.log(fliteredTitleList)
         self.setData({
           searchTitleList: fliteredTitleList,
           isShowTitleList: true,

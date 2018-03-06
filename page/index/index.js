@@ -113,6 +113,8 @@ Page({
 		let products = wx.getStorageSync("products");
 
 		COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
+			//接口获取数据后如果有中文编码必须使用decodeURI或decodeURIComponent解码
+			shopProducts = JSON.parse(decodeURIComponent(JSON.stringify(shopProducts)));
 			if (shopProducts) {
 
 				var shopProductIds = [];
