@@ -81,14 +81,19 @@ Page({
 
 		console.log(e)
 		// 传入表单数据，调用验证方法
-		// 
 		if (!this.WxValidate.checkForm(e)) {
 			const error = this.WxValidate.errorList[0]
 			wx.showModal({
 				title: '添加收货人失败',
 				content: error.msg
 			})
-		} else {
+		} else if (!this.checkImg()) {
+			wx.showModal({
+				title: '添加收货人失败',
+				content: "身份证上传有误",
+
+			})
+		}else {
 			this.data.address.name = value.name
 			this.data.address.phone = value.phone
 			this.data.address.detail = value.detail
@@ -187,5 +192,33 @@ Page({
 	onShow: function () {	
 	
 	},
+	url(value) {
+		return /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/.test(value)
+	},
+
+	checkImg() {
+		let self = this
+		let flag = true
+		let picData = [
+			{
+				"file": self.data.address.correctSidePic
+			},
+			{
+				"file": self.data.address.oppositeSidePic
+			}
+		]
+		console.log(picData)
+		// 验证图像上传
+		picData.forEach(function (element) {
+			console.log(element.file == 0)
+			console.log(!self.url(element.file))
+			if (element.file == 0 || !self.url(element.file)) {
+				flag = false
+			}
+
+		});
+		console.log(flag)
+		return flag
+	}
 
 })

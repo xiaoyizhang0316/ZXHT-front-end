@@ -8,13 +8,13 @@ Page({
   
   },
 
-  onShareAppMessage: function () {
-    return {
-      title: '欢迎，这是xx的海淘店铺',
-      desc: '分享的店铺编号是xxx',
-      path: '/page/index/index?shopid=xxx'
-    }
-  },
+  // onShareAppMessage: function () {
+  //   return {
+  //     title: '欢迎，这是xx的海淘店铺',
+  //     desc: '分享的店铺编号是xxx',
+  //     path: '/page/index/index?shopid=xxx'
+  //   }
+  // },
 
   toShare: function (e) {
     console.log('to add goods')

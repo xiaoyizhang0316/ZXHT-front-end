@@ -15,6 +15,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+		COM.load('Util').loadBrands();
+		COM.load('Util').loadProducts();
 		this.prepare(options)
   },
 
@@ -32,11 +34,12 @@ Page({
 		if (Object.prototype.toString.call(e) !== '[object Undefined]' && Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
 		this.setTargetShop(e)
 		} else {
-			this.navigatorToIndex()
+			//this.navigatorToIndex()
+			e.targetShopId = "o0_gG0RDvF6ESSQSFZJKuOyB2bDE"
+			this.setTargetShop(e)
 		}
 		
-		COM.load('Util').loadBrands();
-		COM.load('Util').loadProducts();
+	
 		let products = wx.getStorageSync("products");
 		let brands = wx.getStorageSync("brands");
 
@@ -47,10 +50,6 @@ Page({
 	setTargetShop: function (e) {
 		let self = this
 		//得到传输过来的目标商铺
-	
-		
-		
-
 		console.log(app.globalData.openId)
 			let fan = app.globalData.openId
 			let shop = e.targetShopId
@@ -66,7 +65,7 @@ Page({
 				
 					wx.showModal({
 						title: '提示',
-						content: '您已申请进入本店铺, 请等待店主审核后可进店购物',
+						content: '已经为您向店主申请进入本店铺, 请等待店主审核, 点击确认进入展厅',
 						success: function (res) {
 							if (res.confirm) {
 								console.log('用户点击确定')
@@ -76,7 +75,7 @@ Page({
 							} else if (res.cancel) {
 								console.log('用户点击取消')
 								wx.navigateBack({
-									delta: 2
+									delta: -1
 								})
 							}
 						}
@@ -108,11 +107,11 @@ Page({
 			
 				wx.switchTab({
 					url: '../index/index',
-					success: function (e) {
-						var page = getCurrentPages().pop();
-						if (page == undefined || page == null) return;
-						page.onLoad();
-					} 
+					// success: function (e) {
+					// 	var page = getCurrentPages().pop();
+					// 	if (page == undefined || page == null) return;
+					// 	page.onLoad();
+					// } 
 				})
 			}
 		}, 2000);
@@ -167,7 +166,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

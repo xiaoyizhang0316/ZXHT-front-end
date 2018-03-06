@@ -105,16 +105,21 @@ Page({
     console.log(this.data.action)
   },
   onShow: function (param) {
-    var that = this
-    wx.getStorage({
-      key: 'addressList',
-      success: function (res) {
-        that.setData({
-          addressList: res.data
-        })
-        // console.log(res.data)
-      }
-    })
+    
+		let self = this
+		let url = COM.load('CON').GET_MY_CONSIGNEES_URL + app.globalData.openId
+		COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+			wx.setStorage({
+				key: "addressList",
+				data: callbackdata,
+				success: function (res) {
+					self.setData({
+						addressList: res.data
+					})
+				}
+			})
+		})
+   
   },
 	onPullDownRefresh: function(e)
 	{

@@ -216,11 +216,11 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    return {
-      title: this.data.orderId + ' 订单详情',
-      path: '/pages/mine/sell_order/sell_detail/sell_orderDetail?order=' + JSON.stringify(this.data.order) +"&shared=true",
-      // imageUrl: 'https://s18.postimg.org/hbwxwih7d/image.png',
-    }
-  },
+  // onShareAppMessage: function () {
+  //   return {
+  //     title: this.data.orderId + ' 订单详情',
+  //     path: '/pages/mine/sell_order/sell_detail/sell_orderDetail?order=' + JSON.stringify(this.data.order) +"&shared=true",
+  //     // imageUrl: 'https://s18.postimg.org/hbwxwih7d/image.png',
+  //   }
+  // },
 })

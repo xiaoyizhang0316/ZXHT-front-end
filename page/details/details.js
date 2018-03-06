@@ -180,45 +180,47 @@ Page({
    * 加载商品基本信息
    */
   onLoad: function (options) {
-    this.setData({ productId : options.id});
-		//需要取得本店对于本位客人的价格信息
-		let url = ""
-		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
-			url = COM.load('CON').TARGETSHOP_PRODUCT_URL + "/" + app.globalData.openId + "/" + app.globalData.targetShopId + "/" + options.id			
-		} else {
-			url = COM.load('CON').TARGETSHOP_PRODUCT_URL + "/" + app.globalData.openId + "/" + app.globalData.openId + "/" + options.id		
-		}
-		console.log(url)
-		COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
-			if (shopProduct) {
-				let products = wx.getStorageSync("products");
-				if (products) {
-					this.data.goods["id"] = options.id;
-					this.data.goods["title"] = products[options.id].title;
-					this.data.goods["thumb"] = COM.load('Util').image(products[options.id].barcode);
-					this.data.goods["stock"] = shopProduct.stock;
-					this.data.goods["price"] = shopProduct.price;
+		this.setData({ productId: options.id });
+		//如果是分享的页面
+		if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.targetShopId) !== '[object Undefined]') {
+			let openId = app.globalData.openId
+			let targetShopId = options.targetShopId
+			let productId = options.id
+			//检查当前用户是否可以进入目标店铺
 
-					// http://101.178.98.25:8443/api/mall/products/242
-					let detailUrl = COM.load('CON').PRODUCT_URL + options.id;
-					COM.load('NetUtil').netUtil(detailUrl, "GET", "", (detail) => {
-						if (detail) {
-							console.log(detail)
-							this.setData({
-								detail: detail
-							})
+			let url = COM.load('CON').APPLY_TO_SHOP;
+			COM.load('NetUtil').netUtil(url, "POST", { "open_id": openId, "shop_id": targetShopId }, (callback) => {
+			
+				if (callback == false) {
+					wx.showModal({
+						title: '提示',
+						content: '您暂时无法购买此店铺的商品，我们已经为您向店主申请进入, 请等待店主审核后方可进店购物, 点击确认进入展厅',
+						success: function (res) {
+							if (res.confirm) {
+								console.log('用户点击确定')
+								wx.navigateTo({
+									url: '/page/welcome/welcome?targetShopId=o0_gG0RDvF6ESSQSFZJKuOyB2bDE',
+								})
+							} else if (res.cancel) {
+								console.log('用户点击取消')
+								wx.navigateBack({
+									delta: -1
+								})
+							}
 						}
-					});
-
-					this.setData({
-						goods: this.data.goods
 					})
-					console.log("goods: ------------------")
-					console.log(this.data.goods)
-					this.updateTotalNum();
+				} else {
+					//将得到的shopid 写入缓存并改写global shopid
+					wx.setStorage({
+						key: 'targetShopId',
+						data: targetShopId,
+					})
+					app.globalData.targetShopId = targetShopId
 				}
-			}
-		});
+			})
+			
+		} 
+		
   },
 
 
@@ -226,22 +228,64 @@ Page({
  * 加载相应店铺的商品价格和库存
  */
   onShow: function () {
-    let productId = this.data.productId, shopOpenId = app.globalData.shopOpenId;
-    let url = COM.load('CON').SHOP_PRODUCT_URL + "search/" + shopOpenId + "/" + productId;
-    COM.load('NetUtil').netUtil(url, "GET", "", (product) => {
-      if (product) {
-        this.data.goods["detail"] = product.memo;
-        this.data.goods["price"] = product.vipPrice;
-        this.data.goods["stock"] = product.stock;
+		let self = this
+		//需要取得本店对于本位客人的价格信息
+		let url = ""
+		let productId = self.data.productId
+		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
+			url = COM.load('CON').TARGETSHOP_PRODUCT_URL + "/" + app.globalData.openId + "/" + app.globalData.targetShopId + "/" + productId
+		} else {
+			url = COM.load('CON').TARGETSHOP_PRODUCT_URL + "/" + app.globalData.openId + "/" + app.globalData.openId + "/" + productId
+		}
 
-        this.setData({
-          goods: this.data.goods
-        })
+		COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
+			if (shopProduct) {
+				let products = wx.getStorageSync("products");
+				if (products) {
+					self.data.goods["id"] = productId;
+					self.data.goods["title"] = products[productId].title;
+					self.data.goods["thumb"] = COM.load('Util').image(products[productId].barcode);
+					self.data.goods["stock"] = shopProduct.stock;
+					self.data.goods["price"] = shopProduct.price;
 
-      }
-    });
+					// http://101.178.98.25:8443/api/mall/products/242
+					let detailUrl = COM.load('CON').PRODUCT_URL + productId;
+					COM.load('NetUtil').netUtil(detailUrl, "GET", "", (detail) => {
+						if (detail) {
 
+							self.setData({
+								detail: detail
+							})
+						}
+					});
+
+					self.setData({
+						goods: self.data.goods
+					})
+
+					self.updateTotalNum();
+				}
+			}
+		});
+   
   },
+	onShareAppMessage: function(){
+		let self = this
+		let openId = app.globalData.openId;
+		let shopId = (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) ? app.globalData.targetShopId : app.globalData.openId
+		
+		return {
+			title: '真实澳洲直邮 朋友分享的海淘',
+			desc: self.data.goods["title"],
+			path: '/page/details/details?id='+self.data.productId+'&targetShopId='+shopId,
+			success: function (res) {
+				// 转发成功
+			},
+			fail: function (res) {
+				// 转发失败
+			}
+		}
+	}
 
     
 })

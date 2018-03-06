@@ -36,6 +36,12 @@ Page({
 
 	onLoad: function (options) {
 
+	},
+
+
+	onShow: function () {
+
+
 		var self = this;
 		self.loadRecommendedProducts();
 
@@ -50,7 +56,7 @@ Page({
 		// setTimeout(function () {
 		//   wx.hideLoading()
 		// }, 100);
-		this.resetSearch();
+		self.resetSearch();
 
 		//设置页面标题
 
@@ -71,7 +77,7 @@ Page({
 						sign: callbackdata.sign,
 						shopImg: callbackdata.shopImg
 					})
-				
+
 					//self.loadRecommendedProducts();
 				}
 			})
@@ -80,11 +86,6 @@ Page({
 				title: '真享 海淘',
 			})
 		}
-
-	},
-
-
-	onShow: function () {
 
 	},
 
@@ -110,8 +111,6 @@ Page({
 		let products = wx.getStorageSync("products");
 
 		COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
-			console.log("ssssssssssssssssssss")
-			console.log(shopProducts)
 			if (shopProducts) {
 
 				var shopProductIds = [];
@@ -263,10 +262,18 @@ Page({
 	},
 
 	onShareAppMessage: function () {
+		let self = this
+		let openId = app.globalData.openId;
 		return {
-			title: '真享海淘',
-			desc: '分享的店铺编号是12',
-			path: '/page/index/index?shopid=12'
+			title: '真实澳洲直邮 朋友分享的海淘',
+			desc: self.data.sign,
+			path: '/page/welcome/welcome?targetShopId=' + openId,
+			success: function (res) {
+				// 转发成功
+			},
+			fail: function (res) {
+				// 转发失败
+			}
 		}
 	},
 
@@ -277,11 +284,11 @@ Page({
 	},
 
 	onPullDownRefresh() {
-		console.log('--------下拉刷新-------')
-		wx.showNavigationBarLoading() //在标题栏中显示加载
-		var page = getCurrentPages().pop();
-		if (page == undefined || page == null) return;
-		page.onLoad();
+		let self = this
+		console.log('--------下拉刷新-------')	
+		wx.stopPullDownRefresh()
+		self.onLoad()	
+		self.onShow()
 
 	}
 })
