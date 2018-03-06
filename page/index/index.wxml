@@ -15,7 +15,7 @@
     <view class="main-profile">
           <image id="profile" style="margin-right:2px;opacity:1.0;" src="{{shopImg}}"></image>
       <view>   
-      <text>{{sign}}</text>
+      <text>{{userName}} + {{sign}}</text>
       </view>
     </view>
 

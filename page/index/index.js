@@ -30,7 +30,8 @@ Page({
 		userinfo: '',
 		targetShopId: null,
 		sign:"",
-		shopImg:""
+		shopImg:"",
+		userName:""
 
 	},
 
@@ -75,7 +76,8 @@ Page({
 					})
 					self.setData({
 						sign: callbackdata.sign,
-						shopImg: callbackdata.shopImg
+						shopImg: callbackdata.shopImg,
+						userName: callbackdata.userName
 					})
 
 					//self.loadRecommendedProducts();
