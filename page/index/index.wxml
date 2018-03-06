@@ -4,7 +4,8 @@
   <!-- <view class='main'> -->
 
   <view class="search-box">
-    <swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
+     
+    <swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true" stlye="z-index:-1;">
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
           <image src="{{item}}" class="slide-image" width="100%" />
@@ -12,10 +13,13 @@
       </block>
     </swiper>
 
-    <view class="main-profile">
-          <image id="profile" style="margin-right:2px;opacity:1.0;" src="{{shopImg}}"></image>
-      <view>   
-      <text>{{userName}} + {{sign}}</text>
+ <view class="main-profile">
+          <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
+      <view style="width:80%;">   
+      <!-- <text id="name">{{userName}}</text>
+      <view style="height:20rpx;">
+      </view> -->
+      <text id="sign">{{sign}}</text>
       </view>
     </view>
 
