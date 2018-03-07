@@ -101,7 +101,7 @@ page,.main{
     position: relative;
     height: 30rpx;
     line-height: 30rpx;
-    padding:30rpx 0 45rpx;
+    padding:30rpx 0 0rpx;
     text-align: center;
     color: #AB956D;
     font-size: 30rpx;
