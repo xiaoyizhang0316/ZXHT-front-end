@@ -108,12 +108,45 @@ Page({
     })
   },
 
-  placeOrder: function (e) {
-    wx.redirectTo({
-      url: '/pages/send/' + e.currentTarget.dataset.logo + '/send?order=' + e.currentTarget.dataset.order,
+	placeOrder: function (e) {
+		let self = this
+		console.log(e)
+		let orderId = e.currentTarget.dataset.order
+		let url = COM.load('CON').REORDER_URL;
+		COM.load('NetUtil').netUtil(url, "POST", { "orderId": orderId }, (callback) => {
+			console.log(callback.flag)
+			if (callback.flag == true)
+			{
+				wx.showModal({
+					title: '下单成功',
+					content: '已经为您重新下单',
+					showCancel: false,
+					success: function (res) {
+						if (res.confirm) {
+							wx.navigateBack({
+								delta: 1
+							})
+						}
+					}
+				})
+			}else{
+				wx.showModal({
+					title: '下单失败',
+					content: '店家已下架此商品或者无货',
+					showCancel: false,
+					success: function (res) {
+						if (res.confirm) {
+							wx.navigateBack({
+								delta: 1
+							})
+						}
+					}
+				})
+			}
+				
+		})
 
-    })
-  },
+	},
   getLogo: function (productId) {
     let products = wx.getStorageSync("products");
     return COM.load('Util').image(products[productId].barcode)

@@ -36,6 +36,7 @@ Page({
 
 
   radioChange: function (e) {
+		console.log(this.data.shopLineList[e.detail.value])
     this.setData({
       selectedShop: this.data.shopLineList[e.detail.value],
       isSelect: true
@@ -70,17 +71,44 @@ Page({
       let shopMap = new Map();
       if (shops) {
         console.log(shops)
+				//console.log(self.globalData)
         for (var x in shops) {
           let shop = shops[x];
-          shopMap.set(shop.shop.id,
-            {
-              "id": shop.shop.id,
-              "shop_name": shop.shop.shopName,
-              "shop_logo": shop.user.avatarUrl,
-              "shop_sign": shop.shop.sign,
-							"shop_openId": shop.shop.openId
-            })
+					if(app.globalData.targetShopId == shop.shop.openId)
+					{				
+						shopMap.set(shop.shop.id,
+							{
+								"id": shop.shop.id,
+								"shop_name": shop.shop.shopName,
+								"shop_logo": shop.user.avatarUrl,
+								"shop_sign": shop.shop.sign,
+								"shop_openId": shop.shop.openId,
+								"selected" : true
+							})
+						 this.setData({
+							 selectedShop: shopMap.get(shop.shop.id),
+						 	isSelect: true
+						 });
+					}
         }
+
+
+				for (var x in shops) {
+					let shop = shops[x];
+					if (app.globalData.targetShopId != shop.shop.openId) {
+						shopMap.set(shop.shop.id,
+							{
+								"id": shop.shop.id,
+								"shop_name": shop.shop.shopName,
+								"shop_logo": shop.user.avatarUrl,
+								"shop_sign": shop.shop.sign,
+								"shop_openId": shop.shop.openId,
+								"selected": false
+							})
+					}
+				}
+
+				
         self.setData({
           shopLineList: Array.from(shopMap.values()),
           shopMap: shopMap
@@ -112,12 +140,47 @@ Page({
 
 	switchShop: function(e)
 	{
-		console.log(e)
+		
 		let targetShopId = e.currentTarget.dataset.id
-		console.log(targetShopId);
-		wx.navigateTo({
-			url: '../../welcome/welcome?targetShopId='+targetShopId,
-		})
+		let cartList = wx.getStorageSync("cartList")		
+		if(targetShopId == app.globalData.targetShopId)
+		{
+			wx.showModal({
+				title: '提示',
+				content: '您已在所选的店铺中',
+				showCancel:false,
+				success:function(res){
+					if(res.confirm)
+					{
+						return
+					}
+				}
+			})
+			return
+		}
+		if(cartList.length > 0)
+		{
+			wx.showModal({
+				title: '提示',
+				content: '切换店铺会清空您的购物车, 是否确定切换',
+				success: function(res){
+					if(res.confirm)
+					{
+						cartList = [];
+						wx.setStorageSync("cartList", cartList)
+						console.log(targetShopId);
+						wx.navigateTo({
+							url: '../../welcome/welcome?targetShopId=' + targetShopId,
+						})
+
+					}
+				}
+			})
+		}else{
+			wx.navigateTo({
+				url: '../../welcome/welcome?targetShopId=' + targetShopId,
+			})
+		}
 		
 	},
 	

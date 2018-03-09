@@ -163,15 +163,23 @@ Page({
           wx.showModal({
             title: '开店成功',
             content: '您的店铺已开启',
+						showCancel:false,
+						success: function(res){
+							if(res.confirm)
+							{
+								app.globalData.shopOpened = true
+								wx.setStorage({
+									key: 'shopOpened',
+									data: true
+								})
+								wx.redirectTo({
+									url: '/page/mine/shopApply/applySuccess/applySuccess'
+								})
+							}
+						}
           })
-          wx.redirectTo({
-            url: '/page/mine/shopApply/applySuccess/applySuccess'
-          })
-          app.globalData.shopOpened = true
-          wx.setStorage({
-            key: 'shopOpened',
-            data: true
-          })
+         
+         
 
         }
         else {

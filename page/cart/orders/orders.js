@@ -87,10 +87,11 @@ Page({
 
   placeOrder() {
     //let orderTime = COM.load('Util').formatTime(new Date());
-		if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId) {
+		// if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId || app.globalData.targetShopId == "o0_gG0RDvF6ESSQSFZJKuOyB2bDE") {
+			if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId) {
 			wx.showModal({
 				title: '错误',
-				content: '您不能在自己的店里购买商品',
+				content: '您不能在自己的店或者展览厅中购物',
 				success: function (res) {
 					if (res.confirm) {
 						return
@@ -100,7 +101,15 @@ Page({
 				}
 			})
 			return
+		} else if (app.globalData.nickName == "未登录用户" || app.globalData.nickName == null) {
+			wx.showToast({
+				title: '未登录不能购物',
+				icon: 'loading',
+				duration: 2000
+			})
 		}
+
+		
 
 		if(this.data.address.id == null)
 		{

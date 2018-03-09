@@ -74,6 +74,7 @@ Page({
   },
 
   addCartItemToStorage(item) {
+		console.log(item)
     const self = this;
     if (self.data.cartList.length > 0){
 

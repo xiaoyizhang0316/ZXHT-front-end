@@ -63,3 +63,23 @@ form {
   width: 90%;
   margin-top: 27rpx;
 }
+
+.middle-pic-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px #e3e3e3 solid;
+}
+
+.middle-pic {
+  color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30rpx; 
+  margin-bottom: 30rpx;
+  width: 280rpx;
+  height: 220rpx;
+  border: 1px #e3e3e3 solid;
+}

@@ -41,6 +41,11 @@ Page({
     }
   },
 
+	bindChange:function(e){
+		
+		var that = this;
+		that.setData({ currentTab: e.detail.current });
+	},
   reset: function (e) {
     this.showOrderList();
     this.setData({ search: '', displayClear: false });

@@ -4,14 +4,20 @@
       已关注<text class='shop-num'>{{shopLineList.length}}</text>个店铺
   </view>
 
+
+	
   <scroll-view class = 'shop-list' scroll-y="{{true}}" style="height:{{winHeight-88}}px" >
     <radio-group class="shop-radio-group" bindchange="radioChange">
       <view class='shop-item' wx:for="{{shopLineList}}" wx:key="{{index}}" data-id="{{item.id}}">
-        <radio class='shop-item-radio' value="{{index}}" />
+        <radio class='shop-item-radio' value="{{index}}" checked="{{item.selected}}"/>
         <image class='shop-item-image' src="{{item.shop_logo}}"></image>
         <view class='shop-item-desc'>
           <view class='shop-item-name'>{{item.shop_name}}</view>
           <view class='shop-item-sign'>{{item.shop_sign}}</view>
+					<block wx:if="{{item.selected == true}}">
+                  <view class='shop-item-tips'>您位于当前店铺</view>
+          </block>
+					<view class='shop-item-tips'></view>
         </view>
       </view>
     </radio-group>

@@ -19,7 +19,8 @@ Page({
 			// 'https://s18.postimg.org/5zkcept2x/image.png',
 			// 'https://s18.postimg.org/hbwxwih7d/image.png'
 			'https://img.zhenxianghaitao.com/slide1.png',
-			'https://img.zhenxianghaitao.com/slide2.png'
+			'https://img.zhenxianghaitao.com/slide2.png',
+			'https://img.zhenxianghaitao.com/slide3.png'
 		],
 		indicatorDots: false,
 		autoplay: false,
@@ -160,9 +161,15 @@ Page({
 	},
 
 	bindSearch: function (event) {
+	if(this.data.focus == false)
+	{
 		wx.navigateTo({
 			url: '/page/index/search/search'
 		})
+	}
+	self.setData({
+		focus: true
+	})
 	},
 
 	resetSearch: function (e) {
@@ -267,7 +274,17 @@ Page({
 
 	onShareAppMessage: function () {
 		let self = this
-		let openId = app.globalData.openId;
+		let shopOpen = wx.getStorageSync('shopOpened')
+		let openId = ""
+		if(shopOpen == true)
+		{
+			openId = app.globalData.openId;
+		}else{
+			openId = "o0_gG0RDvF6ESSQSFZJKuOyB2bDE"
+		}
+		
+		console.log(wx.getStorageSync('shopOpened'))
+		console.log(openId)
 		return {
 			title: '真实澳洲直邮 朋友分享的海淘',
 			desc: self.data.sign,

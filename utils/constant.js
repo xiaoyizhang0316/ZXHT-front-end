@@ -59,6 +59,8 @@ const CANCEL_ORDER_BUYER = BASE_URL + "/api/mall/orders/cancelOrder/"
 const UPDATE_ORDER_URL = BASE_URL + "/api/mall/orders/updateOrder"
 const CONFRIM_ORDER_URL = BASE_URL + "/api/mall/orders/confirmOrder"
 const PAY_ORDER_URL = BASE_URL + "/api/mall/orders/payOrder/"
+const REORDER_URL = BASE_URL + "/api/mall/orders/reorder"
+const RECEIVE_ORDER_URL = BASE_URL + "/api/mall/orders/receiveOrder/"
 
 //发货单
 const SAVE_SHIPORDER = BASE_URL + "/api/mall/orders/saveShipOrder"
@@ -106,5 +108,7 @@ module.exports = {
   GET_ALL_PRODUCT_BY_CATEGORYID_URL: GET_ALL_PRODUCT_BY_CATEGORYID_URL,
 	GET_ALL_SHOPPRODUCTS_URL: GET_ALL_SHOPPRODUCTS_URL,
 	UPLOADFILE: UPLOADFILE,
-	IMG_BASE: IMG_BASE
+	IMG_BASE: IMG_BASE,
+	REORDER_URL: REORDER_URL,
+	RECEIVE_ORDER_URL: RECEIVE_ORDER_URL
 }

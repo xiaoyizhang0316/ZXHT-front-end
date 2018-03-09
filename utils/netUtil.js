@@ -5,9 +5,9 @@ var CON = require('constant.js');
  * 返回 格式res:{code:1/-1, errMsg, data} 1成功 -1失败
  * 包含统一的加载中 加载失败提示
  * **/
-function netUtil(url, method,body, callBack) {
+function netUtil(url, method,body, callBack, hide = true) {
   wx.showLoading({
-    title: '加载中',
+    title: '加载中，请稍等',
     mask: true,
 
   }) 
@@ -59,12 +59,16 @@ function netUtil(url, method,body, callBack) {
     },
 		complete: function(res){
 			console.log("加载结束")
-			wx.hideLoading()
+			if(hide)
+			{
+				wx.hideLoading()
+			}
+			
 		}
   });
 }
 
-function uploadFile(url, method, list, callBack) {
+function uploadFile(url, method, list, callBack, hide = true) {
 	console.log("上传开始")
 	
 	var callBackData = {};
@@ -126,7 +130,11 @@ function uploadFile(url, method, list, callBack) {
 			},
 			complete: function(res){
 				console.log("上传结束")
-				wx.hideToast()
+				if(hide)
+				{
+					wx.hideToast()
+				}
+				
 			}
 		})
 		})

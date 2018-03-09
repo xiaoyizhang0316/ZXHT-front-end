@@ -3,31 +3,46 @@
 <view class="container">
 
   <view class="header-contaniner">
-
     <view class="header-box">
       <view class="header-input-box">
         <image class="find-icon" src="/image/public/find.png" background-size="cover"></image>
         <input bindinput="onKeyUp" value="{{param}}" focus="{{focus}}" placeholder="请输入搜索关键字" />
-
         <image wx:if="{{isShowTitleList}}" bindtap='clearTitle' class="clear-icon" src="/image/public/clear.png" background-size="cover"></image>
       </view>
-      <button bindtap='searchRequest' type='warn'>搜索</button>
+    </view>
+		 <view class="history-box">
+      <view class="history-box-text">
+        <text class="box-name-text">热门搜索</text>
+        <!-- <text bindtap='changeHot' class="red-btn">换一批</text> -->
+      </view>
+      <view class="history-box-label ">
+        <view bindtap='writeQuery' data-name="{{item.name}}" class="box-label" wx:for="{{searchHotList}}">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+	<view class="label-contaniner">
+    <view class="history-box" wx:if="{{isShowHistory}}">
+      <view class="history-box-text">
+        <text class="box-name-text">历史搜索</text>
+        <text bindtap='cleanHistory' class="red-btn">清除</text>
+      </view>
+      <view class="history-box-label ">
+        <view bindtap='writeQuery' data-name="{{item.name}}" class="box-label" wx:for="{{searchHistoryList}}">{{item.name}}</view>
+      </view>
     </view>
 
-
-  </view>
+   
 
   <block wx:if="{{isShowTitleList}}">
     <view class="title-contaniner">
       <block wx:if="{{searchTitleList.length > 0}}">
         <block wx:for="{{searchTitleList}}">
           <view class="title-line" data-name="{{item.title}}" data-id="{{item.id}}" bindtap='showDetail'>
-
             <block wx:if="{{item.rendered.length > 0}}">
-            <block wx:for="{{item.rendered}}" wx:for-item="key_obj">
-              <text wx:if="{{key_obj.key == true}}" class="high-light-font">{{key_obj.str}}</text>
-              <text wx:else>{{key_obj.str}}</text>
-            </block>
+              <block wx:for="{{item.rendered}}" wx:for-item="key_obj">
+                <text wx:if="{{key_obj.key == true}}" class="high-light-font">{{key_obj.str}}</text>
+                <text wx:else>{{key_obj.str}}</text>
+              </block>
             </block>
             <block wx:else>
               <view class="title-line">
@@ -42,38 +57,11 @@
           暂无搜索结果
         </view>
       </block>
-
-
-      <!-- <view wx:if="{{searchTitleList}}" bindtap='writeQuery' data-name="{{item.title}}" class="title-line" wx:for="{{searchTitleList}}">
-
-       {{item.title}} 
-      </view>  -->
-
-
     </view>
   </block>
 
 
-  <view class="label-contaniner">
-    <view class="history-box" wx:if="{{isShowHistory}}">
-      <view class="history-box-text">
-        <text class="box-name-text">历史搜索</text>
-        <text bindtap='cleanHistory' class="red-btn">清除</text>
-      </view>
-      <view class="history-box-label ">
-        <view bindtap='writeQuery' data-name="{{item.name}}" class="box-label" wx:for="{{searchHistoryList}}">{{item.name}}</view>
-      </view>
-    </view>
-
-    <view class="history-box">
-      <view class="history-box-text">
-        <text class="box-name-text">热门搜索</text>
-        <text bindtap='changeHot' class="red-btn">换一批</text>
-      </view>
-      <view class="history-box-label ">
-        <view bindtap='writeQuery' data-name="{{item.name}}" class="box-label" wx:for="{{searchHotList}}">{{item.name}}</view>
-      </view>
-    </view>
+  
 
   </view>
 </view>

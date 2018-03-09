@@ -91,6 +91,13 @@ page {
   line-height: 36rpx;
 }
 
+.shop-item-desc view:nth-child(3) {
+  width: 460rpx;
+  font-size: 28rpx;
+  color: #db4437;
+  
+  line-height: 36rpx;
+}
 .invisible-brick {
   height: 88rpx;
 }

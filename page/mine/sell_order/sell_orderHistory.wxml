@@ -4,7 +4,7 @@
       未支付
     </view>
     <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
-      已支付
+      待发货
     </view>
     <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">
       已发货
@@ -14,7 +14,7 @@
   <swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight}}px" bindchange="bindChange">
     <!-- 未支付 -->
     <swiper-item>
-      <scroll-view scroll-y="{{true}}" style="height:{{winHeight-44}}px">
+      <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
         <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
         
            <block wx:if="{{item.orderInfo.orderStatus == 1||item.orderInfo.orderStatus == 2||item.orderInfo.orderStatus == 9}}"> 
@@ -57,10 +57,13 @@
                   <text class='button'>发货中</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
-                  <text class='button'>已支付</text>
+                  <text class='button'>待发货</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
                   <text class='button'>已收货</text>
+                </block>
+								<block wx:elif="{{item.orderInfo.orderStatus == 6}}">
+                  <text class='button'>待收货</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
                   <text class='button-grey'>已取消</text>
@@ -78,11 +81,11 @@
       </scroll-view>
     </swiper-item>
 
-    <!-- 已支付 -->
+    <!-- 待发货 -->
     <swiper-item>
       <scroll-view scroll-y="{{true}}" style="height:{{winHeight-44}}px">
         <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
-         <block wx:if="{{(item.orderInfo.orderStatus == 3) || (item.orderInfo.orderStatus == 5)}}"><!-- 已支付 -->
+         <block wx:if="{{(item.orderInfo.orderStatus == 3) || (item.orderInfo.orderStatus == 5)}}"><!-- 待发货 -->
           <view class="explain-line" bindtap="sendOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
             <view class="item-top">
               <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
@@ -119,7 +122,7 @@
                 <text class='button'>发货中</text>
               </block>
               <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
-                <text class='button'>已支付</text>
+                <text class='button'>待发货</text>
               </block>
               <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
                 <text class='button'>已收货</text>
@@ -188,7 +191,7 @@
                   <text class='button'>发货中</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
-                  <text class='button'>已支付</text>
+                  <text class='button'>待发货</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
                   <text class='button'>已收货</text>

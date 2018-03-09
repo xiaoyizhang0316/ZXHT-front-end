@@ -8,9 +8,7 @@
  <image src="https://img.zhenxianghaitao.com/openImg1.png" style="width:100%;height:100%;"/> 
  </swiper-item>
  <swiper-item>
- <image src="https://img.zhenxianghaitao.com/4.jpg" style="width:100%;height:100%;"/> 
+ <image src="https://img.zhenxianghaitao.com/openImg3.png" style="width:100%;height:100%;"/> 
  </swiper-item>
- <swiper-item>
- <image src="https://img.zhenxianghaitao.com/5.jpg" style="width:100%;height:100%;"/> 
- </swiper-item>
+ 
 </swiper>

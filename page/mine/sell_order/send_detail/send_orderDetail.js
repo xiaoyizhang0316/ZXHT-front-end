@@ -290,7 +290,7 @@ Page({
 		return value.length > 0
 	},
 	digits: function (value) {
-		return that.optional(value) || /^\d+$/.test(value)
+		return /^\d+$/.test(value)
 	},
 	checkShipDetail: function(shipdetail){
 		let self = this

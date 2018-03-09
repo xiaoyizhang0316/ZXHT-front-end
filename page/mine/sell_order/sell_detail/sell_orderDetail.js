@@ -156,7 +156,7 @@ Page({
   },
 
   updateDeliveryPrice: function (e) {
-    if (e.detail.value > 0) {
+    if (e.detail.value >= 0) {
       this.setData({
         deliveryPrice: e.detail.value
       });
@@ -164,7 +164,7 @@ Page({
   },
 
   updateDiscountValue: function (e) {
-    if (e.detail.value > 0) {
+    if (e.detail.value >= 0) {
       this.setData({
         discountValue: e.detail.value
       });

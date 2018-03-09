@@ -6,25 +6,29 @@ page {
 }
 
 .container {
-  display: flex;
+
   flex-direction: column;
   align-items: flex-start；
+	
 }
 
 .header-contaniner {
+
   width: 100%;
-  display: flex;
+ 
   justify-content: center;
   padding-top: 20rpx;
   padding-bottom: 20rpx;
-  height: 60rpx;
+  height: 195rpx;
   font-size: 25rpx;
   border-bottom: 1px #e3e3e3 solid;
 }
 
 .header-box {
-  width: 90%;
+  width: 100%;
   display: flex;
+	padding-bottom: 10rpx;
+	border-bottom: 1px #e3e3e3 solid;
 }
 
 .header-box button{
@@ -50,7 +54,7 @@ page {
 
 .header-input-box {
   display: flex;
-  width: 80%;
+  width: 100%;
   background-color: #f7f7f7;
   border:2px #f7f7f7 solid;
   border-radius:25rpx;
@@ -61,22 +65,23 @@ page {
 }
 
 .label-contaniner {
-  position: fixed;
+  
   top: 102rpx;
   width: 100%;
-  display: flex;
+ 
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 
 .history-box {
-    width: 89%;
+    width: 100%;
+		padding-bottom: 10rpx;
 }
 
 
 .history-box-text{
-  display: flex;
+ 
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -89,6 +94,7 @@ page {
   color: #ef3535;
   font-size: 25rpx;
   padding-right: 8rpx;
+	padding-left:10rpx;
 }
 
 .box-name-text {
@@ -117,8 +123,8 @@ page {
 
 
 .title-contaniner {
-  position: fixed;
-  top: 102rpx;
+  
+  top: 200rpx;
   z-index: 999;
   background-color: #fff;
   width: 100%;

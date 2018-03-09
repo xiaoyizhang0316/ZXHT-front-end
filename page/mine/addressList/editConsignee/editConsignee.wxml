@@ -23,12 +23,6 @@
               <text>身份证号</text><input type="idcard" placeholder="身份证号码"  name="identityCard" value="{{address.identityCard}}"/>
           </view>
     </view>
-
-    <view class="bottom-contaniner">
-        <text>详细地址需填写楼栋楼层或房间号信息</text>
-        <button type='primary' class='confirmBtn' form-type="submit">确认</button>
-        <button bindtap='deleteAddress' class='confirmBtn'>删除地址</button>
-    </view>
 		<view class="middle-pic-box">
         <view bindtap='chooseCorrectPic' class="middle-pic">
           <block wx:if="{{address.correctSidePic == 0}}">
@@ -53,5 +47,11 @@
         </view>
 
       </view>
+    <view class="bottom-contaniner">
+        <text>详细地址需填写楼栋楼层或房间号信息</text>
+        <button type='primary' class='confirmBtn' form-type="submit">确认</button>
+        <button bindtap='deleteAddress' class='confirmBtn'>删除地址</button>
+    </view>
+		
   </form>
 </view>

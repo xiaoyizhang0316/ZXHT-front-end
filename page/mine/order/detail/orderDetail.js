@@ -143,11 +143,43 @@ Page({
     COM.load('Util').makeCall(number);
   },
 
-  placeOrder: function (e) {
-    wx.redirectTo({
-      url: '/pages/send/' + this.data.logo + '/send?order=' + this.data.orderId,
-    })
-  },
+	placeOrder: function (e) {
+		let self = this
+		console.log(e)
+		let orderId = e.currentTarget.dataset.order
+		let url = COM.load('CON').REORDER_URL;
+		COM.load('NetUtil').netUtil(url, "POST", { "orderId": orderId }, (callback) => {
+			console.log(callback)
+			if (callback.flag == true) {
+				wx.showModal({
+					title: '下单成功',
+					content: '已经为您重新下单',
+					showCancel: false,
+					success: function (res) {
+						if (res.confirm) {
+							wx.navigateBack({
+								delta: 1
+							})
+						}
+					}
+				})
+			} else {
+				wx.showModal({
+					title: '下单失败',
+					content: '店家已下架此商品或者无货',
+					showCancel: false,
+					success: function (res) {
+						if (res.confirm) {
+							wx.navigateBack({
+								delta: 1
+							})
+						}
+					}
+				})
+			}
+		})
+
+	},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -190,6 +222,97 @@ Page({
   onReachBottom: function () {
 
   },
+
+	addToCart: function(e)
+	{
+		let self = this
+		
+		let product = self.data.order.orderGoods[e.currentTarget.dataset.id]
+		console.log(product)
+		var newCartItem = {}
+		newCartItem.title = product.title
+		newCartItem.image = product.image
+		newCartItem.num = product.num
+		newCartItem.price = product.price
+		newCartItem.id = product.productId
+		// newCartItem.selected: true
+
+		self.addCartItemToStorage(newCartItem)
+
+	},
+	addCartItemToStorage: function(item) {
+		const self = this;
+		//得到缓存的购物车
+		let cartList = []
+		cartList = wx.getStorageSync("cartList")
+		if (cartList.length > 0) {
+			console.log(cartList)
+			var flag = false;
+			for (var x in cartList) {
+				if (cartList[x].id == item.id) {
+					flag = true
+					cartList[x].num += item.num					
+					break;
+				}
+			}
+			if (!flag) {
+				cartList.push(item)			
+			}
+		} else {
+			cartList = []
+			cartList.push(item)		
+		}
+	
+		wx.setStorage({
+			key: 'cartList',
+			data: cartList,
+			success: function(res){
+				wx.showToast({
+					title: '添加购物车成功',
+					icon: 'success',
+					duration: 1500
+				})
+			}
+		})
+
+	},
+
+	receiveOrder : function(e){
+		let self = this
+		
+		let orderId = e.currentTarget.dataset.order
+		let url = COM.load('CON').RECEIVE_ORDER_URL+orderId;
+		COM.load('NetUtil').netUtil(url, "PUT", {}, (callback) => {
+			console.log(callback)
+			if (callback == true) {
+				wx.showModal({
+					title: '收货成功',
+					content: '谢谢您的支持',
+					showCancel: false,
+					success: function (res) {
+						if (res.confirm) {
+							wx.navigateBack({
+								delta: 1
+							})
+						}
+					}
+				})
+			} else {
+				wx.showModal({
+					title: '收货失败',
+					content: '请重新尝试一下~',
+					showCancel: false,
+					success: function (res) {
+						if (res.confirm) {
+							wx.navigateBack({
+								delta: 1
+							})
+						}
+					}
+				})
+			}
+		})
+	}
 
   /**
    * 用户点击右上角分享

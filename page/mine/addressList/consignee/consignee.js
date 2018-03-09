@@ -4,7 +4,7 @@ import WxValidate from "../../../../utils/Validate/WxValidate.js"
 var Validate = ""
 var app = getApp()
 Page({
-
+	
   data: {
     addressList: [],
     address: {
@@ -16,7 +16,8 @@ Page({
       identityCard: '',
       detail: '',
       correctSidePic: 0,
-      oppositeSidePic: 0
+      oppositeSidePic: 0,
+			buttonFlag: false,
     },
     middleInfo: '海关政策要求，请正确填写收货人身份证并上传身份证的正反面照片。加密保存，仅用于海关清关',
     region: ['广东省', '广州市', '海珠区'],
@@ -31,6 +32,18 @@ Page({
 
   formSubmit(e) {
     let self = this
+		if(self.data.buttonFlag == true)
+		{
+			wx.showToast({
+				title: '请不要重复提交',				
+				icon: 'loading',
+				duration: 2000
+			})
+			return
+		}
+		self.setData({
+			'buttonFlag': true
+		})
     const value = e.detail.value;
 
     // 验证字段的规则
@@ -108,6 +121,7 @@ Page({
       aData.openId = app.globalData.openId
       //发送地址到服务器
       let url = COM.load('CON').SAVE_CONSIGNEE_URL;
+
       COM.load('NetUtil').netUtil(url, "POST", aData, (callback) => {
         if (callback.suc == true) {
           console.log(callback.id)
@@ -132,7 +146,7 @@ Page({
 						}
 					]
 
-				
+					//上传图片
 					console.log("img data here")
 					console.log(cData)
 					let url = COM.load("CON").UPLOADFILE;
@@ -142,12 +156,27 @@ Page({
 						key: 'addressList',
 						data: this.data.addressList,
 						success() {
-							wx.navigateBack();
+							//wx.navigateBack();
+						
+							wx.showToast({
+								title: '上传成功',
+								icon: 'success',
+								duration: 1000,
+								success: function(res){
+									self.setData({
+										'buttonFlag': false
+									})
+									wx.navigateTo({
+										url: '/page/mine/addressList/addressList',
+									})
+								}
+							})
+						
 						}
 					})
 					})
         }
-      })
+      },false)
     }
   },
 

@@ -55,10 +55,13 @@
             <text>发货中</text>
           </block>
           <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
-            <text>已支付</text>
+            <text>待发货</text>
           </block>
           <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
             <text>已收货</text>
+          </block>
+					<block wx:elif="{{item.orderInfo.orderStatus == 6}}">
+          	<text>待收货</text>
           </block>
           <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
             <view class='button-grey'>已取消</view>
@@ -67,7 +70,7 @@
             <text>处理中</text>
           </block>
         </view>
-        <view class='button' data-order="{{item.orderGoods.orderId}}" data-logo="getLogo({{item.orderGoods.productId}})" catchtap="placeOrder">再次下单</view>
+        
       </view>
     </view>
   </block>

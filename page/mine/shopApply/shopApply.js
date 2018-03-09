@@ -14,9 +14,9 @@ Page({
 
 
   doApply: function (event) {
-    wx.navigateTo({
-      url: '/page/mine/shopApply/applyForm/applyForm',
-    })
+    wx.redirectTo({
+			url: '/page/mine/shopApply/applyForm/applyForm',
+		})
     // this.setData({
     //   showModal: true
     // })
@@ -96,7 +96,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+	
   },
 
   /**
