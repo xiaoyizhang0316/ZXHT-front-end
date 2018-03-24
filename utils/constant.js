@@ -1,6 +1,6 @@
 //url相关
 const BASE_URL = "https://mini.zhenxianghaitao.com"
-//const BASE_URL = "https://3b11ec9e.ngrok.io"
+//const BASE_URL = "https://29749969.ngrok.io"
 
 
 const IMG_BASE = "https://img.zhenxianghaitao.com/"

@@ -162,14 +162,13 @@ Page({
   },
   formSubmit: function (e) {
     let self = this
-   
-
-
     let numOfShippingform = self.data.checkbox.length
     let shipAll = {}
     let shipGoodsAll = []
-    var i = 0
-    for (i = 0; i < numOfShippingform; i++) {
+		
+		let shipFull = []
+    
+    for (var i = 0; i < numOfShippingform; i++) {
       let shipdetail = {}
       shipdetail.orderId = self.data.orderId
       shipdetail.agentId = e.detail.value["agentId[" + i + "]"]
@@ -197,27 +196,37 @@ Page({
       for (var j = 0; j < self.data.items.length; j++) {
         let productId = self.data.items[j].productId
         let sendNumber = e.detail.value["shipGoods[" + i + "][" + self.data.items[j].productId + "]"]
-        shipGoodsOne[j] = { productId, sendNumber }
+        shipGoodsOne[j] = { productId, sendNumber }			
       }
+			
       shipGoodsAll.push(shipGoodsOne)
     }
-    console.log(shipGoodsAll.length)
+    
     console.log(shipAll)
+		console.log(shipGoodsAll)
+		console.log("********************")
 
-    var i
-    let shipFull = []
-    for (i = 0; i < numOfShippingform; i++) {
+   
+    for (var g = 0; g < numOfShippingform; g++) {
       let shipGoods = []
-      for (var k = 0; k < shipGoodsAll.length; k++) {
-        shipGoods.push(shipGoodsAll[i][k])
+			console.log(shipGoodsAll[0])
+			console.log(shipGoodsAll[0].length)
+			for (var k = 0; k < Object.keys(shipGoodsAll[g]).length; k++) {
+				console.log("+++++++++++++++")
+				console.log(shipGoodsAll[g][k])
+        shipGoods.push(shipGoodsAll[g][k])
       }
-      let ship = shipAll[i]
+			console.log("-------------------------")
+			console.log(shipGoods)
+      let ship = shipAll[g]
       shipFull.push({ ship, shipGoods })
     }
 
     let url = COM.load('CON').SAVE_SHIPORDER;
-    console.log("********************")
+    
     console.log(shipFull)
+
+
     COM.load('NetUtil').netUtil(url, "POST", shipFull, (callback) => {
       console.log(callback)
       wx.redirectTo({
