@@ -34,6 +34,36 @@ form {
   background-color: #fff;
 }
 
+.top-header {
+  font-size: 28rpx;
+  color: black;
+  background: #e3e3e3;
+  padding-left: 30rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.bottom-text {
+  color:red; 
+  font-size: 20rpx;
+  width: 200px;
+}
+
+.switch1 {
+ height:60%;
+align-items:center;
+justify-content:right;
+margin-left: 180px;
+}
+
+.switch2 {
+ height:60%;
+align-items:center;
+justify-content:right;
+margin-left: 63px;
+}
+
 .top-input-box {
   width: 100%;
   border-bottom: 1px #e3e3e3 solid;

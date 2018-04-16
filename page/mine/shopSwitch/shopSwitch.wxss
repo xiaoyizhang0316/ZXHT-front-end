@@ -61,8 +61,8 @@ page {
 .shop-item-image {
   width: 130rpx;
   height: 130rpx;
-  border-radius: 50%;
-  margin-right: 40rpx;
+  border-radius: 8px;
+  margin-right: 30rpx;
 }
 
 .shop-item-desc {
@@ -71,7 +71,7 @@ page {
 }
 
 .shop-item-desc view:nth-child(1) {
-  width: 460rpx;
+  width: 400rpx;
   font-size: 30rpx;
   overflow: hidden;
   white-space: nowrap;
@@ -80,16 +80,51 @@ page {
 }
 
 .shop-item-desc view:nth-child(2) {
-  width: 460rpx;
-  font-size: 24rpx;
-  color: #888;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-height: 36rpx;
+ height:85rpx;
+background-color:white;
+position:relative;
+display:flex;
+align-items:center;
+margin-top:3rpx;
+font-size:28rpx;
+color:#999;
 }
+
+.explain-line{
+  width: 500rpx;
+ height:85rpx;
+}
+
+.explain-block{
+  width: 30rpx;
+ height:40rpx;
+background-color:white;
+position:relative;
+align-items:center;
+margin-top:3rpx;
+color:#999;
+display:flex;
+}
+
+.explain-text {
+   width: 100px;
+ height:50rpx;
+ margin-left: 10rpx;
+ background-color:white;
+position:relative;
+align-items:center;
+margin-top:3rpx;
+font-size:28rpx;
+color:#999;
+display:flex;
+}
+
+.image-icon {
+  padding:10rpx;
+  height:20px;
+  width:20px;
+}
+
 
 .shop-item-desc view:nth-child(3) {
   width: 460rpx;

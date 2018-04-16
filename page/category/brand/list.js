@@ -18,7 +18,7 @@ Page({
 
   filterProductsIds: function (brandId) {
     let ids = [];
-    let products = wx.getStorageSync("products");
+    let products = wx.getStorageSync("shopProducts");
     let shopProductIds = wx.getStorageSync("shopProductIds");
     for (var x in shopProductIds) {
       if (products[shopProductIds[x]].brand == brandId) {
@@ -31,7 +31,7 @@ Page({
   loadPrice: function () {
     let shopOpenId = app.globalData.shopOpenId;
     let url = COM.load('CON').SHOP_PRODUCT_URL + "/selected/" + shopOpenId + "/" + this.data.ids;
-    let products = wx.getStorageSync("products");
+    let products = wx.getStorageSync("shopProducts");
 
     COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
       if (shopProducts) {

@@ -15,30 +15,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-		COM.load('Util').loadBrands();
-		COM.load('Util').loadProducts();
+
+		let self = this
+		if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.targetShopId) !== '[object Undefined]') {
+			
+		} else {
+			//this.navigatorToIndex()
+			options.targetShopId = "o0_gG0RDvF6ESSQSFZJKuOyB2bDE"
+		}
+		app.globalData.targetShopId = options.targetShopId
 		this.prepare(options)
   },
 
 	prepare: function(e){
-		let self = this	
-
+		let self = this		
 		if (app.globalData.openId == null) {
 			setTimeout(function () {
-				self.prepare(e);
-
+			
+			console.log(app.globalData.openId)
+			self.prepare(e)
 			}, 1000)
 			return
+		}else{
+			self.setTargetShop(e)
+			COM.load('Util').loadBrands();
+			//COM.load('Util').loadProducts();
+			//修改为读取本店的商品
+			COM.load('Util').loadProducts(app.globalData.openId, app.globalData.targetShopId);
 		}
-		if (Object.prototype.toString.call(e) !== '[object Undefined]' && Object.prototype.toString.call(e.targetShopId) !== '[object Undefined]') {
-		this.setTargetShop(e)
-		} else {
-			//this.navigatorToIndex()
-			e.targetShopId = "o0_gG0RDvF6ESSQSFZJKuOyB2bDE"
-			this.setTargetShop(e)
-		}		
-
-
 	},
 
 	//获得访问的商店
@@ -90,7 +94,7 @@ Page({
 	navigatorToIndex:function(){
 		var interval = setInterval(function () {
 			console.info('checking the storage');
-			let products = wx.getStorageSync("products");
+			let products = wx.getStorageSync("shopProducts");
 			let brands = wx.getStorageSync("brands");
 			let openId = wx.getStorageSync("openId");
 			if (brands && products && openId) {

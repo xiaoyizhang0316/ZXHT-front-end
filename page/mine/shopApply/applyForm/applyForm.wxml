@@ -5,6 +5,10 @@
   </view> -->
   <form bindsubmit="formSubmit">
     <view class="top-contaniner">
+<view class='top-header'>
+  <text>店铺信息</text>
+</view>
+
       <view class="top-input-box flex-col">
         <text>店铺名</text>
         <input placeholder="请输入店铺名称" bindinput="bindName" name="shopname" value="{{shop.shopname}}" />
@@ -13,6 +17,39 @@
         <text>店铺签名</text>
         <input placeholder="请输入店铺签名" bindinput="bindSign" name="sign" value="{{shop.sign}}" />
       </view>
+
+<view class="top-header">
+        <text>支付方式设置</text>
+</view>
+<view class="top-input-box flex-col">
+        <text>收取预存款</text>
+        <switch class='switch1'></switch>
+</view>
+
+<view class="top-input-box flex-col">
+    <view style='flex-direction: column;'>
+    <view>
+       <text>线下支付</text>
+      </view>
+    <view class='bottom-text'>
+        <text>该支付方式需好友转帐</text>
+    </view>
+    </view>
+        <switch class='switch2'></switch>
+</view>
+
+<view class="top-input-box flex-col">
+    <view style='flex-direction: column;'>
+    <view>
+       <text>微信支付</text>
+      </view>
+    <view class='bottom-text'>
+        <text>钱款直接转到银行卡，快速便捷，会扣除1%手续费</text>
+    </view>
+    </view>
+        <switch class='switch2'></switch>
+</view>
+
       <view class="top-input-box flex-col">
         <text class='pay-text'>支付方式</text>
         <radio-group class="radio-group" bindchange="radioChange">

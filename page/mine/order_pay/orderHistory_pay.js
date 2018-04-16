@@ -116,7 +116,7 @@ Page({
     })
   },
   getLogo: function (productId) {
-    let products = wx.getStorageSync("products");
+    let products = wx.getStorageSync("shopProducts");
     return COM.load('Util').image(products[productId].barcode)
   },
 

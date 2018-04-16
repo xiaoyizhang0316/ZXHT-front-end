@@ -45,7 +45,7 @@ Page({
   filterProducts: function () {
     let shopOpenId = app.globalData.openId;
     let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + shopOpenId;
-    let products = wx.getStorageSync("products");
+    let products = wx.getStorageSync("shopProducts");
 
     COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
       let goodsMap = new Map();

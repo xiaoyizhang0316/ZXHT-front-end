@@ -112,7 +112,7 @@ App({
   saveOrUserData: function (userInfo) {
     var self = this
 
-    //let url = "https://a5f93900.ngrok.io/api/mall/users/saveOrUpdateUserData"
+   
 		let url = COM.load('CON').CREATE_OR_UPDATE_USER;
 		COM.load('NetUtil').netUtil(url, "POST", { "open_id": self.globalData.openId, "name": userInfo.nickName, "avatarUrl": userInfo.avatarUrl, "country":userInfo.country, "province": userInfo.province,	"city": userInfo.city }, (callback) => {
 
@@ -126,9 +126,11 @@ App({
   //设定用户是否开过店以及商店ID
   setShopisOpenedOrNot: function (openId) {
     var self = this
-    //let url = "https://a5f93900.ngrok.io/api/mall/shops/checkOpenShop/" + openId
+    
     let url = COM.load('CON').shopisOpenOrNot+openId;
     COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+			console.log('--------------------------------------------------------------------------------------++')
+			console.log(callbackdata)
       if (callbackdata == 0) {
         self.globalData.shopOpened = false
       } else {

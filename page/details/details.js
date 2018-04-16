@@ -241,7 +241,7 @@ Page({
 
 		COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
 			if (shopProduct) {
-				let products = wx.getStorageSync("products");
+				let products = wx.getStorageSync("shopProducts");
 				if (products) {
 					self.data.goods["id"] = productId;
 					self.data.goods["title"] = products[productId].title;

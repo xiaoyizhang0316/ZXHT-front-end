@@ -76,9 +76,46 @@ function loadBrands() {
   return cacheOrLoad("brands", url);
 }
 
-function loadProducts() {
-  let url = CON.PRODUCT_URL +"/all"
-  cacheOrLoad("products", url);
+function loadProducts(openId, targetShopId) {
+	let self = this
+	let products = {}
+	NetUtil.netUtil(CON.GET_ALL_SHOPPRODUCTS_URL + openId + "/" + targetShopId, "GET", "", function (shopProducts) {
+
+		if (shopProducts) {
+		
+			for (var x in shopProducts) {
+				let shopProduct = shopProducts[x];
+				
+				if (shopProduct.stock >= 0 && shopProduct.basePrice >= 0) {
+				
+					products[shopProduct.productId] = {
+						"id": shopProduct.productId,
+						"title": shopProduct.title,
+						"price": shopProduct.basePrice,
+						"vipPrice": shopProduct.vipPrice,
+						"stock": shopProduct.stock,
+						"sales": shopProduct.sales,
+						"barcode": shopProduct.barcode,
+						"thumb": self.image(shopProduct.barcode),
+						"weight": shopProduct.weight,						
+
+					}
+				
+				}
+			
+			}
+			console.log("-------------------------------------")
+			console.log(products)
+			wx.setStorage({
+				key: "shopProducts",
+				data: products,
+			})
+		}
+
+	
+	})
+
+
 };
 
 /**
@@ -86,7 +123,7 @@ function loadProducts() {
  */
 function cacheOrLoad(storageKey, url){
   let cache = wx.getStorageSync(storageKey);
-	console.log(cache)
+	
   if (!cache) {
     NetUtil.netUtil(url, 'GET', '', (ret) => {
 			console.log(storageKey + "OK!")
@@ -96,7 +133,7 @@ function cacheOrLoad(storageKey, url){
       }) 
     });
   } else {
-		console.log("fking cache")
+		
       return cache;
   } 
 }

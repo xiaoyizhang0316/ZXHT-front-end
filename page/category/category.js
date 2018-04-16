@@ -84,7 +84,7 @@ Page({
 	// filterBrands: function () {
 	//   let shopBrands = new Set();
 	//   let brands = wx.getStorageSync("brands");
-	//   let products = wx.getStorageSync("products");
+	//   let products = wx.getStorageSync("shopProducts");
 	//   let shopProductIds = wx.getStorageSync("shopProductIds");
 	//   for (var x in shopProductIds) {
 	//     shopBrands.add(brands[products[shopProductIds[x]].brand]);
@@ -97,7 +97,7 @@ Page({
 		let targetShopId = this.data.targetShopId
 		let shopBrands = new Set();
 		let brands = wx.getStorageSync("brands");
-		let products = wx.getStorageSync("products");
+		let products = wx.getStorageSync("shopProducts");
 		let shopProductIds = wx.getStorageSync("shopProductIds");
 		for (var x in shopProductIds) {
 			shopBrands.add(brands[products[shopProductIds[x]].brand]);
@@ -112,8 +112,8 @@ Page({
 		let targetShopId = this.data.targetShopId
 		let productsMap = new Map();
 		let products = []
-		//let products = wx.getStorageSync("products");
-		//let p = wx.getStorageSync("products");
+		//let products = wx.getStorageSync("shopProducts");
+		//let p = wx.getStorageSync("shopProducts");
 
 		//修改 product为从服务器读取
 		let openId = app.globalData.openId
@@ -190,7 +190,7 @@ Page({
 			let subCategories = this.data.res[e.target.dataset.index - 1].subCategories;
 			let rightCategory = [];
 
-			//let products = wx.getStorageSync("products");
+			//let products = wx.getStorageSync("shopProducts");
 			let products = this.data.products
 			subCategories.forEach(function (subCat) {
 				subCat.productIds.forEach(function (val, index, arr) {
