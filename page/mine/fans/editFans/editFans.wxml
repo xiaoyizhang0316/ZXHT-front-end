@@ -1,0 +1,38 @@
+<!--page/mine/fans/editFans/editFans.wxml-->
+<view class="main">
+
+
+  <view style="flex:1;display: flex;padding-top:10px;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;">    </view>
+
+  <view class='fan-item'>
+    <image class='fan-image2' src="/image/add_user.png"></image>
+
+    <view class='fan-des'>
+
+    <view class="explain-line-top">
+      <view class='fan-item-name'>该粉丝的名字</view>
+      <switch></switch>
+    </view>
+    </view>
+    </view>
+
+<view style='height:5px; background:#f8f8f8;'></view>
+      <view class="explain-line">
+        <image class='image-icon2' src='/image/vip.png'></image>
+        <view class='explain-text'>会员等级-无折扣</view>   
+        <image class='arrow_icon' src="/image/arrow_down.png"></image>
+      </view>
+      <view style='height:5px; background:#f8f8f8;'></view>
+
+     <view class="explain-line">
+        <image class='image-icon2' src="/image/card.png"></image>
+        <view class='explain-text'>预存款</view>
+          <image class='plus_icon' src="/image/plus.png"></image>
+        <view class='amount' >¥2000</view>
+      </view> 
+
+     <view style='height:5px; background:#f8f8f8;'></view> 
+        <button class='bottom-contaniner-text' >确认</button>
+  
+    
+</view>
