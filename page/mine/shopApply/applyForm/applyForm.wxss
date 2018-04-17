@@ -47,21 +47,21 @@ form {
 .bottom-text {
   color:red; 
   font-size: 20rpx;
-  width: 200px;
+  width: 640rpx;
 }
 
 .switch1 {
- height:60%;
+height:60%;
 align-items:center;
 justify-content:right;
-margin-left: 180px;
+
 }
 
 .switch2 {
  height:60%;
 align-items:center;
 justify-content:right;
-margin-left: 63px;
+
 }
 
 .top-input-box {

@@ -98,6 +98,9 @@ Page({
     // 传入表单数据，调用验证方法
 		if (!this.WxValidate.checkForm(e)) {
 			const error = this.WxValidate.errorList[0]
+			self.setData({
+				'buttonFlag': false
+			})
 			wx.showModal({
 				title: '添加收货人失败',
 				content: error.msg
@@ -108,9 +111,15 @@ Page({
 				content: "身份证上传有误",
 
 			})
+			self.setData({
+				'buttonFlag': false
+			})
 		}
 		else {
 		
+			self.setData({
+				'buttonFlag': true
+			})
       this.data.address.name = value.name
       this.data.address.phone = value.phone
       this.data.address.detail = value.detail

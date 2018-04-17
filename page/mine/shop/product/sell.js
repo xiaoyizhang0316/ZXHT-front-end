@@ -19,12 +19,14 @@ Page({
     selectedIndex: 0,
     tmp: { 'price': '', 'vipPrice': '' },
     memo: '',
+		myShopProducts : {},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+	
     this.filterProducts();
 
   },
@@ -45,36 +47,61 @@ Page({
   filterProducts: function () {
     let shopOpenId = app.globalData.openId;
     let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + shopOpenId;
-    let products = wx.getStorageSync("shopProducts");
-
     COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
       let goodsMap = new Map();
+		
       if (shopProducts) {
-        for (var x in shopProducts) {
-          let shopProduct = shopProducts[x];
-          goodsMap.set(shopProduct.productId,
-            {
-              "productId": shopProduct.productId,
-              "title": products[shopProduct.productId].title,
-              "price": shopProduct.price,
-              "vip1Price": shopProduct.vip1Price,
-              "vip2Price": shopProduct.vip2Price,
-              "vip3Price": shopProduct.vip3Price,
-              "stock": shopProduct.stock == 0 ? 10 : shopProduct.stock,
-              "thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
-              "memo": shopProduct.memo,
-              "openId": shopOpenId,
-              "id": shopProduct.id,
-              "barcode": products[shopProduct.productId].barcode,
-              "recommend": shopProduct.recommend,
-              "hot": shopProduct.hot,
-              "hotSale": shopProduct.hotSale
-            })
-        }
-        this.setData({
-          goodsLineList: Array.from(goodsMap.values()),
-          goodsMap: goodsMap
-        })
+				let myProduts = wx.getStorageSync("myProducts");
+
+				if (!myProduts) {
+					//先获得本店的商品目录
+					let ids = []
+					for (let x in shopProducts) {
+						ids.push(shopProducts[x].productId)
+					}
+					if(ids.length > 0)
+					{
+						let url = COM.load('CON').GET_MY_PRODUCTS + ids;
+						COM.load('NetUtil').netUtil(url, "GET", "", (myProducts) => {
+							wx.setStorage({
+								key: "myProducts",
+								data: myProducts,
+							})
+							console.log(myProducts)
+							for (var x in shopProducts) {
+								let shopProduct = shopProducts[x];
+								goodsMap.set(shopProduct.productId,
+									{
+										"productId": shopProduct.productId,
+										"title": myProducts[shopProduct.productId].title,
+										"price": shopProduct.price,
+										"vip1Price": shopProduct.vip1Price,
+										"vip2Price": shopProduct.vip2Price,
+										"vip3Price": shopProduct.vip3Price,
+										// "stock": shopProduct.stock == 0 ? 10 : shopProduct.stock,
+										"stock": shopProduct.stock,
+										"thumb": COM.load('Util').image(myProducts[shopProduct.productId].barcode),
+										"memo": shopProduct.memo,
+										"openId": shopOpenId,
+										"id": shopProduct.id,
+										"barcode": myProducts[shopProduct.productId].barcode,
+										"recommend": shopProduct.recommend,
+										"hot": shopProduct.hot,
+										"hotSale": shopProduct.hotSale
+									})
+							}
+							this.setData({
+								goodsLineList: Array.from(goodsMap.values()),
+								goodsMap: goodsMap
+							})
+						});
+
+					}
+					
+				
+				}
+			
+			
       }
     });
   },

@@ -7,8 +7,8 @@
         </view>
         <view class='success-desc'>
           <text>尊敬的真享海淘用户您好，恭喜您开店成功了！</text>
-          <text>店铺名：XXX的海淘小店</text>
-          <text>创建时间：2017年12月25日 14:36</text>
+          <text>店铺名：{{shop.shopName}}</text>
+          <text>创建时间：{{shop.createTime}}</text>
         </view>
 
         <view class='success-operation'>

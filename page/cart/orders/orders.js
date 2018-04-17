@@ -87,7 +87,7 @@ Page({
 
   placeOrder() {
     //let orderTime = COM.load('Util').formatTime(new Date());
-		// if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId || app.globalData.targetShopId == "o0_gG0RDvF6ESSQSFZJKuOyB2bDE") {
+		// if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId || app.globalData.targetShopId == "o0_gG0bsIV1gKqRTUEFB7Rh-qb2I") {
 			if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId) {
 			wx.showModal({
 				title: '错误',

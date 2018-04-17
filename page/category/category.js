@@ -121,18 +121,18 @@ Page({
 		COM.load('NetUtil').netUtil(COM.load('CON').GET_ALL_SHOPPRODUCTS_URL + openId + "/" + targetShopId, "GET", "",function (shopProducts) {
 			
 			if (shopProducts) {
-				console.log("shop products")
-				console.log(shopProducts);
+				//console.log("shop products")
+				//console.log(shopProducts);
 
 				for (var x in shopProducts) {
 					let shopProduct = shopProducts[x];
 
-					if (shopProduct.stock >= 0 && shopProduct.price >= 0) {
+					if (shopProduct.stock >= 0 && shopProduct.vipPrice >= 0) {
 						products[shopProduct.productId] = {
 							"id": shopProduct.productId,
 							"title": shopProduct.title,
-							"price": shopProduct.price,
-							"vipPrice": shopProduct.price,
+							"price": shopProduct.basePrice,
+							"vipPrice": shopProduct.vipPrice,
 							"stock": shopProduct.stock,
 							"sales": shopProduct.sales,
 							"barcode": shopProduct.barcode,
@@ -142,7 +142,7 @@ Page({
 					}
 				}
 
-				// console.log(products)
+				//console.log(products)
 				// let shopProductIds = wx.getStorageSync("shopProductIds");
 				// for (var x in shopProductIds) {
 				// 	let key = undefined;

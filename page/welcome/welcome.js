@@ -21,7 +21,7 @@ Page({
 			
 		} else {
 			//this.navigatorToIndex()
-			options.targetShopId = "o0_gG0RDvF6ESSQSFZJKuOyB2bDE"
+			options.targetShopId = "o0_gG0bsIV1gKqRTUEFB7Rh-qb2I"
 		}
 		app.globalData.targetShopId = options.targetShopId
 		this.prepare(options)
@@ -47,7 +47,7 @@ Page({
 
 	//获得访问的商店
 	setTargetShop: function (e) {
-		let self = this
+	//	let self = this
 		//得到传输过来的目标商铺
 		console.log(app.globalData.openId)
 			let fan = app.globalData.openId
@@ -65,7 +65,7 @@ Page({
 							if (res.confirm) {
 								console.log('用户点击确定')
 								wx.navigateTo({
-									url: '/page/welcome/welcome?targetShopId=o0_gG0RDvF6ESSQSFZJKuOyB2bDE',
+									url: '/page/welcome/welcome?targetShopId=o0_gG0bsIV1gKqRTUEFB7Rh-qb2I',
 								})
 							} else if (res.cancel) {
 								console.log('用户点击取消')

@@ -1,11 +1,16 @@
 // page/mine/shopApply/applySuccess/applySuccess.js
+var app = getApp()
+var COM = require('../../../../utils/common.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+		shop: {
+			'shopName' : "",
+			'creatTime': "",
+		}
   },
 
   // onShareAppMessage: function () {
@@ -41,7 +46,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+		let openId = app.globalData.openId		
+		let url = COM.load('CON').getMyShopInfo + openId
+		COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+			if (callbackdata == null) {
+
+			} else {
+			
+				this.setData({
+				'shop.shopName' : callbackdata.shopName,
+				'shop.createTime' : callbackdata.createTime
+				})
+
+				//self.loadRecommendedProducts();
+			}
+		})
   },
 
   /**

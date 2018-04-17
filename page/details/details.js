@@ -200,7 +200,7 @@ Page({
 							if (res.confirm) {
 								console.log('用户点击确定')
 								wx.navigateTo({
-									url: '/page/welcome/welcome?targetShopId=o0_gG0RDvF6ESSQSFZJKuOyB2bDE',
+									url: '/page/welcome/welcome?targetShopId=o0_gG0bsIV1gKqRTUEFB7Rh-qb2I',
 								})
 							} else if (res.cancel) {
 								console.log('用户点击取消')
@@ -240,6 +240,7 @@ Page({
 		}
 
 		COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
+			console.log(shopProduct)
 			if (shopProduct) {
 				let products = wx.getStorageSync("shopProducts");
 				if (products) {
@@ -247,7 +248,7 @@ Page({
 					self.data.goods["title"] = products[productId].title;
 					self.data.goods["thumb"] = COM.load('Util').image(products[productId].barcode);
 					self.data.goods["stock"] = shopProduct.stock;
-					self.data.goods["price"] = shopProduct.price;
+					self.data.goods["price"] = shopProduct.vipPrice;
 
 					// http://101.178.98.25:8443/api/mall/products/242
 					let detailUrl = COM.load('CON').PRODUCT_URL + productId;

@@ -24,9 +24,31 @@ Page({
     tips: {
       zh_cn: '请填写对应的支付信息',
       en: 'Please fill in the payment information.'
-    }
-
+    },
+		showModalStatus: false,
+		prepayStatus:false,
+		offlinePayStatus:true,
+		weixinPayStatus:false, 
+	
   },
+	bindPrePay: function(){
+		this.setData({
+			'prepayStatus': !this.data.prepayStatus
+		})
+	},
+	bindOfflinePay: function () {
+		this.setData({
+			'offlinePayStatus': !this.data.offlinePayStatus
+		})
+	},
+	showModal: function () {
+		console.log(this.data.showModalStatus)
+		this.setData({
+			'showModalStatus': !this.data.showModalStatus,
+			'weixinPayStatus': !this.data.weixinPayStatus,
+		})
+		console.log(this.data.weixinPayStatus)
+	},
   bindName: function (e) {
     console.log(e)
     this.setData({
@@ -83,20 +105,11 @@ Page({
   },
 
   formSubmit: function (e) {
-    console.log("pushed")
+   
     let self = this
-    //let url = "https://a5f93900.ngrok.io/api/mall/shops/create"
-    //let url = "https://mini.zhenxianghaitao.com/api/mall/shops/create"
+   
     let url = COM.load('CON').CREATE_SHOP;
-    // if (self.data.shop.name == null || self.data.shop.name == '') {
-    //   wx.showModal({
-    //     title: '开店失败',
-    //     content: '店铺名不能为空'
-    //   })
-    // }
-
-
-
+   
     // 验证字段的规则
     const rules = {
       shopname: {
@@ -105,15 +118,16 @@ Page({
       sign: {
         required: true
       },
+			
       bankName: {
-        required: true
+        required: self.data.weixinPayStatus ? true : false
       },
       accountNbr: {
-        required: true,
-        digit: true
+				required: self.data.weixinPayStatus ? true : false,
+        digit: self.data.weixinPayStatus ? true : false
       },
       accountName: {
-        required: true
+				required: self.data.weixinPayStatus ? true : false
       }
     }
 
@@ -138,7 +152,20 @@ Page({
     }
     // 创建实例对象
     this.WxValidate = new WxValidate(rules, messages)
-
+		
+		// paymethods = {
+		// 	'prepayStatus': self.data.prepayStatus,
+		// 	'offlinePayStatus': self.data.offlinePayStatus,
+		// 	'weixinPayStatus': self.data.weixinPayStatus
+		// }
+		if (!self.data.prepayStatus && !self.data.offlinePayStatus && !self.data.weixinPayStatus )
+		{
+			wx.showModal({
+				title: '开店失败',
+				content: "请至少选择一个支付方式"
+			})
+			return
+		}
     // 传入表单数据，调用验证方法
     if (!this.WxValidate.checkForm(e)) {
       const error = this.WxValidate.errorList[0]
@@ -152,6 +179,9 @@ Page({
         "owner": app.globalData.nickName,
         "shopName": self.data.shop.shopname,
         "sign": self.data.shop.sign,
+				"prepay": self.data.prepayStatus,
+				"offlinePay": self.data.offlinePayStatus,
+				"weixinPay": self.data.weixinPayStatus,
         "payment": self.data.shop.payment,
         "bankName": self.data.shop.bankName,
         "accountNbr": self.data.shop.accountNbr,
@@ -192,6 +222,8 @@ Page({
       })
     }
   },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

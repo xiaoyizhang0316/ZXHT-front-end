@@ -65,7 +65,7 @@ Page({
   listProducts: function () {
     //let shopOpenId = app.globalData.shopOpenId;
     let self = this;
-    let products = Object.values(wx.getStorageSync("shopProducts"));
+    let products = Object.values(wx.getStorageSync("myProducts"));
    
 
     //let shopProductIds = wx.getStorageSync("shopProductIds");
