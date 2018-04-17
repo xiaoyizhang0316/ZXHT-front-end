@@ -34,7 +34,8 @@
     "page/mine/sell_order/send_detail/send_orderDetail",
     "page/mine/order_pay/orderHistory_pay",
     "page/mine/order_receive/orderHistory_receive",
-		"page/share/customerConsignee/customerConsignee"
+		"page/share/customerConsignee/customerConsignee",
+    "page/mine/fans/editFans/editFans"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",
@@ -44,33 +45,33 @@
     "enablePullDownRefresh": true
   },
   "tabBar": {
-    "color": "#b7b7b7",
-    "selectedColor": "#AB956D",
+    "color": "#696969",
+    "selectedColor":"#AB956D",
     "borderStyle": "#f5f5f5",
     "backgroundColor": "#f5f5f5",
     "list": [
       {
         "pagePath": "page/index/index",
-        "iconPath": "image/tabBar/12.png",
-        "selectedIconPath": "image/tabBar/11.png",
+        "iconPath": "image/tabBar/13.png",
+        "selectedIconPath": "image/tabBar/14.png",
         "text": "主页"
       },
       {
         "pagePath": "page/category/category",
-        "iconPath": "image/tabBar/22.png",
-        "selectedIconPath": "image/tabBar/21.png",
+        "iconPath": "image/tabBar/23.png",
+        "selectedIconPath": "image/tabBar/24.png",
         "text": "分类"
       },
       {
         "pagePath": "page/cart/cart",
-        "iconPath": "image/tabBar/32.png",
-        "selectedIconPath": "image/tabBar/31.png",
+        "iconPath": "image/tabBar/33.png",
+        "selectedIconPath": "image/tabBar/34.png",
         "text": "购物车"
       },
       {
         "pagePath": "page/mine/mine",
-        "iconPath": "image/tabBar/42.png",
-        "selectedIconPath": "image/tabBar/41.png",
+        "iconPath": "image/tabBar/43.png",
+        "selectedIconPath": "image/tabBar/44.png",
         "text": "个人"
       }
     ]

@@ -2,7 +2,10 @@
 
 <view class="main">
 
+
   <view style="flex:1;display: flex;padding-top:10px;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;">
+
+<!--搜索粉丝后返回的粉丝-->
     <view class="search-box">
       <view class="search-input">
         <view style="display:flex;flex:1;">
@@ -14,40 +17,70 @@
         <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
           <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
         </view>
-        
+
       </view>
     </view>
-    <!-- <view style="display:flex;margin-right:9px" catchtap="listProdsTemplate">
+    <!--<view style="display:flex;margin-right:9px" catchtap="listProdsTemplate">
       <image style="height:27px;width:27px;align-self:center" src="/image/add.png"></image>
     </view> -->
+
   </view>
 
 
 
+
+  <view style='height:5px; background:#f8f8f8;'></view>
   <view bindtap='share' class="top-containerbar">
-        <image class='fan-image' src="/image/add_user.png"></image>
-        <view class='fan-item-name'>添加粉丝</view>
+    <image class='fan-image1' src="/image/add_user.png"></image>
+    <view class='fan-item-name'>添加粉丝</view>
   </view>
 
   <!--  split line -->
-  <view class="fans-line-list-top">
+
+  <!-- 标题暂时不要
+    <view class="fans-line-list-top">
         <text class='fans-image-clo'>图片</text>
         <text class='fans-name-clo'>名称</text>
         <text class='fans-viplevel-clo'>VIP等级（可编辑）</text>
         <text class='fans-access-clo'>允许</text>
   </view>
+  -->
+  <view style='height:5px; background:#f8f8f8;'></view>
 
   <view class='fan-item' wx:for="{{fansLineList}}" wx:key="{{index}}" data-id="{{item.id}}">
-    <image class='fan-image' src="{{item.avatarUrl}}"></image>    
-      <view class='fan-item-name'>{{item.name}}</view>    
-        <view class='fan-viplevel'>
+    <image class='fan-image2' src="{{item.avatarUrl}}"></image>
+
+    <view class='fan-des'>
+
+    <view class="explain-line-top">
+      <view class='fan-item-name'>{{item.name}}</view>
+      <navigator url='/page/mine/fans/editFans/editFans' class='fan-edit'>编辑</navigator> 
+    </view>
+
+      <view class="explain-line">
+        <image class='image-icon1' src="/image/card.png"></image>
+        <view class='explain-text'>预存款</view>
+        <image class='image-icon2' src='/image/vip.png'></image>
+        <view class='explain-text'>会员等级</view>   
+      </view>
+
+      </view>
+      </view>
+    
+<!--
+        <view class='fan-viplevel '>
 				<picker bindchange="updateVipLevel" value="{{item.vipLevel}}" range="{{vipArray}}" data-id="{{item.id}}">
  				<view class="picker">
   			{{vipArray[item.vipLevel]}}
  				</view>
 				</picker>
-        <!-- <input type="digit" bindblur='updateVipLevel' value='{{item.vipLevel}}' data-id="{{item.id}}" ></input> -->
+        -->
+        <!-- <input type="digit" bindblur='updateVipLevel ' value='{{item.vipLevel}} ' data-id="{{item.id}}" ></input> -->
         </view>
+        
+      
+      <!-- 把访问权限放到编辑粉丝里面
       <switch checked="{{item.access}}" data-id="{{item.id}}" bindchange="switchChange" />    
   </view>
 </view>
+-->

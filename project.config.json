@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
 	"appid": "wx9bfdbcc805b0c5e0",
-	"projectname": "wx_mall",
+	"projectname": "mini",
 	"condition": {
 		"search": {
 			"current": -1,

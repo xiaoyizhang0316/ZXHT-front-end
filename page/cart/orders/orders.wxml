@@ -12,22 +12,35 @@
         <navigator url="/page/mine/addressList/consignee/consignee">添加收货地址</navigator>
         </view>
 
-        <view class="orders-msg" bindtap='bindExtra'>
-              <view class="orders-msg-label"><text>补充说明:(可选)</text></view>
-              <view><text>{{memo}}</text></view>
-        </view>
-    
-
 
     <view class="orders-box">
         <view wx:for="{{orders}}" wx:key="index" class="orders-list">
             <image class="orders-thumb" src="{{item.image}}"></image>
             <view>
                 <view class="orders-pro-name">{{item.title}}</view>
-                <view class="orders-pro-price">$ {{item.price}} × {{item.num}}</view>
+            </view>
+            <view class='explain-line'>
+                <view class="orders-pro-price1">$ {{item.price}} </view>
+                <view class="orders-pro-price2">$ 200 </view>
+                <view class='orders-pro-num' > × {{item.num}}</view>
             </view>
         </view>
     </view>
+
+    <view style='height:5px; background:#ededed;'></view>
+
+    <view class="orders-msg1" bindtap='bindExtra'>
+              <view class="orders-msg-label"><text>优惠选项</text></view>
+              <!--
+              <view class='orders-msg-label'><text>红包扣除</text></view>
+              -->
+              <view><text>{{memo}}</text></view>
+        </view>
+
+    <view class="orders-msg" bindtap='bindExtra'>
+              <view class="orders-msg-label"><text>补充说明:(可选)</text></view>
+              <view><text>{{memo}}</text></view>
+        </view>
 
     <view class="orders-footer">
         <view class="orders-footer-total">付款合计：${{total}}</view>

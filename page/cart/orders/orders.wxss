@@ -60,6 +60,17 @@
     font-size:14px;
 }
 
+.orders-msg1 {
+  position: relative;
+  padding: 20rpx 50rpx 20rpx 35rpx;
+    line-height: 50rpx;
+    color: #adadad;
+    border-bottom: 10rpx solid #ededed;
+    font-size:14px;
+    flex-direction: row;
+    display: flex;
+}
+
 .orders-msg::after{
     position: absolute;
     right: 30rpx;
@@ -73,9 +84,6 @@
     transform: rotate(45deg);
 }
 
-.orders-box{
-    padding-bottom: 105rpx;
-}
 .orders-list{
     position: relative;
     padding:10rpx 20rpx 20rpx 220rpx;
@@ -92,7 +100,8 @@
 
 .orders-pro-name {
   padding-top:10px;
-  color:#454552;
+  color:#696969;
+  font-size: 25rpx;
 }
 
 .orders-footer{
@@ -118,8 +127,37 @@
     color: #fff;
     background: #AB956D;
 }
-.orders-pro-price {
-  color: #adadad;
+
+.explain-line{
+
+  width: 100%;
+  height: 50rpx;
+  /* line-height: 30px; */
+  background-color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 3rpx;
+  font-size: 28rpx;
+  color: #696969;
+}
+
+.orders-pro-price1 {
+  color: #696969;
+  font-size: 25rpx;
+  padding-right: 200rpx;
+}
+
+.orders-pro-price2{
+  color: #C0C0C0;
+  font-size: 25rpx;
+  padding-right: 170rpx;
+  text-decoration: line-through;
+}
+
+.orders-pro-num{
+  color: #696969;
+  font-size: 25rpx;
 }
 
 /* 底部弹窗-start */

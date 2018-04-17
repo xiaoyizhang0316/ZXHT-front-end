@@ -36,7 +36,7 @@ page {
   align-items: center;
   margin-top: 3rpx;
   font-size: 28rpx;
-  color: #999;
+  color: #696969;
 }
 
 .explain-block {
