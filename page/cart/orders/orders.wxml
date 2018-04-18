@@ -27,23 +27,56 @@
         </view>
     </view>
 
-    <view style='height:5px; background:#ededed;'></view>
+    <view style='height:10rpx; background:#ededed;'></view>
 
-    <view class="orders-msg1" bindtap='bindExtra'>
-              <view class="orders-msg-label"><text>优惠选项</text></view>
+<view class="orders-msg" bindtap='bindExtra'>
+              <view class="orders-msg-label"><text>补充说明:(可选)</text></view>
+              <view><text>{{memo}}</text></view>
+   
+        </view>
+
+    <view class="orders-msg" bindtap='bindExtra'>
+              <view class="orders-msg-label"><text id='txt1'>优惠选项</text></view>
               <!--
               <view class='orders-msg-label'><text>红包扣除</text></view>
               -->
               <view><text>{{memo}}</text></view>
         </view>
 
-    <view class="orders-msg" bindtap='bindExtra'>
-              <view class="orders-msg-label"><text>补充说明:(可选)</text></view>
-              <view><text>{{memo}}</text></view>
+     
+
+<!-- 显示红包余额的view-->
+<view class="red-amount">
+              <view class="red-amount-msg"><text>红包余额</text></view>
+              <view class='red-amount-msg'><text>¥ 20</text></view>
         </view>
 
+<!-- 点击优惠选项后弹出来的view-->
+<view class='list-container'>
+<view class='explain-block'><text>优惠选项</text></view>
+
+<view class='explain-line'>
+<view >全额支付</view>
+<icon type='success'></icon>
+</view>
+<view style='height:1rpx; background:#ededed;'></view>
+
+<view class='explain-line'>
+<view >红包抵扣（¥20）</view>
+<icon type='success'></icon>
+</view>
+</view>
+
+<!-- 取消的按钮-->
+<view style='height:5px; background:#f8f8f8;'></view> 
+        <button class='botton-contaniner-text'>确认</button>
+
+
+
+<!-- 最下方的付款合计➕提交订单-->
     <view class="orders-footer">
         <view class="orders-footer-total">付款合计：${{total}}</view>
         <view class="orders-footer-btn" bindtap="placeOrder">提交订单</view>
     </view>
+
 </view>

@@ -40,7 +40,7 @@
   "window": {
     "navigationBarTextStyle": "#ffffff",
     "navigationBarTitleText": "真享 海淘",
-    "navigationBarBackgroundColor": "#AB956D",
+    "navigationBarBackgroundColor": "#696969",
     "backgroundColor": "#eeeeee",
     "enablePullDownRefresh": true
   },
