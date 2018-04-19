@@ -22,17 +22,24 @@ Page({
   // },
 
   toShare: function (e) {
-    console.log('to add goods')
-    wx.redirectTo({
-      url: '/page/mine/fans/share/share'
-    })
+    console.log('to share')
+		wx.navigateTo({
+			url: '/page/mine/fans/share/share',
+			complete: function (res) {
+				console.log(res)
+			}
+		})
+		
   },
 
   toAddGoods: function (e) {
     console.log('to add goods')
-    wx.redirectTo({
-      url: '/page/mine/shop/product/sell'
-    })
+		wx.navigateTo({
+			url: '/page/mine/shop/product/sell',
+			complete: function (res) {
+				console.log(res)
+			}
+		})
   },
 
   toIndex: function (e) {

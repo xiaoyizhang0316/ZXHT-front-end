@@ -67,22 +67,14 @@ Page({
     let self = this;
     let products = Object.values(wx.getStorageSync("myProducts"));
    
-
-    //let shopProductIds = wx.getStorageSync("shopProductIds");
     let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + app.globalData.openId;
 
     COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
       for (var x in callbackdata) {
         let shopProduct = callbackdata[x];
-        self.data.myShopProductIds.push(shopProduct.productId);
+        self.data.myShopProductIds.push(shopProduct.id);
       }
-      // products.slice(this.data.page * size, ++this.data.page * size).forEach(function (p) {
-      // products.slice(this.data.page * size, ++this.data.page * size).forEach(function (p) {
-      //   p.thumb = COM.load('Util').image(p.barcode);
-
-      //   p.selected = self.data.myShopProductIds.includes(p.id);
-      //   self.data.goodsLineList.push(p);
-      // });
+     
 
       products.slice(0, products.length).forEach(function (p) {
         p.thumb = COM.load('Util').image(p.barcode);
@@ -148,8 +140,8 @@ Page({
       let url = COM.load('CON').ADD_SHOP_PRODUCT_URL;
       COM.load('NetUtil').netUtil(url, 'POST', product, function (res) {
         let shopProductIds = wx.getStorageSync("shopProductIds");
-        if (!shopProductIds.includes(product.productId)) {
-          shopProductIds.push(product.productId);
+        if (!shopProductIds.includes(product.id)) {
+          shopProductIds.push(product.id);
           wx.setStorage({
             key: 'shopProductIds',
             data: shopProductIds,
@@ -312,10 +304,16 @@ Page({
     //goodslinelist是显示的
     let url = COM.load('CON').GET_ALL_PRODUCT_BY_CATEGORYID_URL + self.data.cateListWithId[self.data.cateList[e.detail.value]]
     console.log(url)
+		let shopProductIds = wx.getStorageSync("shopProductIds");
+		let searchResult = [];
     COM.load('NetUtil').netUtil(url, 'GET', "", callback => {
-      console.log(callback)
+			callback.forEach(function (p) {
+				p.thumb = COM.load('Util').image(p.barcode);
+				p.selected = shopProductIds.includes(p.id);
+				searchResult.push(p);
+			});
       self.setData({
-        goodsLineList: callback
+				goodsLineList: searchResult
       })
     })
   },

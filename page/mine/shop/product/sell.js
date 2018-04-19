@@ -46,60 +46,89 @@ Page({
 
   filterProducts: function () {
     let shopOpenId = app.globalData.openId;
-    let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + shopOpenId;
-    COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
-      let goodsMap = new Map();
-		
-      if (shopProducts) {
-				let myProduts = wx.getStorageSync("myProducts");
-
-				if (!myProduts) {
-					//先获得本店的商品目录
-					let ids = []
-					for (let x in shopProducts) {
-						ids.push(shopProducts[x].productId)
-					}
-					if(ids.length > 0)
-					{
-						let url = COM.load('CON').GET_MY_PRODUCTS + ids;
-						COM.load('NetUtil').netUtil(url, "GET", "", (myProducts) => {
-							wx.setStorage({
+		let url = COM.load('CON').GET_MY_PRODUCTS + shopOpenId;
+    COM.load('NetUtil').netUtil(url, "GET", "", (myShopProducts) => {
+			wx.setStorage({
 								key: "myProducts",
-								data: myProducts,
+								data: myShopProducts,
 							})
-							console.log(myProducts)
-							for (var x in shopProducts) {
-								let shopProduct = shopProducts[x];
-								goodsMap.set(shopProduct.productId,
-									{
-										"productId": shopProduct.productId,
-										"title": myProducts[shopProduct.productId].title,
-										"price": shopProduct.price,
-										"vip1Price": shopProduct.vip1Price,
-										"vip2Price": shopProduct.vip2Price,
-										"vip3Price": shopProduct.vip3Price,
-										// "stock": shopProduct.stock == 0 ? 10 : shopProduct.stock,
-										"stock": shopProduct.stock,
-										"thumb": COM.load('Util').image(myProducts[shopProduct.productId].barcode),
-										"memo": shopProduct.memo,
-										"openId": shopOpenId,
-										"id": shopProduct.id,
-										"barcode": myProducts[shopProduct.productId].barcode,
-										"recommend": shopProduct.recommend,
-										"hot": shopProduct.hot,
-										"hotSale": shopProduct.hotSale
-									})
-							}
-							this.setData({
-								goodsLineList: Array.from(goodsMap.values()),
-								goodsMap: goodsMap
-							})
-						});
-
-					}
-					
-				
+      let goodsMap = new Map();		
+      if (myShopProducts) {
+				for (var x in myShopProducts) {
+					let shopProduct = myShopProducts[x];
+					goodsMap.set(shopProduct.id,
+						{
+							"productId": shopProduct.id,
+							"title": shopProduct.title,
+							"price": shopProduct.nonVipPrice,
+							"vip1Price": shopProduct.vip1Price,
+							"vip2Price": shopProduct.vip2Price,
+							"vip3Price": shopProduct.vip3Price,
+						
+							"stock": shopProduct.stock,
+							"thumb": COM.load('Util').image(shopProduct.barcode),							
+							"openId": shopOpenId,
+							
+							"barcode": shopProduct.barcode,
+							"recommend": shopProduct.recommend,
+							"hot": shopProduct.hot,
+							"hotSale": shopProduct.hotSale,
+							"id" : shopProduct.redis_id
+						})
 				}
+				this.setData({
+					goodsLineList: Array.from(goodsMap.values()),
+					goodsMap: goodsMap
+				})
+
+				// if (!myProducts) {
+				// 	//先获得本店的商品目录
+				// 	let ids = []
+				// 	for (let x in shopProducts) {
+				// 		ids.push(shopProducts[x].productId)
+				// 	}
+				// 	if(ids.length > 0)
+				// 	{
+				// 		let url = COM.load('CON').GET_MY_PRODUCTS + ids;
+				// 		COM.load('NetUtil').netUtil(url, "GET", "", (myProducts) => {
+				// 			wx.setStorage({
+				// 				key: "myProducts",
+				// 				data: myProducts,
+				// 			})
+				// 			console.log(myProducts)
+				// 			for (var x in shopProducts) {
+				// 				let shopProduct = shopProducts[x];
+				// 				goodsMap.set(shopProduct.productId,
+				// 					{
+				// 						"productId": shopProduct.productId,
+				// 						"title": myProducts[shopProduct.productId].title,
+				// 						"price": shopProduct.price,
+				// 						"vip1Price": shopProduct.vip1Price,
+				// 						"vip2Price": shopProduct.vip2Price,
+				// 						"vip3Price": shopProduct.vip3Price,
+				// 						// "stock": shopProduct.stock == 0 ? 10 : shopProduct.stock,
+				// 						"stock": shopProduct.stock,
+				// 						"thumb": COM.load('Util').image(myProducts[shopProduct.productId].barcode),
+				// 						"memo": shopProduct.memo,
+				// 						"openId": shopOpenId,
+				// 						"id": shopProduct.id,
+				// 						"barcode": myProducts[shopProduct.productId].barcode,
+				// 						"recommend": shopProduct.recommend,
+				// 						"hot": shopProduct.hot,
+				// 						"hotSale": shopProduct.hotSale
+				// 					})
+				// 			}
+				// 			this.setData({
+				// 				goodsLineList: Array.from(goodsMap.values()),
+				// 				goodsMap: goodsMap
+				// 			})
+				// 		});
+
+				// 	}
+				// }else{
+				
+
+				// }
 			
 			
       }

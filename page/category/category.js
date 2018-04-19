@@ -118,7 +118,7 @@ Page({
 		//修改 product为从服务器读取
 		let openId = app.globalData.openId
 
-		COM.load('NetUtil').netUtil(COM.load('CON').GET_ALL_SHOPPRODUCTS_URL + openId + "/" + targetShopId, "GET", "",function (shopProducts) {
+		COM.load('NetUtil').netUtil(COM.load('CON').GET_TARGETSHOP_PRODUCTS_URL + openId + "/" + targetShopId, "GET", "",function (shopProducts) {
 			
 			if (shopProducts) {
 				//console.log("shop products")
@@ -128,8 +128,8 @@ Page({
 					let shopProduct = shopProducts[x];
 
 					if (shopProduct.stock >= 0 && shopProduct.vipPrice >= 0) {
-						products[shopProduct.productId] = {
-							"id": shopProduct.productId,
+						products[shopProduct.id] = {
+							"id": shopProduct.id,
 							"title": shopProduct.title,
 							"price": shopProduct.basePrice,
 							"vipPrice": shopProduct.vipPrice,
@@ -224,6 +224,15 @@ Page({
 			})
 		}, 1)
 
+	},
+	onPullDownRefresh() {
+		let self = this
+		console.log('--------下拉刷新-------')
+		COM.load('Util').loadProducts(app.globalData.openId, app.globalData.targetShopId);
+
+		self.onLoad()
+		self.onShow()
+		wx.stopPullDownRefresh()
 	}
 
 })

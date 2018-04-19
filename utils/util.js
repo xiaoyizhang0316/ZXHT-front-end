@@ -79,36 +79,13 @@ function loadBrands() {
 function loadProducts(openId, targetShopId) {
 	let self = this
 	let products = {}
-	NetUtil.netUtil(CON.GET_ALL_SHOPPRODUCTS_URL + openId + "/" + targetShopId, "GET", "", function (shopProducts) {
+	NetUtil.netUtil(CON.GET_TARGETSHOP_PRODUCTS_URL + openId + "/" + targetShopId, "GET", "", function (shopProducts) {
 
 		if (shopProducts) {
-		
-			for (var x in shopProducts) {
-				let shopProduct = shopProducts[x];
-				
-				if (shopProduct.stock >= 0 && shopProduct.basePrice >= 0) {
-				
-					products[shopProduct.productId] = {
-						"id": shopProduct.productId,
-						"title": shopProduct.title,
-						"price": shopProduct.basePrice,
-						"vipPrice": shopProduct.vipPrice,
-						"stock": shopProduct.stock,
-						"sales": shopProduct.sales,
-						"barcode": shopProduct.barcode,
-						"thumb": self.image(shopProduct.barcode),
-						"weight": shopProduct.weight,						
-
-					}
-				
-				}
-			
-			}
-			console.log("-------------------------------------")
-			console.log(products)
+		console.log(shopProducts);		
 			wx.setStorage({
 				key: "shopProducts",
-				data: products,
+				data: shopProducts,
 			})
 		}
 

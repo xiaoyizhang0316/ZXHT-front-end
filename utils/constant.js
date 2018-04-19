@@ -1,6 +1,6 @@
 //url相关
-const BASE_URL = "https://mini.zhenxianghaitao.com"
-//const BASE_URL = "https://9629fcf9.ngrok.io"
+//const BASE_URL = "https://mini.zhenxianghaitao.com"
+const BASE_URL = "https://9629fcf9.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/"
 
 //登录
@@ -37,14 +37,14 @@ const BAR_CODE_URL = PRODUCT_URL + "barcode/";
 const SEARCH_URL = PRODUCT_URL + "title/";
 
 //商品信息 购物车信息
-const TARGETSHOP_PRODUCT_URL = SHOP_PRODUCT_URL + "getTargetShopProduct";
+const GET_TARGETSHOP_PRODUCTS_URL = SHOP_PRODUCT_URL + "openId/";
 const SAVE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/saveConsignee";
 const DELETE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/deleteConsignee/";
 const GET_MY_CONSIGNEES_URL = BASE_URL + "/api/mall/users/getMyConsignees/"
 const SET_DEFAULT_CONSIGNEE_URL = BASE_URL + "/api/mall/users/setDefaultConsignee/"
 const GET_ALL_PRODUCT_BY_CATEGORYID_URL = BASE_URL + "/api/mall/products/category/"
-const GET_ALL_SHOPPRODUCTS_URL = BASE_URL + "/api/mall/products/getAllShopProducts/"
-const GET_MY_PRODUCTS = BASE_URL+"/api/mall/products/getMyProducts/"
+
+const GET_MY_PRODUCTS = SHOP_PRODUCT_URL + "openId/"
 
 //进入他人店铺
 const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/"
@@ -85,7 +85,7 @@ module.exports = {
   FANS_ACCESS_URL: FANS_ACCESS_URL,
   BAR_CODE_URL: BAR_CODE_URL,
   SEARCH_URL: SEARCH_URL,
-  TARGETSHOP_PRODUCT_URL: TARGETSHOP_PRODUCT_URL,
+	GET_TARGETSHOP_PRODUCTS_URL: GET_TARGETSHOP_PRODUCTS_URL,
   ADD_SHOP_PRODUCT_URL: ADD_SHOP_PRODUCT_URL,
   SAVE_CONSIGNEE_URL: SAVE_CONSIGNEE_URL,
   DELETE_CONSIGNEE_URL: DELETE_CONSIGNEE_URL,
@@ -105,7 +105,7 @@ module.exports = {
   PAY_ORDER_URL: PAY_ORDER_URL,
   SAVE_SHIPORDER: SAVE_SHIPORDER,
   GET_ALL_PRODUCT_BY_CATEGORYID_URL: GET_ALL_PRODUCT_BY_CATEGORYID_URL,
-	GET_ALL_SHOPPRODUCTS_URL: GET_ALL_SHOPPRODUCTS_URL,
+	
 	UPLOADFILE: UPLOADFILE,
 	IMG_BASE: IMG_BASE,
 	REORDER_URL: REORDER_URL,

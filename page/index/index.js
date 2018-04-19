@@ -14,10 +14,7 @@ Page({
 		hotList: {},
 		shop: [],
 		imgUrls: [
-			// 'https://s18.postimg.org/hbwxwiwmx/image.png',
-			// 'https://s18.postimg.org/v5lalkhih/image.png',
-			// 'https://s18.postimg.org/5zkcept2x/image.png',
-			// 'https://s18.postimg.org/hbwxwih7d/image.png'
+		
 			'https://img.zhenxianghaitao.com/slide1.png',
 			'https://img.zhenxianghaitao.com/slide2.png',
 			'https://img.zhenxianghaitao.com/slide3.png'
@@ -99,66 +96,54 @@ Page({
 	loadRecommendedProducts: function (event) {
 		let self = this
 		//如果有targetShopId 则优先展示
-		let openId = ""
+		let targetShopId = ""
 		self.setData({
 			goodsList: {},
 			hotList: {}
 		})
-		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
-			openId = app.globalData.targetShopId;
-		} else {
-			openId = app.globalData.openId;
-		}
-
-		let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + openId + "/" + app.globalData.openId;
-		let products = wx.getStorageSync("shopProducts");
-
-		COM.load('NetUtil').netUtil(url, "GET", "", (shopProducts) => {
-			//接口获取数据后如果有中文编码必须使用decodeURI或decodeURIComponent解码
-			shopProducts = JSON.parse(decodeURIComponent(JSON.stringify(shopProducts)));
-			if (shopProducts) {
-
-				var shopProductIds = [];
-				for (var x in shopProducts) {
-					let shopProduct = shopProducts[x];
-					shopProductIds.push(shopProduct.productId);
-					if (shopProduct.stock >= 0 && shopProduct.price >= 0 && shopProduct.recommend) {
-						this.data.goodsList[shopProduct.productId] = {
-							"id": shopProduct.productId,
-							"title": products[shopProduct.productId].title,
-							"price": shopProduct.price,
-							"vipPrice": shopProduct.price,
-							"sales": products[shopProduct.productId].sales,
-							"thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
-							// "thumb": "https://pic1.zhimg.com/v2-28d55dc8b4c44e5542be2def2ff1d76f_xs.jpg"
-						}
-					}
-					if (shopProduct.stock >= 0 && shopProduct.price >= 0 && shopProduct.hot) {
-						this.data.hotList[shopProduct.productId] = {
-							"id": shopProduct.productId,
-							"title": products[shopProduct.productId].title,
-							"price": shopProduct.price,
-							"vipPrice": shopProduct.price,
-							"sales": products[shopProduct.productId].sales,
-							"thumb": COM.load('Util').image(products[shopProduct.productId].barcode),
-							//"thumb": "https://pic1.zhimg.com/v2-28d55dc8b4c44e5542be2def2ff1d76f_xs.jpg"
-						}
-					}
+	
+		let shopProducts = wx.getStorageSync("shopProducts");
+	
+		var shopProductIds = [];
+		for (var x in shopProducts) {
+			let shopProduct = shopProducts[x];
+			shopProductIds.push(shopProduct.id);
+			if (shopProduct.stock >= 0 && shopProduct.vipPrice >= 0 && shopProduct.recommend) {
+				self.data.goodsList[shopProduct.id] = {
+					"id": shopProduct.id,
+					"title": shopProduct.title,
+					"price": shopProduct.basePrice,
+					"vipPrice": shopProduct.vipPrice,
+					"sales": shopProduct.sales,
+					"thumb": COM.load('Util').image(shopProduct.barcode),					
 				}
-				self.setData({
-					goodsList: this.data.goodsList,
-					hotList: this.data.hotList
-				})
-				wx.setStorage({
-					key: 'shopProductIds',
-					data: shopProductIds,
-				})
-
-				console.log(self.data.goodsList)
-				console.log(self.data.hotList)
 			}
-		});
+			if (shopProduct.stock >= 0 && shopProduct.vipPrice >= 0 && shopProduct.hot) {
+				self.data.hotList[shopProduct.id] = {
+					"id": shopProduct.id,
+					"title": shopProduct.title,
+					"price": shopProduct.basePrice,
+					"vipPrice": shopProduct.vipPrice,
+					"sales": shopProduct.sales,
+					"thumb": COM.load('Util').image(shopProduct.barcode),		
+				}
+			}
+		}
+		self.setData({
+			goodsList: self.data.goodsList,
+			hotList: self.data.hotList
+		})
+		wx.setStorage({
+			key: 'shopProductIds',
+			data: shopProductIds,
+		})
+
+		console.log(self.data.goodsList)
+		console.log(self.data.hotList)
+		
 	},
+
+	
 
 	bindSearch: function (event) {
 	if(this.data.focus == false)
@@ -306,10 +291,24 @@ Page({
 
 	onPullDownRefresh() {
 		let self = this
-		console.log('--------下拉刷新-------')	
-		wx.stopPullDownRefresh()
-		self.onLoad()	
-		self.onShow()
+		console.log('--------下拉刷新-------')
+		COM.load('Util').netUtil(COM.load('CON').GET_TARGETSHOP_PRODUCTS_URL + app.globalData.openId + "/" + app.globalData.targetShopId, "GET", "", function (shopProducts) {
 
+			if (shopProducts) {
+				
+				wx.setStorageSync({
+					key: "shopProducts",
+					data: shopProducts,
+				})
+			};
+		
+
+			self.onLoad()
+			self.onShow()
+			wx.stopPullDownRefresh()
+
+
+		})
+	
 	}
 })
