@@ -63,23 +63,22 @@
                     <view class="product-list" wx:for="{{item.productIds}}" wx:key="index" wx:for-item="val">
                         <navigator url="../details/details?id={{val.id}}">
 
-                               <image class="goods-image" src="https://img.zhenxianghaitao.com/mini/{{val.barcode}}.jpg"></image> 
-                               </navigator>   
+                               <image class="goods-image" src="https://img.zhenxianghaitao.com/mini/{{val.barcode}}.jpg"></image>  </navigator> 
+                                 
 
                               <view class="title-line">
                                 <text>{{val.title}}</text>
                              </view>
                              <view class="goods-price">
-                    <text class="goods-price-strong goods-price-now">${{val.price}}澳元</text>
-										<text class="goods-sales-strong">已售{{val.sales}}件</text>
-                    
-                </view>
-               
-														<!-- <view><text>${{val.price}} 已售: {{val.sales}}</text></view>-->
-													        
+                   <text class='goods-price-strong'>${{val.price}}澳元</text>
+										<text class='goods-sales-strong'>已售{{val.sales}}件</text>
+                 
+             <!--  <view><text>${{val.price}} 已售: {{val.sales}}</text></view>-->
+											        
         </view>
-        
-                </view>
+        	 
+          </view>
+              </view>
                 </block>
 
                 </block>

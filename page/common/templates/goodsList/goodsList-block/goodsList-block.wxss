@@ -23,8 +23,8 @@
 }
 
 .goods-image{
-  height: 340rpx;
-  width: 340rpx;
+  height: 300rpx;
+  width: 300rpx;
 }
 
 .goods-desc {
@@ -38,6 +38,8 @@
 .goods-name{
   padding-top: 12rpx;
   /* height: 78rpx; */
+  padding-left: 20rpx;
+  padding-right: 12rpx;
 }
 .goods-name text{
   overflow:hidden; 
@@ -48,11 +50,13 @@
   font-size: 24rpx;
   max-width: 320rpx;
   color: #696969;
+  padding-left: 5rpx;
 }
 .goods-price {
   width: 82%;
   font-size: 22rpx;
-  padding: 10rpx;
+  padding-left: 22rpx;
+  padding-right: 20rpx;
   display:flex;
   flex-direction: row;
    justify-content:space-between;
@@ -62,6 +66,7 @@
   font-weight: 600; 
   align-self:center;
   color: #8B0000;
+  padding-left: 5rpx;
 }
 
 
