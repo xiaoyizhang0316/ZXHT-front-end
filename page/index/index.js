@@ -292,10 +292,9 @@ Page({
 	onPullDownRefresh() {
 		let self = this
 		console.log('--------下拉刷新-------')
-		COM.load('Util').netUtil(COM.load('CON').GET_TARGETSHOP_PRODUCTS_URL + app.globalData.openId + "/" + app.globalData.targetShopId, "GET", "", function (shopProducts) {
+		COM.load('NetUtil').netUtil(COM.load('CON').GET_TARGETSHOP_PRODUCTS_URL + app.globalData.openId + "/" + app.globalData.targetShopId, "GET", "", function (shopProducts) {
 
-			if (shopProducts) {
-				
+			if (shopProducts) {				
 				wx.setStorageSync({
 					key: "shopProducts",
 					data: shopProducts,
