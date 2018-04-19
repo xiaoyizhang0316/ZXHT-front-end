@@ -87,8 +87,10 @@ form {
 }
 
 .confirmBtn {
-  width: 90%;
+  width: 50%;
   margin-top: 27rpx;
+  opacity: 0.8;
+
 }
 
 /* .explain-text {

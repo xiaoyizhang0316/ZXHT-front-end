@@ -17,7 +17,7 @@
               <button class='opt-btn' bindtap='toAddGoods'>
               <view class='success-image-item' >
                   <image class='add-goods' src='/image/public/addGoods.png'></image>
-                  <text>添加货物</text>
+                  <text>前去上货</text>
               </view>
               </button>
               <button class='opt-btn' bindtap="toShare">

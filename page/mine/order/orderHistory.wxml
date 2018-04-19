@@ -19,7 +19,7 @@
       </view>  -->
     <view class="item-top">
       <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
-      <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view>
+      <view style="font-size:14px;flex:2; color:grey;">{{item.consignee.name}}</view>
       <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
         <image style="height:20px;width:20px;" src="/image/public/clear.png"></image>
       </view>

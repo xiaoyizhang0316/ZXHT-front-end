@@ -80,12 +80,13 @@
 }
 .bottom-contaniner {
   height:100rpx;
-  width: 100%;
+  width: 90%;
   z-index: 999;
   font-size: 40rpx;
   position:fixed;
   bottom: 0px;
   display: flex;
+  opacity: 0.9;
 }
 
 .addAddressBtn {
