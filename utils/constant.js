@@ -1,6 +1,6 @@
 //url相关
-//const BASE_URL = "https://mini.zhenxianghaitao.com"
-const BASE_URL = "https://9629fcf9.ngrok.io"
+const BASE_URL = "https://mini.zhenxianghaitao.com"
+//const BASE_URL = "https://9629fcf9.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/"
 
 //登录
@@ -38,12 +38,12 @@ const SEARCH_URL = PRODUCT_URL + "title/";
 
 //商品信息 购物车信息
 const GET_TARGETSHOP_PRODUCTS_URL = SHOP_PRODUCT_URL + "openId/";
+const GET_TARGETSHOP_PRODUCT_URL = SHOP_PRODUCT_URL + "getTargetShopProduct/"
 const SAVE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/saveConsignee";
 const DELETE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/deleteConsignee/";
 const GET_MY_CONSIGNEES_URL = BASE_URL + "/api/mall/users/getMyConsignees/"
 const SET_DEFAULT_CONSIGNEE_URL = BASE_URL + "/api/mall/users/setDefaultConsignee/"
 const GET_ALL_PRODUCT_BY_CATEGORYID_URL = BASE_URL + "/api/mall/products/category/"
-
 const GET_MY_PRODUCTS = SHOP_PRODUCT_URL + "openId/"
 
 //进入他人店铺
@@ -110,5 +110,6 @@ module.exports = {
 	IMG_BASE: IMG_BASE,
 	REORDER_URL: REORDER_URL,
 	RECEIVE_ORDER_URL: RECEIVE_ORDER_URL,
-	GET_MY_PRODUCTS: GET_MY_PRODUCTS
+	GET_MY_PRODUCTS: GET_MY_PRODUCTS,
+	GET_TARGETSHOP_PRODUCT_URL : GET_TARGETSHOP_PRODUCT_URL
 }

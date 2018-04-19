@@ -234,9 +234,9 @@ Page({
 		let url = ""
 		let productId = self.data.productId
 		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
-			url = COM.load('CON').TARGETSHOP_PRODUCT_URL + "/" + app.globalData.openId + "/" + app.globalData.targetShopId + "/" + productId
+			url = COM.load('CON').GET_TARGETSHOP_PRODUCT_URL + app.globalData.openId + "/" + app.globalData.targetShopId + "/" + productId
 		} else {
-			url = COM.load('CON').TARGETSHOP_PRODUCT_URL + "/" + app.globalData.openId + "/" + app.globalData.openId + "/" + productId
+			url = COM.load('CON').GET_TARGETSHOP_PRODUCT_URL + app.globalData.openId + "/" + app.globalData.openId + "/" + productId
 		}
 
 		COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
