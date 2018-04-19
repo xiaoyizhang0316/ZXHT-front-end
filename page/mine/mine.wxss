@@ -9,7 +9,7 @@ page {
     line-height: 100rpx;
     padding:30rpx 30rpx 30rpx 150rpx;
     box-sizing: border-box; 
-    background: linear-gradient(to top right, #AB956D, #D4AF37); 
+    background: linear-gradient(to top left, #696969, white); 
     font-size: 28rpx;
     color: #fff;
     border-radius: 5px;

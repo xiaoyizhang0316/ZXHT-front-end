@@ -45,23 +45,23 @@
   display:-webkit-box; 
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2; 
-  font-size: 28rpx;
+  font-size: 24rpx;
   max-width: 320rpx;
-  color: #3D383C;
+  color: #696969;
 }
 .goods-price {
-  width: 100%;
-  font-size: 28rpx;
+  width: 82%;
+  font-size: 22rpx;
   padding: 10rpx;
   display:flex;
   flex-direction: row;
-   justify-content:center;
+   justify-content:space-between;
 }
 
 .goods-price-strong {
   font-weight: 600; 
   align-self:center;
-  color: #ac966a;
+  color: #8B0000;
 }
 
 

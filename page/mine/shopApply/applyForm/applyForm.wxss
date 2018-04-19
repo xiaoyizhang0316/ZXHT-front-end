@@ -47,25 +47,50 @@ form {
 .bottom-text {
   color:red; 
   font-size: 20rpx;
+<<<<<<< HEAD
 
   width: 640rpx;
 
  
 }
+=======
+  }
+/*Updated upstream
+  //width: 640rpx;
+ // width: 300px;
+//>>>>>>> Stashed changes*/
+
+>>>>>>> 546b015bc5d536833d5b90617211d4f50dcbd683
 
 .switch1 {
 height:60%;
 align-items:center;
 justify-content:right;
+<<<<<<< HEAD
 
 
+=======
+/*//<<<<<<< Updated upstream
+
+//=======
+//margin-left: 235px;
+//>>>>>>> Stashed changes*/
+>>>>>>> 546b015bc5d536833d5b90617211d4f50dcbd683
 }
 
 .switch2 {
  height:60%;
 align-items:center;
 justify-content:right;
+<<<<<<< HEAD
 
+=======
+/*//<<<<<<< Updated upstream
+
+//=======
+//margin-left: 50px;
+//>>>>>>> Stashed changes*/
+>>>>>>> 546b015bc5d536833d5b90617211d4f50dcbd683
 }
 
 .top-input-box {
