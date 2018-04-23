@@ -32,8 +32,8 @@
   </scroll-view>
 
   <view class="bottom-contaniner" bindtap='addConsignee'>
-      <button type='warn'class='addAddressBtn'>新增收货地址</button> 
+      <button class='addAddressBtn'>新增收货地址</button> 
   </view>
-
+<!--type='warn'-->
 
 </view>

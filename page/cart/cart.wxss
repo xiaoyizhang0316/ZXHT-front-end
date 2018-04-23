@@ -120,8 +120,8 @@
     /* padding:0 20rpx 0 80rpx; */
     box-sizing: border-box;
     color: #fff;
-    background-color: #808080;
-    opacity: 0.6;
+    background-color: #C70039;
+    opacity: 0.8;
   
 }
 
@@ -141,6 +141,11 @@ font-size: 30rpx;
 
   padding-right: 20rpx;
 font-size: 30rpx;
+}
+
+.cart-step{
+  font-size: 28rpx;
+  margin-left: 200rpx;
 }
 
 .cart-toatl-msg-behind{

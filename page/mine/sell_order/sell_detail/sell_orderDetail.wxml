@@ -138,7 +138,7 @@
   <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;">
     <view class="inner-explain-line">
       <view class="explain-text" style="flex:5">总计: ${{totalPrice}}
-        <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:8px;">(不包括运送费)</text>
+        <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:3rpx;">(不包括运送费)</text>
       </view>
       <view class="explain-value" style="flex:1">
         {{totalQuantity}}件
