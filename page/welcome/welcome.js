@@ -42,6 +42,9 @@ Page({
 			//COM.load('Util').loadProducts();
 			//修改为读取本店的商品
 			COM.load('Util').loadProducts(app.globalData.openId, app.globalData.targetShopId);
+			COM.load('Util').loadPayments();
+			COM.load('Util').loadShopParams();
+			COM.load('Util').loadShipAgents();
 		}
 	},
 
@@ -55,9 +58,8 @@ Page({
 			//let url = "https://a5f93900.ngrok.io/api/mall/users/applyToShop/"
 			let url = COM.load('CON').APPLY_TO_SHOP;		
 			COM.load('NetUtil').netUtil(url, "POST", { "open_id": fan, "shop_id": shop }, (callback) => {			
-				console.log(callback)
-				console.log (callback == false)
-				if (callback == false) {				
+				
+				if (callback.access == false) {				
 					wx.showModal({
 						title: '提示',
 						content: '已经为您向店主申请进入本店铺, 请等待店主审核, 点击确认进入展厅',
@@ -78,11 +80,14 @@ Page({
 
 					//to--do
 				} else {
+					
 					//将得到的shopid 写入缓存并改写global shopid
 					wx.setStorage({
 						key: 'targetShopId',
 						data: e.targetShopId,
 					})
+					app.globalData.deposit = callback.deposit
+					console.log("deposit: " + app.globalData.deposit)
 					app.globalData.targetShopId = e.targetShopId				
 					this.navigatorToIndex();
 				

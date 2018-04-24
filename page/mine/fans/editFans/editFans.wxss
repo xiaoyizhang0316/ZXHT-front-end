@@ -200,7 +200,7 @@ margin-left: 300rpx;
 
    width: 100rpx;
  height:50rpx;
- margin-left: 8rpx;
+ margin-left: 308rpx;
  background-color:white;
 position:relative;
 align-items:center;
@@ -208,6 +208,7 @@ margin-top:3rpx;
 font-size:28rpx;
 color:#696969;
 display:flex;
+
 }
 
 .bottom-contaniner {

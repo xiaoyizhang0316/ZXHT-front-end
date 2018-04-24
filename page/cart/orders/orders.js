@@ -6,6 +6,7 @@ Page({
     hasAddress: false,
     memo: '',
     total: 0,
+	rmb:0,
     orders: [],
     animationData: {},
     showModalStatus: false,
@@ -73,8 +74,11 @@ Page({
       total += orders[i].num * orders[i].price;
       totalNum += orders[i].num;
     }
+	let shopParams = wx.getStorageSync("shopParams");
+
     this.setData({
       total: total.toFixed(2),
+	  rmb: (total * shopParams.rate).toFixed(2),
       totalNum: totalNum
     })
   },

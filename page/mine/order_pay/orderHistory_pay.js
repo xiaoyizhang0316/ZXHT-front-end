@@ -12,7 +12,8 @@ Page({
     rowFocusFlagArray: [],
     animationData: {},
     showModalStatus: false,
-    selectedOrder: Object
+    selectedOrder: Object,
+	payChoice:[],
   },
 
   /**
@@ -155,10 +156,20 @@ Page({
     console.log(orderList)
     console.log(e.currentTarget.dataset)
     console.log(orderList[e.currentTarget.dataset.id])
+	let shop = orderList[e.currentTarget.dataset.id].sellerShop
+	let payChoice = []
+	if(shop.offlinePay)
+		payChoice.push("offlinePay");
+	if(shop.prepay)
+		payChoice.push("prepay");
+	if(shop.weixinPay)
+		payChoice.push("weixinPay");
+	console.log(payChoice)
     this.setData({
       animationData: animation.export(),
       showModalStatus: true,
       selectedOrder: orderList[e.currentTarget.dataset.id],
+	  payChoice: payChoice,
     })
     setTimeout(function () {
       animation.translateY(0).step()
@@ -200,7 +211,12 @@ Page({
       console.log(callback)
     })
   },
-
+  bindChoiceChange: function (e) {
+	  console.log('picker发送选择改变，携带值为', e.detail.value)
+	  this.setData({
+		  index: e.detail.value
+	  })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

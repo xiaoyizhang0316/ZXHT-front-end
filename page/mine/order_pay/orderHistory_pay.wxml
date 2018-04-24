@@ -84,13 +84,21 @@
         <image bindtap="hideModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
       </view>
 
-      <view class='bottom-window-price'>
+      <!-- <view class='bottom-window-price'>
         <text>付款方式</text>
         <view style='display:flex;align-content: center;align-items:center;padding-right:15rpx'>
           <text>微信支付</text>
           <image class='bottom-window-detail-arrow' src='/image/arrow_down.png'></image>
         </view>
-      </view>
+      </view> -->
+	  <view class="section">
+		<view class="section__title">选择支付方式</view>
+		<picker bindchange="bindPayChoiceChange" value="{{index}}" range="{{payChoice}}">
+			<view class="picker">
+			当前选择：{{payChoice[index]}}
+			</view>
+		</picker>
+	  </view>
 
       <view class='bottom-window-pay'>
         <text>需付款</text>
