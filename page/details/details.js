@@ -22,7 +22,7 @@ Page({
       thumb: '',
       title: '',
       price: 0,
-			
+	  basePrice:0,
       stock: '无货',
       detail: '',
       parameter: '规格:无',
@@ -200,7 +200,7 @@ Page({
 							if (res.confirm) {
 								console.log('用户点击确定')
 								wx.navigateTo({
-									url: '/page/welcome/welcome?targetShopId=o0_gG0bsIV1gKqRTUEFB7Rh-qb2I',
+									url: '/page/welcome/welcome?targetShopId=oVxpo5FQkb2qY4TGpD9rq2xFWRlk',
 								})
 							} else if (res.cancel) {
 								console.log('用户点击取消')
@@ -249,7 +249,7 @@ Page({
 					self.data.goods["thumb"] = COM.load('Util').image(products[productId].barcode);
 					self.data.goods["stock"] = shopProduct.stock;
 					self.data.goods["price"] = shopProduct.vipPrice;
-
+					self.data.goods["basePrice"] = products[productId].basePrice;
 					// http://101.178.98.25:8443/api/mall/products/242
 					let detailUrl = COM.load('CON').PRODUCT_URL + productId;
 					COM.load('NetUtil').netUtil(detailUrl, "GET", "", (detail) => {

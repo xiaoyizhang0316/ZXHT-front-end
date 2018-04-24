@@ -17,9 +17,9 @@ Page({
     selectedFan: Object,
     selectedIndex: 0,
     tmp: { 'access': false, 'vipLevel': '1' },
-		memo: '',
-		searchResult: {},
-		vipArray: ["普通会员-无折扣","青铜会员-9折","白银会员-8折","黄金会员-7折"]
+	memo: '',
+	searchResult: {},
+	vipArray: ["普通会员-无折扣","青铜会员-9折","白银会员-8折","黄金会员-7折"]
   },
 
 
@@ -67,7 +67,9 @@ Page({
               "avatarUrl": user.avatarUrl,
               "vipLevel": fan.vipLevel,
               "access" : fan.access,
-							"openId" : user.openId
+			  "openId" : user.openId,
+			  "deposit": fan.deposit,
+
             })
         }
         this.setData({
@@ -282,6 +284,21 @@ Page({
     wx.navigateTo({
       url: '/page/mine/fans/share/share'
     })
+  },
+
+  editFan: function(e)
+  {
+	  let self = this
+	 
+	  let fan = self.data.fansLineList[e.currentTarget.dataset.id]
+	  self.setData({
+		  
+		  selectedFan: fan
+	  });
+	  wx.navigateTo({
+		  url: '/page/mine/fans/editFans/editFans',
+	  })
+	
   },
 
   /**

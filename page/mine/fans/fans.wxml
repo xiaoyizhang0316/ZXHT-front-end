@@ -37,14 +37,14 @@
 
   <!--  split line -->
 
-  <!-- 标题暂时不要
-    <view class="fans-line-list-top">
+  
+    <!-- <view class="fans-line-list-top">
         <text class='fans-image-clo'>图片</text>
         <text class='fans-name-clo'>名称</text>
         <text class='fans-viplevel-clo'>VIP等级（可编辑）</text>
         <text class='fans-access-clo'>允许</text>
-  </view>
-  -->
+  </view> -->
+ 
   <view style='height:5px; background:#f8f8f8;'></view>
 
   <view class='fan-item' wx:for="{{fansLineList}}" wx:key="{{index}}" data-id="{{item.id}}">
@@ -52,16 +52,19 @@
 
     <view class='fan-des'>
 
-    <view class="explain-line-top">
+    <view class="explain-line-top" >
       <view class='fan-item-name'>{{item.name}}</view>
-      <navigator url='/page/mine/fans/editFans/editFans' class='fan-edit'>编辑</navigator> 
+	  <view bindtap='editFan' data-id="{{index}}">
+		<text class='fan-edit'>编辑</text>
+	  </view>
+      
     </view>
 
       <view class="explain-line">
         <image class='image-icon1' src="/image/card.png"></image>
-        <view class='explain-text'>预存款</view>
+        <view class='explain-text'>预存款: ${{item.deposit}}</view>
         <image class='image-icon2' src='/image/vip.png'></image>
-        <view class='explain-text'>会员等级</view>   
+        <view class='explain-text'>等级: {{item.vipLevel}}</view>   
       </view>
 
       </view>

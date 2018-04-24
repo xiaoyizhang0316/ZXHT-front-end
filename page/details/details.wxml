@@ -11,10 +11,12 @@
 
     <view class="goods-title">{{goods.title}}</view>
 
-    <view class="goods-operation">
+    <view class="goods-operation" bindtap="addToCart">
+	  <text class="goods-price">${{goods.price}}</text>
+	  <text class="goods-price del">${{goods.basePrice}}</text>
       <text class="goods-operation-num">库存 {{goods.stock}}</text>
-      <text class="goods-price">${{goods.price}}</text>
-      <image src="/image/cart1.png" class="goods-cart-img" bindtap="addToCart"></image>
+      
+      <image src="/image/cart1.png" class="goods-cart-img" ></image>
     </view>
     <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
   </view>

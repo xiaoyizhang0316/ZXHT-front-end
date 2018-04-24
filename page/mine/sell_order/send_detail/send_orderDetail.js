@@ -20,6 +20,8 @@ Page({
     deliveryPrice: 0,
     discountValue: 0,
     checkbox: [],
+	shipAgents:[],
+	index: [],
   },
 
   /**
@@ -48,7 +50,7 @@ Page({
       numofGoods = numofGoods + order[0].orderGoods[index].num
     }
     console.log(numofGoods)
-
+	let shipAgents = wx.getStorageSync("shipAgents")
     this.setData({
       order: order[0],
       orderId: options.orderId,
@@ -63,8 +65,10 @@ Page({
       receiver: order[0].consignee,
       deliveryPrice: order[0].orderInfo.shippingCost,
       discountValue: order[0].orderInfo.discount,
-      merchant: order[0].sellerShop.shopName
+      merchant: order[0].sellerShop.shopName,
+	  shipAgents: shipAgents,
     });
+	console.log(this.data.shipAgents);
     let s = JSON.stringify(this.data.order);
     console.log(JSON.parse(s));
 
@@ -81,19 +85,25 @@ Page({
 
   insert: function () {
     var cb = this.data.checkbox;
+	var index = this.data.index;
     console.log(cb);
     cb.push(this.data.checkbox.length);
+	index.push(0);
     this.setData({
-      checkbox: cb
+      checkbox: cb,
+	  index: index
     });
   },
 
   delBind: function () {
     var cb = this.data.checkbox;
+	var index = this.data.index;
     console.log(cb);
     cb.pop(this.data.checkbox.length);
+	index.pop(this.data.checkbox.length);
     this.setData({
-      checkbox: cb
+      checkbox: cb,
+	  index:index
     });
   },
 
@@ -167,7 +177,16 @@ Page({
     let shipGoodsAll = []
 		
 		let shipFull = []
-    
+    if(numOfShippingform == 0)
+	{
+		wx.showModal({
+			title: '错误',
+			content: '发货单不能为空！',
+			showCancel: false,
+		
+		})
+		return
+	}
     for (var i = 0; i < numOfShippingform; i++) {
       let shipdetail = {}
       shipdetail.orderId = self.data.orderId
@@ -370,7 +389,15 @@ Page({
   onReachBottom: function () {
 
   },
-
+  bindShipAgentChange: function (e) {
+	  console.log(e)
+	let index = this.data.index;
+	let ind = e.currentTarget.dataset.id;
+	index[ind] = e.detail.value;
+	  this.setData({
+		  index: index
+	  })
+  },
   /**
    * 用户点击右上角分享
    */

@@ -69,31 +69,37 @@ function netUtil(url, method,body, callBack, hide = true) {
 }
 
 function uploadFile(url, method, list, callBack, hide = true) {
+	var self = this
 	console.log("上传开始")
 	
 	var callBackData = {};
-
+	wx.showLoading({
+		title: '正在上传',
+		mask: true
+	})
 	//微信请求 上传图片
-	list.forEach(function(ele){
-		wx.showLoading({
-			title: '正在上传',
-			mask: true
-		})
-		
+	uploadAllFiles(url,list,callBack);
+	
+	wx.hideToast()
+	
+}
+function uploadAllFiles(url,list,callBack)
+{
+	console.log(list)
+	if (typeof list !== 'undefined' && list.length > 0)
+	{
 		wx.uploadFile({
 			url: url,
-			filePath: ele.file,
+			filePath: list[0].file,
 			name: "file",
 			formData: {
-				'table': ele.table,
-				'id': ele.id,
-				'name': ele.name
+				'table': list[0].table,
+				'id': list[0].id,
+				'name': list[0].name
 			},
 			success: function (res) {
 				if (200 <= res.statusCode && res.statusCode <= 299) {
-					callBackData.data = res.data;
-					callBack(callBackData.data);
-					wx.hideToast();
+					console.log("upload img success")
 				} else if (res.statusCode === 404 || res.statusCode === 400) {
 					wx.showToast({
 						title: "无法找到数据",
@@ -108,7 +114,7 @@ function uploadFile(url, method, list, callBack, hide = true) {
 					})
 
 				}
-				
+
 			},
 			fail: function (res) {
 				console.log(res)
@@ -126,18 +132,20 @@ function uploadFile(url, method, list, callBack, hide = true) {
 						mask: true
 					})
 				}
-				
+
 			},
-			complete: function(res){
-				console.log("上传结束")
-				if(hide)
-				{
-					wx.hideToast()
-				}
-				
+			complete: function (res) {
+				console.log("complete +1")
+				list.shift();
+				uploadAllFiles(url, list, callBack)				
 			}
 		})
-		})
+	}else{
+		callBack("done");
+		return;
+	}
+	
+	
 }
 
 

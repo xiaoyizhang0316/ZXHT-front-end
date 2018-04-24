@@ -6,6 +6,7 @@ Page({
     hasAddress: false,
     memo: '',
     total: 0,
+	rmb:0,
     orders: [],
     animationData: {},
     showModalStatus: false,
@@ -73,8 +74,11 @@ Page({
       total += orders[i].num * orders[i].price;
       totalNum += orders[i].num;
     }
+	let shopParams = wx.getStorageSync("shopParams");
+
     this.setData({
       total: total.toFixed(2),
+	  rmb: (total * shopParams.rate).toFixed(2),
       totalNum: totalNum
     })
   },
@@ -87,7 +91,7 @@ Page({
 
   placeOrder() {
     //let orderTime = COM.load('Util').formatTime(new Date());
-		// if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId || app.globalData.targetShopId == "o0_gG0bsIV1gKqRTUEFB7Rh-qb2I") {
+		// if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId || app.globalData.targetShopId == "oVxpo5FQkb2qY4TGpD9rq2xFWRlk") {
 			if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId) {
 			wx.showModal({
 				title: '错误',

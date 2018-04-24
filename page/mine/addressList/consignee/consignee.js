@@ -166,7 +166,7 @@ Page({
 						data: this.data.addressList,
 						success() {
 							//wx.navigateBack();
-						
+							console.log("ppppppppppppppppppppppppppppppppppppppp")
 							wx.showToast({
 								title: '上传成功',
 								icon: 'success',
@@ -175,8 +175,8 @@ Page({
 									self.setData({
 										'buttonFlag': false
 									})
-									wx.navigateTo({
-										url: '/page/mine/addressList/addressList',
+									wx.redirectTo({
+										url: '/page/mine/addressList/addressList?action=selectOne',
 									})
 								}
 							})

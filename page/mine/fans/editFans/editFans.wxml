@@ -10,29 +10,34 @@
     <view class='fan-des'>
 
     <view class="explain-line-top">
-      <view class='fan-item-name'>该粉丝的名字</view>
-      <switch></switch>
+      <view class='fan-item-name'>{{fan.name}}</view>
+      <switch checked="{{fan.access}}"  bindchange="switchChange"></switch>
     </view>
     </view>
     </view>
 
 <view style='height:5px; background:#f8f8f8;'></view>
-      <view class="explain-line">
+	<picker name="vipPicker" value="{{index}}" range="{{vipArray}}"   bindchange="bindVipArrayChange"  >
+        <view class="explain-line">
         <image class='image-icon2' src='/image/vip.png'></image>
-        <view class='explain-text'>会员等级-无折扣</view>   
+        <view class='explain-text'>{{vipArray[index]}}</view>   
         <image class='arrow_icon' src="/image/arrow_down.png"></image>
-      </view>
+        </view>
+      </picker>
+      
       <view style='height:5px; background:#f8f8f8;'></view>
 
      <view class="explain-line">
         <image class='image-icon2' src="/image/card.png"></image>
-        <view class='explain-text'>预存款</view>
-          <image class='plus_icon' src="/image/plus.png"></image>
-        <view class='amount' >¥2000</view>
+        <view class='explain-text'>预存款(此为澳元):</view>
+        
+        <view class='amount' >
+		<input type="text" value="${{fan.deposit}}" name="deposit"></input>
+		</view> 
       </view> 
 
      <view style='height:5px; background:#f8f8f8;'></view> 
-        <button class='bottom-contaniner-text' >确认</button>
+        <button class='bottom-contaniner-text' bindtap='saveFan'>保存</button>
   
     
 </view>

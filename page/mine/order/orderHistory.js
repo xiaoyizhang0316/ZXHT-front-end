@@ -12,7 +12,11 @@ Page({
     rowFocusFlagArray: [],
     animationData: {},
     showModalStatus: false,
-    selectedOrder: Object
+    selectedOrder: Object,
+	payChoice: [
+		
+	],
+	index: 0,
   },
 
   /**
@@ -181,11 +185,26 @@ Page({
 		console.log(orderList)
 		console.log(e.currentTarget.dataset)
     console.log(orderList[e.currentTarget.dataset.id])
-    this.setData({
-      animationData: animation.export(),
-      showModalStatus: true,
-      selectedOrder: orderList[e.currentTarget.dataset.id],
-    })
+	let shop = orderList[e.currentTarget.dataset.id].sellerShop
+	let payChoice = []
+	if (shop.offlinePay)
+	
+	payChoice.push({id:1,name:"线下支付"});
+	if (shop.prepay)
+	{
+		let deposit = orderList[e.currentTarget.dataset.id].applyToShop.deposit
+		payChoice.push({id:2, name:"预存款支付(当前预存款为$"+deposit+")澳元"});
+	}
+	if (shop.weixinPay)
+	payChoice.push({id:3, name:"微信支付"});
+	
+	this.setData({
+		animationData: animation.export(),
+		showModalStatus: true,
+		selectedOrder: orderList[e.currentTarget.dataset.id],
+		payChoice: payChoice,
+	})
+    
     setTimeout(function () {
       animation.translateY(0).step()
       this.setData({
@@ -218,13 +237,45 @@ Page({
   //确认支付
   payOrder: function (e) {
     var self = this;
-    let orderList = self.data.orderHistoryList;
-    console.log(e.currentTarget.dataset.order)
-    let url = COM.load('CON').PAY_ORDER_URL + e.currentTarget.dataset.order+"/"+app.globalData.openId;
+    let order = self.data.selectedOrder;
+    
+	//1. offlinePay 2. prepay 3.weixinPay
+	let payChoiceIndex = self.data.payChoice[self.data.index].id
+	console.log
+	if (payChoiceIndex == 2)
+	{
+		
+		if (order.orderInfo.totalCost * 100 > order.applyToShop.deposit*100)
+		{
+			wx.showModal({
+				title: '无法支付',
+				content: '存款余额不足以支付本订单，请储值后购买',
+			})
+
+			return
+		}
+	}
+	
+    let url = COM.load('CON').PAY_ORDER_URL + e.currentTarget.dataset.order+"/"+app.globalData.openId+"/"+payChoiceIndex;
     console.log(url)
     COM.load('NetUtil').netUtil(url, "GET", {}, (callback) => {
-      if(callback.flag == true)
+		if(callback.flag == true)
+		{
+			if (callback.payChoice == 1 || callback.payChoice == 2)
 			{
+				wx.showModal({
+					title: '提示',
+					content: '支付成功',
+					showCancel: false,
+					success: function (res) {
+						if (res.confirm) {
+							wx.navigateBack({
+								delta: 1
+							})
+						}
+					}
+				})
+			}else if (callback.payChoice == 3) {
 				let params = callback.params;
 				wx.requestPayment(
 					{
@@ -238,34 +289,46 @@ Page({
 								title: '提示',
 								content: '支付成功',
 								showCancel: false,
-								success: function(res){
-									if(res.confirm)
-									{
+								success: function (res) {
+									if (res.confirm) {
 										wx.navigateBack({
 											delta: 1
 										})
 									}
 								}
 							})
-						 },
-						'fail': function (res) { 
+						},
+						'fail': function (res) {
 							wx.showModal({
 								title: '提示',
 								content: '支付失败',
 								showCancel: false,
 								success: function (res) {
-								
+
 								}
 							})
 						},
-						'complete': function (res) { 
+						'complete': function (res) {
 							console.log("done");
 						}
 					})
 			}
+
+		}else{
+			wx.showModal({
+				title: '支付失败',
+				content: callback.message ? callback.message : "支付失败",
+			})
+		}
+      
     })          
   },
-
+  bindPayChoiceChange: function (e) {
+	 
+	  this.setData({
+		  index: e.detail.value
+	  })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

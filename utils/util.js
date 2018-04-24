@@ -76,6 +76,39 @@ function loadBrands() {
   return cacheOrLoad("brands", url);
 }
 
+function loadShopParams(){	
+	let shopParams = {}
+	NetUtil.netUtil(CON.GET_SHOPPARAMS_URL, "GET", "", function (shopParams) {
+		if (shopParams) {			
+			wx.setStorage({
+				key: "shopParams",
+				data: shopParams,
+			})
+		}
+	})
+}
+function loadShipAgents(){
+	let shipAgents = {}
+	NetUtil.netUtil(CON.GET_SHIPAGENTS_URL, "GET", "", function (shipAgents) {
+		if (shipAgents) {
+			wx.setStorage({
+				key: "shipAgents",
+				data: shipAgents,
+			})
+		}
+	})
+}
+function loadPayments(){
+	let payments = {}
+	NetUtil.netUtil(CON.GET_PAYMENTS_URL, "GET", "", function (payments) {
+		if (payments) {
+			wx.setStorage({
+				key: "payments",
+				data: payments,
+			})
+		}
+	})
+}
 function loadProducts(openId, targetShopId) {
 	let self = this
 	let products = {}
@@ -87,12 +120,8 @@ function loadProducts(openId, targetShopId) {
 				key: "shopProducts",
 				data: shopProducts,
 			})
-		}
-
-	
+		}	
 	})
-
-
 };
 
 /**
@@ -125,5 +154,10 @@ module.exports = {
   image: image,
   loadBrands: loadBrands,
   loadProducts: loadProducts,
+
+  loadPayments: loadPayments,
+  loadShipAgents: loadShipAgents,
+  loadShopParams: loadShopParams,
+
   isNumeric: isNumeric,
 }

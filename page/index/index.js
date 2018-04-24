@@ -265,7 +265,7 @@ Page({
 		{
 			openId = app.globalData.openId;
 		}else{
-			openId = "o0_gG0bsIV1gKqRTUEFB7Rh-qb2I"
+			openId = "oVxpo5FQkb2qY4TGpD9rq2xFWRlk"
 		}
 		
 		console.log(wx.getStorageSync('shopOpened'))
