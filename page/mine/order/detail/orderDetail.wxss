@@ -158,7 +158,7 @@ page{
 .order-cate .order-cate-title {
   width: 100%;
   color:#515151;
-  font-size:31rpx;
+  font-size:28rpx;
   overflow: hidden; 
   white-space: nowrap; 
   text-overflow:ellipsis;
@@ -183,6 +183,9 @@ page{
 .order-cate .order-cate-price button{
   margin: 0;
   /* padding: 0; */
+  background-color: #C70039;
+  opacity: 0.8;
+  color: white;
 }
 
 .footer{
@@ -195,4 +198,5 @@ page{
   height:50px;
   border:1px solid #f0f0f0; 
   background-color:#f8f8f8;
+  padding-left: 20rpx;
 }

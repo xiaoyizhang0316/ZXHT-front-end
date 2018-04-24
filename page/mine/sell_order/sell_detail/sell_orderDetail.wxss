@@ -147,7 +147,7 @@ page{
 .order-cate .order-cate-title {
   width: 100%;
   color:#515151;
-  font-size:31rpx;
+  font-size:25rpx;
   overflow: hidden; 
   white-space: nowrap; 
   text-overflow:ellipsis;

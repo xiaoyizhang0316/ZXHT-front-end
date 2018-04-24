@@ -186,8 +186,8 @@ page,.main{
 }
 
 .product-list .goods-image{
-    width: 100%;
-    height: 230rpx;
+    width: 90%;
+    height: 200rpx;
 }
 .title-line{  
  overflow:hidden;
