@@ -17,7 +17,7 @@
       </view>
     </view>
     <view style="display:flex;margin-right:9px" catchtap="listProdsTemplate">
-      <image style="height:27px;width:27px;align-self:center" src="/image/add.png"></image>
+      <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
     </view>
   </view>
 

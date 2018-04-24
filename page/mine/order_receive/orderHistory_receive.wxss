@@ -112,7 +112,7 @@ page{
 
 .order-item-title text {
   width: 88%;
-  font-size: 30rpx;
+  font-size: 25rpx;
   line-height: 39rpx;
   white-space: pre-wrap; 
   overflow:hidden; 
@@ -126,7 +126,7 @@ page{
 .order-item-desc{
   width: 100%;
   height: 60rpx;
-  font-size: 30rpx;
+  font-size: 26rpx;
   display: flex;
   align-items: center;
   justify-content: flex-end;

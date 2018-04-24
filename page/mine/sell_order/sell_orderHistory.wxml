@@ -46,33 +46,62 @@
                 <text class='middle-tip'>实付款:</text>
                 <text class='order-price'>${{item.orderInfo.totalCost}}</text>
               </view>
+
               <view class="order-send">
+
                 <block wx:if="{{item.orderInfo.orderStatus == 2}}">
-                  <text class='button'>已确认</text>
+                  <text class='button1'>已确认</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
-                  <text class='button'>已下单</text>
+                  <text class='button1'>已下单</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
-                  <text class='button'>发货中</text>
+                  <text class='button1'>发货中</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
-                  <text class='button'>待发货</text>
+                  <text class='button1'>待发货</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
-                  <text class='button'>已收货</text>
+                  <text class='button1'>已收货</text>
                 </block>
 								<block wx:elif="{{item.orderInfo.orderStatus == 6}}">
-                  <text class='button'>待收货</text>
+                  <text class='button1'>待收货</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
                   <text class='button-grey'>已取消</text>
                 </block>
                 <block wx:else>
-                  <text class='button'>处理中</text>
+                  <text class='button1'>处理中</text>
                 </block>
+
+                <block wx:if="{{item.orderInfo.orderStatus == 2}}">
+                  <text class='button2'>已确认</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
+                  <text class='button2'>已下单</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
+                  <text class='button2'>发货中</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
+                  <text class='button2'>待发货</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
+                  <text class='button2'>已收货</text>
+                </block>
+
+								<block wx:elif="{{item.orderInfo.orderStatus == 6}}">
+                  <text class='button2'>待收货</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
+                  <text class='button-red'>已取消</text>
+                </block>
+                <block wx:else>
+                  <text class='button2'>处理中</text>
+                </block>
+
                 <block wx:if="{{item.orderInfo.orderStatus != 9}}">
-                  <view class='button' data-order="{{item.orderInfo.id}}" catchtap="cancelOrder">取消订单</view>
+                  <view class='button3' data-order="{{item.orderInfo.id}}" catchtap="cancelOrder">取消订单</view>
                 </block>
               </view>
             </view>
@@ -113,31 +142,31 @@
             </view>
             <view class="order-send">
               <block wx:if="{{item.orderInfo.orderStatus == 2}}">
-                <text class='button'>已确认</text>
+                <text class='button1'>已确认</text>
               </block>
               <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
-                <text class='button'>已下单</text>
+                <text class='button1'>已下单</text>
               </block>
               <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
-                <text class='button'>发货中</text>
+                <text class='button1'>发货中</text>
               </block>
               <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
-                <text class='button'>待发货</text>
+                <text class='button1'>待发货</text>
               </block>
               <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
-                <text class='button'>已收货</text>
+                <text class='button1'>已收货</text>
               </block>
               <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
-                <text class='button'>已取消</text>
+                <text class='button1'>已取消</text>
               </block>
               <block wx:else>
-                <text class='button'>处理中</text>
+                <text class='button1'>处理中</text>
               </block>
               <block wx:if="{{item.orderInfo.orderStatus == 3}}">
-                <view class='button' data-order="{{item.orderInfo.id}}" catchtap="sendOrder">手动发货</view>
+                <view class='button2' data-order="{{item.orderInfo.id}}" catchtap="sendOrder">手动发货</view>
               </block>
               <block wx:if="{{item.orderInfo.orderStatus != 9}}">
-                <view class='button' data-order="{{item.orderInfo.id}}" catchtap="cancelOrder">取消订单</view>
+                <view class='button3' data-order="{{item.orderInfo.id}}" catchtap="cancelOrder">取消订单</view>
               </block>
             </view>
           </view>
@@ -182,28 +211,52 @@
               </view>
               <view class="order-send">
                 <block wx:if="{{item.orderInfo.orderStatus == 2}}">
-                  <text class='button'>已确认</text>
+                  <text class='button1'>已确认</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
-                  <text class='button'>已下单</text>
+                  <text class='button1'>已下单</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
-                  <text class='button'>发货中</text>
+                  <text class='button1'>发货中</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
-                  <text class='button'>待发货</text>
+                  <text class='button1'>待发货</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
-                  <text class='button'>已收货</text>
+                  <text class='button1'>已收货</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
-                  <text class='button'>已取消</text>
+                  <text class='button1'>已取消</text>
                 </block>
                 <block wx:else>
-                  <text class='button'>处理中</text>
+                  <text class='button1'>处理中</text>
                 </block>
+
+<block wx:if="{{item.orderInfo.orderStatus == 2}}">
+                  <text class='button2'>已确认</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
+                  <text class='button2'>已下单</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
+                  <text class='button2'>发货中</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
+                  <text class='button2'>待发货</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
+                  <text class='button2'>已收货</text>
+                </block>
+                <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
+                  <text class='button2'>已取消</text>
+                </block>
+                <block wx:else>
+                  <text class='button2'>处理中</text>
+                </block>
+
+
                 <block wx:if="{{item.orderInfo.orderStatus != 9}}">
-                  <view class='button' data-order="{{item.orderInfo.id}}" catchtap="cancelOrder">取消订单</view>
+                  <view class='button3' data-order="{{item.orderInfo.id}}" catchtap="cancelOrder">取消订单</view>
                 </block>
               </view>
             </view>

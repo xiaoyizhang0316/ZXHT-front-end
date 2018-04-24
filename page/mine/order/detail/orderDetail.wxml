@@ -167,7 +167,7 @@
     <text style="color:#fff;font-size:15px">确认收货</text>
 		</view>
 	 </block>
-	  <view style="margin-right:10px;display:flex;border:1px solid #e64949;background-color:#e64949;padding:7px;border-radius:3px;" data-order="{{orderId}}" bindtap="placeOrder">
-    <text style="color:#fff;font-size:15px">再次下单</text>
+	  <view style="display:flex;padding-left:10rpx;width:150rpx;border:1px solid #C70039;background-color:#C70039;opacity:0.8;padding:7px;border-radius:3px;" data-order="{{orderId}}" bindtap="placeOrder">
+    <text style="color:#fff;font-size:15px;margin-left:15rpx;">再次下单</text>
   </view>
 </view>

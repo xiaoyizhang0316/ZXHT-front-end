@@ -11,12 +11,22 @@
 
     <view class="goods-title">{{goods.title}}</view>
 
-    <view class="goods-operation" bindtap="addToCart">
+    <!-- <view class="goods-operation" bindtap="addToCart">
+
 	  <text class="goods-price">${{goods.price}}</text>
 	  <text class="goods-price del">${{goods.basePrice}}</text>
       <text class="goods-operation-num">库存 {{goods.stock}}</text>
       
-      <image src="/image/cart1.png" class="goods-cart-img" ></image>
+      <image src="/image/cart1.png" class="goods-cart-img" ></image> -->
+
+
+      <view class='goods-operation-num'>库存 {{goods.stock}}</view>
+   
+   <view class='goods-des'></view>
+      <text class="goods-price">${{goods.price}}</text>
+      <image src="/image/cart3.png" class="goods-cart-img" bindtap="addToCart"></image>
+
+>>>>>>> 766cca560edf19d1aa1b8e1434b3016fe7542c63
     </view>
     <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
   </view>
