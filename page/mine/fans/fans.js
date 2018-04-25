@@ -120,126 +120,126 @@ Page({
     this.resetDisplay();
   }, 
 	
-  updateVipLevel: function (e) {
-		console.log(e.currentTarget)
-		let self = this;
-    let vipLevel = e.detail.value.trim();
-    if ([0, 1, 2, 3].indexOf(parseInt(vipLevel)) !== -1) {
-			let targetOpenId = ""
-			console.log(Array.from(self.data.fansLineList).length)
-			console.log(Array.from(self.data.fansLineList))		
-			console.log(self.data.fansLineList)	
-			console.log(self.data)
-			for (let i = 0; i < self.data.fansLineList.length; i++) {	
-				console.log(self.data.fansLineList[i])
-				if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
+//   updateVipLevel: function (e) {
+// 		console.log(e.currentTarget)
+// 		let self = this;
+//     let vipLevel = e.detail.value.trim();
+//     if ([0, 1, 2, 3].indexOf(parseInt(vipLevel)) !== -1) {
+// 			let targetOpenId = ""
+// 			console.log(Array.from(self.data.fansLineList).length)
+// 			console.log(Array.from(self.data.fansLineList))		
+// 			console.log(self.data.fansLineList)	
+// 			console.log(self.data)
+// 			for (let i = 0; i < self.data.fansLineList.length; i++) {	
+// 				console.log(self.data.fansLineList[i])
+// 				if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
 
-					targetOpenId = self.data.fansLineList[i].openId;
-					console.log(targetOpenId)
-				}
-			}
+// 					targetOpenId = self.data.fansLineList[i].openId;
+// 					console.log(targetOpenId)
+// 				}
+// 			}
 		
-			let fan = { "shop_id": app.globalData.openId, "open_id": targetOpenId, "vip_level": vipLevel };
-			let url = COM.load('CON').FANS_VIP_URL;
-			COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
+// 			let fan = { "shop_id": app.globalData.openId, "open_id": targetOpenId, "vip_level": vipLevel };
+// 			let url = COM.load('CON').FANS_VIP_URL;
+// 			COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
 
-				for (let i = 0; i < self.data.fansLineList.length; i++) {
-					if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
-						self.data.fansLineList[i].vipLevel = vipLevel;
-					}
-				}
-				for (let i = 0; i < self.data.searchResult.length; i++) {
-					if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
-						self.data.searchResult[i].vipLevel = vipLevel;
-					}
-				}
-				self.setData({
-					fansLineList: self.data.fansLineList,
-					searchResult: self.data.searchResult
-				});
-			})
-    }else{
-			// to do 提示vip只有四个等级
-      console.log("aaaaaaaaaaaaa");
-    }
-  },
+// 				for (let i = 0; i < self.data.fansLineList.length; i++) {
+// 					if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
+// 						self.data.fansLineList[i].vipLevel = vipLevel;
+// 					}
+// 				}
+// 				for (let i = 0; i < self.data.searchResult.length; i++) {
+// 					if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
+// 						self.data.searchResult[i].vipLevel = vipLevel;
+// 					}
+// 				}
+// 				self.setData({
+// 					fansLineList: self.data.fansLineList,
+// 					searchResult: self.data.searchResult
+// 				});
+// 			})
+//     }else{
+// 			// to do 提示vip只有四个等级
+//       console.log("aaaaaaaaaaaaa");
+//     }
+//   },
 
 
-  switchChange: function (e) {
-    let self = this;
-		let targetOpenId = ""
-		for (let i = 0; i < self.data.fansLineList.length; i++) {
-			if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
-				targetOpenId = self.data.fansLineList[i].openId;
-			}
-		}
-    if (!e.detail.value) {
-			let fan = { "shop_id": app.globalData.openId, "open_id": targetOpenId, "access": false };
-      wx.showModal({
-        title: '提示',
-        content: '确认不允许此人进入店铺?',
-        success: function (res) {          
-          if (res.confirm) {
-            fan.access = false
-            let url = COM.load('CON').FANS_ACCESS_URL;
-            COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
+//   switchChange: function (e) {
+//     let self = this;
+// 		let targetOpenId = ""
+// 		for (let i = 0; i < self.data.fansLineList.length; i++) {
+// 			if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
+// 				targetOpenId = self.data.fansLineList[i].openId;
+// 			}
+// 		}
+//     if (!e.detail.value) {
+// 			let fan = { "shop_id": app.globalData.openId, "open_id": targetOpenId, "access": false };
+//       wx.showModal({
+//         title: '提示',
+//         content: '确认不允许此人进入店铺?',
+//         success: function (res) {          
+//           if (res.confirm) {
+//             fan.access = false
+//             let url = COM.load('CON').FANS_ACCESS_URL;
+//             COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
              
-              for (let i = 0; i < self.data.fansLineList.length; i++) 
-              {
-                if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
-                  self.data.fansLineList[i].access = false;
-                  }
-              }
-              for (let i = 0; i < self.data.searchResult.length; i++) 
-              {
-                if (self.data.searchResult[i].id == e.currentTarget.dataset.id) 
-                {
-									self.data.searchResult[i].access = false;
-                }
-              }
-              self.setData({
-                fansLineList: self.data.fansLineList,
-                searchResult: self.data.searchResult
-              });
+//               for (let i = 0; i < self.data.fansLineList.length; i++) 
+//               {
+//                 if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
+//                   self.data.fansLineList[i].access = false;
+//                   }
+//               }
+//               for (let i = 0; i < self.data.searchResult.length; i++) 
+//               {
+//                 if (self.data.searchResult[i].id == e.currentTarget.dataset.id) 
+//                 {
+// 									self.data.searchResult[i].access = false;
+//                 }
+//               }
+//               self.setData({
+//                 fansLineList: self.data.fansLineList,
+//                 searchResult: self.data.searchResult
+//               });
                   
                 
-            })
-          } else if (res.cancel) {
-            self.setData({ fansLineList: self.data.fansLineList });
-          }
-        }
-      })
-    } else {
-      //允许进入
-			let fan = { "shop_id": app.globalData.openId, "open_id": targetOpenId, "access": true };
-      let url = COM.load('CON').FANS_ACCESS_URL;
-      COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
-        for (let i = 0; i < self.data.fansLineList.length; i++) {
-          if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
-						self.data.fansLineList[i].access = true;
-          }
-        }
-        for (let i = 0; i < self.data.searchResult.length; i++) {
-          if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
-						self.data.searchResult[i].access = true;
-          }
-        }
-        // self.data.fansLineList[e.currentTarget.dataset.id -1].selected = true;
-        // self.data.searchResult[e.currentTarget.dataset.id - 1].selected = true;
-        self.setData({
-          fansLineList: self.data.fansLineList,
-          searchResult: self.data.searchResult
-        });
+//             })
+//           } else if (res.cancel) {
+//             self.setData({ fansLineList: self.data.fansLineList });
+//           }
+//         }
+//       })
+//     } else {
+//       //允许进入
+// 			let fan = { "shop_id": app.globalData.openId, "open_id": targetOpenId, "access": true };
+//       let url = COM.load('CON').FANS_ACCESS_URL;
+//       COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
+//         for (let i = 0; i < self.data.fansLineList.length; i++) {
+//           if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
+// 						self.data.fansLineList[i].access = true;
+//           }
+//         }
+//         for (let i = 0; i < self.data.searchResult.length; i++) {
+//           if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
+// 						self.data.searchResult[i].access = true;
+//           }
+//         }
+//         // self.data.fansLineList[e.currentTarget.dataset.id -1].selected = true;
+//         // self.data.searchResult[e.currentTarget.dataset.id - 1].selected = true;
+//         self.setData({
+//           fansLineList: self.data.fansLineList,
+//           searchResult: self.data.searchResult
+//         });
     
         
-      })
-    };
-    //once something changed should force refresh fans list page
-    wx.setStorage({
-      key: 'refreshFansList',
-      data: true,
-    })
-  },
+//       })
+//     };
+//     //once something changed should force refresh fans list page
+//     wx.setStorage({
+//       key: 'refreshFansList',
+//       data: true,
+//     })
+//   },
   // saveFan: function () {
   //   let self = this, url = COM.load('CON').SHOP_Fan_URL + '/saveOrUpdate';
   //   if (self.data.tmp && self.data.tmp.price) {

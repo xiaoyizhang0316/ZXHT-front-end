@@ -17,6 +17,7 @@ Page({
 		
 	],
 	index: 0,
+	rate:0,
   },
 
   /**
@@ -59,6 +60,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+	this.setData({
+		rate : wx.getStorageSync("shopParams").rate
+	}) 
     this.showOrderList();
   },
 
@@ -193,15 +197,18 @@ Page({
 	if (shop.prepay)
 	{
 		let deposit = orderList[e.currentTarget.dataset.id].applyToShop.deposit
-		payChoice.push({id:2, name:"预存款支付(当前预存款为$"+deposit+")澳元"});
+		payChoice.push({id:2, name:"预存款支付(当前预存款为￥"+deposit+")人民币"});
 	}
 	if (shop.weixinPay)
 	payChoice.push({id:3, name:"微信支付"});
 	
+	let selectedOrder = orderList[e.currentTarget.dataset.id];
+	let rmb = Math.round(selectedOrder.orderInfo.totalCost * this.data.rate * 100)/100;
+	selectedOrder.orderInfo.rmb = rmb;
 	this.setData({
 		animationData: animation.export(),
 		showModalStatus: true,
-		selectedOrder: orderList[e.currentTarget.dataset.id],
+		selectedOrder: selectedOrder,
 		payChoice: payChoice,
 	})
     
@@ -244,8 +251,9 @@ Page({
 	console.log
 	if (payChoiceIndex == 2)
 	{
-		
-		if (order.orderInfo.totalCost * 100 > order.applyToShop.deposit*100)
+
+		let rate = wx.getStorageSync("shopParams").rate;
+		if (order.orderInfo.totalCost * 10000 * rate > order.applyToShop.deposit*10000)
 		{
 			wx.showModal({
 				title: '无法支付',

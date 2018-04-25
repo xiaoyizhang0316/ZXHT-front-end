@@ -26,19 +26,27 @@
     <view class='goods-line-list'>
       <view class="goods-line-list-child goods-line-list-top">
         <text class='goods-image-clo'>图片</text>
-        <text class='goods-name-clo'>名称</text>
+        <text class='goods-top-name-clo'>名称</text>
+		<text class='goods-top-tip-clo'>(点击商品修改价格和首页展示)</text>
         <text class='goods-stock-clo'>库存</text>
         <text class='goods-price-clo'>价格</text>
       </view>
 
 
       <!-- <block wx:if="{{displayClear == false}}"> -->
+	<block wx:if="{{goodsLineList.length == 0}}">
+                  <view style="text-align:center; margin: 0 auto; margin-top: 100rpx" catchtap="listProdsTemplate">
+				  点我去上货
+      <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
+    </view>
+    </block>
       <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
         <image class='goods-image-clo' src="{{item.thumb}}"></image>
         <text class='goods-name-clo'>{{item.title}}</text>
         <text class='goods-stock-clo'>{{item.stock}}</text>
         <text class='goods-price-clo'>$ {{item.vip1Price}} \n$ {{item.price}}</text>
       </view>
+
     </view>
   </view>
 

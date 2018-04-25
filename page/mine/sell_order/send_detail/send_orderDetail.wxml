@@ -1,152 +1,202 @@
 <form class="page__bd" catchsubmit="formSubmit" catchreset="formReset">
-  <view class='top' bindtap="insert">
-     添加物流单 +
-    <!-- <image class="add" src="/image/plus.png"></image> -->
-  </view>
-
-  <!-- 添加物流订单 -->
-  <view wx:for="{{checkbox}}" wx:key="id" wx:for-index="id" class="contain" style="flex-direction:column">
-    <view class="inner-explain-line">
-      <view class="explain-text">物流公司</view>
-      <text class="explain-text" style='margin-right:0px'></text>
-	  <picker bindchange="bindShipAgentChange" value="{{shipAgents[index[id]].id}}" range="{{shipAgents}}" data-selecthx="{{shipAgents[index[id]].name}}" data-id="{{id}}" range-key="{{'name'}}" >
-			<view class="picker">
-			<text class="explain-text" style="flex:2;font-size=12px">{{shipAgents[index[id]].name}}</text>
-			 <input hidden="true" name="agentId[{{id}}]"  value='{{shipAgents[index[id]].id}}' ></input>
-			</view>
-	  </picker>
-      <!-- <input class='explain-text' style="flex:2" placeholder='快递公司' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="agentId[{{id}}]"    ></input> -->
-      <view bindtap="delBind">
-        <image class="add" src="/image/minus.png"></image>
-      </view>
-    </view>
-    <view class="inner-explain-line">
-      <view class="explain-text">物流条码</view>
-      <text class="explain-text" style='margin-right:0px'></text>
-      <input class='explain-text' placeholder='请输入快递单号' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="receiptNumber[{{id}}]"></input>
+    <view class='top' bindtap="insert">
+        添加物流单 +
+        <!-- <image class="add" src="/image/plus.png"></image> -->
     </view>
 
-		<block wx:key="idx" wx:for-index="idx" wx:for="{{items}}">
-    <view class="explain-line order-cate">
-      <view class="explain-text" style='overflow:hidden; white-space:nowrap;text-overflow:ellipsis;'>{{item.title}}</view>
-      <text class="explain-text" style='margin-right:0px'></text>
-      <input class='explain-text' placeholder='发货数量' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipGoods[{{id}}][{{item.productId}}]" value="{{item.num}}"></input>
-    </view>
-  	</block>
-
-		<view class="inner-explain-line">
-      <view class="explain-text">本单发货费用</view>
-      <text class="explain-text" style='margin-right:0px'></text>
-      <input class='explain-text' placeholder='发货的费用' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipFee[{{id}}]" value= "0"></input>
-    </view>
-
-  </view>
-
-  <scroll-view scroll-y="true" style="height:{{winHeight-50}}px">
-    
-
-    <view class="explain-line" style='background:#eff3f4;justify-content:flex-start'>
-      <view class="text">订单详情</view>
-    </view>
-
-    <view class='contain'>
-      <view style="display:flex;flex-direction:column;flex:10;">
+    <!-- 添加物流订单 -->
+    <view wx:for="{{checkbox}}" wx:key="id" wx:for-index="id" class="contain" style="flex-direction:column">
         <view class="inner-explain-line">
-          <view class="explain-text" style="padding-left:9px">订单编号</view>
-          <view class="explain-value" style="margin-right:5px">{{orderId}}</view>
-          <view class="explain-value" style="align-items:center;justify-content: center;border:1px solid #e6e6e6;flex:1;border-radius:3px;" catchtap="copyOrderId">复制</view>
-        </view>
-        <view style="display:flex;">
-          <view class="explain-text" style="padding-left:9px">订单日期</view>
-          <view class="explain-value" style="align-items:center;">{{orderTime}}</view>
-        </view>
-		<view style="display:flex;">
-          <view class="explain-text" style="padding-left:9px">支付方式</view>
-          <view class="explain-value" style="align-items:center;">{{orderTime}}</view>
-        </view>
-      </view>
-
-      <view style="display:flex;align-items:center;justify-content:center;padding-right:3px;background-color:white;flex:1;">
-        <image style="width:75px;height:70px;" src="{{qrcode}}" class="qrcode" />
-      </view>
-    </view>
-
-    <view class="explain-line" style="border-top:1px solid #eff3f4">
-      <view class="inner-explain-line">
-        <view class="explain-text">收件地址</view>
-        <view class="explain-value">
-          <view>
-            <text>{{receiver.name}}</text>
-          </view>
-          <view class='explain-phone'>
-            <text style="border-bottom:1px solid #e8e8e8" catchtap="makeCall" data-mobile="{{receiver.phone}}">{{receiver.phone}}</text>
-          </view>
-
-          <view class="explain-line">
-            <view class="receiver-line">
-              <view class="explain-value">
-                <text>{{receiver.identityCard}}</text>
-              </view>
+            <view class="explain-text">物流公司</view>
+            <text class="explain-text" style='margin-right:0px'></text>
+            <picker bindchange="bindShipAgentChange" value="{{shipAgents[index[id]].id}}" range="{{shipAgents}}" data-selecthx="{{shipAgents[index[id]].name}}" data-id="{{id}}" range-key="{{'name'}}">
+                <view class="picker">
+                    <text class="explain-text" style="flex:2;font-size=12px">{{shipAgents[index[id]].name}}</text>
+                    <input hidden="true" name="agentId[{{id}}]" value='{{shipAgents[index[id]].id}}'></input>
+                </view>
+            </picker>
+            <!-- <input class='explain-text' style="flex:2" placeholder='快递公司' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="agentId[{{id}}]"    ></input> -->
+            <view bindtap="delBind">
+                <image class="add" src="/image/minus.png"></image>
             </view>
-          </view>
+        </view>
+        <view class="inner-explain-line">
+            <view class="explain-text">物流条码</view>
+            <text class="explain-text" style='margin-right:0px'></text>
+            <input class='explain-text' placeholder='请输入快递单号' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="receiptNumber[{{id}}]"></input>
+        </view>
 
-          <view class="explain-line" style="padding-bottom:5px;">
-            <view class="receiver-line">
-              <view class="explain-value" style="line-height:15px;">
-                {{receiver.city}} {{receiver.detail}}
-              </view>
+        <block wx:key="idx" wx:for-index="idx" wx:for="{{items}}">
+            <view class="explain-line order-cate">
+                <view class="explain-text" style='overflow:hidden; white-space:nowrap;text-overflow:ellipsis;'>{{item.title}}</view>
+                <text class="explain-text" style='margin-right:0px'></text>
+                <input class='explain-text' placeholder='发货数量' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipGoods[{{id}}][{{item.productId}}]" value="{{item.num}}"></input>
             </view>
-          </view>
+        </block>
+
+        <view class="inner-explain-line">
+            <view class="explain-text">本单发货费用(仅作为记录，不影响订单，不展示给用户)</view>
+            <text class="explain-text" style='margin-right:0px'>$</text>
+            <input class='explain-text' placeholder='发货的费用' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipFee[{{id}}]" value="0"></input>
         </view>
-      </view>
+
     </view>
 
-		<!-- 插入身份证下载  -->
-		<button type="primary" class='button' bindtap = "downloadIDs">下载本单收货人身份证正反面</button>
+    <scroll-view scroll-y="true" style="height:{{winHeight-50}}px">
 
 
+        <view class="explain-line" style='background:#eff3f4;justify-content:flex-start'>
+            <view class="text">订单详情</view>
+        </view>
 
-    <view class="explain-line" style="border-top:20px solid #eff3f4">
-      <view class="inner-explain-line">
-        <view class="explain-text">物品种类</view>
-      </view>
+        <view class='contain'>
+            <view style="display:flex;flex-direction:column;flex:10;">
+                <view class="inner-explain-line">
+                    <view class="explain-text" style="padding-left:9px">订单编号</view>
+                    <view class="explain-value" style="margin-right:5px">{{orderId}}</view>
+                    <view class="explain-value" style="align-items:center;justify-content: center;border:1px solid #e6e6e6;flex:1;border-radius:3px;" catchtap="copyOrderId">复制</view>
+                </view>
+                <view style="display:flex;">
+                    <view class="explain-text" style="padding-left:9px">订单日期</view>
+                    <view class="explain-value" style="align-items:center;">{{orderTime}}</view>
+                </view>
+                <view style="display:flex;">
+                    <view class="explain-text" style="padding-left:9px">支付方式</view>
+                    <view class="explain-value" style="align-items:center;">{{payment}}</view>
+                </view>
+                <view style="display:flex;">
+                    <view class="explain-text" style="padding-left:9px">支付邮费</view>
+                    <text class="explain-text" style='margin-right:0px'>$</text>
+                    <view class="explain-value" style="align-items:center;">{{shippingCost}}</view>
+                </view>
+                <view style="display:flex;">
+                    <view class="explain-text" style="padding-left:9px">最终支付(线下支付此处为0)</view>
+                    <text class="explain-text" style='margin-right:0px'>$</text>
+                    <view class="explain-value" style="align-items:center;">{{finalPayment}}</view>
+                </view>
+
+            </view>
+
+            <view style="display:flex;align-items:center;justify-content:center;padding-right:3px;background-color:white;flex:1;">
+                <image style="width:75px;height:70px;" src="{{qrcode}}" class="qrcode" />
+            </view>
+        </view>
+
+        <view class="explain-line" style="border-top:1px solid #eff3f4">
+            <view class="inner-explain-line">
+                <view class="explain-text">收件地址</view>
+                <view class="explain-value">
+                    <view>
+                        <text>{{receiver.name}}</text>
+                    </view>
+                    <view class='explain-phone'>
+                        <text style="border-bottom:1px solid #e8e8e8" catchtap="makeCall" data-mobile="{{receiver.phone}}">{{receiver.phone}}</text>
+                    </view>
+
+                    <view class="explain-line">
+                        <view class="receiver-line">
+                            <view class="explain-value">
+                                <text>{{receiver.identityCard}}</text>
+                            </view>
+                        </view>
+                    </view>
+
+                    <view class="explain-line" style="padding-bottom:5px;">
+                        <view class="receiver-line">
+                            <view class="explain-value" style="line-height:15px;">
+                                {{receiver.city}} {{receiver.detail}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 插入身份证下载  -->
+        <button type="primary" class='button' bindtap="downloadIDs">下载本单收货人身份证正反面</button>
+
+        <block wx:if="{{order.orderInfo.orderStatus == 5 || order.orderInfo.orderStatus == 6 || order.orderInfo.orderStatus == 7}}">
+            <view class="explain-line" style='background:#eff3f4;justify-content:flex-start'>
+                <view class="text">已发货单</view>
+            </view>
+            <view class="explain-line" style="border-top:20px solid #eff3f4">
+                <view class="inner-explain-line">
+                    <view class="explain-text">发货单</view>
+                </view>
+            </view>
+            <block wx:key="ship_id" wx:for-index="ship_id" wx:for="{{order.shipFulls}}" wx:for-item="item">
+                <view class="inner-explain-line" style="padding-bottom:5px;border-top:1rpx solid #e8e8e8">
+                    <view class="explain-text">发货中介</view>
+                    <view class="explain-value">{{shipAgents[item.ship.agentId].name}}</view>
+                </view>
+                <view class="inner-explain-line" style="padding-top:0px;">
+                    <view class="explain-text">发货单号</view>
+                    <view class="explain-value">{{item.ship.receiptNumber}}</view>
+                </view>
+                <block wx:key="idx" wx:for-index="idx" wx:for="{{item.shipGoods}}" wx:for-item="shipGood">
+                    <view class="explain-line order-cate" style='border-top:none; border-bottom:1rpx solid #e8e8e8'>
+                        <view class="order-cate-image">
+                            <image src="{{shipGood.image}}"></image>
+                        </view>
+                        <view class="order-cate-desc">
+                            <view class="order-cate-title">
+                                <text>{{shipGood.title}}</text>
+                            </view>
+                            <view class="order-cate-num">
+                                <text>数量:{{shipGood.sendNumber}}</text>
+                            </view>
+
+                        </view>
+                    </view>
+
+                </block>
+
+
+            </block>
+        </block>
+
+
+        <view class="explain-line" style="border-top:20px solid #eff3f4">
+            <view class="inner-explain-line">
+                <view class="explain-text">订单商品</view>
+            </view>
+        </view>
+
+        <block wx:key="idx" wx:for-index="idx" wx:for="{{items}}">
+            <view class="explain-line order-cate">
+                <view class="order-cate-image">
+                    <image src="{{item.image}}"></image>
+                </view>
+                <view class="order-cate-desc">
+                    <view class="order-cate-title">
+                        <text>{{item.title}}</text>
+                    </view>
+                    <view class="order-cate-num">
+                        <text>数量:{{item.num}}</text>
+                    </view>
+                    <view class="order-cate-price">
+                        <text>${{item.price}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+
+        <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;">
+            <view class="inner-explain-line">
+                <view class="explain-value" style="flex:1">
+                    {{totalQuantity}}件
+                </view>
+                <view class="explain-value" style="flex:1">
+                    {{totalWeight}}kg
+                </view>
+            </view>
+        </view>
+    </scroll-view>>
+
+    <view wx:if="{{!shared}}" class="footer">
+
+
+        <button type="warn" class='button' formType="submit">确认发货</button>
+        <button type="default" class='button' formType="reset">重置</button>
     </view>
-
-    <block wx:key="idx" wx:for-index="idx" wx:for="{{items}}">
-      <view class="explain-line order-cate">
-        <view class="order-cate-image">
-          <image src="{{item.image}}"></image>
-        </view>
-        <view class="order-cate-desc">
-          <view class="order-cate-title">
-            <text>{{item.title}}</text>
-          </view>
-          <view class="order-cate-num">
-            <text>数量:{{item.num}}</text>
-          </view>
-          <view class="order-cate-price">
-            <text>${{item.price}}</text>
-          </view>
-        </view>
-      </view>
-    </block>
-
-    <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;">
-      <view class="inner-explain-line">
-        <view class="explain-value" style="flex:1">
-          {{totalQuantity}}件
-        </view>
-        <view class="explain-value" style="flex:1">
-          {{totalWeight}}kg
-        </view>
-      </view>
-    </view>
-  </scroll-view>>
-
-  <view wx:if="{{!shared}}" class="footer">
-
-
-    <button type="warn" class='button' formType="submit">确认发货</button>
-    <button type="default" class='button' formType="reset">重置</button>
-  </view>
 </form>

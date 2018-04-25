@@ -90,6 +90,18 @@
   flex: 0.6;
 }
 
+.goods-top-name-clo {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 0.5;
+}
+.goods-top-tip-clo {
+ 
+  flex: 2.5;
+  color:red;
+  font-size: 24rpx;
+}
 .goods-name-clo {
   overflow: hidden;
   white-space: nowrap;

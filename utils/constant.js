@@ -1,6 +1,6 @@
 //url相关
-//const BASE_URL = "https://mini.zhenxianghaitao.com"
-const BASE_URL = "https://9629fcf9.ngrok.io"
+const BASE_URL = "https://mini.zhenxianghaitao.com"
+//const BASE_URL = "https://9629fcf9.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/"
 
 //登录 初始设置
@@ -27,6 +27,7 @@ const updateMyShopInfo = BASE_URL + "/api/mall/shops/update"
 const FANS_LIST_URL = BASE_URL + "/api/mall/users/getFansApplyToShop/"
 const FANS_ACCESS_URL = BASE_URL + "/api/mall/users/updateFansAccess"
 const FANS_VIP_URL = BASE_URL + "/api/mall/users/updateFansVipLevel"
+const UPDATE_FAN_URL = BASE_URL + "/api/mall/users/updateFan"
 const ADD_SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shops/addShopProduct"
 const APPLY_TO_SHOP = BASE_URL + "/api/mall/users/applyToShop/"
 const CREATE_SHOP = BASE_URL + "/api/mall/shops/create"
@@ -117,4 +118,6 @@ module.exports = {
 	GET_SHOPPARAMS_URL : GET_SHOPPARAMS_URL,
 	GET_PAYMENTS_URL : GET_PAYMENTS_URL,
 	GET_SHIPAGENTS_URL : GET_SHIPAGENTS_URL,
+	UPDATE_FAN_URL: UPDATE_FAN_URL,
+	IMG_BASE: IMG_BASE
 }

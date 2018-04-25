@@ -45,7 +45,8 @@ Page({
         key: 'brandIds',
         data: brandIds,
       })
-    });
+
+    }, false);
     //获得所有分类
     let urlcates = COM.load('CON').CATEGORY_URL + 'all'
     let allcategories = []
@@ -59,7 +60,8 @@ Page({
         cateList: allcategories,
         cateListWithId: allcategoriesWithId
       });
-    });
+	  wx.hideToast();
+	}, false);
   },
 
   listProducts: function () {
@@ -269,13 +271,14 @@ Page({
     if (query.length === 0) {
       return false;
     } else {
-      let shopProductIds = wx.getStorageSync("shopProductIds");
+		let myProducts = wx.getStorageSync("myProducts");
+		var myProductsIds = Object.keys(myProducts);
       let url = COM.load('CON').PRODUCT_URL + '/title/';
       let searchResult = [];
       COM.load('NetUtil').netUtil(url + query, 'GET', "", function (res) {
         res.forEach(function (p) {
           p.thumb = COM.load('Util').image(p.barcode);
-          p.selected = shopProductIds.includes(p.id);
+		  p.selected = myProductsIds.includes(p.id.toString());
           searchResult.push(p);
         });
         self.setData({
@@ -304,12 +307,14 @@ Page({
     //goodslinelist是显示的
     let url = COM.load('CON').GET_ALL_PRODUCT_BY_CATEGORYID_URL + self.data.cateListWithId[self.data.cateList[e.detail.value]]
     console.log(url)
-		let shopProductIds = wx.getStorageSync("shopProductIds");
+		let myProducts = wx.getStorageSync("myProducts");
+		var myProductsIds = Object.keys(myProducts);
+		console.log(myProductsIds);
 		let searchResult = [];
     COM.load('NetUtil').netUtil(url, 'GET', "", callback => {
 			callback.forEach(function (p) {
 				p.thumb = COM.load('Util').image(p.barcode);
-				p.selected = shopProductIds.includes(p.id);
+				p.selected = myProductsIds.includes(p.id.toString());
 				searchResult.push(p);
 			});
       self.setData({

@@ -14,7 +14,13 @@ Page({
     totalQuantity: null,
     orderConfirmed: false,
     discount: null,
-    postalFee: null
+    postalFee: null,
+	shipAgents: [],
+	
+	finalPayment: 0,
+	shippingCost: 0,
+	payment: null,
+	shipFulls:[],
   },
 
   /**
@@ -37,7 +43,7 @@ Page({
     }
     var numofGoods = 0;
     for (var index = 0; index < order[0].orderGoods.length; index++) {
-      console.log("hahahah")
+      
       numofGoods = numofGoods + order[0].orderGoods[index].num
     }
     if (order[0].orderInfo.orderStatus == 2) {
@@ -46,6 +52,8 @@ Page({
       })
     }
     console.log(numofGoods)
+	let shipAgents = wx.getStorageSync("shipAgents")
+	let payments = wx.getStorageSync("payments")
     this.setData({
       order: order[0],
       orderId: options.orderId,
@@ -60,7 +68,12 @@ Page({
       discount: order[0].orderInfo.discount,
       postalFee: order[0].orderInfo.shippingCost,
       // totalWeight: order[0].totalWeight,
-      receiver: order[0].consignee
+      receiver: order[0].consignee,
+	  shipAgents: shipAgents,
+	  finalPayment: order[0].orderInfo.finalPayment,
+	  shippingCost: order[0].orderInfo.shippingCost,
+	  payment: payments[order[0].orderInfo.payId - 1].name,
+	  shipFulls: order[0].shipFulls
     });
     let s = JSON.stringify(this.data.order);
     console.log(JSON.parse(s));

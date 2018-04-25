@@ -5,7 +5,7 @@
   <view style="flex:1;display: flex;padding-top:10px;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;">    </view>
 
   <view class='fan-item'>
-    <image class='fan-image2' src="/image/add_user.png"></image>
+    <image class='fan-image2' src="{{fan.avatarUrl}}"></image>
 
     <view class='fan-des'>
 
@@ -29,10 +29,10 @@
 
      <view class="explain-line">
         <image class='image-icon2' src="/image/card.png"></image>
-        <view class='explain-text'>预存款(此为澳元):</view>
+        <view class='explain-text'>预存款(此为人民币￥):</view>
         
-        <view class='amount' >
-		<input type="text" value="${{fan.deposit}}" name="deposit"></input>
+        <view class='amount'>
+		<input type="text" value="{{fan.deposit}}" name="deposit" bindchange="bindDepositChange"></input>
 		</view> 
       </view> 
 

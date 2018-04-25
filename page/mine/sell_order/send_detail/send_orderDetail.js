@@ -22,6 +22,10 @@ Page({
     checkbox: [],
 	shipAgents:[],
 	index: [],
+	finalPayment: 0,
+	shippingCost: 0,
+	payment: null,
+	shipFulls: [],
   },
 
   /**
@@ -51,6 +55,7 @@ Page({
     }
     console.log(numofGoods)
 	let shipAgents = wx.getStorageSync("shipAgents")
+	let payments = wx.getStorageSync("payments")
     this.setData({
       order: order[0],
       orderId: options.orderId,
@@ -67,6 +72,11 @@ Page({
       discountValue: order[0].orderInfo.discount,
       merchant: order[0].sellerShop.shopName,
 	  shipAgents: shipAgents,
+	  finalPayment: order[0].orderInfo.finalPayment,
+	  shippingCost: order[0].orderInfo.shippingCost,
+	  payment: payments[order[0].orderInfo.payId - 1].name,
+	  shipFulls: order[0].shipFulls
+
     });
 	console.log(this.data.shipAgents);
     let s = JSON.stringify(this.data.order);
@@ -215,7 +225,9 @@ Page({
       for (var j = 0; j < self.data.items.length; j++) {
         let productId = self.data.items[j].productId
         let sendNumber = e.detail.value["shipGoods[" + i + "][" + self.data.items[j].productId + "]"]
-        shipGoodsOne[j] = { productId, sendNumber }			
+		let title = self.data.items[j].title
+		let image = self.data.items[j].image
+        shipGoodsOne[j] = { productId,title, image, sendNumber }			
       }
 			
       shipGoodsAll.push(shipGoodsOne)
@@ -359,7 +371,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+	  //如果是线下支付 并且是要发货 提示收到钱后再发货
+	  console.log("------------------------------")
+	  console.log(this.data.order)
+	  if (this.data.order.orderInfo.payId == 1 && this.data.order.orderInfo.orderStatus == 3)
+	  {
+		  wx.showModal({
+			  title: '注意！',
+			  content: '此订单为线下支付, 请注意在确定收到订金后再发货！',
+		  })
+	  }
   },
 
   /**

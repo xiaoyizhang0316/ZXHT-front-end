@@ -201,6 +201,13 @@ Page({
 			url: '/page/mine/order_receive/orderHistory_receive'
 		})
 	},
+	
+	helpCenter:function(event)
+	{
+		wx.navigateTo({
+			url: '/page/mine/helpCenter/helpCenter'
+		})
+	},
 
 	//用户登录后把用户储存在user表里, 把用户是否注册状态存入缓存
 	saveOrUserData: function (userInfo) {

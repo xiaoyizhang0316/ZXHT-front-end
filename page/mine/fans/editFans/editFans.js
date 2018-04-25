@@ -8,9 +8,15 @@ Page({
 	 */
 	data: {
 
-		
-		fan: Object,		
-		tmp: { 'access': false, 'vipLevel': '1' },		
+
+		fan: Object,
+		applyToShop: {
+			"openId": "",
+			"shopId": "",
+			"access": 0,
+			"vipLevel": 0,
+			"deposit": 0
+		},
 		vipArray: ["普通会员-无折扣", "青铜会员-9折", "白银会员-8折", "黄金会员-7折"],
 		index: 0,
 	},
@@ -21,12 +27,18 @@ Page({
 	 */
 	onLoad: function (options) {
 		var pages = getCurrentPages();
-	
+
 		var prevPage = pages[pages.length - 2];  //上一个页面
 		var fan = prevPage.data.selectedFan; //取上页data里的数据也可以修改
+		console.log(fan)
 		this.setData({
-			fan:fan,
-			index:fan.vipLevel
+			fan: fan,
+			index: fan.vipLevel,
+			"applyToShop.openId": fan.openId,
+			"applyToShop.shopId": app.globalData.openId,
+			"applyToShop.access": fan.access,
+			"applyToShop.vipLevel": fan.vipLevel,
+			"applyToShop.deposit": fan.deposit,
 		})
 	},
 	/**
@@ -40,118 +52,154 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-	
+
 	},
-	bindVipArrayChange: function(e){
+	bindVipArrayChange: function (e) {
 		console.log(e)
 		this.setData({
-			index: e.detail.value
-		})  
+			index: e.detail.value,
+			"applyToShop.vipLevel": e.detail.value,
+		})
 	},
-
+	bindDepositChange: function (e) {
+		console.log(e)
+		let deposit = e.detail.value
+		if (deposit.match(/^[+-]?([0-9]*[.])?[0-9]+$/))
+		{
+			this.setData({
+				"applyToShop.deposit": e.detail.value,
+			})
+		}else
+		{
+			wx.showToast({
+				title: '数值错误，请检查您输入的预存款',
+				icon: "none"
+			})
+		}
+		
+	},
 	switchChange: function (e) {
 		let self = this;
-		let targetOpenId = ""
-		for (let i = 0; i < self.data.fansLineList.length; i++) {
-			if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
-				targetOpenId = self.data.fansLineList[i].openId;
-			}
-		}
+		let fan = this.data.fan
+		console.log(e);
 		if (!e.detail.value) {
-			let fan = { "shop_id": app.globalData.openId, "open_id": targetOpenId, "access": false };
+
 			wx.showModal({
 				title: '提示',
 				content: '确认不允许此人进入店铺?',
 				success: function (res) {
-					if (res.confirm) {
-						fan.access = false
-						let url = COM.load('CON').FANS_ACCESS_URL;
-						COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
 
-							for (let i = 0; i < self.data.fansLineList.length; i++) {
-								if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
-									self.data.fansLineList[i].access = false;
-								}
-							}
-							for (let i = 0; i < self.data.searchResult.length; i++) {
-								if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
-									self.data.searchResult[i].access = false;
-								}
-							}
-							self.setData({
-								fansLineList: self.data.fansLineList,
-								searchResult: self.data.searchResult
-							});
+					self.setData({ "applyToShop.access": false })
+
+					// 	if (res.confirm) {
+					// 		fan.access = false
+					// 		let url = COM.load('CON').FANS_ACCESS_URL;
+					// 		COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
+
+					// 			for (let i = 0; i < self.data.fansLineList.length; i++) {
+					// 				if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
+					// 					self.data.fansLineList[i].access = false;
+					// 				}
+					// 			}
+					// 			for (let i = 0; i < self.data.searchResult.length; i++) {
+					// 				if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
+					// 					self.data.searchResult[i].access = false;
+					// 				}
+					// 			}
+					// 			self.setData({
+					// 				fansLineList: self.data.fansLineList,
+					// 				searchResult: self.data.searchResult
+					// 			});
 
 
-						})
-					} else if (res.cancel) {
-						self.setData({ fansLineList: self.data.fansLineList });
-					}
+					// 		})
+					// 	} else if (res.cancel) {
+					// 		self.setData({ fansLineList: self.data.fansLineList });
+					// 	}
 				}
 			})
 		} else {
+
+			self.setData({ "applyToShop.access": true })
 			//允许进入
-			let fan = { "shop_id": app.globalData.openId, "open_id": targetOpenId, "access": true };
-			let url = COM.load('CON').FANS_ACCESS_URL;
-			COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
-				for (let i = 0; i < self.data.fansLineList.length; i++) {
-					if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
-						self.data.fansLineList[i].access = true;
-					}
-				}
-				for (let i = 0; i < self.data.searchResult.length; i++) {
-					if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
-						self.data.searchResult[i].access = true;
-					}
-				}
-				// self.data.fansLineList[e.currentTarget.dataset.id -1].selected = true;
-				// self.data.searchResult[e.currentTarget.dataset.id - 1].selected = true;
-				self.setData({
-					fansLineList: self.data.fansLineList,
-					searchResult: self.data.searchResult
-				});
+			// let fan = { "shop_id": app.globalData.openId, "open_id": targetOpenId, "access": true };
+			// let url = COM.load('CON').FANS_ACCESS_URL;
+			// COM.load('NetUtil').netUtil(url, 'PUT', fan, function (res) {
+			// 	for (let i = 0; i < self.data.fansLineList.length; i++) {
+			// 		if (self.data.fansLineList[i].id == e.currentTarget.dataset.id) {
+			// 			self.data.fansLineList[i].access = true;
+			// 		}
+			// 	}
+			// 	for (let i = 0; i < self.data.searchResult.length; i++) {
+			// 		if (self.data.searchResult[i].id == e.currentTarget.dataset.id) {
+			// 			self.data.searchResult[i].access = true;
+			// 		}
+			// 	}
+			// 	// self.data.fansLineList[e.currentTarget.dataset.id -1].selected = true;
+			// 	// self.data.searchResult[e.currentTarget.dataset.id - 1].selected = true;
+			// 	self.setData({
+			// 		fansLineList: self.data.fansLineList,
+			// 		searchResult: self.data.searchResult
+			// 	});
 
 
-			})
+			// })
 		};
 		//once something changed should force refresh fans list page
-		wx.setStorage({
-			key: 'refreshFansList',
-			data: true,
-		})
+
 	},
-	// saveFan: function () {
-	//   let self = this, url = COM.load('CON').SHOP_Fan_URL + '/saveOrUpdate';
-	//   if (self.data.tmp && self.data.tmp.price) {
-	//     self.setData({ 'selectedFan.price': self.data.tmp.price });
-	//   }
-	//   if (self.data.tmp && self.data.tmp.vipPrice) {
-	//     self.setData({ 'selectedFan.vipPrice': self.data.tmp.vipPrice });
-	//   }
 
-	//   COM.load('NetUtil').netUtil(url, 'POST', self.data.selectedFan, function (res) {
-	//     wx.showToast({
-	//       title: '数据更新成功',
-	//       success: function () {
-	//         self.data.fansMap.set(self.data.selectedFan.FanId, self.data.selectedFan);
-	//         for (let x in self.data.fansLineList) {
-	//           if (self.data.fansLineList[x].FanId == self.data.selectedFan.FanId) {
-	//             self.data.fansLineList[x] = self.data.selectedFan;
-	//             break;
-	//           }
-	//         }
-	//         self.setData({
-	//           fansLineList: self.data.fansLineList,
-	//           fansMap: self.data.fansMap,
-	//           tmp: Object
-	//         });
 
-	//         self.hideModal();
-	//       }
-	//     })
-	//   })
-	// },
+	saveFan: function () {
+		let self = this
+		let url = COM.load('CON').UPDATE_FAN_URL;
+
+		console.log(url)
+		console.log(self.data.applyToShop)
+		if (self.data.applyToShop.deposit.match(/^[+-]?([0-9]*[.])?[0-9]+$/)) {
+			let deposit = Math.round(self.data.applyToShop.deposit * 100) / 100
+
+			this.setData({
+				"applyToShop.deposit": deposit,
+			})
+			COM.load('NetUtil').netUtil(url, 'POST', self.data.applyToShop, function (res) {
+				console.log(res)
+				if (res == true) {
+					wx.showToast({
+						title: '数据更新成功',
+						icon: 'success',
+						duration: 1500,
+						mask: true,
+						success: function () {
+
+							wx.setStorage({
+								key: 'refreshFansList',
+								data: true,
+							})
+							wx.navigateBack({
+
+							})
+						}
+					})
+				} else {
+					wx.showToast({
+						title: '数据更新失败，请重新尝试',
+						icon: 'none',
+						duration: 1500,
+						mask: true,
+
+					})
+				}
+
+			})
+		} else {
+			wx.showToast({
+				title: '数值错误，请检查您输入的预存款',
+				icon: "none"
+			})
+		}
+		
+	},
 
 
 	/**
@@ -161,11 +209,6 @@ Page({
 
 	},
 
-	share: function (event) {
-		wx.navigateTo({
-			url: '/page/mine/fans/share/share'
-		})
-	},
 
 	/**
 	 * 生命周期函数--监听页面卸载
@@ -187,6 +230,7 @@ Page({
 	onReachBottom: function () {
 
 	},
+
 
 
 })

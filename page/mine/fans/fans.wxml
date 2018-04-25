@@ -64,7 +64,7 @@
         <image class='image-icon1' src="/image/card.png"></image>
         <view class='explain-text'>预存款: ${{item.deposit}}</view>
         <image class='image-icon2' src='/image/vip.png'></image>
-        <view class='explain-text'>等级: {{item.vipLevel}}</view>   
+        <view class='explain-text'>{{vipArray[item.vipLevel]}}</view>   
       </view>
 
       </view>
