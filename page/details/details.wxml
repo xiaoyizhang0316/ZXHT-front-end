@@ -1,62 +1,82 @@
 <view class="main">
-  <view class="goods-box">
-    <image src="{{goods.thumb}}" class="goods-thumb"></image>
+    <view class="goods-box">
+        <image src="{{goods.thumb}}" class="goods-thumb"></image>
 
-    <navigator open-type="switchTab" url="../cart/cart">
-      <view class="carts-icon {{scaleCart?'on':''}}">
-        <image src="/image/cart2.png"></image>
-        <text class="carts-icon-num" wx:if="{{hasCarts}}">{{totalNum}}</text>
-      </view>
-    </navigator>
+        <navigator open-type="switchTab" url="../cart/cart">
+            <view class="carts-icon {{scaleCart?'on':''}}">
+                <image src="/image/cart2.png"></image>
+                <text class="carts-icon-num" wx:if="{{hasCarts}}">{{totalNum}}</text>
+            </view>
+        </navigator>
 
-    <view class="goods-title">{{goods.title}}</view>
+        <view class="goods-title">{{goods.title}}</view>
 
-    <view class="goods-operation" bindtap="addToCart">
-      <view class='goods-operation-num'>库存 {{goods.stock}}</view>
-   
-   <view class='goods-des'></view>
-      <text class="goods-price">${{goods.price}}</text>
-      <image src="/image/cart3.png" class="goods-cart-img" bindtap="addToCart"></image>
+        <view class="goods-operation" bindtap="addToCart">
+
+            <!-- <text class="goods-price">${{goods.price}}</text>
+	  <text class="goods-price del">${{goods.basePrice}}</text>
+      <text class="goods-operation-num">库存 {{goods.stock}}</text>
+      
+      <image src="/image/cart1.png" class="goods-cart-img" ></image> -->
+
+
+            <view class='goods-operation-num'>库存 {{goods.stock}}</view>
+
+            <view class='goods-des'></view>
+            <text class="goods-price">${{goods.price}}</text>
+            <text class="goods-price del">${{goods.basePrice}}</text>
+            <image src="/image/cart3.png" class="goods-cart-img"></image>
+
+
+        </view>
+        <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
     </view>
-    <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
-  </view>
-  <view class="goods-tab-box">
-    <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">商品详情</view>
-    <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">产品参数</view>
-    <view class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">售后保障</view>
-    <view class="goods-content">
-      <view class="goods-detail-content" wx:if="{{curIndex === 0}}">
-        <view class="goods-item-line goods-item-desc" wx:if="{{detail.desc}}">
-          【产品介绍】
-          <view class="goods-item-text goods-item-desc-text">{{detail.desc}}</view>
-        </view>
+    <view class="goods-tab-box">
+        <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">商品详情</view>
+        <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">产品参数</view>
+        <view class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">售后保障</view>
+        <view class="goods-content">
+            <view class="goods-detail-content" wx:if="{{curIndex === 0}}">
+                <view class="goods-item-line goods-item-desc" wx:if="{{detail.desc}}">
+                    【产品介绍】
+                    <view class="goods-item-text goods-item-desc-text">{{detail.desc}}</view>
+                </view>
 
-        <view class="goods-item-line" wx:if="{{detail.function}}">
-          【产品功效】
-          <view style="padding-left:5px;">
-            <text class="goods-item-text">{{detail.function}}</text>
-          </view>
+                <view class="goods-item-line" wx:if="{{detail.function}}">
+                    【产品功效】
+                    <view style="padding-left:5px;">
+                        <text class="goods-item-text">{{detail.function}}</text>
+                    </view>
+                </view>
+
+                <view class="goods-item-line" wx:if="{{detail.images}}">
+                    【产品详情】
+                    <view style="padding-left:5px;">
+                        <view wx:for="{{detail.images}}" wx:key="{{index}}" class="good-img">
+                            <image class="good-image" src="{{item}}"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="goods-spec-content" wx:if="{{curIndex === 1}}">
+                <view class="flex-row flex-cell" wx:if="{{detail.enTitle}}">
+                    <text class="flex-cell flex-row">英文名称</text>
+                    <text class="flex-cell flex-row flex-content goods-spec-entitle">{{detail.enTitle}}</text>
+                </view>
+                <view class="flex-row flex-cell" wx:if="{{detail.dosage}}">
+                    <text class="flex-cell flex-row">使用方法</text>
+                    <text class="flex-cell flex-row flex-content goods-spec-dosage">{{detail.dosage}}</text>
+                </view>
+                <view class="flex-row flex-cell" wx:if="{{detail.suitable}}">
+                    <text class="flex-cell flex-row">适用人群</text>
+                    <text class="flex-cell flex-row flex-content">{{detail.suitable}}</text>
+                </view>
+                <view class="flex-row flex-cell" wx:if="{{detail.attention}}">
+                    <text class="flex-cell flex-row">注意事项</text>
+                    <text class="flex-cell flex-row flex-content">{{detail.attention}}</text>
+                </view>
+            </view>
+            <view wx:if="{{curIndex === 2}}">{{goods.service}}</view>
         </view>
-      </view>
-      <view class="goods-spec-content" wx:if="{{curIndex === 1}}">
-        <view class="flex-row flex-cell" wx:if="{{detail.enTitle}}">
-          <text class="flex-cell flex-row">英文名称</text>
-          <text class="flex-cell flex-row flex-content goods-spec-entitle">{{detail.enTitle}}</text>
-        </view>
-        <view class="flex-row flex-cell" wx:if="{{detail.dosage}}">
-          <text class="flex-cell flex-row">使用方法</text>
-          <text class="flex-cell flex-row flex-content goods-spec-dosage">{{detail.dosage}}</text>
-        </view>
-        <view class="flex-row flex-cell" wx:if="{{detail.suitable}}">
-          <text class="flex-cell flex-row">适用人群</text>
-          <text class="flex-cell flex-row flex-content">{{detail.suitable}}</text>
-        </view>
-        <view class="flex-row flex-cell" wx:if="{{detail.attention}}">
-          <text class="flex-cell flex-row">注意事项</text>
-          <text class="flex-cell flex-row flex-content">{{detail.attention}}</text>
-        </view>
-      </view>
-      <view wx:if="{{curIndex === 2}}">{{goods.service}}</view>
     </view>
-  </view>
 </view>

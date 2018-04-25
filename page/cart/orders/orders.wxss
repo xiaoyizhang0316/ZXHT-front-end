@@ -186,16 +186,16 @@ opacity: 0.7;
 
 .orders-footer .orders-footer-total{
     display: inline-block;
-    width: 510rpx;
-    padding-left: 30rpx;
+    width: 530rpx;
+    padding-left: 20rpx;
     box-sizing: border-box;
     color:#ef3535;
-    font-size: 30rpx;
+    font-size: 25rpx;
 }
 
 .orders-footer .orders-footer-btn{
     display: inline-block;
-    width: 241rpx;
+    width: 220rpx;
     text-align: center;
     color: #fff;
     background: #C70039;

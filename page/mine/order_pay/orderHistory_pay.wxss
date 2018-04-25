@@ -1,6 +1,18 @@
 page{
   background-color:#eff1f3;
 }
+.section{
+    margin-bottom: 80rpx;
+}
+.section__title{
+    margin-bottom: 16rpx;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+}
+.picker{
+  padding: 26rpx;
+  background-color: #FFFFFF;
+}
 
 .search-input {
   margin-left: 10px;

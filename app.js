@@ -15,7 +15,11 @@ App({
     targetShopId: null,
     country: null,
     provice: null,
-    city: null
+    city: null,
+	payments:[],
+	shipAgents:[],
+	shopParams:[],
+	deposit:0
   },
 
   onLaunch: function (e) {

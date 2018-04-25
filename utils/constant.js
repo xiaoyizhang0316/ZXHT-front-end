@@ -3,7 +3,7 @@ const BASE_URL = "https://mini.zhenxianghaitao.com"
 //const BASE_URL = "https://9629fcf9.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/"
 
-//登录
+//登录 初始设置
 const CATEGORY_URL = BASE_URL + "/api/mall/categories/";
 const SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shopProducts/";
 const PRODUCT_URL = BASE_URL + "/api/mall/products/";
@@ -13,6 +13,9 @@ const tryCode_URL = BASE_URL + "/api/mall/test/appid/";
 const tryAddUser_URL = BASE_URL + "/api/mall/users/saveOrUpdateUserData";
 const CREATE_OR_UPDATE_USER = BASE_URL + "/api/mall/users/saveOrUpdateUserData";
 
+const GET_SHOPPARAMS_URL = BASE_URL + "/api/mall/shops/getShopParams";
+const GET_PAYMENTS_URL = BASE_URL + "/api/mall/shops/getPayments";
+const GET_SHIPAGENTS_URL = BASE_URL + "/api/mall/shops/getShipAgents";
 //获得个人用户页面信息
 const shopisOpenOrNot = BASE_URL + "/api/mall/shops/checkOpenShop/";
 const ShopInfo = BASE_URL + "/api/mall/shops/getShopInfo/";
@@ -24,6 +27,7 @@ const updateMyShopInfo = BASE_URL + "/api/mall/shops/update"
 const FANS_LIST_URL = BASE_URL + "/api/mall/users/getFansApplyToShop/"
 const FANS_ACCESS_URL = BASE_URL + "/api/mall/users/updateFansAccess"
 const FANS_VIP_URL = BASE_URL + "/api/mall/users/updateFansVipLevel"
+const UPDATE_FAN_URL = BASE_URL + "/api/mall/users/updateFan"
 const ADD_SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shops/addShopProduct"
 const APPLY_TO_SHOP = BASE_URL + "/api/mall/users/applyToShop/"
 const CREATE_SHOP = BASE_URL + "/api/mall/shops/create"
@@ -85,7 +89,7 @@ module.exports = {
   FANS_ACCESS_URL: FANS_ACCESS_URL,
   BAR_CODE_URL: BAR_CODE_URL,
   SEARCH_URL: SEARCH_URL,
-	GET_TARGETSHOP_PRODUCTS_URL: GET_TARGETSHOP_PRODUCTS_URL,
+  GET_TARGETSHOP_PRODUCTS_URL: GET_TARGETSHOP_PRODUCTS_URL,
   ADD_SHOP_PRODUCT_URL: ADD_SHOP_PRODUCT_URL,
   SAVE_CONSIGNEE_URL: SAVE_CONSIGNEE_URL,
   DELETE_CONSIGNEE_URL: DELETE_CONSIGNEE_URL,
@@ -104,12 +108,16 @@ module.exports = {
   CONFRIM_ORDER_URL: CONFRIM_ORDER_URL,
   PAY_ORDER_URL: PAY_ORDER_URL,
   SAVE_SHIPORDER: SAVE_SHIPORDER,
-  GET_ALL_PRODUCT_BY_CATEGORYID_URL: GET_ALL_PRODUCT_BY_CATEGORYID_URL,
-	
+  GET_ALL_PRODUCT_BY_CATEGORYID_URL: GET_ALL_PRODUCT_BY_CATEGORYID_URL,	
 	UPLOADFILE: UPLOADFILE,
 	IMG_BASE: IMG_BASE,
 	REORDER_URL: REORDER_URL,
 	RECEIVE_ORDER_URL: RECEIVE_ORDER_URL,
 	GET_MY_PRODUCTS: GET_MY_PRODUCTS,
-	GET_TARGETSHOP_PRODUCT_URL : GET_TARGETSHOP_PRODUCT_URL
+	GET_TARGETSHOP_PRODUCT_URL : GET_TARGETSHOP_PRODUCT_URL,
+	GET_SHOPPARAMS_URL : GET_SHOPPARAMS_URL,
+	GET_PAYMENTS_URL : GET_PAYMENTS_URL,
+	GET_SHIPAGENTS_URL : GET_SHIPAGENTS_URL,
+	UPDATE_FAN_URL: UPDATE_FAN_URL,
+	IMG_BASE: IMG_BASE
 }

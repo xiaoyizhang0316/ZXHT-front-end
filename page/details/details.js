@@ -22,11 +22,12 @@ Page({
       thumb: '',
       title: '',
       price: 0,
-			
+	  basePrice:0,
       stock: '无货',
       detail: '',
       parameter: '规格:无',
-      service: '不支持退货'
+      service: '不支持退货',
+	  images:[]
     },
     detail: {},
     num: 1,
@@ -37,6 +38,7 @@ Page({
     show: false,
     scaleCart: false,
     productId:'',
+	img_base: COM.load('CON').IMG_BASE
   },
 
   addCount() {
@@ -200,7 +202,7 @@ Page({
 							if (res.confirm) {
 								console.log('用户点击确定')
 								wx.navigateTo({
-									url: '/page/welcome/welcome?targetShopId=o0_gG0bsIV1gKqRTUEFB7Rh-qb2I',
+									url: '/page/welcome/welcome?targetShopId=oVxpo5FQkb2qY4TGpD9rq2xFWRlk',
 								})
 							} else if (res.cancel) {
 								console.log('用户点击取消')
@@ -249,12 +251,21 @@ Page({
 					self.data.goods["thumb"] = COM.load('Util').image(products[productId].barcode);
 					self.data.goods["stock"] = shopProduct.stock;
 					self.data.goods["price"] = shopProduct.vipPrice;
-
+					self.data.goods["basePrice"] = products[productId].basePrice;
+					
 					// http://101.178.98.25:8443/api/mall/products/242
 					let detailUrl = COM.load('CON').PRODUCT_URL + productId;
 					COM.load('NetUtil').netUtil(detailUrl, "GET", "", (detail) => {
 						if (detail) {
-
+							if(detail.images)
+							{
+								detail.images = JSON.parse(detail.images)
+								for (var i = 0; i < detail.images.length ; i++)
+								{
+									detail.images[i] = COM.load('CON').IMG_BASE + "storage/" + detail.images[i];
+								}
+							}		
+							console.log(detail)
 							self.setData({
 								detail: detail
 							})

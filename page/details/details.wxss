@@ -82,7 +82,7 @@
 }
 .goods-box .goods-operation{
     position: relative;
-    width: 70%;
+    width: 100%;
     height: 100rpx;
     line-height: 100rpx;
     padding: 0 50rpx;
@@ -237,5 +237,19 @@
   padding: 10rpx;
   flex-basis: 55%;
   border-left: 1rpx solid #ddd;
+}
+.del{
+	font-size: 14px;
+    font-weight: normal;
+    color: #68625a;
+	text-decoration: line-through;
+}
+.good-img{
+	margin: 0 auto;
+	
+}
+.good-image{
+	width: 100%;
+	
 }
 /*** goods spec end ***/

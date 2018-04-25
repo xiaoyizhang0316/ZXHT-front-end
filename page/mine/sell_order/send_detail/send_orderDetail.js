@@ -20,6 +20,12 @@ Page({
     deliveryPrice: 0,
     discountValue: 0,
     checkbox: [],
+	shipAgents:[],
+	index: [],
+	finalPayment: 0,
+	shippingCost: 0,
+	payment: null,
+	shipFulls: [],
   },
 
   /**
@@ -48,7 +54,8 @@ Page({
       numofGoods = numofGoods + order[0].orderGoods[index].num
     }
     console.log(numofGoods)
-
+	let shipAgents = wx.getStorageSync("shipAgents")
+	let payments = wx.getStorageSync("payments")
     this.setData({
       order: order[0],
       orderId: options.orderId,
@@ -63,8 +70,15 @@ Page({
       receiver: order[0].consignee,
       deliveryPrice: order[0].orderInfo.shippingCost,
       discountValue: order[0].orderInfo.discount,
-      merchant: order[0].sellerShop.shopName
+      merchant: order[0].sellerShop.shopName,
+	  shipAgents: shipAgents,
+	  finalPayment: order[0].orderInfo.finalPayment,
+	  shippingCost: order[0].orderInfo.shippingCost,
+	  payment: payments[order[0].orderInfo.payId - 1].name,
+	  shipFulls: order[0].shipFulls
+
     });
+	console.log(this.data.shipAgents);
     let s = JSON.stringify(this.data.order);
     console.log(JSON.parse(s));
 
@@ -81,19 +95,25 @@ Page({
 
   insert: function () {
     var cb = this.data.checkbox;
+	var index = this.data.index;
     console.log(cb);
     cb.push(this.data.checkbox.length);
+	index.push(0);
     this.setData({
-      checkbox: cb
+      checkbox: cb,
+	  index: index
     });
   },
 
   delBind: function () {
     var cb = this.data.checkbox;
+	var index = this.data.index;
     console.log(cb);
     cb.pop(this.data.checkbox.length);
+	index.pop(this.data.checkbox.length);
     this.setData({
-      checkbox: cb
+      checkbox: cb,
+	  index:index
     });
   },
 
@@ -167,7 +187,16 @@ Page({
     let shipGoodsAll = []
 		
 		let shipFull = []
-    
+    if(numOfShippingform == 0)
+	{
+		wx.showModal({
+			title: '错误',
+			content: '发货单不能为空！',
+			showCancel: false,
+		
+		})
+		return
+	}
     for (var i = 0; i < numOfShippingform; i++) {
       let shipdetail = {}
       shipdetail.orderId = self.data.orderId
@@ -196,7 +225,9 @@ Page({
       for (var j = 0; j < self.data.items.length; j++) {
         let productId = self.data.items[j].productId
         let sendNumber = e.detail.value["shipGoods[" + i + "][" + self.data.items[j].productId + "]"]
-        shipGoodsOne[j] = { productId, sendNumber }			
+		let title = self.data.items[j].title
+		let image = self.data.items[j].image
+        shipGoodsOne[j] = { productId,title, image, sendNumber }			
       }
 			
       shipGoodsAll.push(shipGoodsOne)
@@ -340,7 +371,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+	  //如果是线下支付 并且是要发货 提示收到钱后再发货
+	  console.log("------------------------------")
+	  console.log(this.data.order)
+	  if (this.data.order.orderInfo.payId == 1 && this.data.order.orderInfo.orderStatus == 3)
+	  {
+		  wx.showModal({
+			  title: '注意！',
+			  content: '此订单为线下支付, 请注意在确定收到订金后再发货！',
+		  })
+	  }
   },
 
   /**
@@ -370,7 +410,15 @@ Page({
   onReachBottom: function () {
 
   },
-
+  bindShipAgentChange: function (e) {
+	  console.log(e)
+	let index = this.data.index;
+	let ind = e.currentTarget.dataset.id;
+	index[ind] = e.detail.value;
+	  this.setData({
+		  index: index
+	  })
+  },
   /**
    * 用户点击右上角分享
    */

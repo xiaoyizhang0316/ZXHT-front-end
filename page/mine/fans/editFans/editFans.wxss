@@ -168,7 +168,7 @@ page {
 }
 
 .explain-text{
- width: 220rpx;
+ width: 250rpx;
  height:50rpx;
  margin-left: 10rpx;
  background-color:white;
@@ -198,16 +198,17 @@ margin-left: 300rpx;
 
 .amount{
 
-   width: 100rpx;
+width: 150rpx;
  height:50rpx;
- margin-left: 8rpx;
+ margin-left: 250rpx;
  background-color:white;
 position:relative;
-align-items:center;
+align-items:right;
 margin-top:3rpx;
 font-size:28rpx;
 color:#696969;
 display:flex;
+
 }
 
 .bottom-contaniner {
@@ -224,7 +225,7 @@ display:flex;
 
 .bottom-contaniner-text{
     margin-top: 27rpx;
-  width: 60%;
+  width: 100%;
   color:#FFFFFF;
 background-color:#1AAD19;
 }
