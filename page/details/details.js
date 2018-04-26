@@ -69,6 +69,7 @@ Page({
     newCartItem.image = self.data.goods.thumb
     newCartItem.num = self.data.num
     newCartItem.price = self.data.goods.price
+	newCartItem.basePrice = self.data.goods.basePrice
     // newCartItem.selected: true
 
     self.addCartItemToStorage(newCartItem)

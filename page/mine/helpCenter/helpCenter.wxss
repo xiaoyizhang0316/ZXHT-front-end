@@ -1,1 +1,56 @@
-/* page/mine/helpCenter/helpCenter.wxss */
+@import '../../common/common.wxss';
+page {
+  background-color: #eff3f4;
+}
+
+.header{
+    position: relative;
+    height: 160rpx;
+    line-height: 100rpx;
+    padding:30rpx 30rpx 30rpx 150rpx;
+    box-sizing: border-box; 
+    background: linear-gradient(to top left, #696969, white); 
+    font-size: 28rpx;
+    color: #fff;
+    border-radius: 5px;
+}
+.header .thumb{
+    position: absolute;
+    left: 30rpx;
+    top: 30rpx;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+.header .about{
+    float: right;
+}
+
+.explain-line {
+  width: 100%;
+  height: 85rpx;
+  /* line-height: 30px; */
+  background-color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 3rpx;
+  font-size: 28rpx;
+  color: #696969;
+}
+
+.explain-block {
+  width: 5px;
+  display: flex;
+  margin-left: 10px;
+  flex:1;
+}
+
+.explain-text {
+  display: flex;
+  flex:9;
+  justify-content:flex-start;
+  align-items:center;
+}
+
+

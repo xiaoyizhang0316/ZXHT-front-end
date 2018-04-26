@@ -24,8 +24,10 @@ Page({
 	},
 
 	onShow: function () {
+		
 
 		let self = this;
+		console.log(self.data.address)
 		if (Object.keys(self.data.address).length === 0) {
 			let addressList = wx.getStorageSync('addressList')
 
@@ -42,6 +44,7 @@ Page({
 					address: addressList[index],
 					hasAddress: true
 				})
+				console.log(self.data.address)
 			}
 
 		}

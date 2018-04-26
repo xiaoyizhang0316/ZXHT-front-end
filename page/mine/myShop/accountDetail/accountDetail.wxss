@@ -1,3 +1,4 @@
+/* page/mine/shopApply/applyForm/applyForm.wxss */
 page{
     height: 0rpx;
     background-color: #e3e3e3;
@@ -31,6 +32,48 @@ form {
   display: flex;
   flex-direction: column;
   background-color: #fff;
+}
+
+.top-header {
+  font-size: 28rpx;
+  color: black;
+  background: #e3e3e3;
+  padding-left: 30rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.bottom-text {
+  color:red; 
+  font-size: 20rpx;
+  }
+/*Updated upstream
+  //width: 640rpx;
+ // width: 300px;
+//>>>>>>> Stashed changes*/
+
+
+.switch1 {
+height:60%;
+align-items:center;
+justify-content:right;
+/*//<<<<<<< Updated upstream
+
+//=======
+//margin-left: 235px;
+//>>>>>>> Stashed changes*/
+}
+
+.switch2 {
+ height:60%;
+align-items:center;
+justify-content:right;
+/*//<<<<<<< Updated upstream
+
+//=======
+//margin-left: 50px;
+//>>>>>>> Stashed changes*/
 }
 
 .top-input-box {
@@ -87,15 +130,6 @@ form {
 }
 
 .confirmBtn {
-  width: 50%;
+  width: 90%;
   margin-top: 27rpx;
-  opacity: 0.8;
-
 }
-
-/* .explain-text {
-  display: flex;
-  flex:9;
-  justify-content:flex-start;
-  align-items:center;
-} */

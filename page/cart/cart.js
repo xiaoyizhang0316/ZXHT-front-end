@@ -10,7 +10,7 @@ Page({
     },
 
   },
-	onLoad(){},
+  onLoad(){},
 
   onShow() {
 		console.log("run on show")
@@ -30,17 +30,21 @@ Page({
         } else {
           self.setData({
             carts: [],
-            hasCarts: false,
+			hasList: false,
           })
 					
         }
         self.getTotalPrice();
       },
-			fail: function(res){
+	  fail: function(res){
 				self.setData({
 					carts: [],
-					hasCarts: false,
+					hasList: false,
+					totalPrice: 0,          
+					selectAllStatus: false, 
+					
 				})
+				
 
 			},
     })

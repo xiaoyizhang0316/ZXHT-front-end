@@ -86,14 +86,36 @@ position:relative;
 display:flex;
 align-items:center;
 margin-top:3rpx;
-font-size:28rpx;
+font-size:25rpx;
 color:#999;
 }
-
-.explain-line{
-  width: 500rpx;
- height:85rpx;
+.image-icon2 {  
+  height:20px;
+  width:20px;
+  align-items: center;
 }
+
+.explain-text{
+ width: 200rpx;
+ height:50rpx;
+ margin-left: 10rpx;
+ background-color:white;
+position:relative;
+align-items:center;
+margin-top:3rpx;
+font-size:25rpx;
+color:#696969;
+display:flex;
+}
+
+.fan-viplevel{
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  font-size:30rpx;
+  flex:3;
+}
+
 
 .explain-block{
   width: 30rpx;

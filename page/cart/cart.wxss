@@ -60,6 +60,17 @@
   color:#696969;
   font-size: 25rpx;
 }
+.del{
+	 display: inline-block;
+    /* width: 300rpx; */
+   
+	font-size: 20rpx;
+    font-weight: normal;
+    color: #68625a;
+	text-decoration: line-through;
+	margin-left:15rpx
+	
+}
 .cart-list .cart-pro-price{
     position: absolute;
     bottom: 30rpx;

@@ -35,7 +35,7 @@
 
       <!-- <block wx:if="{{displayClear == false}}"> -->
 	<block wx:if="{{goodsLineList.length == 0}}">
-                  <view style="text-align:center; margin: 0 auto; margin-top: 100rpx" catchtap="listProdsTemplate">
+                  <view style="text-align:center; margin: 0 auto; margin-top: 400rpx" catchtap="listProdsTemplate">
 				  点我去上货
       <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
     </view>
@@ -124,6 +124,8 @@
     </view>
     <view class='bottom-window-btn' bindtap='priceValidation'>
       <text>保存信息</text> </view>
+	<view class='bottom-window-btn2' bindtap='hideModal'>
+      <text>放弃修改</text> </view>
   </view>
 
 </view>

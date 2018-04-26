@@ -11,19 +11,10 @@ Page({
     shopLineList: {},
     shopMap: Object,
     shopList: [
-      { shop_id: 1, shop_name: '店铺名称1', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart1.png' },
-      { shop_id: 2, shop_name: '店铺名称2', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart2.png' },
-      { shop_id: 3, shop_name: '店铺名称3', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart1.png' },
-      { shop_id: 4, shop_name: '店铺名称4', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart1.png' },
-      { shop_id: 5, shop_name: '店铺名称5', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart1.png' },
-      { shop_id: 6, shop_name: '店铺名称6', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart1.png' },
-      { shop_id: 7, shop_name: '店铺名称7', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart1.png' },
-      { shop_id: 8, shop_name: '店铺名称8', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart1.png' },
-      { shop_id: 9, shop_name: '店铺名称9', shop_sign: '本店品种繁多，物美价廉，欢迎选购！', shop_logo: '/image/cart1.png' },
+     
     ],
     idolList: [
-      { idol_id: 1, idol_name: '大哥' },
-      { idol_id: 2, idol_name: '二哥' }
+     
     ],
     selectedShop: {},
     isSelect: false,
@@ -32,6 +23,7 @@ Page({
     winHeight: 0,
     // tab切换  
     currentTab: 0,
+	vipArray: ["普通会员", "青铜会员", "白银会员", "黄金会员"]
   },
 
 
@@ -48,7 +40,7 @@ Page({
    */
   onLoad() {
     var self = this;
-    self.loadShop();
+   
     /** 
     * 获取系统信息 
     */
@@ -83,6 +75,8 @@ Page({
 								"shop_logo": shop.user.avatarUrl,
 								"shop_sign": shop.shop.sign,
 								"shop_openId": shop.shop.openId,
+								"deposit": shop.applyToShop.deposit,
+								"vipLevel": this.data.vipArray[shop.applyToShop.vipLevel],
 								"selected" : true
 							})
 						 this.setData({
@@ -103,12 +97,14 @@ Page({
 								"shop_logo": shop.user.avatarUrl,
 								"shop_sign": shop.shop.sign,
 								"shop_openId": shop.shop.openId,
+								"deposit": shop.applyToShop.deposit,
+								"vipLevel": this.data.vipArray[shop.applyToShop.vipLevel],
 								"selected": false
 							})
 					}
 				}
 
-				
+				console.log(shopMap)
         self.setData({
           shopLineList: Array.from(shopMap.values()),
           shopMap: shopMap

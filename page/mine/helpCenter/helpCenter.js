@@ -1,66 +1,68 @@
-// page/mine/helpCenter/helpCenter.js
+// page/component/new-pages/user/user.js
+var app = getApp()
+var COM = require('../../../utils/common.js')
+
 Page({
+	data: {
+		thumb: '',
+		nickname: '',
+		orders: [],
+		hasAddress: false,
+		address: {},
+		touched: [],
+		openShopButton: false,
+	},
+	onLoad() {
+		var self = this;
+		//如果未授权则不允许进入本页面
+		
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
+	},
+	onShow() {
+		var self = this;
+		/**
+     * 获取用户信息
+     */
+		self.setData({
+			thumb: app.globalData.avatarUrl,
+			nickname: app.globalData.nickName ? app.globalData.nickName : "未登陆用户"
+		})
+	},
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
+	touchstart: function (e) {
+		var id = e.currentTarget.dataset.id;
+		var array = this.data.touched;
+		array[id] = true;
+		this.setData({
+			touched: array
+		})
+	},
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
+	touchend: function (e) {
+		var id = e.currentTarget.dataset.id;
+		var array = this.data.touched;
+		array[id] = false;
+		this.setData({
+			touched: array
+		})
+	},
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
+	buyerHelp:function(e)
+	{
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
+	},
+	sellerHelp:function(e){
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+	},
+	policy:function(e)
+	{
+
+	},
+	contactUs:function(e)
+	{
+
+	},
 })

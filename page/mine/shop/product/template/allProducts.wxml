@@ -34,6 +34,12 @@
   </view>
 
   <view class='goods-line-list-container'>
+  <block wx:if="{{goodsLineList.length == 0}}">
+    <view style="text-align:center; margin: 100rpx auto; margin-top: 300rpx" >
+				 <text>请使用搜索功能/扫描商品barcode</text> 
+				 <text>或点击品牌/分类选择上货物品  </text>     
+    </view>
+    </block>
     <view class='goods-line-list'>
 
       <block wx:if="{{displayClear == false}}">

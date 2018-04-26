@@ -84,7 +84,7 @@
     </block>
 
 
-    <view class="explain-line" style="margin-top:20px;background-color:{{touched[7] ? '#e9e9e9':''}}" data-id="7" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="aboutus">
+    <!-- <view class="explain-line" style="margin-top:20px;background-color:{{touched[7] ? '#e9e9e9':''}}" data-id="7" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="aboutus">
         <view class="explain-block">
             <image style="height:22px;width:22px;" src="../../image/service.png"></image>
         </view>
@@ -92,8 +92,8 @@
         <view class="explain-block">
             <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
         </view>
-    </view>
-	<view class="explain-line" style="background-color:{{touched[4] ? '#e9e9e9':''}}" data-id="8" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="helpCenter">
+    </view> -->
+	<view class="explain-line" style="background-color:{{touched[7] ? '#e9e9e9':''}}" data-id="7" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="helpCenter">
         <view class="explain-block">
             <image style="height:22px;width:22px;" src="../../image/help.png"></image>
         </view>

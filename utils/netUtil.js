@@ -23,7 +23,7 @@ function netUtil(url, method,body, callBack, hide = true) {
       if (200 <= res.statusCode && res.statusCode <= 299) {
         callBackData.data = res.data;
         callBack(callBackData.data);
-        wx.hideToast();
+        
       } else if (res.statusCode === 404 || res.statusCode === 400){
         wx.showToast({
           title: "无法找到数据",
@@ -142,6 +142,9 @@ function uploadAllFiles(url,list,callBack)
 		})
 	}else{
 		callBack("done");
+		if (hide) {
+			wx.hideLoading()
+		}
 		return;
 	}
 	

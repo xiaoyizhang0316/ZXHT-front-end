@@ -76,8 +76,6 @@ Page({
         let shopProduct = callbackdata[x];
         self.data.myShopProductIds.push(shopProduct.id);
       }
-     
-
       products.slice(0, products.length).forEach(function (p) {
         p.thumb = COM.load('Util').image(p.barcode);
         p.selected = self.data.myShopProductIds.includes(p.id);
@@ -285,6 +283,7 @@ Page({
           displayClear: true,
           searchResult: searchResult
         });
+		self.notifySearchResult(searchResult)
       });
     }
   },
@@ -299,7 +298,7 @@ Page({
     this.setData({
       goodsLineList: this.data.allGoodsList
     })
-
+	self.notifySearchResult(searchResult)
   },
 
   bindCateChange: function (e) {
@@ -317,13 +316,25 @@ Page({
 				p.selected = myProductsIds.includes(p.id.toString());
 				searchResult.push(p);
 			});
+		
       self.setData({
 				goodsLineList: searchResult
       })
+	  self.notifySearchResult(searchResult)
+	 
     })
   },
 
-
+  notifySearchResult:function(searchResult)
+  {
+	  if (searchResult.length == 0) {
+		  wx.showModal({
+			  title: '搜索结果',
+			  content: '当前搜索暂时木有商品, 我们会很快添加的>_<',
+			  showCancel: false,
+		  })
+	  }
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

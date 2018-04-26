@@ -3,6 +3,7 @@ var COM = require('../../../utils/common.js')
 var app = getApp();
 Page({
   action: '',
+  returnPage: 1,
   data: {
     addressList: [
     ],
@@ -32,6 +33,7 @@ Page({
     }else{
       console.log('action is not selectOne!')
     }
+	
 
 
   },
@@ -80,8 +82,10 @@ Page({
     })
   },
   addConsignee: function (event) {
+	  let self = this
+	  let url = "consignee/consignee?returnPage="+self.data.returnPage
     wx.navigateTo({
-      url: "consignee/consignee",
+      url: url,
       //接口调用成功的回调方法
       fuccess: function () {
         console.log('succ')
@@ -102,6 +106,13 @@ Page({
     this.setData({
       action: param.action
     })
+	if(param.returnPage)
+	{
+		this.setData({
+			returnPage: param.returnPage
+		})
+	}
+	
     console.log(this.data.action)
   },
   onShow: function (param) {

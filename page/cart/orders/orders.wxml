@@ -1,7 +1,7 @@
 <view class="main">
 
     <view wx:if="{{hasAddress}}" class="orders-address">
-        <navigator url="/page/mine/addressList/addressList?action=selectOne">
+        <navigator url="/page/mine/addressList/addressList?action=selectOne&&returnPage=2">
             <text style="color:#454552;display:block;">收件人信息</text>
             <text class="orders-address-name">{{address.name}}</text>
             <text class="orders-address-phone">{{address.phone}}</text>

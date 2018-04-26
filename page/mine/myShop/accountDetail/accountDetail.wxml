@@ -1,62 +1,113 @@
+<!--page/mine/shopApply/applyForm/applyForm.wxml-->
 <view class="container">
   <!-- <view class='top-bar'>
     <text>请填写店铺信息</text>
   </view> -->
   <form bindsubmit="formSubmit">
     <view class="top-contaniner">
+      <view class='top-header'>
+        <text>店铺信息</text>
+      </view>
 
-          <view class="top-input-box flex-col">
-              <text>店铺名</text><input bindinput="bindShopName" placeholder="请输入店铺名称" name="name" value="{{shop.name}}"/>
-          </view>
-          <view class="top-input-box flex-col">
-              <text>店铺签名</text><input bindinput="bindShopSign" placeholder="请输入店铺签名" name="phone" value="{{shop.sign}}"/>
-          </view>
-          <view class="top-input-box flex-col">
-              <text class='pay-text'>支付方式</text>
-              <radio-group class="radio-group" bindchange="radioChange">
-                <label class="radio" wx:for="{{payItems}}">
-                  <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
-                </label>
-              </radio-group>
-          </view>
-          <view class='payment-tips'>
-            <block wx:if="{{shop.payment == 'RMB'}}">
-                <text>↓↓ 请填写对应的支付信息 ↓↓</text>
-            </block>
-            <block wx:else>
-                <text>↓↓ Please fill in the payment information. ↓↓</text>
-            </block>
-          </view>
+      <view class="top-input-box flex-col">
+        <text>店铺名</text>
+        <input placeholder="请输入店铺名称" bindinput="bindName" name="shopname" value="{{shop.name}}" />
+      </view>
+      <view class="top-input-box flex-col">
+        <text>店铺签名</text>
+        <input placeholder="请输入店铺签名" bindinput="bindSign" name="sign" value="{{shop.sign}}" />
+      </view>
 
-          <view class="top-input-box flex-col">
-            <block wx:if="{{shop.payment == 'RMB'}}">
-                 <text >开户行: </text><input bindinput="bindbankName" name="name" />    
-            </block>
-            <block wx:else>
-                 <text >Bank: </text><input bindinput="bindbankName" name="name" />    
-            </block>
-            <!-- <input  name="phone" value="{{shop.accountName}}"/>  -->
+      <view class="top-header">
+        <text>支付方式设置</text>
+      </view>
+      <view class="top-input-box flex-col">
+        <view style='flex-direction: column;'>
+          <text>收取预存款</text>
+          <view class='bottom-text'>
+            <text>支持使用红包预存款等支付</text>
           </view>
-          <view class="top-input-box flex-col">
-            <block wx:if="{{shop.payment == 'RMB'}}">
-                 <text>户名：</text><input bindinput="bindaccountNbr" name="AccountNbr" value="{{shop.accountNbr}}"/>
-            </block>
-            <block wx:else>
-                <text>AccountNbr:</text><input bindinput="bindaccountNbr" name="AccountNbr" value="{{shop.accountNbr}}"/>
-            </block>
+        </view>
+        <switch class='switch1' bindchange='bindPrePay' checked="{{prepayStatus}}"></switch>
+      </view>
+
+      <view class="top-input-box flex-col">
+        <view style='flex-direction: column;'>
+          <view>
+            <text>线下支付</text>
           </view>
-          <view class="top-input-box flex-col">
-            <block wx:if="{{shop.payment == 'RMB'}}">
-                <text>账户：</text><input bindinput="bindaccountName" name="AccountName" value="{{shop.accountName}}"/>
-            </block>
-            <block wx:else>
-                <text>AccountName:</text><input bindinput="bindaccountName" name="AccountName" value="{{shop.accountName}}"/>
-            </block>
+          <view class='bottom-text'>
+            <text>该支付方式需好友转帐</text>
           </view>
+        </view>
+        <switch class='switch2' bindchange='bindOfflinePay' checked="{{offlinePayStatus}}"></switch>
+      </view>
+
+      <view class="top-input-box flex-col">
+        <view style='flex-direction: column;'>
+          <view>
+            <text>微信支付</text>
+          </view>
+          <view class='bottom-text'>
+            <text>钱款直接转到银行卡，快速便捷，会扣除1%手续费</text>
+          </view>
+        </view>
+        <switch class='switch2' bindchange='showModal' checked="{{weixinPayStatus}}"></switch>
+      </view>
+      <view class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
+        <view class="top-input-box flex-col">
+          <text class='pay-text'>支付方式</text>
+          <radio-group class="radio-group" bindchange="radioChange">
+            <label class="radio" wx:for="{{payItems}}">
+              <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+            </label>
+          </radio-group>
+        </view>
+        <view class='payment-tips'>
+          <block wx:if="{{shop.payment == 'RMB'}}">
+            <text>↓↓ 请填写对应的支付信息 ↓↓</text>
+          </block>
+          <block wx:else>
+            <text>↓↓ Please fill in the payment information. ↓↓</text>
+          </block>
+        </view>
+
+        <view class="top-input-box flex-col">
+          <block wx:if="{{shop.payment == 'RMB'}}">
+            <text>开户行:</text>
+            <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" />
+          </block>
+          <block wx:else>
+            <text>Bank: </text>
+            <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" />
+          </block>
+
+        </view>
+        <view class="top-input-box flex-col">
+          <block wx:if="{{shop.payment == 'RMB'}}">
+            <text>户名:</text>
+            <input bindinput="bindaccountNbr" name="accountNbr" value="{{shop.accountNbr}}" />
+          </block>
+          <block wx:else>
+            <text>AccountNbr:</text>
+            <input bindinput="bindaccountNbr" name="accountNbr" value="{{shop.accountNbr}}" />
+          </block>
+        </view>
+        <view class="top-input-box flex-col">
+          <block wx:if="{{shop.payment == 'RMB'}}">
+            <text>账户:</text>
+            <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" />
+          </block>
+          <block wx:else>
+            <text>AccountName:</text>
+            <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" />
+          </block>
+        </view>
+      </view>
     </view>
 
     <view class="bottom-contaniner">
-        <button type='primary' class='confirmBtn' bindtap="formSubmit">保存并返回</button>
+      <button type='primary' class='confirmBtn' form-type="submit">保存并返回</button>
     </view>
   </form>
 </view>

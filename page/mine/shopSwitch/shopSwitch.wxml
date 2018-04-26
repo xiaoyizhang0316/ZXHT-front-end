@@ -16,9 +16,9 @@
 
     <view class="explain-line">  
       <image class='image-icon' src="/image/card.png"></image>
-          <view class="explain-text">预存款</view>
+          <view class="explain-text">预存款:￥{{item.deposit}}</view>
      <image class='image-icon' src="/image/vip.png"></image>
-      <view class="explain-text">黄金会员</view>
+      <view class="explain-text">{{item.vipLevel}}</view>
     </view>
     
 
