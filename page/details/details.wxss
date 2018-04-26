@@ -241,7 +241,7 @@
 .del{
 	font-size: 14px;
     font-weight: normal;
-    color: #68625a;
+    color: #D3D3D3;
 	text-decoration: line-through;
 }
 .good-img{
