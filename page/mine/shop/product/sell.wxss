@@ -98,9 +98,11 @@
 }
 .goods-top-tip-clo {
  
-  flex: 2.5;
+  flex: 8;
   color:red;
-  font-size: 24rpx;
+  font-size: 28rpx;
+  text-align:center;
+
 }
 .goods-name-clo {
   overflow: hidden;

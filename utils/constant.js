@@ -1,7 +1,7 @@
 //url相关
 const BASE_URL = "https://mini.zhenxianghaitao.com"
 //const BASE_URL = "https://9629fcf9.ngrok.io"
-const IMG_BASE = "https://img.zhenxianghaitao.com/"
+const IMG_BASE = "https://img.zhenxianghaitao.com/storage/mini/"
 
 //登录 初始设置
 const CATEGORY_URL = BASE_URL + "/api/mall/categories/";
@@ -35,6 +35,7 @@ const HEADERS = {
   'content-type': 'application/json',
   'Authorization': 'Basic ZXhwcmVzczozeTZGUkAyRw=='
 };
+const ONE_BUTTON_PRODUCTS = BASE_URL + "/api/mall/shops/oneButtonProducts/"
 
 //二维码扫描和商品搜索
 const BAR_CODE_URL = PRODUCT_URL + "barcode/";
@@ -119,5 +120,6 @@ module.exports = {
   GET_PAYMENTS_URL : GET_PAYMENTS_URL,
   GET_SHIPAGENTS_URL : GET_SHIPAGENTS_URL,
   UPDATE_FAN_URL: UPDATE_FAN_URL,
-  IMG_BASE: IMG_BASE
+  IMG_BASE: IMG_BASE,
+  ONE_BUTTON_PRODUCTS: ONE_BUTTON_PRODUCTS
 }

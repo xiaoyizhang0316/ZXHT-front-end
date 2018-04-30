@@ -78,12 +78,11 @@ function uploadFile(url, method, list, callBack, hide = true) {
 		mask: true
 	})
 	//微信请求 上传图片
-	uploadAllFiles(url,list,callBack);
+	uploadAllFiles(url, list, callBack, hide );
 	
-	wx.hideToast()
 	
 }
-function uploadAllFiles(url,list,callBack)
+function uploadAllFiles(url,list,callBack, hide)
 {
 	console.log(list)
 	if (typeof list !== 'undefined' && list.length > 0)

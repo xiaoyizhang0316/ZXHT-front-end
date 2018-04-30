@@ -36,7 +36,8 @@
     "page/mine/order_receive/orderHistory_receive",
 		"page/share/customerConsignee/customerConsignee",
     "page/mine/fans/editFans/editFans",
-	"page/mine/helpCenter/helpCenter"
+	"page/mine/helpCenter/helpCenter",
+	"page/mine/shop/product/oneButtonProducts/oneButtonProducts"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",

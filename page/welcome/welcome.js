@@ -18,7 +18,7 @@ Page({
 
 		let self = this
 		if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.targetShopId) !== '[object Undefined]') {
-			
+			console.log(options.targetShopId)
 		} else {
 			//this.navigatorToIndex()
 			options.targetShopId = "oVxpo5FQkb2qY4TGpD9rq2xFWRlk"
@@ -59,7 +59,7 @@ Page({
 			let url = COM.load('CON').APPLY_TO_SHOP;		
 			COM.load('NetUtil').netUtil(url, "POST", { "open_id": fan, "shop_id": shop }, (callback) => {			
 				
-				if (callback.access == false) {				
+				if (callback.flag == false) {				
 					wx.showModal({
 						title: '提示',
 						content: '已经为您向店主申请进入本店铺, 请等待店主审核, 点击确认进入展厅',

@@ -72,8 +72,8 @@
 	
 }
 .cart-list .cart-pro-price{
-    position: absolute;
-    bottom: 30rpx;
+    
+    
     left: 285rpx;
     line-height: 50rpx;
     color: #ef3535;

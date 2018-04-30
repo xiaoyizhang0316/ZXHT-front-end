@@ -249,7 +249,11 @@
 	
 }
 .good-image{
-	width: 100%;
+	
+    
+  width:700rpx;
+  
+  
 	
 }
 /*** goods spec end ***/

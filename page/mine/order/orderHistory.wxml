@@ -125,7 +125,7 @@
         </block> -->
             <block wx:elif="{{item.orderInfo.orderStatus == 6}}">
                  <view class='button2' data-order="{{item.orderInfo.id}}" data-logo="getLogo({{item.orderGoods.productId}})">
-                    <view class='button' data-order="{{item.orderInfo.id}}" data-id="{{idx}}" catchtap='showModal'>去收货</view>
+                    <view class='button-red' data-order="{{item.orderInfo.id}}" data-id="{{idx}}">去收货</view>
                 </view>
             </block>
             <!-- <block wx:elif="{{item.orderInfo.orderStatus == 9}}">

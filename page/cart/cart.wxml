@@ -21,12 +21,10 @@
                     <image class="cart-thumb" src="{{item.image}}"></image>
                 </navigator>
                 <text class="cart-pro-name">{{item.title}}</text>
-                <text class="cart-pro-price">${{item.price}}
+                <text class="cart-pro-price">${{item.price}}</text>
 				<block wx:if="{{item.price < item.basePrice}}">
             		<text class="del">${{item.basePrice}}</text>
                 </block>
-
-                </text>
 
                 <view class="cart-count-box">
                     <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}">-</text>

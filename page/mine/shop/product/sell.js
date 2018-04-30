@@ -382,7 +382,13 @@ Page({
       self.saveShopProduct();
     }
   },
-
+  
+  oneButtonProducts:function(){
+	wx.navigateTo({
+		url: '/page/mine/shop/product/oneButtonProducts/oneButtonProducts',
+	})
+	
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

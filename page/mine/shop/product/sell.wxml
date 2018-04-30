@@ -1,131 +1,136 @@
 <view class="main">
-  <view style="flex:1;display: flex;padding-top:10px;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;">
-    <view class="search-box">
-      <view class="search-input">
-        <view style="display:flex;flex:1;">
-          <view>
-            <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
-          </view>
-          <input focus="{{focus}}" placeholder="搜索已上架商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindinput="bindSearch" />
+    <view style="flex:1;display: flex;padding-top:10px;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;">
+        <view class="search-box">
+            <view class="search-input">
+                <view style="display:flex;flex:1;">
+                    <view>
+                        <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
+                    </view>
+                    <input focus="{{focus}}" placeholder="搜索已上架商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindinput="bindSearch" />
+                </view>
+                <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
+                    <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+                </view>
+                <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
+                    <image style="height:21px;width:21px; margin-right: 5px;" src="/image/public/scan.png"></image>
+                </view>
+            </view>
         </view>
-        <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
-          <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+        <view style="display:flex;margin-right:9px" catchtap="listProdsTemplate">
+            <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
         </view>
-        <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
-          <image style="height:21px;width:21px; margin-right: 5px;" src="/image/public/scan.png"></image>
-        </view>
-      </view>
-    </view>
-    <view style="display:flex;margin-right:9px" catchtap="listProdsTemplate">
-      <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
-    </view>
-  </view>
-
-  <!--  split line -->
-  <view class='goods-line-list-container'>
-    <view class='goods-line-list'>
-      <view class="goods-line-list-child goods-line-list-top">
-        <text class='goods-image-clo'>图片</text>
-        <text class='goods-top-name-clo'>名称</text>
-		<text class='goods-top-tip-clo'>(点击商品修改价格和首页展示)</text>
-        <text class='goods-stock-clo'>库存</text>
-        <text class='goods-price-clo'>价格</text>
-      </view>
-
-
-      <!-- <block wx:if="{{displayClear == false}}"> -->
-	<block wx:if="{{goodsLineList.length == 0}}">
-                  <view style="text-align:center; margin: 0 auto; margin-top: 400rpx" catchtap="listProdsTemplate">
-				  点我去上货
-      <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
-    </view>
-    </block>
-      <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
-        <image class='goods-image-clo' src="{{item.thumb}}"></image>
-        <text class='goods-name-clo'>{{item.title}}</text>
-        <text class='goods-stock-clo'>{{item.stock}}</text>
-        <text class='goods-price-clo'>$ {{item.vip1Price}} \n$ {{item.price}}</text>
-      </view>
-
-    </view>
-  </view>
-
-
-  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
-  <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
-    <view class='bottom-window-detail'>
-      <view class='bottom-window-detail-left'>
-        <image src='{{selectedProduct.thumb}}'></image>
-      </view>
-
-
-      <view class='bottom-window-detail-right'>
-        <!-- <text class='goods-name-label'>商品名:</text> -->
-        <text class='goods-name'>{{selectedProduct.title}}</text>
-
-        <view style="display:flex;font-size:35rpx;align-items:center;color:#888;">
-          <text>库存:</text>
-          <view class='stock-edit'>
-            <text bindtap='decreaseStock' data-stock="{{selectedProduct.stock}}">-</text>
-            <input type="number" bindinput='updateStock' value='{{selectedProduct.stock}}'></input>
-            <text bindtap='increaseStock' data-stock="{{selectedProduct.stock}}">+</text>
-          </view>
-        </view>
-      </view>
-
-
-
-      <image bindtap="hideModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
-
-
     </view>
 
-    <view class='bottom-price'>
-      <view class='bottom-window-price'>
-        <view>
-          <text>市场价: $</text>
-          <input type="digit" bindinput='updatePrice' value="{{selectedProduct.price}}"></input>
-        </view>
-        <view>
-          <text>青铜价: $</text>
-          <input type="digit" bindinput='updateVip1Price' value="{{selectedProduct.vip1Price}}"></input>
-        </view>
-      </view>
+    <!--  split line -->
+    <view class='goods-line-list-container'>
+        <view class='goods-line-list'>
+            <view class="goods-line-list-child goods-line-list-top">
+                <text class='goods-image-clo'>图片</text>
+                <text class='goods-top-name-clo'>名称</text>
 
-      <view class='bottom-window-price'>
-        <view>
-          <text>白银价: $</text>
-          <input type="digit" bindinput='updateVip2Price' value="{{selectedProduct.vip2Price}}"></input>
+                <text class='goods-stock-clo'>库存</text>
+                <text class='goods-price-clo'>价格</text>
+            </view>
+            <view class="goods-line-list-child goods-line-list-top">
+                <text class='goods-top-tip-clo'>点击商品修改价格和首页展示</text>
+            </view>
+            <!-- <block wx:if="{{displayClear == false}}"> -->
+            <block wx:if="{{goodsLineList.length == 0}}">
+                <view style="text-align:center; margin: 0 auto; margin-top: 250rpx" catchtap="listProdsTemplate">
+                    点我去上货
+                    <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
+                </view>
+				<view style="text-align:center; margin: 0 auto; margin-top: 40rpx" catchtap="oneButtonProducts">
+                    点我一键上货
+                    <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
+                </view>
+            </block>
+            <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
+                <image class='goods-image-clo' src="{{item.thumb}}"></image>
+                <text class='goods-name-clo'>{{item.title}}</text>
+                <text class='goods-stock-clo'>{{item.stock}}</text>
+                <text class='goods-price-clo'>$ {{item.vip1Price}} \n$ {{item.price}}</text>
+            </view>
+
         </view>
-        <view>
-          <text>黄金价: $</text>
-          <input type="digit" bindinput='updateVip3Price' value="{{selectedProduct.vip3Price}}"></input>
-        </view>
-      </view>
-      <view class='bottom-window-RecommandNHot'>
-        <view>
-          <text>店主推荐</text>
-          <switch checked="{{isRecommandChecked}}" data-id="{{item.id}}" bindchange="addRecommandation" />
-        </view>
-        <view>
-          <text style='width: 100rpx'>热卖</text>
-          <switch checked="{{isHotChecked}}" data-id="{{item.id}}" bindchange="addHot" />
-          <input type="number" bindinput='updateHotSale' value='{{selectedProduct.hotSale}}'></input>
-        </view>
-      </view>
     </view>
 
 
-    <view class='bottom-window-stock' bindtap='bindExtra'>
-      <view style='color:#888;font-size:30rpx;margin-left:13px;'>额外信息:
-        <text style="text-overflow: ellipsis;">{{memo}}</text>
-      </view>
+    <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+    <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
+        <view class='bottom-window-detail'>
+            <view class='bottom-window-detail-left'>
+                <image src='{{selectedProduct.thumb}}'></image>
+            </view>
 
+
+            <view class='bottom-window-detail-right'>
+                <!-- <text class='goods-name-label'>商品名:</text> -->
+                <text class='goods-name'>{{selectedProduct.title}}</text>
+
+                <view style="display:flex;font-size:35rpx;align-items:center;color:#888;">
+                    <text>库存:</text>
+                    <view class='stock-edit'>
+                        <text bindtap='decreaseStock' data-stock="{{selectedProduct.stock}}">-</text>
+                        <input type="number" bindinput='updateStock' value='{{selectedProduct.stock}}'></input>
+                        <text bindtap='increaseStock' data-stock="{{selectedProduct.stock}}">+</text>
+                    </view>
+                </view>
+            </view>
+
+
+
+            <image bindtap="hideModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
+
+
+        </view>
+
+        <view class='bottom-price'>
+            <view class='bottom-window-price'>
+                <view>
+                    <text>市场价: $</text>
+                    <input type="digit" bindinput='updatePrice' value="{{selectedProduct.price}}"></input>
+                </view>
+                <view>
+                    <text>青铜价: $</text>
+                    <input type="digit" bindinput='updateVip1Price' value="{{selectedProduct.vip1Price}}"></input>
+                </view>
+            </view>
+
+            <view class='bottom-window-price'>
+                <view>
+                    <text>白银价: $</text>
+                    <input type="digit" bindinput='updateVip2Price' value="{{selectedProduct.vip2Price}}"></input>
+                </view>
+                <view>
+                    <text>黄金价: $</text>
+                    <input type="digit" bindinput='updateVip3Price' value="{{selectedProduct.vip3Price}}"></input>
+                </view>
+            </view>
+            <view class='bottom-window-RecommandNHot'>
+                <view>
+                    <text>店主推荐</text>
+                    <switch checked="{{isRecommandChecked}}" data-id="{{item.id}}" bindchange="addRecommandation" />
+                </view>
+                <view>
+                    <text style='width: 100rpx'>热卖</text>
+                    <switch checked="{{isHotChecked}}" data-id="{{item.id}}" bindchange="addHot" />
+                    <input type="number" bindinput='updateHotSale' value='{{selectedProduct.hotSale}}'></input>
+                </view>
+            </view>
+        </view>
+
+
+        <view class='bottom-window-stock' bindtap='bindExtra'>
+            <view style='color:#888;font-size:30rpx;margin-left:13px;'>额外信息:
+                <text style="text-overflow: ellipsis;">{{memo}}</text>
+            </view>
+
+        </view>
+        <view class='bottom-window-btn' bindtap='priceValidation'>
+            <text>保存信息</text> </view>
+        <view class='bottom-window-btn2' bindtap='hideModal'>
+            <text>放弃修改</text> </view>
     </view>
-    <view class='bottom-window-btn' bindtap='priceValidation'>
-      <text>保存信息</text> </view>
-	<view class='bottom-window-btn2' bindtap='hideModal'>
-      <text>放弃修改</text> </view>
-  </view>
 
 </view>
