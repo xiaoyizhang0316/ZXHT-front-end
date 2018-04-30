@@ -90,7 +90,7 @@ justify-content:right;
 
 .top-input-box text {
   padding-left: 30rpx;
-  width: 180rpx;
+  width: 220rpx;
 }
 
 .account {
@@ -132,4 +132,9 @@ justify-content:right;
 .confirmBtn {
   width: 90%;
   margin-top: 27rpx;
+}
+.pay-method{
+	flex-direction: column;
+	display:flex;
+	flex:8;
 }

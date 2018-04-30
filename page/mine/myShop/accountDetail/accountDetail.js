@@ -47,6 +47,14 @@ Page({
 	  })
 	  console.log(this.data.weixinPayStatus)
   },
+  bindName: function (e) {
+	  console.log(e)
+	  this.setData({
+		  'shop.name': e.detail.value
+	  })
+	  console.log(this.data.shop.shopname)
+  },
+  
   bindSign: function (e) {
 	  this.setData({
 		  'shop.sign': e.detail.value
@@ -70,9 +78,7 @@ Page({
   radioChange: function (e) {
 	  this.setData({
 		  'shop.payment': e.detail.value,
-		  'shop.bankName': '',
-		  'shop.accountNbr': '',
-		  'shop.accountName': '',
+		 
 		  
 	  })
 	  console.log(this.data.shop)
@@ -88,6 +94,7 @@ Page({
     COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
 		console.log(myShopInfo)
       self.setData({
+		'shop.id':myShopInfo.id,
         'shop.name': myShopInfo.shopName,
         'shop.sign': myShopInfo.sign,
         'shop.payment': myShopInfo.payment,
@@ -189,10 +196,13 @@ Page({
 			  content: error.msg
 		  })
 	  } else {
+		  console.log(e)
+
 		  COM.load('NetUtil').netUtil(url, "POST", {
+			  "id": self.data.shop.id,
 			  "open_id": app.globalData.openId,
 			  "owner": app.globalData.nickName,
-			  "shopName": self.data.shop.shopname,
+			  "shopName": self.data.shop.name,
 			  "sign": self.data.shop.sign,
 			  "prepay": self.data.prepayStatus,
 			  "offlinePay": self.data.offlinePayStatus,

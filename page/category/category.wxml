@@ -39,7 +39,7 @@
                     <view class="product-list" wx:for="{{items}}" wx:key="index" wx:for-item="val">
                         <navigator url="./brand/list?id={{val.id}}">
 
-                               <image wx:if="{{val.title}}"class="brand-image" src="https://img.zhenxianghaitao.com/mini/{{val.title}}.jpg"></image>                              
+                               <image wx:if="{{val.title}}"class="brand-image" src="https://img.zhenxianghaitao.com/storage/mini/{{val.title}}.jpg"></image>                              
                              <view class="classname">
                                 <text>{{val.title}}</text>
                              </view>
@@ -63,7 +63,7 @@
                     <view class="product-list" wx:for="{{item.productIds}}" wx:key="index" wx:for-item="val">
                         <navigator url="../details/details?id={{val.id}}">
 
-                               <image class="goods-image" src="https://img.zhenxianghaitao.com/mini/{{val.barcode}}.jpg"></image>  </navigator> 
+                               <image class="goods-image" src="https://img.zhenxianghaitao.com/storage/mini/{{val.barcode}}.jpg"></image>  </navigator> 
                                  
 
                               <view class="title-line">

@@ -22,7 +22,7 @@
         <text>支付方式设置</text>
       </view>
       <view class="top-input-box flex-col">
-        <view style='flex-direction: column;'>
+        <view class="pay-method">
           <text>收取预存款</text>
           <view class='bottom-text'>
             <text>支持使用红包预存款等支付</text>
@@ -32,7 +32,7 @@
       </view>
 
       <view class="top-input-box flex-col">
-        <view style='flex-direction: column;'>
+        <view class="pay-method">
           <view>
             <text>线下支付</text>
           </view>
@@ -44,7 +44,7 @@
       </view>
 
       <view class="top-input-box flex-col">
-        <view style='flex-direction: column;'>
+        <view class="pay-method">
           <view>
             <text>微信支付</text>
           </view>
@@ -54,7 +54,7 @@
         </view>
         <switch class='switch2' bindchange='showModal' checked="{{weixinPayStatus}}"></switch>
       </view>
-      <view class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
+      <view class="commodity_attr_box bottom-window" wx:if="{{showModalStatus || weixinPayStatus}}">
         <view class="top-input-box flex-col">
           <text class='pay-text'>支付方式</text>
           <radio-group class="radio-group" bindchange="radioChange">

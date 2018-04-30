@@ -375,6 +375,12 @@ Page({
    */
   onReachBottom: function () {
   },
+  oneButtonProducts: function () {
+	  wx.navigateTo({
+		  url: '/page/mine/shop/product/oneButtonProducts/oneButtonProducts',
+	  })
+
+  },
 
   /**
    * 用户点击右上角分享

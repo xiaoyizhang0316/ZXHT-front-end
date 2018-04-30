@@ -22,14 +22,19 @@
   <view class="filter-box">
     <view>
       <picker bindchange="bindBrandChange" value="{{index}}" range="{{brandList}}">
-        <view class='picker-view'>品牌</view>
+        <view class='picker-view'>按品牌上货</view>
       </picker>
     </view>
 
     <view>
       <picker bindchange="bindCateChange" value="{{index}}" range="{{cateList}}">
-        <view class='picker-view'>分类</view>
+        <view class='picker-view'>按分类上货</view>
       </picker>
+    </view>
+	 <view bindtap='oneButtonProducts'>
+      
+       <text>一键上货</text>
+      
     </view>
   </view>
 

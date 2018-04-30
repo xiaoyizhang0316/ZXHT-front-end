@@ -29,7 +29,7 @@
 
      <view class="explain-line">
         <image class='image-icon2' src="/image/card.png"></image>
-        <view class='explain-text'>预存款(此为人民币￥):</view>
+        <view class='explain-text'>预存款(人民币￥):</view>
         
         <view class='amount'>
 		<input type="text" value="{{fan.deposit}}" name="deposit" bindchange="bindDepositChange"></input>
