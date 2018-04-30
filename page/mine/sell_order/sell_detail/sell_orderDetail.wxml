@@ -42,12 +42,12 @@
 
             <view class="explain-text">配送费用(澳元)</view>
             <text class="explain-text" style='margin-right:0px;font-size="12px"'>$</text>
-            <input placeholder='{{deliveryPrice}}' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" font-size="12px" bindinput='updateDeliveryPrice'></input>
+            <input placeholder='{{deliveryPrice}}' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" font-size="12px" bindinput='updateDeliveryPrice' value="{{deliveryPrice}}"></input>
         </view>
         <view class="inner-explain-line">
             <view class="explain-text">折扣(澳元)</view>
             <text class="explain-text" style='margin-right:0px;font-size="12px"'>-$</text>
-            <input placeholder='{{discountValue}}' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" font-size="12px" bindinput='updateDiscountValue'></input>
+            <input placeholder='{{discountValue}}' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" font-size="12px" bindinput='updateDiscountValue' value="{{discountValue}}"></input>
         </view>
     </view>
 

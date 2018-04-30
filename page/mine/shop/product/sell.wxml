@@ -115,7 +115,7 @@
                 <view>
                     <text style='width: 100rpx'>热卖</text>
                     <switch checked="{{isHotChecked}}" data-id="{{item.id}}" bindchange="addHot" />
-                    <input type="number" bindinput='updateHotSale' value='{{selectedProduct.hotSale}}'></input>
+                    <!-- <input type="number" bindinput='updateHotSale' value='{{selectedProduct.hotSale}}'></input> -->
                 </view>
             </view>
         </view>

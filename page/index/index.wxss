@@ -162,3 +162,16 @@ swiper-item image {
    margin-top:-20rpx;  
 }
 
+.rate{
+  width: 100%;
+  padding: 10rpx 0;
+  height: 10%;
+  font-size:small;
+  text-align: center;
+	color: #4d0000;
+	letter-spacing: 0.5px;
+	font-weight:400;
+display:flex;
+justify-content:center;
+}
+

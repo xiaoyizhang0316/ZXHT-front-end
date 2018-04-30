@@ -62,7 +62,7 @@
     <view class="bottom-contaniner">
       <button form-type="submit" class='saveBtn'>添加收货人</button>
 
-			<button type="warning" class='saveBtn' bindtap='test'>test</button>
+		
     </view>
   </form>
 </view>

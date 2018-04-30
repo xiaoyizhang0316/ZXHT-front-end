@@ -29,18 +29,14 @@ Page({
 		targetShopId: null,
 		sign:"",
 		shopImg:"",
-		userName:""
+		userName:"",
+		rate: 5,
 
 	},
 
 	onLoad: function (options) {
 
-	},
-
-
-	onShow: function () {
-
-		console.log("show")
+		
 		var self = this;
 		self.loadRecommendedProducts();
 
@@ -87,6 +83,14 @@ Page({
 			})
 		}
 
+	},
+
+
+	onShow: function () {
+		this.setData({
+			rate: wx.getStorageSync("shopParams").rate
+		})
+	
 	},
 
 

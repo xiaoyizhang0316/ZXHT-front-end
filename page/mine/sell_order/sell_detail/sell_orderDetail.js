@@ -144,15 +144,26 @@ Page({
   placeOrder: function (e) {
     console.log(e)
     console.log(this.data.order)
-    this.data.order.orderInfo.discount = this.data.discountValue
-    this.data.order.orderInfo.shippingCost = this.data.deliveryPrice
-    let url = COM.load('CON').CONFRIM_ORDER_URL
-    COM.load('NetUtil').netUtil(url, "PUT", this.data.order.orderInfo, (callback) => {
-      console.log(callback)
-    })
-    wx.redirectTo({
-      url: '/page/mine/sell_order/sell_orderHistory'
-    })
+	console.log(this.data)
+	if (this.data.discountValue.toString().match(/^[-+]?[0-9]*\.?[0-9]+$/) && this.data.deliveryPrice.toString().match(/^[-+]?[0-9]*\.?[0-9]+$/))
+	{
+		this.data.order.orderInfo.discount = this.data.discountValue
+		this.data.order.orderInfo.shippingCost = this.data.deliveryPrice
+
+		let url = COM.load('CON').CONFRIM_ORDER_URL
+		COM.load('NetUtil').netUtil(url, "PUT", this.data.order.orderInfo, (callback) => {
+			console.log(callback)
+		})
+		wx.redirectTo({
+			url: '/page/mine/sell_order/sell_orderHistory'
+		})
+	}else{
+		wx.showModal({
+			title: '错误',
+			content: '折扣或者邮费输入有误, 请确认后重新尝试',
+		})
+	}
+    
   },
 
   updateDeliveryPrice: function (e) {

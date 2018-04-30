@@ -80,7 +80,7 @@
 
               
                 <block wx:if="{{item.orderInfo.orderStatus == 1}}">
-                  <text class='button-red'>确认订单</text>
+                  <text class='button-red'>输入邮费</text>
                 </block>
                 <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
                   <text class='button-red'>继续发货</text>

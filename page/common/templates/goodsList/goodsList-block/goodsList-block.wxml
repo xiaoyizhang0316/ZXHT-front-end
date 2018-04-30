@@ -12,7 +12,7 @@
                   <text>{{item.title}}</text>
                  </view> 
                 <view class="goods-price">
-                    <text class="goods-price-strong goods-price-now">${{item.price}}澳元</text>
+                    <text class="goods-price-strong goods-price-now">${{item.vipPrice}}澳元</text>
 										<text class="goods-sales-strong">已售{{item.sales}}件</text>
                      <!-- <text class="goods-price-deleted">${{item.stock}}澳元</text>  -->
                     <!-- <view class="goods-purchase-btn">
