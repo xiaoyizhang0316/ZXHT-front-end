@@ -9,41 +9,41 @@
 
     <view class="explain-line" style="margin-top:20px;background-color:{{touched[0] ? '#e9e9e9':''}}" data-id="0" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="buyerHelp">
         <view class="explain-block">
-            <image style="height:22px;width:22px;" src="../../image/consignee.png"></image>
+            <image style="height:22px;width:22px;" src="../../../image/help1.png"></image>
         </view>
         <view class="explain-text">买家帮助</view>
         <view class="explain-block">
-            <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
+            <image style="height:23px;width:23px;" src="../../../image/arrow_down.png"></image>
         </view>
     </view>
 
     <view class="explain-line" style="background-color:{{touched[1] ? '#e9e9e9':''}}" data-id="1" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="sellerHelp">
         <view class="explain-block">
-            <image style="height:22px;width:22px;" src="../../image/consignee.png"></image>
+            <image style="height:22px;width:22px;" src="../../../image/help2.png"></image>
         </view>
         <view class="explain-text">卖家帮助</view>
         <view class="explain-block">
-            <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
+            <image style="height:23px;width:23px;" src="../../../image/arrow_down.png"></image>
         </view>
     </view>
 
     <view class="explain-line" style="margin-top:20px;background-color:{{touched[2] ? '#e9e9e9':''}}" data-id="2" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="contactUs">
         <view class="explain-block">
-            <image style="height:22px;width:22px;" src="../../image/service.png"></image>
+            <image style="height:22px;width:22px;" src="../../../image/contact.png"></image>
         </view>
         <view class="explain-text">联系我们</view>
         <view class="explain-block">
-            <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
+            <image style="height:23px;width:23px;" src="../../../image/arrow_down.png"></image>
         </view>
     </view>
 
     <view class="explain-line" style="background-color:{{touched[3] ? '#e9e9e9':''}}" data-id="3" bindtouchstart="touchstart" bindtouchend="touchend" bindtap="policy">
         <view class="explain-block">
-            <image style="height:22px;width:22px;" src="../../image/service.png"></image>
+            <image style="height:22px;width:22px;" src="../../../image/privacy.png"></image>
         </view>
         <view class="explain-text">隐私条款</view>
         <view class="explain-block">
-            <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
+            <image style="height:23px;width:23px;" src="../../../image/arrow_down.png"></image>
         </view>
     </view>
 
