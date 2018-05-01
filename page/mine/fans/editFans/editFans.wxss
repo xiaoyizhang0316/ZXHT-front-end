@@ -229,7 +229,26 @@ display:flex;
   color:#FFFFFF;
 background-color:#1AAD19;
 }
+.bottom-contaniner-text-return{
+    margin-top: 13rpx;
+  width: 100%;
+  color:#FFFFFF;
+background-color:#ff4040;
+}
 
+
+.bottom-bar {
+
+width:100%;
+position:fixed;
+bottom:0px;
+height:200rpx;
+background-color:#fff;
+
+align-items:center;
+font-size:28rpx;
+
+}
 
 
 

@@ -2,7 +2,7 @@
 const BASE_URL = "https://mini.zhenxianghaitao.com"
 //const BASE_URL = "https://9629fcf9.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/mini/"
-
+const IMG_DETAIL_BASE = "https://img.zhenxianghaitao.com/"
 //登录 初始设置
 const CATEGORY_URL = BASE_URL + "/api/mall/categories/";
 const SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shopProducts/";
@@ -121,5 +121,6 @@ module.exports = {
   GET_SHIPAGENTS_URL : GET_SHIPAGENTS_URL,
   UPDATE_FAN_URL: UPDATE_FAN_URL,
   IMG_BASE: IMG_BASE,
-  ONE_BUTTON_PRODUCTS: ONE_BUTTON_PRODUCTS
+  ONE_BUTTON_PRODUCTS: ONE_BUTTON_PRODUCTS,
+  IMG_DETAIL_BASE : IMG_DETAIL_BASE 
 }

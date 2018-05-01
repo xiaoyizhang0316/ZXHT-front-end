@@ -36,7 +36,13 @@ Page({
 
 	onLoad: function (options) {
 
-		
+	},
+
+
+	onShow: function () {
+
+
+
 		var self = this;
 		self.loadRecommendedProducts();
 
@@ -82,13 +88,8 @@ Page({
 				title: '真享 海淘',
 			})
 		}
-
-	},
-
-
-	onShow: function () {
 		this.setData({
-			rate: wx.getStorageSync("shopParams").rate
+			rate: parseFloat(Math.round(wx.getStorageSync("shopParams").rate * 100) / 100).toFixed(2)
 		})
 	
 	},
@@ -189,7 +190,7 @@ Page({
 			fail: (res) => {
 				wx.showModal({
 					title: '提示',
-					content: '扫码失败！',
+					content: '扫码失败，请重新尝试下',
 					showCancel: false,
 					success: function (res) {
 						console.log('scan code failed')
@@ -248,7 +249,7 @@ Page({
 			} else {
 				wx.showModal({
 					title: '提示',
-					content: '无法找到该商品',
+					content: '小店还没有上架此商品>_<，客官您再看看别的呀',
 					showCancel: false,
 					success: function (res) {
 						if (res.confirm) {
