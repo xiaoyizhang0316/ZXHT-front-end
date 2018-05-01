@@ -56,13 +56,13 @@
         "pagePath": "page/index/index",
         "iconPath": "image/tabBar/12.png",
         "selectedIconPath": "image/tabBar/11.png",
-        "text": "主页"
+        "text": "精选"
       },
       {
         "pagePath": "page/category/category",
         "iconPath": "image/tabBar/22.png",
         "selectedIconPath": "image/tabBar/21.png",
-        "text": "分类"
+        "text": "全部"
       },
       {
         "pagePath": "page/cart/cart",

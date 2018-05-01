@@ -42,7 +42,7 @@
 
  <view class="newest" style='margin-top:20px;background-color:#f6f6f6'>
     <view class="rate">
-      <image src='/image/public/au.png' style="height:21px;width:21px; margin-right: 15px;"></image><text style='padding-top:1px'>1 AUD = {{rate}} CNY</text><image src='/image/public/cn.png' style="height:21px;width:21px; margin-left: 15px;"></image>
+      <image src='/image/public/au.png' style="height:21px;width:21px; margin-right: 15px;"></image><text style='padding-top:1px'>1 AUD ≈ {{rate}} CNY</text><image src='/image/public/cn.png' style="height:21px;width:21px; margin-left: 15px;"></image>
     </view>
  </view>
   <!-- <view class="selected" style='margin-top:-25px;'>
