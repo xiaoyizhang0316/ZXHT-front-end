@@ -4,7 +4,7 @@
             <view class="search-input">
                 <view style="display:flex;flex:1;">
                     <view>
-                        <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
+                        <image style="height:21px;width:21px;margin-top:7rpx;margin-left:10rpx;" src="/image/public/find.png"></image>
                     </view>
                     <input focus="{{focus}}" placeholder="搜索已上架商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindinput="bindSearch" />
                 </view>
@@ -12,7 +12,7 @@
                     <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
                 </view>
                 <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
-                    <image style="height:21px;width:21px; margin-right: 5px;" src="/image/public/scan.png"></image>
+                    <image style="height:21px;width:21px; margin-right: 5px;margin-top:5rpx;" src="/image/public/scan.png"></image>
                 </view>
             </view>
         </view>
@@ -68,7 +68,7 @@
                 <!-- <text class='goods-name-label'>商品名:</text> -->
                 <text class='goods-name'>{{selectedProduct.title}}</text>
 
-                <view style="display:flex;font-size:35rpx;align-items:center;color:#888;">
+                <view style="display:flex;font-size:26rpx;align-items:center;color:#888;">
                     <text>库存:</text>
                     <view class='stock-edit'>
                         <text bindtap='decreaseStock' data-stock="{{selectedProduct.stock}}">-</text>
@@ -122,7 +122,7 @@
 
 
         <view class='bottom-window-stock' bindtap='bindExtra'>
-            <view style='color:#888;font-size:30rpx;margin-left:13px;'>额外信息:
+            <view style='color:#888;font-size:28rpx;margin-left:13px;'>额外信息:
                 <text style="text-overflow: ellipsis;">{{memo}}</text>
             </view>
 
@@ -130,7 +130,7 @@
         <view class='bottom-window-btn' bindtap='priceValidation'>
             <text>保存信息</text> </view>
         <view class='bottom-window-btn2' bindtap='hideModal'>
-            <text>放弃修改</text> </view>
+            <text style='font-size:33rpx;'>放弃修改</text> </view>
     </view>
 
 </view>
