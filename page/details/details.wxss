@@ -82,7 +82,7 @@
 }
 .goods-box .goods-operation{
     position: relative;
-    width: 100%;
+    width: 85%;
     height: 100rpx;
     line-height: 100rpx;
     padding: 0 50rpx;
