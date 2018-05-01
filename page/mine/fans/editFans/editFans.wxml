@@ -32,12 +32,14 @@
         <view class='explain-text'>预存款(人民币￥):</view>
         
         <view class='amount'>
-		<input type="text" value="{{fan.deposit}}" name="deposit" bindchange="bindDepositChange"></input>
+		<input type="digit" value="{{fan.deposit}}" name="deposit" bindchange="bindDepositChange"></input>
 		</view> 
       </view> 
 
-     <view style='height:5px; background:#f8f8f8;'></view> 
-        <button class='bottom-contaniner-text' bindtap='saveFan'>保存</button>
-  
+     <view class="bottom-bar">
+	  <button class='bottom-contaniner-text' bindtap='saveFan'>保存</button>
+	  <button class='bottom-contaniner-text-return' bindtap='returnNav'>取消保存</button>
+     </view> 
+       
     
 </view>

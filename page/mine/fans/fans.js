@@ -19,7 +19,7 @@ Page({
     tmp: { 'access': false, 'vipLevel': '1' },
 	memo: '',
 	searchResult: {},
-	vipArray: ["普通会员-无折扣","青铜会员-9折","白银会员-8折","黄金会员-7折"]
+	vipArray: ["青铜会员-无折扣", "白银会员-9折", "黄金会员-8折", "钻石会员-7折"]
   },
 
 

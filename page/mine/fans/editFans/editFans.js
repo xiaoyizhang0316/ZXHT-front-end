@@ -17,7 +17,7 @@ Page({
 			"vipLevel": 0,
 			"deposit": 0
 		},
-		vipArray: ["普通会员-无折扣", "青铜会员-9折", "白银会员-8折", "黄金会员-7折"],
+		vipArray: ["青铜会员-无折扣", "白银会员-9折", "黄金会员-8折", "钻石会员-7折"],
 		index: 0,
 	},
 
@@ -64,7 +64,7 @@ Page({
 	bindDepositChange: function (e) {
 		console.log(e)
 		let deposit = e.detail.value
-		if (deposit.match(/^[+-]?([0-9]*[.])?[0-9]+$/))
+		if (deposit.toString().match(/^[+-]?([0-9]*[.])?[0-9]+$/))
 		{
 			this.setData({
 				"applyToShop.deposit": e.detail.value,
@@ -156,42 +156,48 @@ Page({
 
 		console.log(url)
 		console.log(self.data.applyToShop)
-		if (self.data.applyToShop.deposit.match(/^[+-]?([0-9]*[.])?[0-9]+$/)) {
+		if (self.data.applyToShop.deposit.toString().match(/^[+-]?([0-9]*[.])?[0-9]+$/)) {
 			let deposit = Math.round(self.data.applyToShop.deposit * 100) / 100
 
 			this.setData({
 				"applyToShop.deposit": deposit,
 			})
-			COM.load('NetUtil').netUtil(url, 'POST', self.data.applyToShop, function (res) {
-				console.log(res)
-				if (res == true) {
-					wx.showToast({
-						title: '数据更新成功',
-						icon: 'success',
-						duration: 1500,
-						mask: true,
-						success: function () {
+			wx.showModal({
+				title: '是否确认',
+				content: '会员等级为' + self.data.vipArray[self.data.applyToShop.vipLevel] + '\r\n 预存款为' + self.data.applyToShop.deposit,
+				success:function(res){
+					COM.load('NetUtil').netUtil(url, 'POST', self.data.applyToShop, function (res) {
+						console.log(res)
+						if (res == true) {
+							wx.showToast({
+								title: '数据更新成功',
+								icon: 'success',
+								duration: 1500,
+								mask: true,
+								success: function () {
 
-							wx.setStorage({
-								key: 'refreshFansList',
-								data: true,
+									wx.setStorage({
+										key: 'refreshFansList',
+										data: true,
+									})
+									wx.navigateBack({
+
+									})
+								}
 							})
-							wx.navigateBack({
-
+						} else {
+							wx.showToast({
+								title: '数据更新失败，请重新尝试',
+								icon: 'none',
+								duration: 1500,
+								mask: true,
 							})
 						}
-					})
-				} else {
-					wx.showToast({
-						title: '数据更新失败，请重新尝试',
-						icon: 'none',
-						duration: 1500,
-						mask: true,
 
 					})
 				}
-
 			})
+			
 		} else {
 			wx.showToast({
 				title: '数值错误，请检查您输入的预存款',
@@ -230,7 +236,17 @@ Page({
 	onReachBottom: function () {
 
 	},
-
+	returnNav: function(){
+		wx.showModal({
+			title: '提示',
+			content: '放弃编辑本会员吗?',
+			success:function(res){
+				wx.navigateBack({
+					
+				})
+			}
+		})
+	}
 
 
 })

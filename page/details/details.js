@@ -263,7 +263,7 @@ Page({
 								detail.images = JSON.parse(detail.images)
 								for (var i = 0; i < detail.images.length ; i++)
 								{
-									detail.images[i] = COM.load('CON').IMG_BASE + "storage/" + detail.images[i];
+									detail.images[i] = COM.load('CON').IMG_DETAIL_BASE + "storage/" + detail.images[i];
 								}
 							}		
 							console.log(detail)
