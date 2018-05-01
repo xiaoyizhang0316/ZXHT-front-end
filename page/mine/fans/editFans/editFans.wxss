@@ -225,15 +225,17 @@ display:flex;
 
 .bottom-contaniner-text{
     margin-top: 27rpx;
-  width: 100%;
+  width: 80%;
   color:#FFFFFF;
 background-color:#1AAD19;
+opacity: 0.9;
 }
 .bottom-contaniner-text-return{
-    margin-top: 13rpx;
-  width: 100%;
+    margin-top: 7rpx;
+  width: 80%;
   color:#FFFFFF;
-background-color:#ff4040;
+background-color:#A9A9A9;
+opacity: 0.9;
 }
 
 

@@ -66,6 +66,7 @@ page,.main{
   /* flex: 0 0 75%; */
   /* margin-left: 10px; */
   width:95%;
+  padding-left: 10rpx;
 }
 
 .search-input image {

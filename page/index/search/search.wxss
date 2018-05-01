@@ -38,7 +38,7 @@ page {
 
 .header-input-box image{
   height: 42rpx;
-  width: 42rpx;
+  width: 50rpx;
 }
 .header-input-box .find-icon{
   padding-left: 18rpx;
@@ -62,6 +62,7 @@ page {
 
 .header-input-box input {
   width: 100%;
+  margin-left: 20rpx;
 }
 
 .label-contaniner {
@@ -85,8 +86,8 @@ page {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top:10rpx;
-  padding-bottom:10rpx; 
+  padding-top:10rpx; 
+  margin-left: 30rpx;
 }
 
 
@@ -99,6 +100,7 @@ page {
 
 .box-name-text {
   font-size: 30rpx;
+  color: #C70039;
 }
 
 .history-box-label {
@@ -112,9 +114,9 @@ page {
   display: inline;
   padding: 10rpx;
   margin: 20rpx;
-  margin-left: 0rpx;
-  font-size: 26rpx;
-  border-radius:10rpx;
+  margin-left: 20rpx;
+  font-size: 25rpx;
+  border-radius:30rpx;
   max-width: 230rpx;
   overflow:hidden;
   white-space:nowrap;
@@ -132,7 +134,7 @@ page {
   flex-direction: column;
   align-items: center;
   height: 100%;
-  font-size: 30rpx;
+  font-size: 26rpx;
 }
 
 .title-line {
