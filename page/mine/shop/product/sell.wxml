@@ -42,7 +42,7 @@
                 </view>
 				<view style="text-align:center; margin: 0 auto; margin-top: 40rpx" catchtap="oneButtonProducts">
                     点我一键上货
-                    <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
+                    <image style="height:27px;width:27px;align-self:center" src="/image/add_all.png"></image>
                 </view>
             </block>
             <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">

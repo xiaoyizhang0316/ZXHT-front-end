@@ -84,7 +84,7 @@
 .goods-line-list-top {
   font-weight: 400;
   font-size: 30rpx;
-  color: black;
+  color: #696969;
 }
 
 .goods-image-clo {

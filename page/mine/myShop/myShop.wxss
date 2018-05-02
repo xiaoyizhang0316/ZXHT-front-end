@@ -9,13 +9,35 @@ page {
     width:100%;
     line-height: 100rpx;
     text-align: center;
-    padding:30rpx 30rpx 30rpx;
+    padding:30rpx 50rpx 30rpx;
     box-sizing: border-box; 
      background: linear-gradient(to top left, #696969, white); 
     font-size: 28rpx;
     color: #fff;
     border-radius: 5px;
+    flex-direction: row;
+    display: flex;
 }
+
+.explain-view{
+  flex-direction: column;
+  display: flex;
+  margin-left: 90rpx;
+}
+.explain-line1{
+   width: 100%;
+  height: 85rpx;
+  /* line-height: 30px; */
+  
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 10rpx;
+  font-size: 23rpx;
+  color: white;
+}
+
 .header .thumb{
     position: absolute;
     left: 30rpx;
@@ -29,6 +51,7 @@ page {
 }
 .header .shoptitle{
   font-size: 40rpx;
+  margin-left: 20rpx;
 }
 
 .explain-line {
