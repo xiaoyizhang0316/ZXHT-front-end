@@ -2,6 +2,19 @@
   <view style='background-color:white;padding:10px;'>
     <view class="header">
       <text class="shoptitle">{{shopName}}</text>
+      <view class='explain-view'>
+      <view class='explain-line1'>
+      <image style="height:22px;width:22px;margin-bottom:12rpx;"src='../../../image/balance.png'></image>
+      <view style='margin-left:20rpx;'>余额  ¥200</view>
+      </view>
+
+      <view class='explain-line1'>
+      <image style="height:22px;width:22px;"src='../../../image/withdraw.png'></image>
+      <button style='background: linear-gradient(to top right, #DC143C, #FA8072);color:white;font-size:20rpx; border-radius: 10rpx;margin-left:20rpx;'>提现</button>
+      </view>
+      </view>
+
+
     </view>
   </view>
 
