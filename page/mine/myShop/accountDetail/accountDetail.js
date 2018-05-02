@@ -10,14 +10,14 @@ Page({
 	  shop: {
 		  shopname: '',
 		  sign: '',
-		  payment: 'RMB',//默认支付方式为人民币
+		  payment: 1,//默认支付方式为人民币
 		  bankName: '',
 		  accountNbr: '',
 		  accountName: ''
 	  },
 	  payItems: [
-		  { name: '人民币', value: 'RMB', checked: false },
-		  { name: 'Australian Dollar', value: 'AusDollar',checked:false },
+		  { name: '人民币', value: 1, checked: false },
+		  { name: 'Australian Dollar', value: 2,checked:false },
 	  ],
 	  tips: {
 		  zh_cn: '请填写对应的支付信息',
@@ -206,11 +206,11 @@ Page({
 			  "sign": self.data.shop.sign,
 			  "prepay": self.data.prepayStatus,
 			  "offlinePay": self.data.offlinePayStatus,
-			  "weixinPay": self.data.weixinPayStatus,
-			  "payment": self.data.shop.payment,
-			  "bankName": self.data.shop.bankName,
-			  "accountNbr": self.data.shop.accountNbr,
-			  "accountName": self.data.shop.accountName
+			//   "weixinPay": self.data.weixinPayStatus,
+			//   "payment": self.data.shop.payment,
+			//   "bankName": self.data.shop.bankName,
+			//   "accountNbr": self.data.shop.accountNbr,
+			//   "accountName": self.data.shop.accountName
 		  }, (callbackdata) => {
 			  if (callbackdata == true) {
 				  console.log("成功")

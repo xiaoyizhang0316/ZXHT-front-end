@@ -79,6 +79,12 @@ Page({
     })
 
   },
+  balance: function (event) {
+	  wx.navigateTo({
+		  url: '/page/mine/myShop/balanceManagement/balanceManagement'
+	  })
+
+  },
 
   accountDetail: function(event){
     wx.navigateTo({

@@ -240,10 +240,10 @@ opacity: 0.9;
 
 
 .bottom-bar {
-
+  
 width:100%;
 position:fixed;
-bottom:0px;
+bottom:20px;
 height:200rpx;
 background-color:#fff;
 

@@ -21,7 +21,14 @@ Page({
 			console.log(options.targetShopId)
 		} else {
 			//this.navigatorToIndex()
-			options.targetShopId = "oVxpo5FQkb2qY4TGpD9rq2xFWRlk"
+			let targetShopId = wx.getStorageSync("targetShopId")
+			if (targetShopId && targetShopId != "oVxpo5FQkb2qY4TGpD9rq2xFWRlk")
+			{
+				options.targetShopId = targetShopId
+			}else{
+				options.targetShopId = "oVxpo5FQkb2qY4TGpD9rq2xFWRlk"
+			}
+			
 		}
 		app.globalData.targetShopId = options.targetShopId
 		this.prepare(options)

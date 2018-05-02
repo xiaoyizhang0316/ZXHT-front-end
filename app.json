@@ -34,10 +34,11 @@
     "page/mine/sell_order/send_detail/send_orderDetail",
     "page/mine/order_pay/orderHistory_pay",
     "page/mine/order_receive/orderHistory_receive",
-		"page/share/customerConsignee/customerConsignee",
+	"page/share/customerConsignee/customerConsignee",
     "page/mine/fans/editFans/editFans",
 	"page/mine/helpCenter/helpCenter",
-	"page/mine/shop/product/oneButtonProducts/oneButtonProducts"
+	"page/mine/shop/product/oneButtonProducts/oneButtonProducts",
+	"page/mine/myShop/balanceManagement/balanceManagement"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",

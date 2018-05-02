@@ -12,14 +12,14 @@ Page({
     shop: {
       shopname: '',
       sign: '',
-      payment: 'RMB',//默认支付方式为人民币
+      payment: 1,//默认支付方式为人民币
       bankName: '',
       accountNbr: '',
       accountName: ''
     },
     payItems: [
-      { name: '人民币', value: 'RMB', checked: 'true' },
-      { name: 'Australian Dollar', value: 'AusDollar' },
+      { name: '人民币', value: 1, checked: 'true' },
+      { name: 'Australian Dollar', value: 2 },
     ],
     tips: {
       zh_cn: '请填写对应的支付信息',
@@ -100,7 +100,7 @@ Page({
       }
     }),
       this.setData({
-        payment: 'RMB',
+        payment: 1,
       })
   },
 
@@ -179,9 +179,9 @@ Page({
         "owner": app.globalData.nickName,
         "shopName": self.data.shop.shopname,
         "sign": self.data.shop.sign,
-				"prepay": self.data.prepayStatus,
-				"offlinePay": self.data.offlinePayStatus,
-				"weixinPay": self.data.weixinPayStatus,
+		"prepay": self.data.prepayStatus,
+		"offlinePay": self.data.offlinePayStatus,
+		"weixinPay": self.data.weixinPayStatus,
         "payment": self.data.shop.payment,
         "bankName": self.data.shop.bankName,
         "accountNbr": self.data.shop.accountNbr,
