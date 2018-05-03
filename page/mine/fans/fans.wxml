@@ -32,7 +32,7 @@
   <view style='height:5px; background:#f8f8f8;'></view>
   <view bindtap='share' class="top-containerbar">
     <image class='fan-image1' src="/image/add_user.png"></image>
-    <view class='fan-item-name'>添加粉丝</view>
+    <view class='fan-item-name' style='justify-content: center; '><text>添加粉丝</text></view>
   </view>
 
   <!--  split line -->

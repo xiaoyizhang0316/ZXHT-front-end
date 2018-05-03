@@ -34,7 +34,8 @@ Page({
 
   //搜索还没做完
   searchOrder: function (e) {
-    let orderHistoryList = wx.getStorageSync('orderHistoryList');
+	let self = this
+    let orderHistoryList = this.data.orderHistoryList;
     let text = Util.trim(e.detail.value);
     let rows = [];
     for (var key in orderHistoryList) {

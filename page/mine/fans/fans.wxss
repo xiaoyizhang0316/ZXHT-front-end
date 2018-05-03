@@ -170,6 +170,8 @@ page {
   font-size: 30rpx;
   overflow:hidden;
   padding: 20rpx;
+  text-align: center;
+  align-items: center;
 }
 
 .fan-edit{
