@@ -1,44 +1,47 @@
 @import '../../common/common.wxss';
+
 page {
-  background-color: #eff3f4;
+    background-color: #eff3f4;
 }
 
-.header{
+.header {
     position: relative;
     height: 160rpx;
-    width:100%;
+    width: 100%;
     line-height: 100rpx;
-    text-align: center;
-    padding:30rpx 50rpx 30rpx;
-    box-sizing: border-box; 
-     background: linear-gradient(to top left, #696969, white); 
+    /* text-align: center;
+    padding: 30rpx 50rpx 30rpx; */
+    box-sizing: border-box;
+    background: linear-gradient(to top left, #696969, white);
     font-size: 28rpx;
     color: #fff;
     border-radius: 5px;
     flex-direction: row;
     display: flex;
+	align-items: center;
 }
 
-.explain-view{
-  flex-direction: column;
-  display: flex;
-  margin-left: 90rpx;
-}
-.explain-line1{
-   width: 100%;
-  height: 85rpx;
-  /* line-height: 30px; */
-  
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  margin-bottom: 10rpx;
-  font-size: 23rpx;
-  color: white;
+.explain-view {
+	flex:3;
+    flex-direction: column;
+    display: flex;
+	margin: 20rpx 0 ;
+   
 }
 
-.header .thumb{
+.explain-line1 {
+    width: 100%;
+	height: 60rpx;
+    /* line-height: 30px; */
+    
+    display: flex;
+    align-items: center;
+   
+    font-size: 23rpx;
+    color: white;
+}
+
+.header .thumb {
     position: absolute;
     left: 30rpx;
     top: 30rpx;
@@ -46,51 +49,59 @@ page {
     height: 100rpx;
     border-radius: 50%;
 }
-.header .about{
+
+.header .about {
     float: right;
 }
-.header .shoptitle{
-  font-size: 40rpx;
-  margin-left: 20rpx;
+
+.header .shoptitle {
+    font-size: 30rpx;
+    margin-left: 20rpx;
+	flex:9;
+	align-items: center;
+	text-align: center;
+	overflow: hidden;
+ 	white-space: nowrap;
+  	text-overflow: ellipsis;
 }
 
 .explain-line {
-  width: 100%;
-  height: 85rpx;
-  /* line-height: 30px; */
-  background-color: white;
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-top: 3rpx;
-  font-size: 28rpx;
-  color: #696969;
+    width: 100%;
+    height: 85rpx;
+    /* line-height: 30px; */
+    background-color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 3rpx;
+    font-size: 28rpx;
+    color: #696969;
 }
 
 .explain-block {
-  width: 5px;
-  display: flex;
-  margin-left: 10px;
-  flex:1;
+    width: 5px;
+    display: flex;
+    margin-left: 10px;
+    flex: 1;
 }
 
 .explain-text {
-  display: flex;
-  flex:9;
-  justify-content:flex-start;
-  align-items:center;
+    display: flex;
+    flex: 9;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .bottom-contaniner {
-  align-self: flex-start;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 68%;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 68%;
 }
 
 .confirmBtn {
-  width: 90%;
-  margin-top: 27rpx;
+    width: 90%;
+    margin-top: 27rpx;
 }
