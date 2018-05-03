@@ -58,9 +58,16 @@
     </scroll-view>
 	 
         <view class='bottom-bar2'>
+
             <image class='trans-image2'src='../../../../image/atm.png' ></image>
                 
          
+<!-- =======
+            <view class='item-clo4'>
+                <text>申请提现</text>
+				<text>最低100元</text>
+            </view>
+>>>>>>> 9fb17a3124a0f3a01f87b0a1d8a527cdb3d0e5f8 -->
 
             <view class="item-clo5 item-border" >
                 

@@ -20,8 +20,9 @@
            <block wx:if="{{item.orderInfo.orderStatus == 1||item.orderInfo.orderStatus == 2||item.orderInfo.orderStatus == 9}}"> 
             <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
               <view class="item-top">
-                <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
-                <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view>
+			   <view style="padding-left:20rpx;font-size:12px;flex:3.5;color:grey;">订单: {{item.orderInfo.orderSN}}</view>
+                <view style="padding-left:20rpx;font-size:12px;flex:3;color:grey;">{{item.orderInfo.addTime}}</view>
+                <view style="font-size:14px;flex:1.5;">{{item.consignee.name}}</view>
                 <!-- <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
                       <image style="height:20px;width:20px;" src="/image/public/clear.png"></image> 
                   </view> -->
@@ -108,8 +109,9 @@
          <block wx:if="{{(item.orderInfo.orderStatus == 3) || (item.orderInfo.orderStatus == 5)}}"><!-- 待发货 -->
           <view class="explain-line" bindtap="sendOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
             <view class="item-top">
-              <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
-              <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view>
+              <view style="padding-left:20rpx;font-size:12px;flex:3.5;color:grey;">订单: {{item.orderInfo.orderSN}}</view>
+                <view style="padding-left:20rpx;font-size:12px;flex:3;color:grey;">{{item.orderInfo.addTime}}</view>
+                <view style="font-size:14px;flex:1.5;">{{item.consignee.name}}</view>
             </view>
 
             <scroll-view class="order-item-scroll" scroll-x>
@@ -177,8 +179,9 @@
            <block wx:if="{{item.orderInfo.orderStatus == 6||item.orderInfo.orderStatus == 7}}"> 
             <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
               <view class="item-top">
-                <view style="padding-left:20px;font-size:12px;flex:2;color:grey;">{{item.orderInfo.addTime}}</view>
-                <view style="font-size:14px;flex:2;">{{item.consignee.name}}</view>
+                <view style="padding-left:20rpx;font-size:12px;flex:3.5;color:grey;">订单: {{item.orderInfo.orderSN}}</view>
+                <view style="padding-left:20rpx;font-size:12px;flex:3;color:grey;">{{item.orderInfo.addTime}}</view>
+                <view style="font-size:14px;flex:1.5;">{{item.consignee.name}}</view>
                 <!-- <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
                       <image style="height:20px;width:20px;" src="/image/public/clear.png"></image> 
                   </view> -->

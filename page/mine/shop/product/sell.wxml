@@ -88,22 +88,22 @@
         <view class='bottom-price'>
             <view class='bottom-window-price'>
                 <view>
-                    <text>市场价: $</text>
+                    <text>青铜会员: $</text>
                     <input type="digit" bindinput='updatePrice' value="{{selectedProduct.price}}"></input>
                 </view>
                 <view>
-                    <text>青铜价: $</text>
+                    <text>白银会员: $</text>
                     <input type="digit" bindinput='updateVip1Price' value="{{selectedProduct.vip1Price}}"></input>
                 </view>
             </view>
 
             <view class='bottom-window-price'>
                 <view>
-                    <text>白银价: $</text>
+                    <text>黄金会员: $</text>
                     <input type="digit" bindinput='updateVip2Price' value="{{selectedProduct.vip2Price}}"></input>
                 </view>
                 <view>
-                    <text>黄金价: $</text>
+                    <text>钻石会员: $</text>
                     <input type="digit" bindinput='updateVip3Price' value="{{selectedProduct.vip3Price}}"></input>
                 </view>
             </view>

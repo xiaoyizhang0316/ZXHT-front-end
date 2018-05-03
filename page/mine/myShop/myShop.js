@@ -6,6 +6,7 @@ Page({
   data: {
     shopName: null,
     shopSign: null,
+	shopBalance: null,
     WXaddress: null,
     paymentMethod: null,
     thumb: null,
@@ -34,9 +35,11 @@ Page({
     //console.log(url)
     
     COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
+		console.log(myShopInfo)
      self.setData({
        shopName: myShopInfo.shopName,
-       shopSign: myShopInfo.sign
+       shopSign: myShopInfo.sign,
+	   shopBalance: myShopInfo.balance
      })
      
     })

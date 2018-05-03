@@ -1,12 +1,12 @@
 <view class="main">
 
-        <view style='background-color:white;padding:10px;'>
+        <view style='background-color:white;padding:10px;' >
             <view class="header">
                 <text class="shoptitle">{{shopName}}</text>
-                <view class='explain-view'>
+                <view class='explain-view' bindtap='balance'>
                     <view class='explain-line1'>
                         <image style="height:22px;width:22px;margin-bottom:12rpx;" src='../../../image/balance.png'></image>
-                        <view style='margin-left:20rpx;'>余额 ¥200</view>
+                        <view style='margin-left:20rpx;'>￥{{shopBalance}}</view>
                     </view>
 
                     <view class='explain-line1'>
