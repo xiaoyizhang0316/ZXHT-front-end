@@ -1,4 +1,19 @@
 <view class='container'>
+
+<view style="width:100%;background-color:#f8f8f8;flex-direction:column;{{magnify?'display:none':'display:flex'}};">
+    <view style="flex-direction:row;justify-content:space-between;flex:1;display: flex;margin-bottom: 10px;padding-top:10px;">
+        <view class="search-input" style="height:25px;">
+            <view>
+                <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
+            </view>
+            <input focus="{{focus}}" value="{{search}}" placeholder="搜索收件人姓名、手机、订单SN编号和商品" placeholder-class="placeholderstyle" cursor-spacing="50px" confirm-type="search" type="text" bindinput="searchOrder" focus="{{isFocus}}" auto-focus="{{isFocus}}" />
+            <view class="{{displayClear?'':'hidden'}}" bindtap="reset">
+                <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+            </view>
+        </view>
+    </view>
+</view>
+
   <view class="swiper-tab">
     <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
       未支付

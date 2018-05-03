@@ -40,10 +40,12 @@ Page({
     let rows = [];
     for (var key in orderHistoryList) {
       let order = orderHistoryList[key];
+	  
       let name = order.consignee.name;
       let phone = order.consignee.phone;
       let items = order.orderGoods;
-      if (name.search(text) !== -1 || phone.search(text) !== -1) {
+	  let orderSN = order.orderInfo.orderSN;
+      if (name.search(text) !== -1 || phone.search(text) !== -1 || orderSN.search(text) !== -1) {
         rows.push(order);
       } else {
         for (let x in items) {

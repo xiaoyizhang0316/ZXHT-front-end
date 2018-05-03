@@ -4,7 +4,7 @@
             <view>
                 <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
             </view>
-            <input focus="{{focus}}" value="{{search}}" placeholder="搜索收件人姓名、手机、商品" placeholder-class="placeholderstyle" cursor-spacing="50px" confirm-type="search" type="text" bindinput="searchOrder" focus="{{isFocus}}" auto-focus="{{isFocus}}" />
+            <input focus="{{focus}}" value="{{search}}" placeholder="搜索收件人姓名、手机、订单SN编号和商品" placeholder-class="placeholderstyle" cursor-spacing="50px" confirm-type="search" type="text" bindinput="searchOrder" focus="{{isFocus}}" auto-focus="{{isFocus}}" />
             <view class="{{displayClear?'':'hidden'}}" bindtap="reset">
                 <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
             </view>
@@ -19,8 +19,8 @@
       </view>  -->
         <view class="item-top">
             <view style="padding-left:20rpx;font-size:12px;flex:3.5;color:grey;">订单: {{item.orderInfo.orderSN}}</view>
-                <view style="padding-left:20rpx;font-size:12px;flex:3;color:grey;">{{item.orderInfo.addTime}}</view>
-                <view style="font-size:14px;flex:1.5;">{{item.consignee.name}}</view>
+            <view style="padding-left:20rpx;font-size:12px;flex:3;color:grey;">{{item.orderInfo.addTime}}</view>
+            <view style="font-size:14px;flex:1.5;">{{item.consignee.name}}</view>
             <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
                 <image style="height:20px;width:20px;" src="/image/public/clear.png"></image>
             </view>
@@ -125,7 +125,7 @@
           <text>已收货</text>
         </block> -->
             <block wx:elif="{{item.orderInfo.orderStatus == 6}}">
-                 <view class='button2' data-order="{{item.orderInfo.id}}" data-logo="getLogo({{item.orderGoods.productId}})">
+                <view class='button2' data-order="{{item.orderInfo.id}}" data-logo="getLogo({{item.orderGoods.productId}})">
                     <view class='button-red' data-order="{{item.orderInfo.id}}" data-id="{{idx}}">去收货</view>
                 </view>
             </block>
@@ -135,11 +135,11 @@
             <!-- <block wx:else>
           <text>处理中</text>
         </block> -->
-        
 
 
-        <view class='button3' data-order="{{item.orderInfo.id}}" catchtap="placeOrder">再次下单</view>
-</view>
+
+            <view class='button3' data-order="{{item.orderInfo.id}}" catchtap="placeOrder">再次下单</view>
+        </view>
     </view>
 
     <!-- 遮罩层 -->
@@ -174,7 +174,7 @@
             <view class='bottom-window-pay'>
                 <text>需付款</text>
                 <text>${{selectedOrder.orderInfo.totalCost}}</text>
-				<text>约为￥{{selectedOrder.orderInfo.rmb}}</text>
+                <text>约为￥{{selectedOrder.orderInfo.rmb}}</text>
             </view>
 
             <button data-order="{{selectedOrder.orderInfo.id}}" bindtap='payOrder' class='bottom-window-button' type='primary'>确认付款</button>

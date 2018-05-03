@@ -52,26 +52,29 @@ Page({
   },
 
   searchOrder: function (e) {
-    let orderHistoryList = wx.getStorageSync('orderHistoryList');
-    let text = Util.trim(e.detail.value);
-    let rows = [];
-    for (var key in orderHistoryList) {
-      let order = orderHistoryList[key];
-      let name = order.receiver.name;
-      let phone = order.receiver.phone;
-      let items = order.items;
-      if (name.search(text) !== -1 || phone.search(text) !== -1) {
-        rows.push(order);
-      } else {
-        for (let x in items) {
-          if (items[x].title.toUpperCase().search(text.toUpperCase()) !== -1) {
-            rows.push(order);
-            break;
-          }
-        }
-      }
-    }
-    this.setData({ orderHistoryList: rows, displayClear: true });
+	  let self = this
+	  let orderHistoryList = this.data.orderHistoryList;
+	  let text = Util.trim(e.detail.value);
+	  let rows = [];
+	  for (var key in orderHistoryList) {
+		  let order = orderHistoryList[key];
+
+		  let name = order.consignee.name;
+		  let phone = order.consignee.phone;
+		  let items = order.orderGoods;
+		  let orderSN = order.orderInfo.orderSN;
+		  if (name.search(text) !== -1 || phone.search(text) !== -1 || orderSN.search(text) !== -1) {
+			  rows.push(order);
+		  } else {
+			  for (let x in items) {
+				  if (items[x].title.toUpperCase().search(text.toUpperCase()) !== -1) {
+					  rows.push(order);
+					  break;
+				  }
+			  }
+		  }
+	  }
+	  this.setData({ orderHistoryList: rows, displayClear: true });
   },
 
   /**

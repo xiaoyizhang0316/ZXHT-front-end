@@ -38,7 +38,11 @@
     "page/mine/fans/editFans/editFans",
 	"page/mine/helpCenter/helpCenter",
 	"page/mine/shop/product/oneButtonProducts/oneButtonProducts",
-	"page/mine/myShop/balanceManagement/balanceManagement"
+	"page/mine/myShop/balanceManagement/balanceManagement",
+	"page/mine/helpCenter/buyerHelp/buyerHelp",
+	"page/mine/helpCenter/sellerHelp/sellerHelp",
+	"page/mine/helpCenter/contactUs/contactUs",
+	"page/mine/helpCenter/policy/policy"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",

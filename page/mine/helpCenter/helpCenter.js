@@ -52,17 +52,26 @@ Page({
 
 	buyerHelp:function(e)
 	{
-
+		wx.navigateTo({
+			url: '/page/mine/helpCenter/buyerHelp/buyerHelp',
+		})
 	},
 	sellerHelp:function(e){
+		wx.navigateTo({
+			url: '/page/mine/helpCenter/sellerHelp/sellerHelp',
+		})
 
 	},
 	policy:function(e)
 	{
-
+		wx.navigateTo({
+			url: '/page/mine/helpCenter/policy/policy',
+		})
 	},
 	contactUs:function(e)
 	{
-
+		wx.navigateTo({
+			url: '/page/mine/helpCenter/contactUs/contactUs',
+		})
 	},
 })
