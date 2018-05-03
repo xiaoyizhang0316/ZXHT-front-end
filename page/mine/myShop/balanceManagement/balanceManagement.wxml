@@ -30,7 +30,7 @@
         <view class='bottom-bar2'>
             <view class='item-clo4'>
                 <text>申请提现</text>
-				<text>最低100</text>
+				<text>最低100元</text>
             </view>
 
             <view class="item-clo5 item-border" >

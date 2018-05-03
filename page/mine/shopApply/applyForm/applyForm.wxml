@@ -109,7 +109,7 @@
                     </view>
                     <view class='bottom-text'>
                         <block wx:if="{{shop.payment == 1}}">
-                            <text>提现后资金会在2-4个工作日内到达您的账户</text>
+                            <text>提现后资金会在1-3个工作日内到达您的账户</text>
 
                         </block>
                         <block wx:else>

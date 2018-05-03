@@ -6,7 +6,7 @@
                 <view class='explain-view' bindtap='balance'>
                     <view class='explain-line1'>
                         <image style="height:22px;width:22px;margin-bottom:12rpx;" src='../../../image/balance.png'></image>
-                        <view style='margin-left:20rpx;'>余额￥{{shopBalance}}</view>
+                        <view style='margin-left:20rpx;'>￥{{shopBalance}}</view>
                     </view>
 
                     <view class='explain-line1'>

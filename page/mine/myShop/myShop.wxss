@@ -22,7 +22,7 @@ page {
 }
 
 .explain-view {
-	flex:3;
+	flex:3.5;
     flex-direction: column;
     display: flex;
 	margin: 20rpx 0 ;
@@ -57,7 +57,7 @@ page {
 .header .shoptitle {
     font-size: 30rpx;
     margin-left: 20rpx;
-	flex:9;
+	flex:8.5;
 	align-items: center;
 	text-align: center;
 	overflow: hidden;

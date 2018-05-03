@@ -44,14 +44,14 @@ Page({
 		if (b.toString().match(/^[+-]?([0-9]*[.])?[0-9]+$/)) {
 			b = Math.round(b * 100) / 100
 
-			if (b >= 100 && b * 100 < this.data.shop.balance) {
+			if (b >= 100 && (b * 100 < this.data.shop.balance *100)) {
 				let url = COM.load('CON').BALANCE_APPLY;
 				COM.load('NetUtil').netUtil(url, "POST", { "shopId": shopId, "balanceApply": b }, (callback) => {
 					console.log(callback)
 					if (callback.flag == true) {
 						wx.showModal({
 							title: '申请成功',
-							content: '申请已提交，资金会在3-5个工作日内到账',
+							content: '申请已提交，资金会在1-3个工作日内到账',
 							showCancel: false,
 							success: function (res) {
 								if (res.confirm) {

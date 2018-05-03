@@ -96,7 +96,8 @@ Page({
 
 
   clickOrder: function (e) {
-    wx.navigateTo({
+	  
+    wx.redirectTo({
       url: './sell_detail/sell_orderDetail?orderId=' + e.currentTarget.dataset.order,
     })
   },
