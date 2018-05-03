@@ -3,41 +3,54 @@
 
 
     <view class="top-containerbar">
-    <image style='height:32px;width:32px;margin-bottom:15rpx;' src='../../../../image/savings.png'></image>
-       <view class='top-text'> 当前余额 ￥{{shop.balance}}元</view>
+        <image style='height:32px;width:32px;margin-bottom:15rpx;' src='../../../../image/savings.png'></image>
+        <view class='top-text'> 当前余额 ￥{{shop.balance}}元</view>
     </view>
-     <view style='height:3px; background:#f8f8f8;'></view>
+    <view style='height:3px; background:#f8f8f8;'></view>
 
 
 
-    
-   
-   
+
+
+
 
 
 
     <scroll-view class='shop-list' scroll-y="{{true}}" style="height:{{winHeight-88}}px">
-    <view class='each-trans'>
-    <image class='trans-image' src='../../../../image/shop2.png'></image>
-    <view class='shop-des'>
-    <view class='trans-num'>购物-订单号1</view>
-    <view class='trans-date'>2018-05-01 13:05</view>
-    </view>
-    <view class='trans-amount'>+ ¥2000</view>
-    </view>
-  
-  <view class='each-trans'>
-    <image class='trans-image' src='../../../../image/atm.png'></image>
-    <view class='shop-des'>
-    <view class='trans-num'>购物-订单号2</view>
-    <view class='trans-date'>2018-05-01 13:05</view>
-    </view>
-    <view class='trans-amount'>- ¥200</view>
-    </view>
-  
-	
-  
-  <!--<view class="goods-line-list-child goods-line-list-top">
+        <view wx:for="{{shop.balanceList}}" wx:key="{{index}}">
+            <view class='each-trans'>
+                <block wx:if="{{item.state == 1}}">
+                    <image class='trans-image' src='../../../../image/shop2.png'></image>
+                </block>
+                <block wx:else>
+                    <image class='trans-image' src='../../../../image/atm.png'></image>
+                </block>
+               
+                <view class='shop-des'>
+                    <view class='trans-num'>{{item.reason}}</view>
+                    <view class='trans-date'>{{item.addTime}}</view>
+                </view>
+                <view class='trans-amount'>
+                    <block wx:if="{{item.state == 1}}">
+                        +
+                    </block>
+                    <block wx:else>
+                        -
+                    </block> ¥{{item.amount}}</view>
+            </view>
+            <!-- 
+            <view class='each-trans'>
+                <image class='trans-image' src='../../../../image/atm.png'></image>
+                <view class='shop-des'>
+                    <view class='trans-num'>提现</view>
+                    <view class='trans-date'>2018-05-01 13:05</view>
+                </view>
+                <view class='trans-amount'>- ¥200</view>
+            </view> -->
+
+
+
+            <!--<view class="goods-line-list-child goods-line-list-top">
                 <text class='item-clo1'>资金变化</text>
                 <text class='item-clo2'>原因</text>
                 <text class='item-clo3'>时间</text>
@@ -54,41 +67,42 @@
                 <text class='item-clo3'>{{item.addTime}}</text>
             
         </view>
--->	
+-->
+        </view>
     </scroll-view>
-	 
-        <view class='bottom-bar2'>
 
-            <image class='trans-image2'src='../../../../image/atm.png' ></image>
-                
-         
-<!-- =======
+    <view class='bottom-bar2'>
+
+        <image class='trans-image2' src='../../../../image/atm.png'></image>
+
+
+        <!-- =======
             <view class='item-clo4'>
                 <text>申请提现</text>
 				<text>最低100元</text>
             </view>
 >>>>>>> 9fb17a3124a0f3a01f87b0a1d8a527cdb3d0e5f8 -->
 
-            <view class="item-clo5 item-border" >
-                
-                <input placeholder="提现金额不能低于¥100，同时也不能大于当前余额￥{{shop.balance}}元"  name="withdraw_balance" value="" bindinput='balanceChange' style='color:#D3D3D3; font-size:18rpx;' />
-            </view>
-          
+        <view class="item-clo5 item-border">
+
+            <input placeholder="提现金额不低于¥100，不大于当前余额￥{{shop.balance}}" name="withdraw_balance" value="" bindinput='balanceChange' style=' font-size:20rpx;' />
+        </view>
+
 
         <view class="item-clo6">
             <button style='background: linear-gradient(to top right, #DC143C, #FA8072);color:white;font-size:20rpx;width:80%; border-radius: 10rpx;margin-left:15rpx;' bindtap="balance_apply">提现申请</button>
         </view>
-		 </view>
-    
+    </view>
+
 
     <view class='bottom-bar' style='text-align:center'>
-                 <view style='flex:10;'>
-				 <text style='color:#696969;'>小程序仅展示最近10条记录，更多记录请访问电脑版</text>  
-				 </view>
-        	        
-        
+        <view style='flex:10;'>
+            <text style='color:#696969;'>小程序仅展示最近10条记录，更多记录请访问电脑版</text>
+        </view>
+
+
     </view>
-	 
-       
-   
+
+
+
 </view>
