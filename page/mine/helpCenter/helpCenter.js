@@ -15,10 +15,6 @@ Page({
 	onLoad() {
 		var self = this;
 		//如果未授权则不允许进入本页面
-		
-
-
-
 	},
 	onShow() {
 		var self = this;

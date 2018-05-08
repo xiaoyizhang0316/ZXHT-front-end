@@ -1,2 +1,2 @@
 <!--page/mine/helpCenter/policy/policy.wxml-->
-<text>page/mine/helpCenter/policy/policy.wxml</text>
+<web-view src="https://img.zhenxianghaitao.com/help/policy.html"></web-view>

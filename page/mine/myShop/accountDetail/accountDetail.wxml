@@ -54,6 +54,20 @@
                 </view>
                 <switch class='switch2' bindchange='showModal' checked="{{weixinPayStatus}}" disabled></switch>
             </view>
+			<view>
+                    <view>
+                        <text>微信支付方式已确定, 更改请联系系统管理员</text>
+                    </view>
+                    <view class='bottom-text'>
+                        <block wx:if="{{shop.payment == 1}}">
+                            <text>提现后资金会在2-4个工作日内到达您的账户</text>
+
+                        </block>
+                        <block wx:else>
+                            <text class='bottom-text'>Please contact our admin via wechat account to complete related documents. After 3-5 business days of application, wechat payment will be automatically enabled.</text>
+                        </block>
+                    </view>
+                </view>
             <view class="commodity_attr_box bottom-window" wx:if="{{showModalStatus || weixinPayStatus}}">
                 <view class="top-input-box flex-col">
                     <text class='pay-text'>支付方式</text>
@@ -103,20 +117,7 @@
                         <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" disabled/>
                     </block>
                 </view>
-				<view>
-                    <view>
-                        <text>收款方式已确定, 更改请联系系统管理员</text>
-                    </view>
-                    <view class='bottom-text'>
-                        <block wx:if="{{shop.payment == 1}}">
-                            <text>提现后资金会在2-4个工作日内到达您的账户</text>
-
-                        </block>
-                        <block wx:else>
-                            <text class='bottom-text'>Please contact our admin via wechat account to complete related documents. After 3-5 business days of application, wechat payment will be automatically enabled.</text>
-                        </block>
-                    </view>
-                </view>
+				
             </view>
         </view>
 

@@ -1,2 +1,2 @@
 <!--page/mine/helpCenter/sellerHelp/sellerHelp.wxml-->
-<text>page/mine/helpCenter/sellerHelp/sellerHelp.wxml</text>
+<web-view src="https://img.zhenxianghaitao.com/help/sellerHelp.html"></web-view>
