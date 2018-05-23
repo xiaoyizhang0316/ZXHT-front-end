@@ -42,12 +42,12 @@
                 <text class="cart-toatl-msg-front">总计:</text>
                 <text class="cart-toatl-price">${{totalPrice}}</text>
                 <text class="cart-toatl-msg-behind">(不含运费)</text>
-                <text class='cart-step'>下一步</text>
+                <!-- <text class='cart-step'>下一步</text> -->
             </view>
 
             <view class="order-icon">
 
-                <image src="/image/right-arrow.png"></image>
+                <image src="/image/next.png"></image>
                 <!-- <navigator url="/page/mine/orders/orders"></navigator> -->
             </view>
         </view>
