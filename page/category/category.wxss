@@ -1,3 +1,4 @@
+
 @import '../common/common.wxss';
 
 page,.main{
@@ -106,11 +107,16 @@ page,.main{
     height: 30rpx;
     line-height: 30rpx;
     padding:30rpx 0 0rpx;
-    text-align: center;
-    color: #AB956D;
-    font-size: 30rpx;
+   color: #9F000F;
+    font-size: 32rpx;
+    font: Microsoft YaHeif;
+    font-weight: bold;
+ text-align: center;
+   
 }
-.cate-title::before{
+
+
+/* .cate-title::before{
     position: absolute;
     left: 130rpx;
     top: 43rpx;
@@ -127,7 +133,7 @@ page,.main{
     width: 70rpx;
     height: 4rpx;
     background: #AB956D;
-}
+} */
 
 .cate-box .product {
   display: flex;
@@ -148,9 +154,10 @@ page,.main{
 }
 
 .sub-cate-title {
-  font-size: 30rpx;
+  font-size: 28rpx;
   font-weight: 500;
   font-family: Microsoft YaHei;
+  color: #696969;
 }
 
 .sub-cate-title-be {
@@ -158,8 +165,8 @@ page,.main{
   align-self: center;
   font-size: 45rpx;
   width:70rpx;
-  font-weight: 600;
-  color:#ddd;
+  font-weight: 400;
+  color:#696969;
 }
 
 .product-list{
@@ -203,7 +210,7 @@ color:#3D383C;
 
 .goods-price {
   width: 100%;
-  font-size: 21rpx;
+  font-size: 19rpx;
   padding-left: 8rpx;
   display:flex;
   flex-direction: row;

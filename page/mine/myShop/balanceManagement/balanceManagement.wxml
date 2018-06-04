@@ -1,4 +1,4 @@
-dja;<!--page/mine/shopSwitch/shopSwitch.wxml-->
+<!--page/mine/shopSwitch/shopSwitch.wxml-->
 <view class='container'>
 
 
@@ -90,7 +90,7 @@ dja;<!--page/mine/shopSwitch/shopSwitch.wxml-->
 
 
         <view class="item-clo6">
-            <button style='background: linear-gradient(to top right, #DC143C, #FA8072);color:white;font-size:20rpx;width:80%; border-radius: 10rpx;margin-left:15rpx;' bindtap="balance_apply">提现申请</button>
+            <button style=' background: linear-gradient(to top right, #9F000F, #FA8072);font-size:20rpx;width:80%; border-radius: 10rpx;margin-left:15rpx;color:white;' bindtap="balance_apply">提现申请</button>
         </view>
     </view>
 

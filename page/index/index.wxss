@@ -196,9 +196,11 @@ justify-content:center;
 }
 
 .on {
-  color: #A9A9A9;
+  color: #9F000F;
   font-weight: bolder;
-  border-bottom: 5rpx solid #A9A9A9;
+  border-bottom: 5rpx solid #9F000F;
+   opacity: 0.7;
+  font: Microsoft YaHeif;
 }
 
 .swiper-box {

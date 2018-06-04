@@ -89,7 +89,7 @@
     margin-bottom: 40rpx;
     box-sizing: border-box;
     border-radius: 50rpx;
-    background: #C70039;
+    background: linear-gradient(to top right, #9F000F, #FA8072);
     color: #fff;
     font-size: 28rpx;
     opacity: 0.85;
