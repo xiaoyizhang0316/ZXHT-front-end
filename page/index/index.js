@@ -197,9 +197,7 @@ Page({
 			url: '/page/index/search/search'
 		})
 	}
-	self.setData({
-		focus: true
-	})
+	
 	},
 
 	resetSearch: function (e) {

@@ -1,6 +1,6 @@
 /***** goodsList-block start*****/
 .goods-contaniner {
-  background-color: #f6f6f6; 
+ 
   width: 100%;
   border-top: 1px #e3e3e3 solid; 
   display: flex;
@@ -19,7 +19,7 @@
   align-items: center;
   flex-direction: column;
   flex: 0 0 50%;
-  background-color: #f6f6f6;
+ 
 }
 
 .goods-image{
