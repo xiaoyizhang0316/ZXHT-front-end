@@ -39,7 +39,7 @@
       <view class='order-item-desc'>
         <text>共{{item.orderGoods.length}}种商品</text>
         <text class='middle-tip'>实付款:</text>
-        <text class='order-price'>${{item.orderInfo.totalCost}}</text>
+        <text class='order-price'>￥{{item.orderInfo.totalCost}}</text>
       </view>
       <!-- <view style="margin-right:20rpx;display:flex;border:1px solid #e64949;background-color:#e64949;color:#fff;padding:4px;font-size:15px;border-radius:3px;" data-order="{{item.orderId}}" data-logo="{{item.logo}}" catchtap="placeOrder">
           再次下单
@@ -95,7 +95,7 @@
 
       <view class='bottom-window-pay'>
         <text>需付款</text>
-        <text>${{selectedOrder.orderInfo.totalCost}}</text>
+        <text>￥{{selectedOrder.orderInfo.totalCost}}</text>
       </view>
 
       <button data-order="{{selectedOrder.orderInfo.id}}" bindtap='payOrder' class='bottom-window-button' type='primary'>确认付款</button>

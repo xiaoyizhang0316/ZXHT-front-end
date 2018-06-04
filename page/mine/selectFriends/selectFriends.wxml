@@ -1,0 +1,40 @@
+<!--page/mine/selectFriends/selectFriends.wxml-->
+<!--page/mine/transferOrder/transferOrder.wxml-->
+
+<scroll-view scroll-y="true" style="height:{{winHeight-50}}px">
+    <view class='contain'>
+        <view style="display:flex;flex-direction:column;flex:10;">
+            <view class="inner-explain-line">
+                <view class="explain-text" style="padding-left:9px">转发订单编号</view>
+                <view class="explain-value" style="margin-right:5px">{{transferOrder.orderSN}}</view>
+
+            </view>
+            <view style="display:flex;">
+                <view class="explain-text" style="padding-left:9px">订单日期</view>
+                <view class="explain-value" style="align-items:center;">{{transferOrder.addTime}}</view>
+            </view>
+        </view>
+    </view>
+   
+
+    <block wx:key="idx" wx:for-index="idx" wx:for="{{transferOrderGoods}}">
+        <view class="explain-line order-cate">
+            <view class="order-cate-image">
+                <image src="{{item.image}}"></image>
+            </view>
+            <view class="order-cate-desc">
+                <view class="order-cate-title">
+                    <text>{{item.title}}</text>
+                </view>
+                <view class="order-cate-num">
+                    <text>数量:{{item.num}}</text>
+                </view>
+            </view>
+        </view>        
+    </block>
+</scroll-view>
+
+<view class="footer">
+<!-- <button class="btn-confirm-1" open-type="share">委托好友</button> -->
+        <button  class='button-red' open-type="share">选择好友</button>
+</view>

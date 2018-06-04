@@ -26,6 +26,8 @@ Page({
 	shippingCost: 0,
 	payment: null,
 	shipFulls: [],
+	totalCost: 0,
+	sellShopId: null,
   },
 
   /**
@@ -60,11 +62,13 @@ Page({
       order: order[0],
       orderId: options.orderId,
       orderTime: order[0].orderInfo.addTime,
-      merchant: order[0].orderInfo.shopId,
+      
+	  sellShopId: order[0].orderInfo.shopId,
       // service: order.orderInfo.service,
       // sender: order[0].sender,
       items: order[0].orderGoods,
-      totalPrice: order[0].orderInfo.goodsCost,
+      totalPrice: order[0].orderInfo.totalCost,
+
       totalQuantity: numofGoods,
       // totalWeight: order[0].totalWeight,
       receiver: order[0].consignee,
@@ -202,7 +206,7 @@ Page({
       shipdetail.orderId = self.data.orderId
       shipdetail.agentId = e.detail.value["agentId[" + i + "]"]
       shipdetail.receiptNumber = e.detail.value["receiptNumber[" + i + "]"]
-      shipdetail.senderId = app.globalData.openId
+      shipdetail.senderId = self.data.sellShopId
       shipdetail.shippingCost = e.detail.value["shipFee[" + i + "]"]
 			let checkRes = self.checkShipDetail(shipdetail)
 			if(!checkRes.flag)

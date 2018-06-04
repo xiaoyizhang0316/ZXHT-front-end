@@ -33,19 +33,19 @@
         </view>
         <view class="inner-explain-line" style="padding-top:0px;">
             <view class="explain-text">商品价格</view>
-            <view class="explain-value">${{totalGoodsPrice}}</view>
+            <view class="explain-value">￥{{totalGoodsPrice}}</view>
         </view>
         <view class="inner-explain-line" style="padding-top:0px;">
             <view class="explain-text">邮费</view>
-            <view class="explain-value">${{shippingCost}}</view>
+            <view class="explain-value">￥{{shippingCost}}</view>
         </view>
         <view class="inner-explain-line" style="padding-top:0px;">
             <view class="explain-text">折扣</view>
-            <view class="explain-value">${{discount}}</view>
+            <view class="explain-value">￥{{discount}}</view>
         </view>
         <view class="inner-explain-line" style="padding-top:0px;">
             <view class="explain-text">实际支付</view>
-            <view class="explain-value">${{finalPayment}}</view>
+            <view class="explain-value">￥{{finalPayment}}</view>
         </view>
     </view>
     <block wx:if="{{order.orderInfo.orderStatus == 5 || order.orderInfo.orderStatus == 6 || order.orderInfo.orderStatus == 7}}">
@@ -149,7 +149,7 @@
                     <text>数量:{{item.num}}</text>
                 </view>
                 <view class="order-cate-price">
-                    <text>${{item.price}}</text>
+                    <text>￥{{item.price}}</text>
                     <button size='mini' bindtap="addToCart" data-id="{{idx}}">加购物车</button>
                 </view>
             </view>
@@ -178,7 +178,7 @@
     <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;flex-direction: column">
         <view class="inner-explain-line" style="dispaly:flex;justify-content:space-between;">
             <text class="price">商品总计</text>
-            <text class="price">${{totalGoodsPrice}}</text>
+            <text class="price">￥{{totalGoodsPrice}}</text>
             <!-- <view class="explain-value" style="flex:1">
       {{totalQuantity}}件
     </view>
@@ -191,15 +191,15 @@
         <block wx:if="{{orderConfirmed}}">
             <view class="inner-explain-line" style="dispaly:flex;justify-content:space-between;">
                 <text class="price"> 店铺优惠</text>
-                <text class="price">- ${{discount}}</text>
+                <text class="price">- ￥{{discount}}</text>
             </view>
             <view class="inner-explain-line" style="dispaly:flex;justify-content:space-between;">
                 <text class="price">运费(快递)</text>
-                <text class="price">${{postalFee}}</text>
+                <text class="price">￥{{postalFee}}</text>
             </view>
             <view class="inner-explain-line" style="dispaly:flex;justify-content:space-between;">
                 <text class="totalPrice">订单总价</text>
-                <text class="totalPrice">${{totalPrice}}</text>
+                <text class="totalPrice">￥{{totalPrice}}</text>
             </view>
         </block>
     </view>

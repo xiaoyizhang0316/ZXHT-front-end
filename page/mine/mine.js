@@ -11,62 +11,10 @@ Page({
 		address: {},
 		touched: [],
 		openShopButton: false,
+		showModal:false,
 	},
 	onLoad() {
-		var self = this;
-		//如果未授权则不允许进入本页面
-		if (app.globalData.nickName == null) {
-			wx.showModal({
-				title: '未登录',
-				content: '您未授权登录本系统，请在下个页面允许真享海淘访问您的信息，否则无法开店。如果不允许, 如需开店请退出小程序，删掉小程序后，搜索本程序重新加载才能开店。',
-				success: function (res) {
-					if (res.confirm) {
-						console.log('用户点击确定')
-						wx.openSetting({
-							success: function (data) {
-								console.log(data)
-								if (data) {
-									if (data.authSetting["scope.userInfo"] == true) {
-
-										wx.getUserInfo({
-											withCredentials: false,
-											success: function (res) {
-												//处理获得的用户信息
-
-												console.info(res.userInfo);
-												app.globalData.nickName = res.userInfo.nickName
-												app.globalData.avatarUrl = res.userInfo.avatarUrl
-												wx.setStorage({
-													key: 'nickname',
-													data: app.globalData.nickName
-												})
-												wx.setStorage({
-													key: 'avatarUrl',
-													data: app.globalData.avatarUrl
-												})
-												self.saveOrUserData(res.userInfo)
-
-											},
-											fail: function () {
-												app.globalData.nickName = "未登录用户"
-
-											}
-										});
-
-									}
-								}
-							}
-						})
-					} else if (res.cancel) {
-						console.log('用户点击取消')
-						wx.navigateBack({
-							delta: -1
-						})
-					}
-				}
-			})
-
-		}
+		
 
 
 
@@ -150,20 +98,73 @@ Page({
 	},
 
 	openShop: function (event) {
+		var self = this;
+		//如果未授权则不允许进入本页面
 		console.log(app.globalData)
-		if (app.globalData.nickName == "未登录用户" || app.globalData.nickName == null)
-		{	
-			wx.showToast({
-				title: '未登录不能开店',
-				icon: 'loading',
-				duration: 2000
-			})
-		}else{
+		if (app.globalData.nickName == "未登录用户" || app.globalData.nickName == null) {
+			self.setData({showModal : true})
+			
+
+		} else {
 			wx.navigateTo({
 				url: '/page/mine/shopApply/shopApply'
 			})
 		}
 		
+		
+	},
+	onCancel: function () {
+		this.hideModal();
+		wx.showToast({
+			title: '未登录不能开店',
+			icon: 'loading',
+			duration: 2000
+		})
+	},
+	/**
+	 * 对话框确认按钮点击事件
+	 */
+	onConfirm: function (e) {
+		let self = this
+
+		//储存用户信息
+		console.log("********************")
+		app.globalData.nickName = e.detail.userInfo.nickName
+		app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
+		wx.setStorage({
+			key: 'nickname',
+			data: app.globalData.nickName
+		})
+		wx.setStorage({
+			key: 'avatarUrl',
+			data: app.globalData.avatarUrl
+		})
+
+		self.saveOrUserData(e.detail.userInfo)
+	},
+	//用户登录后把用户储存在user表里, 把用户是否注册状态存入缓存
+	saveOrUserData: function (userInfo) {
+
+		var self = this
+		let url = COM.load('CON').CREATE_OR_UPDATE_USER;
+		COM.load('NetUtil').netUtil(url, "POST", { "open_id": app.globalData.openId, "name": userInfo.nickName, "avatarUrl": userInfo.avatarUrl, "country": userInfo.country, "province": userInfo.province, "city": userInfo.city }, (callback) => {
+			app.globalData.userId = callback;
+			wx.setStorage({
+				key: 'userId',
+				data: callback,
+				success: function(res)
+				{
+					wx.navigateTo({
+						url: '/page/mine/shopApply/shopApply'
+					})
+				}
+			})
+		})
+	},
+	//如果点了确定
+	onBindTap(e) {
+		let self = this	
+		this.hideModal();
 	},
 
 	product: function (event) {
@@ -209,20 +210,12 @@ Page({
 		})
 	},
 
-	//用户登录后把用户储存在user表里, 把用户是否注册状态存入缓存
-	saveOrUserData: function (userInfo) {
-		var self = this
+	hideModal: function () {
+		this.setData({
+			showModal: false
+		});
 
-		//let url = "https://a5f93900.ngrok.io/api/mall/users/saveOrUpdateUserData"
-		let url = COM.load('CON').CREATE_OR_UPDATE_USER;
-		COM.load('NetUtil').netUtil(url, "POST", { "open_id": app.globalData.openId, "name": userInfo.nickName, "avatarUrl": userInfo.avatarUrl, "country": userInfo.country, "province": userInfo.province, "city": userInfo.city }, (callback) => {
 
-			wx.setStorage({
-				key: 'userId',
-				data: callback,
-			})
-		})
-		self.onShow()
 	},
 
 })

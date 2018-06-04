@@ -1,6 +1,7 @@
 //url相关
-const BASE_URL = "https://mini.zhenxianghaitao.com"
-//const BASE_URL = "https://362ad0d7.ngrok.io"
+//const BASE_URL = "https://mini.zhenxianghaitao.com"
+
+const BASE_URL = "https://9f9b229a.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/mini/"
 const IMG_DETAIL_BASE = "https://img.zhenxianghaitao.com/"
 //登录 初始设置
@@ -69,9 +70,17 @@ const CONFRIM_ORDER_URL = BASE_URL + "/api/mall/orders/confirmOrder"
 const PAY_ORDER_URL = BASE_URL + "/api/mall/orders/payOrder/"
 const REORDER_URL = BASE_URL + "/api/mall/orders/reorder"
 const RECEIVE_ORDER_URL = BASE_URL + "/api/mall/orders/receiveOrder/"
-
+const GET_CURRENT_ORDERGOOD_PRICE = BASE_URL +"/api/mall/orders/getCurrentOrderGoodPrice"
 //发货单
 const SAVE_SHIPORDER = BASE_URL + "/api/mall/orders/saveShipOrder"
+
+//转发订单
+const TRANSFER_ORDER = BASE_URL + "/api/mall/orders/transferOrder"
+const GET_TRANSFER_ORDER = BASE_URL + "/api/mall/orders/getTransferOrder"
+const APPLY_TRANSFER_ORDER = BASE_URL + "/api/mall/orders/applyTransferOrder"
+const ACCEPT_TRANSFER_ORDER = BASE_URL + "/api/mall/orders/acceptTransferOrder/"
+const DECLINE_TRANSFER_ORDER = BASE_URL + "/api/mall/orders/declineTransferOrder/"
+
 
 //功能性
 const UPLOADFILE = BASE_URL + "/api/mall/test/uploadFile"
@@ -128,6 +137,12 @@ module.exports = {
   ONE_BUTTON_PRODUCTS: ONE_BUTTON_PRODUCTS,
   IMG_DETAIL_BASE : IMG_DETAIL_BASE,
   BALANCE_APPLY: BALANCE_APPLY,
-  GET_SHOP_BALANCE: GET_SHOP_BALANCE
+  GET_SHOP_BALANCE: GET_SHOP_BALANCE,
+  TRANSFER_ORDER: TRANSFER_ORDER,
+  GET_TRANSFER_ORDER: GET_TRANSFER_ORDER,
+  APPLY_TRANSFER_ORDER: APPLY_TRANSFER_ORDER,
+  ACCEPT_TRANSFER_ORDER: ACCEPT_TRANSFER_ORDER,
+  DECLINE_TRANSFER_ORDER: DECLINE_TRANSFER_ORDER,
+  GET_CURRENT_ORDERGOOD_PRICE: GET_CURRENT_ORDERGOOD_PRICE
    
 }

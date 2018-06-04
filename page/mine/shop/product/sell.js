@@ -16,6 +16,7 @@ Page({
     selectedProduct: Object,
     isRecommandChecked: false,
     isHotChecked: false,
+	isDiscount: false,
     selectedIndex: 0,
     tmp: { 'price': '', 'vipPrice': '' },
     memo: '',
@@ -64,7 +65,8 @@ Page({
 							"vip1Price": shopProduct.vip1Price,
 							"vip2Price": shopProduct.vip2Price,
 							"vip3Price": shopProduct.vip3Price,
-						
+							"discountPrice": shopProduct.discountPrice,
+
 							"stock": shopProduct.stock,
 							"thumb": COM.load('Util').image(shopProduct.barcode),							
 							"openId": shopOpenId,
@@ -73,6 +75,7 @@ Page({
 							"recommend": shopProduct.recommend,
 							"hot": shopProduct.hot,
 							"hotSale": shopProduct.hotSale,
+							"discount": shopProduct.discount,
 							"id" : shopProduct.redis_id
 						})
 				}
@@ -224,7 +227,8 @@ Page({
       showModalStatus: true,
       selectedProduct: this.data.goodsMap.get(e.currentTarget.dataset.id),
       isRecommandChecked: this.data.goodsMap.get(e.currentTarget.dataset.id).recommend,
-      isHotChecked: this.data.goodsMap.get(e.currentTarget.dataset.id).hot
+      isHotChecked: this.data.goodsMap.get(e.currentTarget.dataset.id).hot,
+	  isDiscount: this.data.goodsMap.get(e.currentTarget.dataset.id).discount
     })
     setTimeout(function () {
       animation.translateY(0).step()
@@ -260,11 +264,18 @@ Page({
       'selectedProduct.recommend': e.detail.value
     })
   },
+
+  addDiscount: function (e) {
+	  this.setData({
+		  'selectedProduct.discount': e.detail.value
+	  })
+  },
   addHot: function (e) {
     this.setData({
       'selectedProduct.hot': e.detail.value
     })
   },
+
 
   increaseStock: function (e) {
     let stock = e.currentTarget.dataset.stock;
@@ -288,33 +299,39 @@ Page({
   },
 
   updatePrice: function (e) {
-    let price = e.detail.value;
+	  let price = parseFloat(e.detail.value);
     if (price > 0.1) {
-      this.setData({ 'tmp.price': price });
+		this.setData({ 'selectedProduct.price': price });
     }
   },
 
   updateVip1Price: function (e) {
-    let price = e.detail.value;
+	  let price = parseFloat(e.detail.value);
     if (price > 0.1) {
-      this.setData({ 'tmp.vip1Price': price });
+		this.setData({ 'selectedProduct.vip1Price': price });
     }
   },
 
   updateVip2Price: function (e) {
-    let price = e.detail.value;
+	  let price = parseFloat(e.detail.value);
     if (price > 0.1) {
-      this.setData({ 'tmp.vip2Price': price });
+		this.setData({ 'selectedProduct.vip2Price': price });
     }
   },
 
   updateVip3Price: function (e) {
-    let price = e.detail.value;
+	  let price = parseFloat(e.detail.value);
     if (price > 0.1) {
-      this.setData({ 'tmp.vip3Price': price });
+		this.setData({ 'selectedProduct.vip3Price': price });
     }
   },
-
+  updateDiscountPrice: function (e) {
+	 
+	  let price = parseFloat(e.detail.value);
+	  if (price > 0.1) {
+		  this.setData({ 'selectedProduct.discountPrice': price });
+	  }
+  },
   updateHotSale: function (e) {
     let quantity = e.detail.value;
     if (quantity > 0) {

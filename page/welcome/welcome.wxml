@@ -3,12 +3,25 @@
 </image> -->
 
 
-<swiper indicator-dots="true"autoplay="true" interval="3000" duration="600" style="width:100%;height:100%;">
- <swiper-item>
- <image src="https://img.zhenxianghaitao.com/siteImages/openImg1.png" style="width:100%;height:100%;"/> 
- </swiper-item>
- <swiper-item>
- <image src="https://img.zhenxianghaitao.com/siteImages/openImg3.png" style="width:100%;height:100%;"/> 
- </swiper-item>
- 
+<swiper indicator-dots="true" autoplay="true" interval="3000" duration="600" style="width:100%;height:100%;">
+    <swiper-item>
+        <image src="https://img.zhenxianghaitao.com/siteImages/openImg1.png" style="width:100%;height:100%;" />
+    </swiper-item>
+    <swiper-item>
+        <image src="https://img.zhenxianghaitao.com/siteImages/openImg3.png" style="width:100%;height:100%;" />
+    </swiper-item>
 </swiper>
+
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-content">
+        <text class="privacyText">是否允许真享海淘访问您的个人信息?</text>
+    </view>
+    <view class="modal-footer">
+	<button open-type="getUserInfo" class="btn-confirm" lang="zh_CN" bindgetuserinfo="onConfirm" bindtap='onBindTap'>允许</button>
+        <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+        <!-- <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> -->
+		<!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+		
+    </view>
+</view>

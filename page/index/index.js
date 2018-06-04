@@ -12,6 +12,7 @@ Page({
 		hasMoreData: true,
 		goodsList: {},
 		hotList: {},
+		discountList:{},
 		shop: [],
 		imgUrls: [
 		
@@ -31,6 +32,7 @@ Page({
 		shopImg:"",
 		userName:"",
 		rate: 5,
+		currentTab: 0,
 
 	},
 
@@ -40,9 +42,6 @@ Page({
 
 
 	onShow: function () {
-
-
-
 		var self = this;
 		self.loadRecommendedProducts();
 
@@ -93,8 +92,21 @@ Page({
 		})
 	
 	},
+	bindChange: function (e) {
 
-
+		var that = this;
+		that.setData({ currentTab: e.detail.current });
+	},
+	swichNav: function (e) {
+		var that = this;
+		if (this.data.currentTab == e.target.dataset.current) {
+			return false;
+		} else {
+			that.setData({
+				currentTab: e.target.dataset.current
+			})
+		}
+	},
   /**
    * load the recomemded products by the shop id
    */
@@ -118,7 +130,7 @@ Page({
 					"id": shopProduct.id,
 					"title": shopProduct.title,
 					"price": shopProduct.basePrice,
-					"vipPrice": shopProduct.vipPrice,
+					"vipPrice": shopProduct.discountPrice && shopProduct.discount? shopProduct.discountPrice : shopProduct.vipPrice,
 					"sales": shopProduct.sales,
 					"thumb": COM.load('Util').image(shopProduct.barcode),					
 				}
@@ -128,16 +140,28 @@ Page({
 					"id": shopProduct.id,
 					"title": shopProduct.title,
 					"price": shopProduct.basePrice,
-					"vipPrice": shopProduct.vipPrice,
+					"vipPrice": shopProduct.discountPrice && shopProduct.discount ? shopProduct.discountPrice : shopProduct.vipPrice,
 					"sales": shopProduct.sales,
 					"thumb": COM.load('Util').image(shopProduct.barcode),		
+				}
+			}
+			if (shopProduct.stock >= 0 && shopProduct.discountPrice >= 0 && shopProduct.discount) {
+				self.data.discountList[shopProduct.id] = {
+					"id": shopProduct.id,
+					"title": shopProduct.title,
+					"price": shopProduct.basePrice,
+					"vipPrice": shopProduct.discountPrice ? shopProduct.discountPrice : shopProduct.vipPrice,
+					"sales": shopProduct.sales,
+					"thumb": COM.load('Util').image(shopProduct.barcode),
 				}
 			}
 		}
 		self.setData({
 			goodsList: self.data.goodsList,
-			hotList: self.data.hotList
+			hotList: self.data.hotList,
+			discountList: self.data.discountList
 		})
+		
 		wx.setStorage({
 			key: 'shopProductIds',
 			data: shopProductIds,
@@ -145,6 +169,7 @@ Page({
 
 		console.log(self.data.goodsList)
 		console.log(self.data.hotList)
+		console.log(self.data.discountList)
 		
 	},
 
@@ -312,5 +337,39 @@ Page({
 
 		})
 	
-	}
+	},
+	onConfirm: function (e) {
+		let self = this
+		
+		
+		//储存用户信息
+		console.log("********************")
+		app.globalData.nickName = e.detail.userInfo.nickName
+		app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
+		wx.setStorage({
+			key: 'nickname',
+			data: app.globalData.nickName
+		})
+		wx.setStorage({
+			key: 'avatarUrl',
+			data: app.globalData.avatarUrl
+		})
+
+		self.saveOrUserData(e.detail.userInfo)
+	},
+	saveOrUserData: function (userInfo) {
+
+		var self = this
+		let url = COM.load('CON').CREATE_OR_UPDATE_USER;
+		COM.load('NetUtil').netUtil(url, "POST", { "open_id": app.globalData.openId, "name": userInfo.nickName, "avatarUrl": userInfo.avatarUrl, "country": userInfo.country, "province": userInfo.province, "city": userInfo.city }, (callback) => {
+			app.globalData.userId = callback;
+			wx.setStorage({
+				key: 'userId',
+				data: callback,
+			})
+		})
+	},
+
+
 })
+

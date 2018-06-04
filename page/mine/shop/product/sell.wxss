@@ -292,7 +292,7 @@
 .bottom-window-RecommandNHot view>input{
   margin-right: 30rpx;
   margin-left: 30rpx;
-  width:50rpx;
+  width:100rpx;
   border: 1px solid #e6e6e6;
   align-items: center;
 }

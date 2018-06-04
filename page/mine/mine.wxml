@@ -104,3 +104,18 @@
     </view>
 
 </view>
+
+
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-content">
+       未登录用户不能开店,是否登录?
+    </view>
+    <view class="modal-footer">
+		<button open-type="getUserInfo" class="btn-confirm" lang="zh_CN" bindgetuserinfo="onConfirm" bindtap='onBindTap'>登录</button>
+        <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+        <!-- <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> -->
+		<!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+	
+    </view>
+</view>

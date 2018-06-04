@@ -36,7 +36,7 @@
 
         <view class="inner-explain-line">
             <view class="explain-text">本单发货费用(仅作为记录，不影响订单，不展示给用户)</view>
-            <text class="explain-text" style='margin-right:0px'>$</text>
+            <text class="explain-text" style='margin-right:0px'>￥</text>
             <input class='explain-text' placeholder='发货的费用' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="text" font-size="12px" name="shipFee[{{id}}]" value="0"></input>
         </view>
 
@@ -66,13 +66,18 @@
                 </view>
                 <view style="display:flex;">
                     <view class="explain-text" style="padding-left:9px">支付邮费</view>
-                    <text class="explain-text" style='margin-right:0px'>$</text>
+                    <text class="explain-text" style='margin-right:0px'>￥</text>
                     <view class="explain-value" style="align-items:center;">{{shippingCost}}</view>
                 </view>
                 <view style="display:flex;">
                     <view class="explain-text" style="padding-left:9px">最终支付(线下支付此处为0)</view>
-                    <text class="explain-text" style='margin-right:0px'>$</text>
+                    <text class="explain-text" style='margin-right:0px'>￥</text>
                     <view class="explain-value" style="align-items:center;">{{finalPayment}}</view>
+                </view>
+				<view style="display:flex;">
+                    <view class="explain-text" style="padding-left:9px">总价</view>
+                    <text class="explain-text" style='margin-right:0px'>￥</text>
+                    <view class="explain-value" style="align-items:center;">{{totalPrice}}</view>
                 </view>
 
             </view>
@@ -175,7 +180,7 @@
                         <text>数量:{{item.num}}</text>
                     </view>
                     <view class="order-cate-price">
-                        <text>${{item.price}}</text>
+                        <text>￥{{item.price}}</text>
                     </view>
                 </view>
             </view>

@@ -17,6 +17,18 @@
                 <text>店铺签名</text>
                 <input placeholder="请输入店铺签名" bindinput="bindSign" name="sign" value="{{shop.sign}}" />
             </view>
+			 <view class="top-input-box flex-col">
+                <view class="pay-method">
+                    <text>店铺汇率</text>
+                    <view class='bottom-text'>
+                        <text>店铺商品管理使用澳元,展示使用RMB</text>
+                    </view>
+                    
+
+                </view>
+			<input style="flex:6" placeholder="请输入店铺汇率" bindinput="bindRate" name="rate" value="{{shop.rate}}"/>
+
+            </view>
 
             <view class="top-header">
                 <text>支付方式设置</text>

@@ -1,52 +1,52 @@
 <import src="/page/common/templates/goodsList/goodsList-block/goodsList-block.wxml" />
 <import src="/page/common/templates/goodsList/hotList-block/hotList-block.wxml" />
-<scroll-view scroll-y="true" style="height:{{winHeight}}px">
-  <!-- <view class='main'> -->
+<!-- <scroll-view scroll-y="true" style="height:{{winHeight}}px"> -->
+<!-- <view class='main'> -->
 
-  <view class="search-box">
-     
+<view class="search-box">
+
     <swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true" stlye="z-index:-1;">
-      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
-        <swiper-item>
-          <image src="{{item}}" class="slide-image" width="100%" />
-        </swiper-item>
-      </block>
+        <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+            <swiper-item>
+                <image src="{{item}}" class="slide-image" width="100%" />
+            </swiper-item>
+        </block>
     </swiper>
 
- <view class="main-profile">
-          <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
-      <view style="width:80%;">   
-      <!-- <text id="name">{{userName}}</text>
+    <view class="main-profile">
+        <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
+        <view style="width:80%;">
+            <!-- <text id="name">{{userName}}</text>
       <view style="height:20rpx;">
       </view> -->
-      <text id="sign">{{sign}}</text>
-      </view>
+            <text id="sign">{{sign}}</text>
+        </view>
     </view>
 
 
     <view class="search-input">
-      <view style="display:flex;flex:1;">
-        <view>
-          <image style="height:21px;width:21px;margin-top:7rpx; margin-left:10rpx;" src="/image/public/find.png"></image>
-          
-        </view>
-        <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindfocus="bindSearch" />
-      </view>
-      <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
-        <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
-      </view>
-      <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
-        <image style="height:21px;width:21px; margin-right: 5px;margin-top:5rpx;" src="/image/public/scan.png"></image>
-      </view>
-    </view>
-  </view>
+        <view style="display:flex;flex:1;">
+            <view>
+                <image style="height:21px;width:21px;margin-top:7rpx; margin-left:10rpx;" src="/image/public/find.png"></image>
 
- <view class="newest" style='margin-top:20px;background-color:#f6f6f6'>
+            </view>
+            <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindfocus="bindSearch" />
+        </view>
+        <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
+            <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+        </view>
+        <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
+            <image style="height:21px;width:21px; margin-right: 5px;margin-top:5rpx;" src="/image/public/scan.png"></image>
+        </view>
+    </view>
+</view>
+
+<!-- <view class="newest" style='margin-top:20px;background-color:#f6f6f6'>
     <view class="rate">
       <image src='/image/public/au.png' style="height:21px;width:21px; margin-right: 15px;"></image><text style='padding-top:1px'>1 AUD ≈ {{rate}} CNY</text><image src='/image/public/cn.png' style="height:21px;width:21px; margin-left: 15px;"></image>
     </view>
- </view>
-  <!-- <view class="selected" style='margin-top:-25px;'>
+ </view> -->
+<!-- <view class="selected" style='margin-top:-25px;'>
           <view class="select-title"><text>店主精选</text></view>
         <view class="select-top">
             <view class="select-top-small">
@@ -66,26 +66,96 @@
             </navigator>
         </view>  
     </view> -->
-
-  <view class="newest" style='margin-top:20px;background-color:#f6f6f6'>
+<view class="newest" style='margin-top:20px;background-color:#f6f6f6'>
     <view class="newest-title">
-      <text>来自{{userName}}的推荐</text>
+        <text>来自{{userName}}的</text>
     </view>
+</view>
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
+        本期折扣
+    </view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+        倾心推荐
+    </view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">
+        超级热卖
+    </view>
+</view>
+<!--推荐  -->
+<swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight}}px" bindchange="bindChange">
+    <swiper-item>
+        <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
+            <view class="newest" style='background-color:#f6f6f6;'>
+                <view class="newest-title">
+                    <text>本期折扣</text>
+                </view>
 
-    <view class="container">
-      <!-- <template is="goodsList" data="{{goodsList}}"/> -->
-      <template is="goodsList-block" data="{{goodsList}}" />
-    </view>
-  </view>
+                <view class="container">
+                    <view class="goods-contaniner">
+                        <view class="goods-item" wx:for="{{discountList}}" wx:key="{{index}}">
+                            <!-- <view > -->
+                            <navigator url="/page/details/details?id={{item.id}}">
+                                <image class="goods-image" src="{{item.thumb}}" background-size="cover"></image>
+                            </navigator>
+                            <!-- </view> -->
 
-  <view class="newest" style='background-color:#f6f6f6; border-top: 1px solid #e6e6e6 '>
-    <view class="newest-title">
-      <text>本店热卖</text>
-    </view>
+                            <!-- <view class="goods-desc"> -->
+                            <view class="goods-name">
+                                <text>{{item.title}}</text>
+                            </view>
+                            <view class="goods-price">
+                                <text class="goods-price-strong goods-price-now">￥{{item.vipPrice}}元</text>
+                                <text class="goods-sales-strong">已售{{item.sales}}件</text>
+                                <!-- <text class="goods-price-deleted">￥{{item.stock}}元</text>  -->
+                                <!-- <view class="goods-purchase-btn">
+                     <navigator url="/page/details/details?id={{item.id}}">
+                    <button class="purchase-btn">立即购买</button>
+                    </navigator> 
+                    </view> -->
+                            </view>
 
-    <view class="container">
-      <template is="hotList-block" data="{{hotList}}" />
-    </view>
-  </view>
-  <!-- </view> -->
-</scroll-view>
+                            <!-- </view> -->
+                        </view>
+                    </view>
+                    
+                </view>
+            </view>
+            <!-- </view> -->
+        </scroll-view>
+    </swiper-item>
+
+    <swiper-item>
+        <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
+            <view class="newest" style='background-color:#f6f6f6'>
+                <view class="newest-title">
+                    <text>来自{{userName}}的推荐</text>
+                </view>
+
+                <view class="container">
+                    <!-- <template is="goodsList" data="{{goodsList}}"/> -->
+                    <template is="goodsList-block" data="{{goodsList}}" />
+                </view>
+            </view>
+        </scroll-view>
+    </swiper-item>
+
+    <!--热卖  -->
+
+
+    <swiper-item>
+        <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
+            <view class="newest" style='background-color:#f6f6f6;'>
+                <view class="newest-title">
+                    <text>本店热卖</text>
+                </view>
+
+                <view class="container">
+                    <template is="hotList-block" data="{{hotList}}" />
+                </view>
+            </view>
+            <!-- </view> -->
+        </scroll-view>
+    </swiper-item>
+</swiper>
+<!-- </scroll-view> -->

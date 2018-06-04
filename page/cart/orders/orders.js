@@ -10,6 +10,7 @@ Page({
 		orders: [],
 		animationData: {},
 		showModalStatus: false,
+		showModal: false,
 	},
 
 	onReady() {
@@ -24,7 +25,7 @@ Page({
 	},
 
 	onShow: function () {
-		
+
 
 		let self = this;
 		console.log(self.data.address)
@@ -86,8 +87,10 @@ Page({
 	},
 
 	placeOrder() {
+		console.log(app.globalData)
 		//let orderTime = COM.load('Util').formatTime(new Date());
 		// if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId || app.globalData.targetShopId == "oVxpo5FQkb2qY4TGpD9rq2xFWRlk") {
+		let self = this
 		if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId) {
 			wx.showModal({
 				title: '错误',
@@ -102,11 +105,8 @@ Page({
 			})
 			return
 		} else if (app.globalData.nickName == "未登录用户" || app.globalData.nickName == null) {
-			wx.showToast({
-				title: '未登录不能购物',
-				icon: 'loading',
-				duration: 2000
-			})
+			self.setData({ showModal: true })
+			return
 		}
 
 
@@ -150,7 +150,7 @@ Page({
 			wx.showModal({
 				title: '提交订单成功',
 				content: '订单已提交, 请等待店主确认邮费后进行支付',
-				showCancel:false,
+				showCancel: false,
 				success: function (res) {
 					if (res.confirm) {
 						wx.switchTab({
@@ -208,22 +208,55 @@ Page({
 
 	// 隐藏遮罩层
 	hideModal: function () {
-		var animation = wx.createAnimation({
-			duration: 200,
-			timingFunction: "linear",
-			delay: 0
-		})
-		this.animation = animation
-		animation.translateY(300).step()
 		this.setData({
-			animationData: animation.export(),
+			showModal: false
+		});
+
+
+	},
+	onCancel: function () {
+		this.hideModal();
+	},
+	/**
+	 * 对话框确认按钮点击事件
+	 */
+	onConfirm: function (e) {
+		let self = this
+
+		//储存用户信息
+		console.log("********************")
+		app.globalData.nickName = e.detail.userInfo.nickName
+		app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
+		wx.setStorage({
+			key: 'nickname',
+			data: app.globalData.nickName
 		})
-		setTimeout(function () {
-			animation.translateY(0).step()
-			this.setData({
-				animationData: animation.export(),
-				showModalStatus: false
+		wx.setStorage({
+			key: 'avatarUrl',
+			data: app.globalData.avatarUrl
+		})
+
+		self.saveOrUserData(e.detail.userInfo)
+	},
+	//用户登录后把用户储存在user表里, 把用户是否注册状态存入缓存
+	saveOrUserData: function (userInfo) {
+
+		var self = this
+		let url = COM.load('CON').CREATE_OR_UPDATE_USER;
+		COM.load('NetUtil').netUtil(url, "POST", { "open_id": app.globalData.openId, "name": userInfo.nickName, "avatarUrl": userInfo.avatarUrl, "country": userInfo.country, "province": userInfo.province, "city": userInfo.city }, (callback) => {
+			app.globalData.userId = callback;
+			wx.setStorage({
+				key: 'userId',
+				data: callback,
+				success: function (res) {
+					self.placeOrder()
+				}
 			})
-		}.bind(this), 200)
+		})
+	},
+	//如果点了确定
+	onBindTap(e) {
+		let self = this
+		this.hideModal();
 	},
 })

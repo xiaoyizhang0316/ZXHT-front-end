@@ -21,9 +21,9 @@
                     <image class="cart-thumb" src="{{item.image}}"></image>
                 </navigator>
                 <text class="cart-pro-name">{{item.title}}</text>
-                <text class="cart-pro-price">${{item.price}}</text>
+                <text class="cart-pro-price">￥{{item.price}}</text>
 				<block wx:if="{{item.price < item.basePrice}}">
-            		<text class="del">${{item.basePrice}}</text>
+            		<text class="del">￥{{item.basePrice}}</text>
                 </block>
 
                 <view class="cart-count-box">
@@ -40,7 +40,7 @@
         <view bindtap='orderConfirm' class="cart-footer">
             <view class="cart-toatl-price-box">
                 <text class="cart-toatl-msg-front">总计:</text>
-                <text class="cart-toatl-price">${{totalPrice}}</text>
+                <text class="cart-toatl-price">￥{{totalPrice}}</text>
                 <text class="cart-toatl-msg-behind">(不含运费)</text>
                 <text class='cart-step'>下一步</text>
             </view>

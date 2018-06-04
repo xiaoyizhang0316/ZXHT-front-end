@@ -40,13 +40,13 @@
     </view> -->
         <view class="inner-explain-line">
 
-            <view class="explain-text">配送费用(澳元)</view>
-            <text class="explain-text" style='margin-right:0px;font-size="12px"'>$</text>
+            <view class="explain-text">配送费用(RMB)</view>
+            <text class="explain-text" style='margin-right:0px;font-size="12px"'>￥</text>
             <input placeholder='{{deliveryPrice}}' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" font-size="12px" bindinput='updateDeliveryPrice' value="{{deliveryPrice}}"></input>
         </view>
         <view class="inner-explain-line">
-            <view class="explain-text">折扣(澳元)</view>
-            <text class="explain-text" style='margin-right:0px;font-size="12px"'>-$</text>
+            <view class="explain-text">折扣(RMB)</view>
+            <text class="explain-text" style='margin-right:0px;font-size="12px"'>-￥</text>
             <input placeholder='{{discountValue}}' focus="{{focus}}" focus="{{isFocus}}" auto-focus="{{isFocus}}" type="digit" font-size="12px" bindinput='updateDiscountValue' value="{{discountValue}}"></input>
         </view>
     </view>
@@ -114,7 +114,7 @@
                     <text>数量:{{item.num}}</text>
                 </view>
                 <view class="order-cate-price">
-                    <text>${{item.price}}</text>
+                    <text>￥{{item.price}}</text>
                     <!-- <button size='mini'>加购物车</button> -->
                 </view>
             </view>
@@ -142,7 +142,7 @@
 
     <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;">
         <view class="inner-explain-line">
-            <view class="explain-text" style="flex:5">总计: ${{totalPrice}}
+            <view class="explain-text" style="flex:5">总计: ￥{{totalPrice}}
                 <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:3rpx;">(不包括运送费)</text>
             </view>
             <view class="explain-value" style="flex:1">

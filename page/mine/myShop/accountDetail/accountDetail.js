@@ -13,7 +13,8 @@ Page({
 		  payment: 1,//默认支付方式为人民币
 		  bankName: '',
 		  accountNbr: '',
-		  accountName: ''
+		  accountName: '',
+		  rate: 0,
 	  },
 	  payItems: [
 		  { name: '人民币', value: 1, checked: false },
@@ -65,6 +66,11 @@ Page({
 		  'shop.bankName': e.detail.value
 	  })
   },
+  bindRate: function (e) {
+	  this.setData({
+		  'shop.rate': e.detail.value
+	  })
+  },
   bindaccountNbr: function (e) {
 	  this.setData({
 		  'shop.accountNbr': e.detail.value
@@ -105,6 +111,7 @@ Page({
 		'prepayStatus': myShopInfo.prepay,
 		'offlinePayStatus': myShopInfo.offlinePay,
 		'weixinPayStatus': myShopInfo.weixinPay, 
+		'shop.rate': parseFloat(myShopInfo.rate)
       })
 	  if(self.data.shop.payment)
 	  {
@@ -188,6 +195,13 @@ Page({
 		  })
 		  return
 	  }
+	  if (!self.data.shop.rate.toString().match(/^(([0-9][0-9]*)|(([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2})))$/)) {
+		  wx.showModal({
+			  title: '开店失败',
+			  content: "请输入正确的汇率 e.g 0.00"
+		  })
+		  return
+	  }
 	  // 传入表单数据，调用验证方法
 	  if (!this.WxValidate.checkForm(e)) {
 		  const error = this.WxValidate.errorList[0]
@@ -206,6 +220,7 @@ Page({
 			  "sign": self.data.shop.sign,
 			  "prepay": self.data.prepayStatus,
 			  "offlinePay": self.data.offlinePayStatus,
+			  "rate": self.data.shop.rate
 			//   "weixinPay": self.data.weixinPayStatus,
 			//   "payment": self.data.shop.payment,
 			//   "bankName": self.data.shop.bankName,
