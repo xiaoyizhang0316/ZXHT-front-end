@@ -15,6 +15,7 @@ Page({
 		  accountNbr: '',
 		  accountName: '',
 		  rate: 0,
+		  
 	  },
 	  payItems: [
 		  { name: '人民币', value: 1, checked: false },
@@ -28,6 +29,8 @@ Page({
 	  prepayStatus: false,
 	  offlinePayStatus: false,
 	  weixinPayStatus: false, 
+	  //名为memo 实际是shopNote 使用template的原因
+	  memo: ''
 
   },
   bindPrePay: function () {
@@ -81,6 +84,13 @@ Page({
 		  'shop.accountName': e.detail.value
 	  })
   },
+  bindExtra : function(){
+	  let self = this
+	  console.log(self.data)
+	  wx.navigateTo({
+		  url: "/page/common/templates/textArea/textArea?content=" + self.data.memo + "&placeHolder=请设定本店铺的用户须知"
+	  })
+  },
   radioChange: function (e) {
 	  this.setData({
 		  'shop.payment': e.detail.value,
@@ -111,7 +121,8 @@ Page({
 		'prepayStatus': myShopInfo.prepay,
 		'offlinePayStatus': myShopInfo.offlinePay,
 		'weixinPayStatus': myShopInfo.weixinPay, 
-		'shop.rate': parseFloat(myShopInfo.rate)
+		'shop.rate': parseFloat(myShopInfo.rate),
+		'memo': myShopInfo.shopNote ? myShopInfo.shopNote : "",
       })
 	  if(self.data.shop.payment)
 	  {
@@ -220,7 +231,8 @@ Page({
 			  "sign": self.data.shop.sign,
 			  "prepay": self.data.prepayStatus,
 			  "offlinePay": self.data.offlinePayStatus,
-			  "rate": self.data.shop.rate
+			  "rate": self.data.shop.rate,
+			  "shopNote":self.data.memo
 			//   "weixinPay": self.data.weixinPayStatus,
 			//   "payment": self.data.shop.payment,
 			//   "bankName": self.data.shop.bankName,

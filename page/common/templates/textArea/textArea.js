@@ -20,11 +20,15 @@ Page({
     prevPage.setData({
       memo: input
     })
+	wx.navigateBack({
+		delta:1
+	})
     
 
   },
 
   onLoad:function(option) {
+	  console.log(option)
     this.setData({ inputContent: option.content, placeHolder: option.placeHolder});
   }
 

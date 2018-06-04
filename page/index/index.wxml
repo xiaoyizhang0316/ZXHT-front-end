@@ -14,15 +14,17 @@
     </swiper>
 
 
- <view class="main-profile">
-          <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
-      <view style="width:80%; flex-direction:row; display:flex; ">   
-      <!-- <text id="name">{{userName}}</text>
+    <view class="main-profile">
+        <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
+        <view style="width:80%; flex-direction:row; display:flex; ">
+            <!-- <text id="name">{{userName}}</text>
       <view style="height:20rpx;">
       </view> -->
+
       <text id="sign">{{sign}}</text>
-      <image style="height:25px;width:25px;position:absolute;right:40rpx;opacity:0.7;" src="/image/public/video.png"></image>
+      <image style="height:25px;width:25px;position:absolute;right:40rpx;opacity:0.7;" src="/image/public/video.png" catchtap='displayShopNote' ></image>
       </view>
+
     </view>
 
 
@@ -88,7 +90,9 @@
 <swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight}}px" bindchange="bindChange">
     <swiper-item>
         <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
-            <view class="newest" style='background-color:#f6f6f6;'>
+
+            <view class="newest">
+
                 <!-- <view class="newest-title">
                     <text>本期折扣</text>
                 </view> -->
@@ -120,7 +124,7 @@
                             <!-- </view> -->
                         </view>
                     </view>
-                    
+
                 </view>
             </view>
             <!-- </view> -->
@@ -129,7 +133,9 @@
 
     <swiper-item>
         <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
-            <view class="newest" style='background-color:#f6f6f6'>
+
+            <view class="newest">
+
                 <!-- <view class="newest-title">
                     <text>来自{{userName}}的推荐</text>
                 </view> -->
@@ -147,7 +153,9 @@
 
     <swiper-item>
         <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
-            <view class="newest" style='background-color:#f6f6f6;'>
+
+            <view class="newest">
+
                 <!-- <view class="newest-title">
                     <text>本店热卖</text>
                 </view> -->
@@ -161,3 +169,10 @@
     </swiper-item>
 </swiper>
 <!-- </scroll-view> -->
+
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+   <view>
+  <textarea disabled='true' class="myTextArea"  maxlength = "-1"  value="{{shopNote ? shopNote : '暂无'}}" />
+</view>
+</view>
