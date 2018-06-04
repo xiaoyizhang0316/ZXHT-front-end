@@ -35,7 +35,7 @@ App({
         success(res) {
           self.globalData.openId = res.data
           self.globalData.shopId = wx.getStorageSync('shopId')
-          self.globalData.nickName = wx.getStorageSync('nickname')
+		  self.globalData.nickName = wx.getStorageSync('nickname') ? wx.getStorageSync('nickname') : null
           self.globalData.shopOpened = wx.getStorageSync('shopOpened')
           self.globalData.userId = wx.getStorageSync('userId')
           self.globalData.avatarUrl = wx.getStorageSync('avatarUrl')
@@ -74,29 +74,29 @@ App({
       console.log("haha")
       self.getAddressList(self.globalData.openId)
 			//储存用户信息
-			if (self.globalData.userId == false) {
-				//访问微信获取nickname
-				wx.getUserInfo({
-					withCredentials: false,
-					lang: '',
-					success: function (res) {
-						self.globalData.nickName = res.userInfo.nickName
-						self.globalData.avatarUrl = res.userInfo.avatarUrl
-						wx.setStorage({
-							key: 'nickname',
-							data: self.globalData.nickName
-						})
-						wx.setStorage({
-							key: 'avatarUrl',
-							data: self.globalData.avatarUrl
-						})
-						self.saveOrUserData(res.userInfo)
-					},
-					fail: function (res) { },
-					complete: function (res) { },
-				})
+			// if (self.globalData.userId == false) {
+			// 	//访问微信获取nickname
+			// 	wx.getUserInfo({
+			// 		withCredentials: false,
+			// 		lang: '',
+			// 		success: function (res) {
+			// 			self.globalData.nickName = res.userInfo.nickName
+			// 			self.globalData.avatarUrl = res.userInfo.avatarUrl
+			// 			wx.setStorage({
+			// 				key: 'nickname',
+			// 				data: self.globalData.nickName
+			// 			})
+			// 			wx.setStorage({
+			// 				key: 'avatarUrl',
+			// 				data: self.globalData.avatarUrl
+			// 			})
+			// 			self.saveOrUserData(res.userInfo)
+			// 		},
+			// 		fail: function (res) { },
+			// 		complete: function (res) { },
+			// 	})
 				
-			}
+			// }
 			//查看并设定用户是否开过店
 			self.setShopisOpenedOrNot(self.globalData.openId)
 
@@ -113,19 +113,19 @@ App({
   },
 
   //用户登录后把用户储存在user表里, 把用户是否注册状态存入缓存
-  saveOrUserData: function (userInfo) {
-    var self = this
+//   saveOrUserData: function (userInfo) {
+//     var self = this
 
    
-		let url = COM.load('CON').CREATE_OR_UPDATE_USER;
-		COM.load('NetUtil').netUtil(url, "POST", { "open_id": self.globalData.openId, "name": userInfo.nickName, "avatarUrl": userInfo.avatarUrl, "country":userInfo.country, "province": userInfo.province,	"city": userInfo.city }, (callback) => {
+// 		let url = COM.load('CON').CREATE_OR_UPDATE_USER;
+// 		COM.load('NetUtil').netUtil(url, "POST", { "open_id": self.globalData.openId, "name": userInfo.nickName, "avatarUrl": userInfo.avatarUrl, "country":userInfo.country, "province": userInfo.province,	"city": userInfo.city }, (callback) => {
 
-      wx.setStorage({
-        key: 'userId',
-        data: callback,
-      })
-    })
-  },
+//       wx.setStorage({
+//         key: 'userId',
+//         data: callback,
+//       })
+//     })
+//   },
  
   //设定用户是否开过店以及商店ID
   setShopisOpenedOrNot: function (openId) {

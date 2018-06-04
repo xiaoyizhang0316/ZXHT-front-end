@@ -16,7 +16,7 @@
     "page/mine/addressList/consignee/upload/uploadImg",
     "page/mine/order/orderHistory",
     "page/mine/order/detail/orderDetail",
-    "page/mine/shop/apply",
+    
     "page/mine/shop/product/sell",
     "page/mine/shop/product/template/allProducts",
     "page/mine/shopSwitch/shopSwitch",
@@ -42,7 +42,11 @@
 	"page/mine/helpCenter/buyerHelp/buyerHelp",
 	"page/mine/helpCenter/sellerHelp/sellerHelp",
 	"page/mine/helpCenter/contactUs/contactUs",
-	"page/mine/helpCenter/policy/policy"
+	"page/mine/helpCenter/policy/policy",
+	"page/mine/transferOrder/transferOrder",
+	"page/mine/selectShops/selectShops",
+	"page/mine/selectFriends/selectFriends",
+	"page/mine/getTransferOrder/getTransferOrder"                                                                                                                                                                                              
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",

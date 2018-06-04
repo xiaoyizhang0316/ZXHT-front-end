@@ -184,47 +184,167 @@ Page({
    * 加载商品基本信息
    */
   onLoad: function (options) {
-		this.setData({ productId: options.id });
-		//如果是分享的页面
-		if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.targetShopId) !== '[object Undefined]') {
-			let openId = app.globalData.openId
-			let targetShopId = options.targetShopId
-			let productId = options.id
-			//检查当前用户是否可以进入目标店铺
-
-			let url = COM.load('CON').APPLY_TO_SHOP;
-			COM.load('NetUtil').netUtil(url, "POST", { "open_id": openId, "shop_id": targetShopId }, (callback) => {
-			
-				if (callback == false) {
-					wx.showModal({
-						title: '提示',
-						content: '您暂时无法购买此店铺的商品，我们已经为您向店主申请进入, 请等待店主审核后方可进店购物, 点击确认进入展厅',
-						success: function (res) {
-							if (res.confirm) {
-								console.log('用户点击确定')
-								wx.navigateTo({
-									url: '/page/welcome/welcome?targetShopId=oVxpo5FQkb2qY4TGpD9rq2xFWRlk',
-								})
-							} else if (res.cancel) {
-								console.log('用户点击取消')
-								wx.navigateBack({
-									delta: -1
-								})
-							}
-						}
-					})
-				} else {
-					//将得到的shopid 写入缓存并改写global shopid
-					wx.setStorage({
-						key: 'targetShopId',
-						data: targetShopId,
-					})
-					app.globalData.targetShopId = targetShopId
-				}
-			})
-			
-		} 
+	  this.prepare(options)
+	  
 		
+  },
+  prepare:function(options)
+  {
+	  let self = this
+
+	  self.setData({ productId: options.id });
+	  //如果是分享的页面
+	  if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.targetShopId) !== '[object Undefined]') {
+		  if (app.globalData.openId != "" && app.globalData.openId != null) {
+			  let openId = app.globalData.openId
+			  let targetShopId = options.targetShopId
+			  let productId = options.id
+			  //检查当前用户是否可以进入目标店铺
+			  console.log('1')
+			  console.log(options)
+			  let url = COM.load('CON').APPLY_TO_SHOP;
+			  COM.load('NetUtil').netUtil(url, "POST", { "open_id": openId, "shop_id": targetShopId }, (callback) => {
+
+				  if (callback == false) {
+					  wx.showModal({
+						  title: '提示',
+						  content: '您暂时无法购买此店铺的商品，我们已经为您向店主申请进入, 请等待店主审核后方可进店购物, 点击确认进入展厅',
+						  success: function (res) {
+							  if (res.confirm) {
+								  console.log('用户点击确定')
+								  wx.navigateTo({
+									  url: '/page/welcome/welcome?targetShopId=oVxpo5FQkb2qY4TGpD9rq2xFWRlk',
+								  })
+							  } else if (res.cancel) {
+								  console.log('用户点击取消')
+								  wx.navigateBack({
+									  delta: -1
+								  })
+							  }
+						  }
+					  })
+				  } else {
+					  //将得到的shopid 写入缓存并改写global shopid
+					  wx.setStorageSync('targetShopId', targetShopId,)
+					  
+					  app.globalData.targetShopId = targetShopId
+					 
+
+					 
+					  //需要取得本店对于本位客人的价格信息
+					  let url = ""
+					  let productId = self.data.productId
+					  if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
+						  url = COM.load('CON').GET_TARGETSHOP_PRODUCT_URL + app.globalData.openId + "/" + app.globalData.targetShopId + "/" + productId
+					  } else {
+						  url = COM.load('CON').GET_TARGETSHOP_PRODUCT_URL + app.globalData.openId + "/" + app.globalData.openId + "/" + productId
+					  }
+					  console.log("2")
+					  console.log(url)
+
+					  COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
+						  console.log(shopProduct)
+						  if (shopProduct) {
+							  let products = wx.getStorageSync("shopProducts");
+							  if (products) {
+								  self.data.goods["id"] = productId;
+								  self.data.goods["title"] = products[productId].title;
+								  self.data.goods["thumb"] = COM.load('Util').image(products[productId].barcode);
+								  self.data.goods["stock"] = shopProduct.stock;
+								  self.data.goods["price"] = shopProduct.vipPrice;
+								  self.data.goods["basePrice"] = products[productId].basePrice;
+
+								  // http://101.178.98.25:8443/api/mall/products/242
+								  let detailUrl = COM.load('CON').PRODUCT_URL + productId;
+								  COM.load('NetUtil').netUtil(detailUrl, "GET", "", (detail) => {
+									  if (detail) {
+										  if (detail.images) {
+											  detail.images = JSON.parse(detail.images)
+											  for (var i = 0; i < detail.images.length; i++) {
+												  detail.images[i] = COM.load('CON').IMG_DETAIL_BASE + "storage/" + detail.images[i];
+											  }
+										  }
+										  console.log(detail)
+										  self.data.goods["id"] = productId;
+										  self.data.goods["title"] = detail.title;
+										  self.data.goods["thumb"] = COM.load('Util').image(detail.barcode);
+										 
+										  self.data.goods["basePrice"] = detail.basePrice;
+										  self.setData({
+											  detail: detail
+										  })
+									  }
+								  });
+
+								  self.setData({
+									  goods: self.data.goods
+								  })
+
+								  self.updateTotalNum();
+							  }
+						  }
+					  });
+				  }
+			  })
+		  } else {
+			  setTimeout(function () {
+
+				  self.prepare(options)
+
+			  }, 1000)
+		  }
+	  }else{
+
+		  let url = ""
+		  let productId = self.data.productId
+		  if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
+			  url = COM.load('CON').GET_TARGETSHOP_PRODUCT_URL + app.globalData.openId + "/" + app.globalData.targetShopId + "/" + productId
+		  } else {
+			  url = COM.load('CON').GET_TARGETSHOP_PRODUCT_URL + app.globalData.openId + "/" + app.globalData.openId + "/" + productId
+		  }
+		  console.log("2")
+		  console.log(url)
+
+		  COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
+			  console.log(shopProduct)
+			  if (shopProduct) {
+				  let products = wx.getStorageSync("shopProducts");
+				  
+				  if (products) {
+					  self.data.goods["id"] = productId;
+					  self.data.goods["title"] = products[productId].title;
+					  self.data.goods["thumb"] = COM.load('Util').image(products[productId].barcode);
+					  self.data.goods["stock"] = shopProduct.stock;
+					  self.data.goods["price"] = shopProduct.vipPrice;
+					  self.data.goods["basePrice"] = products[productId].basePrice;
+
+					  // http://101.178.98.25:8443/api/mall/products/242
+					  let detailUrl = COM.load('CON').PRODUCT_URL + productId;
+					  COM.load('NetUtil').netUtil(detailUrl, "GET", "", (detail) => {
+						  if (detail) {
+							  if (detail.images) {
+								  detail.images = JSON.parse(detail.images)
+								  for (var i = 0; i < detail.images.length; i++) {
+									  detail.images[i] = COM.load('CON').IMG_DETAIL_BASE + "storage/" + detail.images[i];
+								  }
+							  }
+							  console.log(detail)
+							  self.setData({
+								  detail: detail
+							  })
+						  }
+					  });
+
+					  self.setData({
+						  goods: self.data.goods
+					  })
+
+					  self.updateTotalNum();
+				  }
+			  }
+		  });
+
+	  } 
   },
 
 
@@ -232,55 +352,7 @@ Page({
  * 加载相应店铺的商品价格和库存
  */
   onShow: function () {
-		let self = this
-		//需要取得本店对于本位客人的价格信息
-		let url = ""
-		let productId = self.data.productId
-		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
-			url = COM.load('CON').GET_TARGETSHOP_PRODUCT_URL + app.globalData.openId + "/" + app.globalData.targetShopId + "/" + productId
-		} else {
-			url = COM.load('CON').GET_TARGETSHOP_PRODUCT_URL + app.globalData.openId + "/" + app.globalData.openId + "/" + productId
-		}
-
-		COM.load('NetUtil').netUtil(url, "GET", "", (shopProduct) => {
-			console.log(shopProduct)
-			if (shopProduct) {
-				let products = wx.getStorageSync("shopProducts");
-				if (products) {
-					self.data.goods["id"] = productId;
-					self.data.goods["title"] = products[productId].title;
-					self.data.goods["thumb"] = COM.load('Util').image(products[productId].barcode);
-					self.data.goods["stock"] = shopProduct.stock;
-					self.data.goods["price"] = shopProduct.vipPrice;
-					self.data.goods["basePrice"] = products[productId].basePrice;
-					
-					// http://101.178.98.25:8443/api/mall/products/242
-					let detailUrl = COM.load('CON').PRODUCT_URL + productId;
-					COM.load('NetUtil').netUtil(detailUrl, "GET", "", (detail) => {
-						if (detail) {
-							if(detail.images)
-							{
-								detail.images = JSON.parse(detail.images)
-								for (var i = 0; i < detail.images.length ; i++)
-								{
-									detail.images[i] = COM.load('CON').IMG_DETAIL_BASE + "storage/" + detail.images[i];
-								}
-							}		
-							console.log(detail)
-							self.setData({
-								detail: detail
-							})
-						}
-					});
-
-					self.setData({
-						goods: self.data.goods
-					})
-
-					self.updateTotalNum();
-				}
-			}
-		});
+		
    
   },
 	onShareAppMessage: function(){

@@ -20,7 +20,7 @@
                 <view class="orders-pro-name">{{item.title}}</view>
             </view>
             <view class='explain-line'>
-                <view class="orders-pro-price1">$ {{item.price}} </view>
+                <view class="orders-pro-price1">￥ {{item.price}} </view>
                 
                 <view class='orders-pro-num'> × {{item.num}}</view>
             </view>
@@ -87,8 +87,23 @@
 
     <!-- 最下方的付款合计➕提交订单-->
     <view class="orders-footer">
-        <view class="orders-footer-total">付款合计：${{total}}(约:￥{{rmb}}元)</view>
+        <view class="orders-footer-total">付款合计：￥{{total}}</view>
         <view class="orders-footer-btn" bindtap="placeOrder">提交订单</view>
     </view>
 
+</view>
+
+
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-content">
+        未登录用户无法购买,是否登录?
+    </view>
+    <view class="modal-footer">
+		<button open-type="getUserInfo" class="btn-confirm" lang="zh_CN" bindgetuserinfo="onConfirm" bindtap='onBindTap'>登录</button>
+        <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+        <!-- <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> -->
+		<!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+		
+    </view>
 </view>

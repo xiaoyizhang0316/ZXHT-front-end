@@ -17,10 +17,22 @@
                 <text>店铺签名</text>
                 <input placeholder="请输入店铺签名" bindinput="bindSign" name="sign" value="{{shop.sign}}" />
             </view>
+            <view class="top-input-box flex-col">
+                <view class="pay-method">
+                    <text>店铺汇率</text>
+                    <view class='bottom-text'>
+                        <text>店铺商品管理使用澳元,展示使用RMB</text>
+                    </view>
+                    
 
+                </view>
+			<input style="flex:6" placeholder="请输入店铺汇率" bindinput="bindRate" name="rate" />
+
+            </view>
             <view class="top-header">
                 <text>支付方式设置</text>
             </view>
+
             <view class="top-input-box flex-col">
                 <view class="pay-method">
                     <text>收取预存款</text>
@@ -77,10 +89,10 @@
                         <text>开户行:</text>
                         <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" />
                     </block>
-                     <block wx:else>
+                    <block wx:else>
                         <text>Bank: </text>
                         <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" />
-                    </block> 
+                    </block>
 
                 </view>
                 <view class="top-input-box flex-col">
@@ -88,20 +100,20 @@
                         <text>户名:</text>
                         <input bindinput="bindaccountNbr" name="accountNbr" value="{{shop.accountNbr}}" />
                     </block>
-                     <block wx:else>
+                    <block wx:else>
                         <text>AccountNbr:</text>
                         <input bindinput="bindaccountNbr" name="accountNbr" value="{{shop.accountNbr}}" />
-                    </block> 
+                    </block>
                 </view>
                 <view class="top-input-box flex-col">
                     <block wx:if="{{shop.payment == 1}}">
                         <text>账户:</text>
                         <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" />
                     </block>
-                     <block wx:else>
+                    <block wx:else>
                         <text>AccountName:</text>
                         <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" />
-                    </block> 
+                    </block>
                 </view>
                 <view>
                     <view>

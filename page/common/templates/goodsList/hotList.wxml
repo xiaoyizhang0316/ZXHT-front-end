@@ -9,7 +9,7 @@
                   <text>{{item.title}}</text>
                 </view>
                 <view class="goods-price">
-                    <text class="goods-price-strong goods-price-now">${{item.vipPrice}}</text>
+                    <text class="goods-price-strong goods-price-now">￥{{item.vipPrice}}</text>
                     <!-- <text class="goods-price-deleted">库存:{{item.stock}}</text> -->
                     <view class="goods-purchase-btn">
                     <navigator url="/page/details/details?id={{item.id}}">

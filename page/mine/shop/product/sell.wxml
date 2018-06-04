@@ -109,13 +109,24 @@
             </view>
             <view class='bottom-window-RecommandNHot'>
                 <view>
-                    <text>店主推荐</text>
+                    <text>本店推荐</text>
                     <switch checked="{{isRecommandChecked}}" data-id="{{item.id}}" bindchange="addRecommandation" />
                 </view>
                 <view>
                     <text style='width: 100rpx'>热卖</text>
                     <switch checked="{{isHotChecked}}" data-id="{{item.id}}" bindchange="addHot" />
                     <!-- <input type="number" bindinput='updateHotSale' value='{{selectedProduct.hotSale}}'></input> -->
+                </view>
+            </view>
+			 <view class='bottom-window-RecommandNHot'>
+                <view>
+                    <text>商品打折</text>
+                    <switch checked="{{isDiscount}}" data-id="{{item.id}}" bindchange="addDiscount" />
+                </view>
+                <view>
+                    <text style='width: 100rpx'>折扣价格</text>
+                    
+                    <input type="number" bindinput='updateDiscountPrice' value='{{selectedProduct.discountPrice}}'></input>
                 </view>
             </view>
         </view>

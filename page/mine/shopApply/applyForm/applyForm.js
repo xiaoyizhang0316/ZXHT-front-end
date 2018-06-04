@@ -15,7 +15,8 @@ Page({
       payment: 1,//默认支付方式为人民币
       bankName: '',
       accountNbr: '',
-      accountName: ''
+      accountName: '',
+	  rate: 5,
     },
     payItems: [
       { name: '人民币', value: 1, checked: 'true' },
@@ -39,6 +40,11 @@ Page({
 	bindOfflinePay: function () {
 		this.setData({
 			'offlinePayStatus': !this.data.offlinePayStatus
+		})
+	},
+	bindRate:function(e){
+		this.setData({
+			rate: e.detail.value
 		})
 	},
 	showModal: function () {
@@ -166,6 +172,15 @@ Page({
 			})
 			return
 		}
+
+		if (!self.data.rate.toString().match(/^(([0-9][0-9]*)|(([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2})))$/))
+		{
+			wx.showModal({
+				title: '开店失败',
+				content: "请输入正确的汇率 e.g 0.00"
+			})
+			return
+		}
     // 传入表单数据，调用验证方法
     if (!this.WxValidate.checkForm(e)) {
       const error = this.WxValidate.errorList[0]
@@ -185,7 +200,8 @@ Page({
         "payment": self.data.shop.payment,
         "bankName": self.data.shop.bankName,
         "accountNbr": self.data.shop.accountNbr,
-        "accountName": self.data.shop.accountName
+        "accountName": self.data.shop.accountName,
+		"rate": self.data.rate
       }, (callbackdata) => {
         if (callbackdata == true) {
           console.log("成功")

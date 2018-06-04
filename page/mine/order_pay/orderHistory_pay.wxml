@@ -39,7 +39,7 @@
       <view class='order-item-desc'>
         <text>共{{item.orderGoods.length}}种商品</text>
         <text class='middle-tip'>实付款:</text>
-        <text class='order-price'>${{item.orderInfo.totalCost}}</text>
+        <text class='order-price'>￥{{item.orderInfo.totalCost}}</text>
       </view>
 
 
@@ -132,7 +132,7 @@
 
       <view class='bottom-window-pay'>
         <text>需付款</text>
-        <text>${{selectedOrder.orderInfo.totalCost}}</text>
+        <text>￥{{selectedOrder.orderInfo.totalCost}}</text>
       </view>
 
       <button data-order="{{selectedOrder.orderInfo.id}}" bindtap='payOrder' class='bottom-window-button' type='primary'>确认付款</button>

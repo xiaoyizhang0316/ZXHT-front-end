@@ -177,3 +177,33 @@ display:flex;
 justify-content:center;
 }
 
+.swiper-tab {
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+  scroll-behavior: unset;
+  height: 88rpx;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.swiper-tab-list {
+  font-size: 30rpx;
+  display: inline-block;
+  width: 50%;
+  color: #777;
+}
+
+.on {
+  color: #A9A9A9;
+  font-weight: bolder;
+  border-bottom: 5rpx solid #A9A9A9;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}

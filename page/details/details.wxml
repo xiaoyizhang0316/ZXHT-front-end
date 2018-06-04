@@ -13,17 +13,17 @@
 
         <view class="goods-operation" bindtap="addToCart">
 
-            <!-- <text class="goods-price">${{goods.price}}</text>
-	  <text class="goods-price del">${{goods.basePrice}}</text>
+            <!-- <text class="goods-price">￥{{goods.price}}</text>
+	  <text class="goods-price del">￥{{goods.basePrice}}</text>
       <text class="goods-operation-num">库存 {{goods.stock}}</text>
       
       <image src="/image/cart1.png" class="goods-cart-img" ></image> -->
 
 
             <view class='goods-operation-num'>库存 {{goods.stock}}</view>
-            <text class="goods-price">${{goods.price}}</text>
+            <text class="goods-price">￥{{goods.price}}</text>
 			<block wx:if="{{goods.price < goods.basePrice}}">
-            <text class="goods-price del">${{goods.basePrice}}</text>
+            <text class="goods-price del">￥{{goods.basePrice}}</text>
 			</block>
 			<block wx:else="{{goods.price < goods.basePrice}}">
             <text class="goods-price del">     </text>
