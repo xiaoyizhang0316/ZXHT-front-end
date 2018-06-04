@@ -30,7 +30,15 @@ Page({
 		prepayStatus:false,
 		offlinePayStatus:true,
 		weixinPayStatus:false, 
+		memo: ''
 	
+  },
+  bindExtra: function () {
+	  let self = this
+	  console.log(self.data)
+	  wx.navigateTo({
+		  url: "/page/common/templates/textArea/textArea?content=" + self.data.memo + "&placeHolder=请设定本店铺的用户须知"
+	  })
   },
 	bindPrePay: function(){
 		this.setData({
@@ -201,7 +209,8 @@ Page({
         "bankName": self.data.shop.bankName,
         "accountNbr": self.data.shop.accountNbr,
         "accountName": self.data.shop.accountName,
-		"rate": self.data.rate
+		"rate": self.data.rate,
+		"shopNote": self.data.memo,
       }, (callbackdata) => {
         if (callbackdata == true) {
           console.log("成功")

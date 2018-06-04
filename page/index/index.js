@@ -29,10 +29,12 @@ Page({
 		userinfo: '',
 		targetShopId: null,
 		sign:"",
+		shopNote:"",
 		shopImg:"",
 		userName:"",
 		rate: 5,
 		currentTab: 0,
+		showModel:false,
 
 	},
 
@@ -70,13 +72,15 @@ Page({
 				if (callbackdata == null) {
 
 				} else {
+					console.log(callbackdata)
 					wx.setNavigationBarTitle({
 						title: callbackdata.shopName,
 					})
 					self.setData({
 						sign: callbackdata.sign,
 						shopImg: callbackdata.shopImg,
-						userName: callbackdata.userName
+						userName: callbackdata.userName,
+						shopNote: callbackdata.shopNote ? callbackdata.shopNote : ""
 					})
 
 					//self.loadRecommendedProducts();
@@ -106,6 +110,17 @@ Page({
 				currentTab: e.target.dataset.current
 			})
 		}
+	},
+	displayShopNote : function(e)
+	{
+		let self = this
+		this.setData({
+			showModal: true
+		});
+		// wx.showModal({
+		// 	title: '店铺须知',
+		// 	content: self.data.shopNote,
+		// })
 	},
   /**
    * load the recomemded products by the shop id
@@ -368,6 +383,25 @@ Page({
 				data: callback,
 			})
 		})
+	},
+	hideModal: function () {
+		this.setData({
+			showModal: false
+		});
+	},
+    /**
+     * 对话框取消按钮点击事件
+     */
+	onCancel: function () {
+		this.hideModal();
+	},
+    /**
+     * 对话框确认按钮点击事件
+     */
+	onConfirm: function () {
+		this.hideModal();
+	},
+	preventTouchMove: function () {
 	},
 
 
