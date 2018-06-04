@@ -13,14 +13,16 @@
         </block>
     </swiper>
 
-    <view class="main-profile">
-        <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
-        <view style="width:80%;">
-            <!-- <text id="name">{{userName}}</text>
+
+ <view class="main-profile">
+          <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
+      <view style="width:80%; flex-direction:row; display:flex; ">   
+      <!-- <text id="name">{{userName}}</text>
       <view style="height:20rpx;">
       </view> -->
-            <text id="sign">{{sign}}</text>
-        </view>
+      <text id="sign">{{sign}}</text>
+      <image style="height:25px;width:25px;position:fixed;right:40rpx;opacity:0.7;" src="/image/public/video.png"></image>
+      </view>
     </view>
 
 

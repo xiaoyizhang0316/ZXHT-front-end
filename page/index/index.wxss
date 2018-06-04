@@ -134,8 +134,7 @@ swiper-item image {
   flex-direction: row;
   width: 100%;
   position: relative;
-  background-color: rgba(
-183,0,0,0.8);
+  background: linear-gradient(to top right, #9F000F, #FA8072);
   height:80rpx;
   z-index:0;
   
@@ -151,6 +150,8 @@ swiper-item image {
 
 .main-profile #sign{
   font-size:100%;
+  margin-left: 10rpx;
+  margin-right:20rpx;
 }
 
 #profile {

@@ -174,14 +174,14 @@ font-size: 30rpx;
 .order-icon{
     position: absolute;
     right: 40rpx;
-    top: 20rpx;
-    width: 40rpx;
-    height: 40rpx;
+    top: 10rpx;
+    /* width: 40rpx;
+    height: 40rpx; */
 }
 .order-icon image,.order-icon navigator{
   display: block;
-  width: 45rpx;
-  height: 45rpx;
+  width:80rpx;
+   height: 60rpx; 
 }
 
 .cart-no-data{
