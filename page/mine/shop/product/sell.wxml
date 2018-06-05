@@ -51,20 +51,15 @@
                 <text class='goods-stock-clo'>{{item.stock}}</text>
                 <text class='goods-price-clo'>$ {{item.vip1Price}} \n$ {{item.price}}</text>
             </view>
-
         </view>
     </view>
-
-
     <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
     <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
         <view class='bottom-window-detail'>
             <view class='bottom-window-detail-left'>
                 <image src='{{selectedProduct.thumb}}'></image>
             </view>
-
-
-            <view class='bottom-window-detail-right'>
+			<view class='bottom-window-detail-right'>
                 <!-- <text class='goods-name-label'>商品名:</text> -->
                 <text class='goods-name'>{{selectedProduct.title}}</text>
 
@@ -124,7 +119,7 @@
                     <switch checked="{{isDiscount}}" data-id="{{item.id}}" bindchange="addDiscount" />
                 </view>
                 <view>
-                    <text style='width: 100rpx'>折扣价格</text>
+                    <text style='width: 150rpx'>折后价格$</text>
                     
                     <input type="number" bindinput='updateDiscountPrice' value='{{selectedProduct.discountPrice}}'></input>
                 </view>

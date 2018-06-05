@@ -300,36 +300,61 @@ Page({
 
   updatePrice: function (e) {
 	  let price = parseFloat(e.detail.value);
-    if (price > 0.1) {
+    if (price >= 0.1) {
 		this.setData({ 'selectedProduct.price': price });
-    }
+	} else {
+		wx.showModal({
+			title: '错误',
+			content: '青铜会员价格需要大于0.1',
+		})
+	}
   },
 
   updateVip1Price: function (e) {
 	  let price = parseFloat(e.detail.value);
-    if (price > 0.1) {
+    if (price >= 0.1) {
 		this.setData({ 'selectedProduct.vip1Price': price });
-    }
+	} else {
+		wx.showModal({
+			title: '错误',
+			content: '白银会员价格需要大于0.1',
+		})
+	}
   },
 
   updateVip2Price: function (e) {
 	  let price = parseFloat(e.detail.value);
-    if (price > 0.1) {
+    if (price >= 0.1) {
 		this.setData({ 'selectedProduct.vip2Price': price });
-    }
+	} else {
+		wx.showModal({
+			title: '错误',
+			content: '黄金会员价格需要大于0.1',
+		})
+	}
   },
 
   updateVip3Price: function (e) {
-	  let price = parseFloat(e.detail.value);
-    if (price > 0.1) {
+	let price = parseFloat(e.detail.value);
+    if (price >= 0.1) {
 		this.setData({ 'selectedProduct.vip3Price': price });
-    }
+	} else {
+		wx.showModal({
+			title: '错误',
+			content: '钻石会员价格需要大于0.1',
+		})
+	}
   },
   updateDiscountPrice: function (e) {
 	 
 	  let price = parseFloat(e.detail.value);
-	  if (price > 0.1) {
+	  if (price >= 0.1) {
 		  this.setData({ 'selectedProduct.discountPrice': price });
+	  }else{
+		  wx.showModal({
+			  title: '错误',
+			  content: '折扣价格需要大于0.1',
+		  })
 	  }
   },
   updateHotSale: function (e) {

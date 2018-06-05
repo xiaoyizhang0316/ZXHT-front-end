@@ -131,11 +131,12 @@ Page({
 		let targetShopId = ""
 		self.setData({
 			goodsList: {},
-			hotList: {}
+			hotList: {},
+			discountList:{}
 		})
 	
 		let shopProducts = wx.getStorageSync("shopProducts");
-	
+		console.log(shopProducts)
 		var shopProductIds = [];
 		for (var x in shopProducts) {
 			let shopProduct = shopProducts[x];
@@ -165,12 +166,14 @@ Page({
 					"id": shopProduct.id,
 					"title": shopProduct.title,
 					"price": shopProduct.basePrice,
-					"vipPrice": shopProduct.discountPrice ? shopProduct.discountPrice : shopProduct.vipPrice,
+					"vipPrice": shopProduct.vipPrice ? shopProduct.vipPrice : shopProduct.discountPrice,
 					"sales": shopProduct.sales,
 					"thumb": COM.load('Util').image(shopProduct.barcode),
 				}
 			}
 		}
+		console.log("ooooooooooooooooooooooooooooooooooo")
+		console.log(self.data.discountList)
 		self.setData({
 			goodsList: self.data.goodsList,
 			hotList: self.data.hotList,
