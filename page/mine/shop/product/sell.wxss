@@ -100,9 +100,10 @@
 .goods-top-tip-clo {
  
   flex: 8;
-  color:red;
+  color:#9F000F;
   font-size: 28rpx;
   text-align:center;
+  font-weight: bolder;
 
 }
 .goods-name-clo {

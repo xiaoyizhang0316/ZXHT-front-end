@@ -20,11 +20,13 @@
   flex-direction: column;
   flex: 0 0 50%;
  
+ 
 }
 
 .goods-image{
   height: 340rpx;
   width: 340rpx;
+ 
 }
 
 .goods-desc {

@@ -201,7 +201,7 @@
     <view wx:if="{{!shared}}" class="footer">
 
 
-        <button type="warn" class='button' formType="submit">确认发货</button>
+        <button  class='button-red' formType="submit">确认发货</button>
         <button type="default" class='button' formType="reset">重置</button>
     </view>
 </form>
