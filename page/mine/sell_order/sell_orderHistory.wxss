@@ -29,9 +29,10 @@ page {
 }
 
 .on {
-  color: #A9A9A9;
+  color: #9F000F;
   font-weight: bolder;
-  border-bottom: 5rpx solid #A9A9A9;
+  border-bottom: 5rpx solid #9F000F;
+  opacity: 0.7;
 }
 
 .swiper-box {
@@ -209,7 +210,7 @@ page {
   display: flex;
   margin-right: 10px;
   background-color: white;
-  color: #C70039;
+  color: #9F000F;
   font-size: 20rpx;
   border-radius: 3px;
   height: 30px;
@@ -266,7 +267,8 @@ page {
 
   display: flex;
   margin-right: 10px;
-  background-color: #C70039;
+ background-color: #9F000F;
+   opacity: 0.7;
   color: #f2f2f2;
   border-radius: 3px;
   height: 30px;
@@ -326,6 +328,7 @@ page {
 
 .modal-content {
   padding: 50rpx 32rpx;
+  color: #696969;
 }
 
 .modal-input {
@@ -370,15 +373,17 @@ input-holder {
 
 .btn-confirm {
   width: 50%;
-  color: #ec5300;
+  color: #9F000F;
   text-align: center;
+  font-weight: 500;
 }
 .btn-confirm-1 {
   width: 50%;
-  color: #ec5300;
+  color: #9F000F;
   text-align: center;
   border-right: 1px solid #dedede;
   border-radius: 0px;
+  font-weight: 500;
 }
 .btn-confirm-1::after {
   border: none;

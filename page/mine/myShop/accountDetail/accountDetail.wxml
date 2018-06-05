@@ -76,7 +76,8 @@
                 </view>
                 <switch class='switch2' bindchange='showModal' checked="{{weixinPayStatus}}" disabled></switch>
             </view>
-            <view>
+             <view class="top-input-box flex-col">
+            <view class='pay-method'>
                 <view>
                     <text>微信支付方式已确定, 更改请联系系统管理员</text>
                 </view>
@@ -89,6 +90,7 @@
                         <text class='bottom-text'>Please contact our admin via wechat account to complete related documents. After 3-5 business days of application, wechat payment will be automatically enabled.</text>
                     </block>
                 </view>
+            </view>
             </view>
             <view class="commodity_attr_box bottom-window" wx:if="{{showModalStatus || weixinPayStatus}}">
                 <view class="top-input-box flex-col">

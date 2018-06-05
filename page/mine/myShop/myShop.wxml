@@ -11,7 +11,7 @@
 
                     <view class='explain-line1'>
                         <image style="height:22px;width:22px;" src='../../../image/withdraw.png'></image>
-                        <button style='background: linear-gradient(to top right, #DC143C, #FA8072);color:white;font-size:20rpx; border-radius: 10rpx;margin-left:20rpx;'>提现</button>
+                        <button style=' background: linear-gradient(to top right, #9F000F, #FA8072);color:white;font-size:20rpx; border-radius: 10rpx;margin-left:20rpx;'>提现</button>
                     </view>
                 </view>
 

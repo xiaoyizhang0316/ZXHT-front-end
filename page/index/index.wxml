@@ -90,7 +90,9 @@
 <swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight}}px" bindchange="bindChange">
     <swiper-item>
         <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
+
             <view class="newest">
+
                 <!-- <view class="newest-title">
                     <text>本期折扣</text>
                 </view> -->
@@ -131,7 +133,9 @@
 
     <swiper-item>
         <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
+
             <view class="newest">
+
                 <!-- <view class="newest-title">
                     <text>来自{{userName}}的推荐</text>
                 </view> -->
@@ -149,7 +153,9 @@
 
     <swiper-item>
         <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
+
             <view class="newest">
+
                 <!-- <view class="newest-title">
                     <text>本店热卖</text>
                 </view> -->

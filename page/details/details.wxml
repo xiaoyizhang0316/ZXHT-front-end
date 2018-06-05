@@ -28,7 +28,7 @@
 			<block wx:else="{{goods.price < goods.basePrice}}">
             <text class="goods-price del">     </text>
 			</block>
-            <image src="/image/cart3.png" class="goods-cart-img"></image>
+            <image src="/image/cart-plus.png" class="goods-cart-img"></image>
 
 
         </view>

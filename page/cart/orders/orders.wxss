@@ -198,9 +198,9 @@ opacity: 0.7;
     width: 220rpx;
     text-align: center;
     color: #fff;
-    background: #C70039;
+     background-color: #9F000F;
+   opacity: 0.7;
     font-size: 30rpx;
-    opacity: 0.7;
 }
 
 

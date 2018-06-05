@@ -51,6 +51,7 @@ page {
   flex:9;
   justify-content:flex-start;
   align-items:center;
+  padding-left: 30rpx;
 }
 
 

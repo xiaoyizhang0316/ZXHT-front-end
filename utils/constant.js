@@ -1,7 +1,7 @@
 //url相关
-//const BASE_URL = "https://mini.zhenxianghaitao.com"
+const BASE_URL = "https://mini.zhenxianghaitao.com"
 
-const BASE_URL = "https://9f9b229a.ngrok.io"
+//const BASE_URL = "https://9f9b229a.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/mini/"
 const IMG_DETAIL_BASE = "https://img.zhenxianghaitao.com/"
 //登录 初始设置

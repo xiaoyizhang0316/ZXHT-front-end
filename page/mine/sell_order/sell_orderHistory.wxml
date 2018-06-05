@@ -4,7 +4,7 @@
         <view style="flex-direction:row;justify-content:space-between;flex:1;display: flex;margin-bottom: 10px;padding-top:10px;">
             <view class="search-input" style="height:25px;">
                 <view>
-                    <image style="height:25px;width:25px;" src="/image/public/find.png"></image>
+                    <image style="height:21px;width:21px;margin-top:7rpx; margin-left:10rpx;margin-right:5rpx;" src="/image/public/find.png"></image>
                 </view>
                 <input focus="{{focus}}" value="{{search}}" placeholder="搜索收件人姓名、手机、订单SN编号和商品" placeholder-class="placeholderstyle" cursor-spacing="50px" confirm-type="search" type="text" bindinput="searchOrder" focus="{{isFocus}}" auto-focus="{{isFocus}}" />
                 <view class="{{displayClear?'':'hidden'}}" bindtap="reset">
