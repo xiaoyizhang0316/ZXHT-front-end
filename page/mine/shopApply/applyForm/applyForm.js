@@ -105,6 +105,8 @@ Page({
    */
   onLoad: function (options) {
     self = this
+	let rate = wx.getStorageSync("shopParams").rate
+	this.setData({rate : rate})
     wx.getUserInfo({
       success: function (res) {
         self.setData({
@@ -185,7 +187,17 @@ Page({
 		{
 			wx.showModal({
 				title: '开店失败',
-				content: "请输入正确的汇率 e.g 0.00"
+				content: "请输入正确的汇率 e.g 0.00",
+				showCancel:false,
+			})
+			return
+		}
+		if(self.data.rate <= 0)
+		{
+			wx.showModal({
+				title: '开店失败',
+				content: "请输入正确的汇率 e.g 0.00",
+				showCancel: false,
 			})
 			return
 		}

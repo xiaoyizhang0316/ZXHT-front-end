@@ -266,9 +266,19 @@ Page({
   },
 
   addDiscount: function (e) {
+	  let self = this
 	  this.setData({
 		  'selectedProduct.discount': e.detail.value
 	  })
+	  
+	  if (e.detail.value)
+	  {
+		  let price = self.data.selectedProduct.discountPrice >= 0.1 ? self.data.selectedProduct.discountPrice : self.data.selectedProduct.vip3Price  
+		  self.setData({
+			  'selectedProduct.discountPrice': price
+		  })
+	  }
+	  console.log(self.data.selectedProduct)
   },
   addHot: function (e) {
     this.setData({
@@ -347,7 +357,7 @@ Page({
   },
   updateDiscountPrice: function (e) {
 	 
-	  let price = parseFloat(e.detail.value);
+	  let price = parseFloat(e.detail.value);console.log(price);
 	  if (price >= 0.1) {
 		  this.setData({ 'selectedProduct.discountPrice': price });
 	  }else{
@@ -382,7 +392,49 @@ Page({
     if (self.data.tmp && self.data.tmp.vipPrice) {
       self.setData({ 'selectedProduct.vipPrice': self.data.tmp.vipPrice });
     }
-
+	let product = self.data.selectedProduct
+	if(product.price < 0.1)
+	{
+		wx.showModal({
+			title: '请检查',
+			content: '青铜会员价格最低为0.1',
+			showCancel:false
+		})
+		return
+	}
+	if (product.vip1Price < 0.1) {
+		wx.showModal({
+			title: '请检查',
+			content: '白银会员价格最低为0.1',
+			showCancel: false
+		})
+		return
+	}
+	if (product.vip2Price < 0.1) {
+		wx.showModal({
+			title: '请检查',
+			content: '黄金会员价格最低为0.1',
+			showCancel: false
+		})
+		return
+	}
+	if (product.vip3Price < 0.1) {
+		wx.showModal({
+			title: '请检查',
+			content: '钻石会员价格最低为0.1',
+			showCancel: false
+		})
+		return
+	}
+	if (product.discount && product.discountPrice < 0.1) {
+		wx.showModal({
+			title: '请检查',
+			content: '打折价格最低为0.1',
+			showCancel: false
+		})
+		return
+	}
+	console.log(self.data.selectedProduct)
     COM.load('NetUtil').netUtil(url, 'POST', self.data.selectedProduct, function (res) {
       wx.showToast({
         title: '数据更新成功',

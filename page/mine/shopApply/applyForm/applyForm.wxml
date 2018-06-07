@@ -21,12 +21,12 @@
                 <view class="pay-method">
                     <text>店铺汇率</text>
                     <view class='bottom-text'>
-                        <text>店铺商品管理使用澳元,展示使用RMB</text>
+                        <text>店铺商品管理使用澳元,展示给客户使用RMB</text>
                     </view>
 
 
                 </view>
-                <input style="flex:6" placeholder="请输入店铺汇率" bindinput="bindRate" name="rate" />
+                <input style="flex:4" placeholder="请输入店铺汇率" bindinput="bindRate" name="rate" value="{{rate}}"/>
 
             </view>
 			<view class="shop-msg top-input-box flex-col" bindtap='bindExtra'>

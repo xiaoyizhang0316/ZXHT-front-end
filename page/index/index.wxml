@@ -17,13 +17,10 @@
     <view class="main-profile">
         <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
         <view style="width:80%; flex-direction:row; display:flex; ">
-            <!-- <text id="name">{{userName}}</text>
-      <view style="height:20rpx;">
-      </view> -->
 
-      <text id="sign">{{sign}}</text>
-      <image style="height:25px;width:25px;position:absolute;right:40rpx;opacity:0.7;" src="/image/public/video.png" catchtap='displayShopNote' ></image>
-      </view>
+            <text id="sign">{{sign}}</text>
+            <image style="height:25px;width:25px;position:absolute;right:40rpx;opacity:0.7;" src="/image/public/video.png" catchtap='displayShopNote'></image>
+        </view>
 
     </view>
 
@@ -75,7 +72,7 @@
         <text>来自{{userName}}的</text>
     </view>
 </view>
-<view class="swiper-tab">
+<view class="swiper-tab {{fixTop ? 'fixTop' : ''}}">
     <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
         本期折扣
     </view>
@@ -172,7 +169,7 @@
 
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
-   <view>
-  <textarea disabled='true' class="myTextArea"  maxlength = "-1"  value="{{shopNote ? shopNote : '暂无'}}" />
-</view>
+    <view>
+        <textarea disabled='true' class="myTextArea" maxlength="-1" value="{{shopNote ? shopNote : '暂无'}}" />
+    </view>
 </view>

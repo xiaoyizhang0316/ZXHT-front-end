@@ -307,3 +307,12 @@ input-holder {
     background-color: #fff;
     box-sizing: border-box;
 }
+.fixTop {
+	position:fixed !important;
+	top:0% !important;
+	background-color: black;
+	margin-bottom: 80rpx;
+	z-index: 999;
+	height:90rpx
+
+}

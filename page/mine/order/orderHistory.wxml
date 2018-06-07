@@ -21,7 +21,8 @@
             <view style="padding-left:20rpx;font-size:12px;flex:3.5;color:grey;">订单: {{item.orderInfo.orderSN}}</view>
             <view style="padding-left:20rpx;font-size:12px;flex:3;color:grey;">{{item.orderInfo.addTime}}</view>
             <view style="font-size:14px;flex:1.5;">{{item.consignee.name}}</view>
-            <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
+
+            <view wx:if="{{item.orderInfo.orderStatus == 1 || item.orderInfo.orderStatus==2}}" style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
                 <image style="height:20px;width:20px;" src="/image/public/clear.png"></image>
             </view>
         </view>

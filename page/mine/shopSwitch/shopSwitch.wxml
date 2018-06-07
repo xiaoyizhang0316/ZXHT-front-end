@@ -1,48 +1,52 @@
 <!--page/mine/shopSwitch/shopSwitch.wxml-->
 <view class='container'>
-  <view class="top-containerbar">
-      已关注<text class='shop-num'>{{shopLineList.length}}</text>个店铺
-  </view>
-
-
-	
-  <scroll-view class = 'shop-list' scroll-y="{{true}}" style="height:{{winHeight-88}}px" >
-    <radio-group class="shop-radio-group" bindchange="radioChange">
-      <view class='shop-item' wx:for="{{shopLineList}}" wx:key="{{index}}" data-id="{{item.id}}">
-        <radio class='shop-item-radio' value="{{index}}" checked="{{item.selected}}"/>
-        <image class='shop-item-image' src="{{item.shop_logo}}"></image>
-        <view class='shop-item-desc'>
-          <view class='shop-item-name'>{{item.shop_name}}</view>
-
-    <view class="explain-line">  
-      <image class='image-icon' src="/image/card.png"></image>
-          <view class="explain-text">预存款:￥{{item.deposit}}</view>
-     <image class='image-icon' src="/image/vip.png"></image>
-      <view class="explain-text">{{item.vipLevel}}</view>
+    <view class="top-containerbar">
+        已关注
+        <text class='shop-num'>{{shopLineList.length}}</text>个店铺
     </view>
-    
 
-      
-					<block wx:if="{{item.selected == true}}">
-                  <view class='shop-item-tips'>您位于当前店铺</view>
-          </block>
-					<view class='shop-item-tips'></view>
+
+
+    <scroll-view class='shop-list' scroll-y="{{true}}" style="height:{{winHeight-88}}px">
+        <radio-group class="shop-radio-group" bindchange="radioChange">           
+            <radio wx:for="{{shopLineList}}" wx:key="{{index}}" data-id="{{item.id}}" value="{{index}}" checked="{{item.selected}}">               
+                <view class='shop-item'>
+
+                    <image class='shop-item-image' src="{{item.shop_logo}}"></image>
+
+                    <view class='shop-item-desc'>
+                        <view class='shop-item-name'>{{item.shop_name}}</view>
+
+                        <view class="explain-line">
+                            <image class='image-icon' src="/image/card.png"></image>
+                            <view class="explain-text">预存款:￥{{item.deposit}}</view>
+                            <image class='image-icon' src="/image/vip.png"></image>
+                            <view class="explain-text">{{item.vipLevel}}</view>
+                        </view>
+
+
+
+                        <block wx:if="{{item.selected == true}}">
+                            <view class='shop-item-tips'>您位于当前店铺</view>
+                        </block>
+                        <view class='shop-item-tips'></view>
+                    </view>
+                </view>
+            </radio>
+        </radio-group>
+    </scroll-view>
+
+
+    <view class='bottom-bar'>
+        <view class='bottom-bar-desc'>
+            <block wx:if="{{isSelect}}">
+                <image class='shop-icon' src='/image/shop-color.png'></image>
+                <text class='selected-shop-name'>{{selectedShop.shop_name}}</text>
+            </block>
+            <block wx:else>
+                <image class='shop-icon' src='/image/shop-grey.png'></image>
+            </block>
         </view>
-      </view>
-    </radio-group>
-  </scroll-view>
-
-
-  <view class='bottom-bar'>
-    <view class='bottom-bar-desc'>
-      <block wx:if="{{isSelect}}">
-        <image class='shop-icon' src='/image/shop-color.png'></image>
-        <text class='selected-shop-name'>{{selectedShop.shop_name}}</text>
-      </block>
-      <block wx:else>
-        <image class='shop-icon' src='/image/shop-grey.png'></image>
-      </block>
+        <button type='warn' size='mini' bindtap='switchShop' data-id="{{selectedShop.shop_openId}}">切换</button>
     </view>
-    <button type='warn' size='mini' bindtap='switchShop' data-id="{{selectedShop.shop_openId}}">切换</button>
-  </view>
 </view>

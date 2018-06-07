@@ -35,6 +35,7 @@ Page({
 		rate: 5,
 		currentTab: 0,
 		showModel:false,
+		fixTop:false
 
 	},
 
@@ -404,6 +405,14 @@ Page({
 	},
 	preventTouchMove: function () {
 	},
+	onPageScroll: function (e) {
+		let self = this
+		console.log(e.scrollTop)
+		console.log(self.data.fixTop)
+		self.setData({ fixTop: e.scrollTop > 326 })
+		
+		
+	}
 
 
 })
