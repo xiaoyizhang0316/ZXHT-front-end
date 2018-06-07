@@ -1,6 +1,6 @@
 @import '../../common/common.wxss';
 
-.orders-address{
+.orders-address {
     position: relative;
     padding: 20rpx 50rpx 20rpx 35rpx;
     font-size: 14px;
@@ -9,7 +9,8 @@
     border-bottom: 10rpx solid #ededed;
     color: #adadad;
 }
-.orders-address::after{
+
+.orders-address::after {
     position: absolute;
     right: 30rpx;
     top: 50%;
@@ -21,12 +22,13 @@
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-.orders-address-name{
+
+.orders-address-name {
     display: inline-block;
     width: 300rpx;
 }
 
-.orders-no-address{
+.orders-no-address {
     position: relative;
     height: 90rpx;
     line-height: 90rpx;
@@ -34,7 +36,8 @@
     border-bottom: 10rpx solid #ededed;
     text-align: center;
 }
-.orders-no-address::after{
+
+.orders-no-address::after {
     position: absolute;
     right: 30rpx;
     top: 34rpx;
@@ -48,30 +51,27 @@
 }
 
 .orders-msg-label {
-  color: #454552;
+    color: #454552;
 }
 
-
-#txt1:after{
+#txt1:after {
     content: '红包抵扣';
     font-size: 14px;
-    color: #A9A9A9;
+    color: #a9a9a9;
     padding-left: 450rpx;
-
 }
 
 .orders-msg {
-  position: relative;
-  padding: 20rpx 50rpx 20rpx 35rpx;
+    position: relative;
+    padding: 20rpx 50rpx 20rpx 35rpx;
     line-height: 50rpx;
     color: #adadad;
     border-bottom: 3rpx solid #ededed;
-    font-size:14px;
+    font-size: 14px;
+    margin-bottom: 100rpx;
 }
 
-
-
-.orders-msg::after{
+.orders-msg::after {
     position: absolute;
     right: 30rpx;
     top: 34rpx;
@@ -85,9 +85,9 @@
     align-items: center;
 }
 
-.red-amount{
-position: relative;
-  padding: 20rpx 20rpx 20rpx 35rpx;
+.red-amount {
+    position: relative;
+    padding: 20rpx 20rpx 20rpx 35rpx;
     line-height: 50rpx;
     color: #696969;
     border-bottom: 10rpx solid #ededed;
@@ -95,21 +95,20 @@ position: relative;
     justify-content: space-between;
     flex-direction: row;
     display: flex;
-
-     }
-
-.red-amount-msg {
-  color: #696969;
 }
 
+.red-amount-msg {
+    color: #696969;
+}
 
-.orders-list{
+.orders-list {
     position: relative;
-    padding:10rpx 20rpx 20rpx 220rpx;
+    padding: 10rpx 20rpx 20rpx 220rpx;
     height: 140rpx;
     border-bottom: 1rpx solid #ededed;
 }
-.orders-thumb{
+
+.orders-thumb {
     position: absolute;
     top: 20rpx;
     left: 20rpx;
@@ -118,63 +117,57 @@ position: relative;
 }
 
 .orders-pro-name {
-  padding-top:10px;
-  color:#696969;
-  font-size: 25rpx;
+    padding-top: 10px;
+    color: #696969;
+    font-size: 25rpx;
 }
 
-
-.list-container{
-  border: 1rpx solid #ededed;
-  margin-top: 50rpx;
-  flex-direction: column;
-  display: flex;
-  margin-left: 20rpx;
-  margin-right: 20rpx;
-  margin-bottom: 10rpx;
- 
+.list-container {
+    border: 1rpx solid #ededed;
+    margin-top: 50rpx;
+    flex-direction: column;
+    display: flex;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    margin-bottom: 10rpx;
 }
 
-.explain-block{
-  font-size: 30rpx;
-  color: #696969;
-  justify-content: center;
-  display: flex;
-  height: 90rpx;
-  align-items: center;
-  background-color: #f6f6f6;
-  font: bold;
- 
+.explain-block {
+    font-size: 30rpx;
+    color: #696969;
+    justify-content: center;
+    display: flex;
+    height: 90rpx;
+    align-items: center;
+    background-color: #f6f6f6;
+    font: bold;
 }
 
-.explain-line{
-
-  width: 90%;
-  height: 70rpx;
-  padding-left: 30rpx;
-  /* line-height: 30px; */
-  background-color: white;
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-top: 3rpx;
-  font-size: 28rpx;
-  color: #696969;
-  flex-direction: row;
-  justify-content: space-between;
+.explain-line {
+    width: 90%;
+    height: 70rpx;
+    padding-left: 30rpx;
+    /* line-height: 30px; */
+    background-color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 3rpx;
+    font-size: 28rpx;
+    color: #696969;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.botton-contaniner-text{
+.botton-contaniner-text {
     margin-top: 27rpx;
-  width: 35%;
-  color:#FFFFFF;
-background-color:#1AAD19;
-opacity: 0.7;
+    width: 35%;
+    color: #fff;
+    background-color: #1aad19;
+    opacity: 0.7;
 }
 
-
-
-.orders-footer{
+.orders-footer {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -184,239 +177,247 @@ opacity: 0.7;
     border-top: 1rpx solid #ededed;
 }
 
-.orders-footer .orders-footer-total{
+.orders-footer .orders-footer-total {
     display: inline-block;
     width: 530rpx;
     padding-left: 20rpx;
     box-sizing: border-box;
-    color:#ef3535;
+    color: #ef3535;
     font-size: 25rpx;
 }
 
-.orders-footer .orders-footer-btn{
+.orders-footer .orders-footer-btn {
     display: inline-block;
     width: 220rpx;
     text-align: center;
     color: #fff;
-     background-color: #9F000F;
-   opacity: 0.7;
+    background-color: #9f000f;
+    opacity: 0.7;
     font-size: 30rpx;
 }
 
-
-
 .orders-pro-price1 {
-  color: #696969;
-  font-size: 25rpx;
-  padding-right: 120rpx;
+    color: #696969;
+    font-size: 25rpx;
+    padding-right: 120rpx;
 }
 
-.orders-pro-price2{
-  color: #C0C0C0;
-  font-size: 25rpx;
-  padding-right: 170rpx;
-  text-decoration: line-through;
+.orders-pro-price2 {
+    color: #c0c0c0;
+    font-size: 25rpx;
+    padding-right: 170rpx;
+    text-decoration: line-through;
 }
 
-.orders-pro-num{
-  color: #696969;
-  font-size: 25rpx;
+.orders-pro-num {
+    color: #696969;
+    font-size: 25rpx;
 }
 
 /* 底部弹窗-start */
 
 .commodity_screen {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: #000;
-  opacity: 0.2;
-  overflow: hidden;
-  z-index: 1000;
-  color: #fff;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.2;
+    overflow: hidden;
+    z-index: 1000;
+    color: #fff;
 }
 
 .commodity_attr_box {
-  width: 100%;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 2000;
-  background: #fff;
-  padding-top: 20rpx;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+    background: #fff;
+    padding-top: 20rpx;
 }
 
 .bottom-window {
-  display: flex;
-  flex-direction: column;
-  height:800rpx;
-  padding-bottom: 20rpx;
+    display: flex;
+    flex-direction: column;
+    height: 800rpx;
+    padding-bottom: 20rpx;
 }
 
 .bottom-window-detail-icon {
-  position: absolute;
-  width: 60rpx;
-  height: 60rpx;
-  top: 10rpx;
-  right: 10rpx;
+    position: absolute;
+    width: 60rpx;
+    height: 60rpx;
+    top: 10rpx;
+    right: 10rpx;
 }
-.bottom-window-detail-arrow{
-  width: 60rpx;
-  height: 60rpx;
+
+.bottom-window-detail-arrow {
+    width: 60rpx;
+    height: 60rpx;
 }
+
 .bottom-window-detail {
-  border-bottom: 1px solid #ededed;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  width: 100%;
-  height: 40px;
+    border-bottom: 1px solid #ededed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
 }
+
 .bottom-window-detail text {
-  font-size: 40rpx;
-  font-weight: 500;
+    font-size: 40rpx;
+    font-weight: 500;
 }
+
 .bottom-window-price {
-  border-bottom: 1px solid #ededed;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; 
-  align-items: center;
-  align-content: center;
-  height: 60px;
-  /* padding-right: 15px; */
-  padding-left:15px;
+    border-bottom: 1px solid #ededed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 60px;
+    /* padding-right: 15px; */
+    padding-left: 15px;
 }
+
 .bottom-window-price text {
-  color: #888;
-  font-size: 34rpx;
-  font-weight: 500;
-}
-.bottom-window-pay{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top:30rpx;
-  font-size:20px;
-  padding: 15px;
-}
-.bottom-window-button{
-  width:90%;
-  position: absolute;
-  bottom: 30rpx;
-  left: 40rpx;
+    color: #888;
+    font-size: 34rpx;
+    font-weight: 500;
 }
 
+.bottom-window-pay {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 30rpx;
+    font-size: 20px;
+    padding: 15px;
+}
 
+.bottom-window-button {
+    width: 90%;
+    position: absolute;
+    bottom: 30rpx;
+    left: 40rpx;
+}
 
 /***** 弹窗start *****/
+
 .modal-mask {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: #000;
-  opacity: 0.5;
-  overflow: hidden;
-  z-index: 9000;
-  color: #fff;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.5;
+    overflow: hidden;
+    z-index: 9000;
+    color: #fff;
 }
 
 .modal-dialog {
-  width: 540rpx;
-  overflow: hidden;
-  position: fixed;
-  top: 50%;
-  left: 0;
-  z-index: 9999;
-  background: #f9f9f9;
-  margin: -180rpx 105rpx;
-  border-radius: 36rpx;
+    width: 540rpx;
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 9999;
+    background: #f9f9f9;
+    margin: -180rpx 105rpx;
+    border-radius: 36rpx;
 }
 
 .modal-title {
-  padding-top: 50rpx;
-  font-size: 36rpx;
-  color: #030303;
-  text-align: center;
+    padding-top: 50rpx;
+    font-size: 36rpx;
+    color: #030303;
+    text-align: center;
 }
 
 .modal-content {
-  padding: 50rpx 32rpx;
-  text-align: center
+    padding: 50rpx 32rpx;
+    text-align: center;
 }
 
 .modal-input {
-  display: flex;
-  background: #fff;
-  border: 2rpx solid #ddd;
-  border-radius: 4rpx;
-  font-size: 28rpx;
+    display: flex;
+    background: #fff;
+    border: 2rpx solid #ddd;
+    border-radius: 4rpx;
+    font-size: 28rpx;
 }
 
-
 .input {
-  width: 100%;
-  height: 66rpx;
-  font-size: 28rpx;
-  line-height: 28rpx;
-  padding: 0 20rpx;
-  box-sizing: border-box;
-
-  color: #333;
+    width: 100%;
+    height: 66rpx;
+    font-size: 28rpx;
+    line-height: 28rpx;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    color: #333;
 }
 
 input-holder {
-  color: #666;
-  font-size: 28rpx;
+    color: #666;
+    font-size: 28rpx;
 }
 
 .code-input {
-  margin-top: 20rpx;
+    margin-top: 20rpx;
 }
+
 .code-input input {
-  width: 100%;
+    width: 100%;
 }
-.code-input button{
-  font-size: 22rpx;
-  width: 300rpx;
-  text-align: center;
-  vertical-align: middle;
+
+.code-input button {
+    font-size: 22rpx;
+    width: 300rpx;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .modal-footer {
-  display: flex;
-  flex-direction: row;
-  height: 86rpx;
-  border-top: 1px solid #dedede;
-  font-size: 34rpx;
-  line-height: 86rpx;
+    display: flex;
+    flex-direction: row;
+    height: 86rpx;
+    border-top: 1px solid #dedede;
+    font-size: 34rpx;
+    line-height: 86rpx;
 }
 
 .btn-cancel {
-  width: 50%;
-  color: #666;
-  text-align: center;
-  border-right: 1px solid #dedede;
+    width: 50%;
+    color: #666;
+    text-align: center;
+    border-right: 1px solid #dedede;
 }
 
 .btn-confirm {
-  width: 50%;
-  color: #ec5300;
-  text-align: center;
+    width: 50%;
+    color: #ec5300;
+    text-align: center;
 }
-.privacyText{
-	font-size: 24rpx;
-	max-width: 320rpx;
-	text-align: center;
 
+.privacyText {
+    font-size: 24rpx;
+    max-width: 320rpx;
+    text-align: center;
 }
-button::after{ border: none; 
-border-right: 1px solid #dedede;
-border-radius: 0px}
+
+button::after {
+    border: none;
+    border-right: 1px solid #dedede;
+    border-radius: 0px;
+}
+
 /***** 弹窗end *****/

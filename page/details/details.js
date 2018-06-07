@@ -52,7 +52,10 @@ Page({
   addToCart() {
     const self = this;
     console.log(self.data.numInCart)
-    
+    if(self.data.goods.price == 0)
+	{
+		return;
+	}
     //todo check stock
     if (self.data.goods.stock == '没货'){
       console.log('没货')
