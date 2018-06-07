@@ -44,6 +44,7 @@ page{
   padding-bottom:5px;
   padding-top:5px;
   align-items:center; 
+  font-size: 25rpx;
 }
 
 .receiver-line {
@@ -131,7 +132,6 @@ page{
 .order-cate .order-cate-image {
   width: 180rpx;
   height: 180rpx;
-  border: 1px solid #e6e6e6;
   border-radius: 10px;
 }
 
@@ -147,7 +147,7 @@ page{
 .order-cate .order-cate-title {
   width: 100%;
   color:#515151;
-  font-size:25rpx;
+  font-size:28rpx;
   overflow: hidden; 
   white-space: nowrap; 
   text-overflow:ellipsis;
@@ -155,7 +155,7 @@ page{
 
 
 .order-cate .order-cate-num {
-  font-size: 28rpx;
+  font-size: 26rpx;
   color: #888;
   padding-bottom: 30rpx;
   padding-top:5rpx;
@@ -165,7 +165,7 @@ page{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size:30rpx;
+  font-size:26rpx;
   color:#515151;
 }
 
@@ -193,3 +193,17 @@ page{
   /* border:1px solid #e64949; */
   font-size:15px;
 }
+
+
+.button-red{
+  margin-right:10px;
+  margin-left:0px;
+  display:flex;
+  /* border:1px solid #e64949; */
+  font-size:15px;
+  background-color: #9F000F;
+  color: white;
+  opacity: 0.7;
+}
+
+

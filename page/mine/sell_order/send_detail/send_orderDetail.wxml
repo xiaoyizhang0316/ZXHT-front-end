@@ -45,7 +45,7 @@
     <scroll-view scroll-y="true" style="height:{{winHeight-50}}px">
 
 
-        <view class="explain-line" style='background:#eff3f4;justify-content:flex-start'>
+        <view class="explain-line" style='background:white; font-weight:400;justify-content:flex-start'>
             <view class="text">订单详情</view>
         </view>
 
@@ -54,7 +54,7 @@
                 <view class="inner-explain-line">
                     <view class="explain-text" style="padding-left:9px">订单编号</view>
                     <view class="explain-value" style="margin-right:5px">{{orderId}}</view>
-                    <view class="explain-value" style="align-items:center;justify-content: center;border:1px solid #e6e6e6;flex:1;border-radius:3px;" catchtap="copyOrderId">复制</view>
+                    <button class="explain-value" style="align-items:center;justify-content: center;flex:1;border-radius:3px;position:absolute; right:40rpx; background-color:white;" catchtap="copyOrderId"> 复制 </button>
                 </view>
                 <view style="display:flex;">
                     <view class="explain-text" style="padding-left:9px">订单日期</view>
@@ -89,7 +89,8 @@
 
         <view class="explain-line" style="border-top:1px solid #eff3f4">
             <view class="inner-explain-line">
-                <view class="explain-text">收件地址</view>
+                <!-- <view class="explain-text">收件地址</view> -->
+                <image style="width:25px;height:25px;margin-right:55rpx;margin-left:40rpx;" src="../../../../image/location.png" ></image>
                 <view class="explain-value">
                     <view>
                         <text>{{receiver.name}}</text>
@@ -106,7 +107,7 @@
                         </view>
                     </view>
 
-                    <view class="explain-line" style="padding-bottom:5px;">
+                    <view class="explain-line" >
                         <view class="receiver-line">
                             <view class="explain-value" style="line-height:15px;">
                                 {{receiver.city}} {{receiver.detail}}
@@ -161,9 +162,9 @@
         </block>
 
 
-        <view class="explain-line" style="border-top:20px solid #eff3f4">
+        <view class="explain-line" style="border-top:1px solid #eff3f4">
             <view class="inner-explain-line">
-                <view class="explain-text">订单商品</view>
+                <view class="text">订单商品</view>
             </view>
         </view>
 

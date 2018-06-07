@@ -12,7 +12,7 @@
             <view class="inner-explain-line">
                 <view class="explain-text" style="padding-left:9px">订单编号</view>
                 <view class="explain-value" style="margin-right:5px">{{orderId}}</view>
-                <view class="explain-value" style="align-items:center;justify-content: center;border:1px solid #e6e6e6;flex:1;border-radius:3px;" catchtap="copyOrderId">复制</view>
+                <button class="explain-value" style="align-items:center;justify-content: center;border-radius:3px; position:absolute; right:40rpx;" catchtap="copyOrderId">复制</button> 
             </view>
             <view style="display:flex;">
                 <view class="explain-text" style="padding-left:9px">订单日期</view>
@@ -159,7 +159,7 @@
     <block wx:if="{{order.orderInfo.orderStatus == 1}}">
         <!-- <button type="default" class='button' open-type="share">分享代理人</button> -->
         <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">取消订单</button>
-        <button type="default" class='button' bindtap="placeOrder">确认订单</button>
+        <button class='button-red' bindtap="placeOrder">确认订单</button>
     </block>
     <block wx:elif="{{order.orderInfo.orderStatus == 2}}">
         <button type="default" class='button' data-order="{{orderId}}" bindtap="delOrder">取消订单</button>
