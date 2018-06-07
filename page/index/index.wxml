@@ -25,7 +25,10 @@
     </view>
 
 
-    <view class="search-input">
+
+</view>
+<view class="{{fixTop ? 'fixTop' : ''}}">
+    <view class="search-input ">
         <view style="display:flex;flex:1;">
             <view>
                 <image style="height:21px;width:21px;margin-top:7rpx; margin-left:10rpx;" src="/image/public/find.png"></image>
@@ -40,53 +43,29 @@
             <image style="height:21px;width:21px; margin-right: 5px;margin-top:5rpx;" src="/image/public/scan.png"></image>
         </view>
     </view>
-</view>
 
-<!-- <view class="newest" style='margin-top:20px;background-color:#f6f6f6'>
-    <view class="rate">
-      <image src='/image/public/au.png' style="height:21px;width:21px; margin-right: 15px;"></image><text style='padding-top:1px'>1 AUD ≈ {{rate}} CNY</text><image src='/image/public/cn.png' style="height:21px;width:21px; margin-left: 15px;"></image>
+    <view class="newest" style='margin-top:20rpx;background-color:#f6f6f6'>
+        <view class="newest-title">
+            <text>来自{{userName}}的</text>
+        </view>
     </view>
- </view> -->
-<!-- <view class="selected" style='margin-top:-25px;'>
-          <view class="select-title"><text>店主精选</text></view>
-        <view class="select-top">
-            <view class="select-top-small">
-                <navigator url="list/list">
-                    <image src="/image/s1.png"></image>
-                </navigator>
-            </view>
-            <view class="select-top-small">
-                <navigator url="list/list">
-                    <image src="/image/s2.png"></image>
-                </navigator>
-            </view>
-        </view> 
-         <view class="select-bottom">
-            <navigator url="list/list">
-                <image src="/image/s3.png"></image>
-            </navigator>
-        </view>  
-    </view> -->
-<view class="newest" style='margin-top:20px;background-color:#f6f6f6'>
-    <view class="newest-title">
-        <text>来自{{userName}}的</text>
+    <view class="swiper-tab">
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
+            本期折扣
+        </view>
+        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+            倾心推荐
+        </view>
+        <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">
+            超级热卖
+        </view>
     </view>
-</view>
-<view class="swiper-tab {{fixTop ? 'fixTop' : ''}}">
-    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
-        本期折扣
-    </view>
-    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
-        倾心推荐
-    </view>
-    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">
-        超级热卖
-    </view>
+
 </view>
 <!--推荐  -->
 <swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight}}px" bindchange="bindChange">
     <swiper-item>
-        <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
+        <scroll-view scroll-y="{{fixTop}}" style="height:{{winHeight-44}}px">
 
             <view class="newest">
 
@@ -129,7 +108,7 @@
     </swiper-item>
 
     <swiper-item>
-        <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
+        <scroll-view scroll-y="{{fixTop}}" style="height:{{winHeight-44}}px">
 
             <view class="newest">
 
@@ -149,7 +128,7 @@
 
 
     <swiper-item>
-        <scroll-view scroll-y="true" style="height:{{winHeight-44}}px">
+        <scroll-view scroll-y="{{fixTop}}" style="height:{{winHeight-44}}px" >
 
             <view class="newest">
 

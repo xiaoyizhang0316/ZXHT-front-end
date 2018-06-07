@@ -35,7 +35,8 @@ Page({
 		rate: 5,
 		currentTab: 0,
 		showModel:false,
-		fixTop:false
+		fixTop:false,
+		winHeight: 0,
 
 	},
 
@@ -409,11 +410,17 @@ Page({
 		let self = this
 		console.log(e.scrollTop)
 		console.log(self.data.fixTop)
-		self.setData({ fixTop: e.scrollTop > 326 })
+		console.log(self.data.winHeight)
+		let winHeight = self.data.winHeight;
+		let ratio = 421.5/750
+		let height = (winHeight * (1000 - ratio*1000))/1000
+		console.log("222222222222222222222222222222")
+		console.log(height)
+		self.setData({ fixTop: e.scrollTop > height })
 		
 		
-	}
-
+	},
+	
 
 })
 

@@ -310,9 +310,11 @@ input-holder {
 .fixTop {
 	position:fixed !important;
 	top:0% !important;
-	background-color: black;
+	background-color: white;
 	margin-bottom: 80rpx;
 	z-index: 999;
-	height:90rpx
+	height:90rpx;
+	width:100%;
+	opacity: 1;
 
 }

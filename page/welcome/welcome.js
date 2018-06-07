@@ -43,8 +43,9 @@ Page({
 		let self = this
 		if ((app.globalData.openId != null && app.globalData.openId != "") && (app.globalData.userId != false || self.data.count > 5 )) {
 			//如果点了允许 但是数据还没有取到 也要等待
+			self.hideModal();
 			if (self.data.approve == true && app.globalData.userId == false)
-			{
+			{ 
 				setTimeout(function () {
 					self.prepare(e)					
 				}, 1000)
@@ -71,7 +72,6 @@ Page({
 
 	//用户登录后把用户储存在user表里, 把用户是否注册状态存入缓存
 	saveOrUserData: function (userInfo) {
-
 		var self = this
 		let url = COM.load('CON').CREATE_OR_UPDATE_USER;
 		COM.load('NetUtil').netUtil(url, "POST", { "open_id": app.globalData.openId, "name": userInfo.nickName, "avatarUrl": userInfo.avatarUrl, "country": userInfo.country, "province": userInfo.province, "city": userInfo.city }, (callback) => {
