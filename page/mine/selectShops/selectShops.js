@@ -69,6 +69,9 @@ Page({
 				//console.log(self.globalData)
 				for (var x in shops) {
 					let shop = shops[x];
+					//自己的店铺不可转发
+					if (app.globalData.openId == shop.shop.openId)
+					continue
 					if (app.globalData.targetShopId == shop.shop.openId) {
 						shopMap.set(shop.shop.id,
 							{

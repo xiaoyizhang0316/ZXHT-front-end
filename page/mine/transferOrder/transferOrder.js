@@ -31,45 +31,58 @@ Page({
 				}, 1000)
 				return
 			} else {
+				
 				let orderId = options.orderId
-				let url = COM.load('CON').GET_TRANSFER_ORDER + '/' + app.globalData.openId + '/' + orderId;
-				COM.load('NetUtil').netUtil(url, "GET", '', (transferOrderFull) => {
-					console.log(transferOrderFull)
-					if (Object.prototype.toString.call(transferOrderFull.orderStatus) !== '[object Undefined]' && transferOrderFull.orderStatus == 43 && Object.prototype.toString.call(transferOrderFull.transferOrder.transferShopId) !== '[object Undefined]' && transferOrderFull.transferOrder.transferShopId == app.globalData.openId) {
-						wx.showModal({
-							title: '可以发货了',
-							content: '店主已经同意提价,请在下边的页面进行发货',
-							showCancel: false,
-							success: function (res) {
-								if (res.confirm) {
-									wx.redirectTo({
-										url: '/page/mine/sell_order/sell_orderHistory',
-									})
-								}
-							}
-						})
-					}
-					if (Object.prototype.toString.call(transferOrderFull.orderStatus) !== '[object Undefined]' && transferOrderFull.orderStatus == 43 && Object.prototype.toString.call(transferOrderFull.transferOrder.transferShopId) !== '[object Undefined]' && transferOrderFull.transferOrder.originalShopId == app.globalData.openId)
+				let url = COM.load('CON').GET_ORDERINFO + '/' + orderId;
+				COM.load('NetUtil').netUtil(url, "GET", '', (orderInfo) => {
+					if (orderInfo.orderInfo.shopId == app.globalData.openId)
 					{
-						wx.showModal({
-							title: '可以发货了',
-							content: '店主已经同意提价,请在下边的页面进行发货',
-							showCancel: false,
-							success: function (res) {
-								if (res.confirm) {
-									wx.redirectTo({
-										url: '/page/mine/sell_order/sell_orderHistory',
-									})
-								}
-							}
+						wx.redirectTo({
+							url: '/page/mine/getTransferOrder/getTransferOrder?orderId=' + orderId,
 						})
-					}
-					console.log(transferOrderFull)
-					let transferOrder = transferOrderFull.transferOrder
-					let transferOrderGoods = transferOrderFull.transferOrderGoods
-					this.setData({ transferOrder: transferOrder, transferOrderGoods: transferOrderGoods })
-				})
+					}else{
+						let url = COM.load('CON').GET_TRANSFER_ORDER + '/' + app.globalData.openId + '/' + orderId;
+						COM.load('NetUtil').netUtil(url, "GET", '', (transferOrderFull) => {
+							console.log(transferOrderFull)
+							if (Object.prototype.toString.call(transferOrderFull.orderStatus) !== '[object Undefined]' && transferOrderFull.orderStatus == 43 && Object.prototype.toString.call(transferOrderFull.transferOrder.transferShopId) !== '[object Undefined]' && transferOrderFull.transferOrder.transferShopId == app.globalData.openId) {
+								wx.showModal({
+									title: '可以发货了',
+									content: '店主已经同意提价,请在下边的页面进行发货',
+									showCancel: false,
+									success: function (res) {
+										if (res.confirm) {
+											wx.redirectTo({
+												url: '/page/mine/sell_order/sell_orderHistory',
+											})
+										}
+									}
+								})
+							}
+							// if (Object.prototype.toString.call(transferOrderFull.orderStatus) !== '[object Undefined]' && transferOrderFull.orderStatus == 43 && Object.prototype.toString.call(transferOrderFull.transferOrder.transferShopId) !== '[object Undefined]' && transferOrderFull.transferOrder.originalShopId == app.globalData.openId)
+							// {
+							// 	wx.showModal({
+							// 		title: '可以发货了',
+							// 		content: '店主已经同意提价,请在下边的页面进行发货',
+							// 		showCancel: false,
+							// 		success: function (res) {
+							// 			if (res.confirm) {
+							// 				wx.redirectTo({
+							// 					url: '/page/mine/sell_order/sell_orderHistory',
+							// 				})
+							// 			}
+							// 		}
+							// 	})
+							// }
+							// console.log(transferOrderFull)
+							let transferOrder = transferOrderFull.transferOrder
+							let transferOrderGoods = transferOrderFull.transferOrderGoods
+							this.setData({ transferOrder: transferOrder, transferOrderGoods: transferOrderGoods })
+						})
 
+
+					}
+				})
+				
 
 			}
 

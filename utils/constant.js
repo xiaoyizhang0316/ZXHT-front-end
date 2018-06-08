@@ -1,7 +1,7 @@
 //url相关
 const BASE_URL = "https://mini.zhenxianghaitao.com"
 
-//const BASE_URL = "https://9f9b229a.ngrok.io"
+//const BASE_URL = "https://34842770.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/mini/"
 const IMG_DETAIL_BASE = "https://img.zhenxianghaitao.com/"
 //登录 初始设置
@@ -62,7 +62,7 @@ const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/
 //订单
 const SAVE_ORDER_URL = BASE_URL + "/api/mall/orders/saveOrder"
 const GET_ALL_ORDERS_SELLER = BASE_URL + "/api/mall/orders/getOrders/2/"
-const GET_ONE_ORDER_SELLERorSELLER = BASE_URL + "/api/mall/orders/getOrder"
+const GET_ORDERINFO = BASE_URL + "/api/mall/orders/getOrder"
 const GET_ALL_ORDERS_BUYER = BASE_URL + "/api/mall/orders/getOrders/1/"
 const CANCEL_ORDER_BUYER = BASE_URL + "/api/mall/orders/cancelOrder/"
 const UPDATE_ORDER_URL = BASE_URL + "/api/mall/orders/updateOrder"
@@ -115,7 +115,7 @@ module.exports = {
   CREATE_OR_UPDATE_USER: CREATE_OR_UPDATE_USER,
   SAVE_ORDER_URL: SAVE_ORDER_URL,
   GET_ALL_ORDERS_SELLER: GET_ALL_ORDERS_SELLER,
-  GET_ONE_ORDER_SELLERorSELLER: GET_ONE_ORDER_SELLERorSELLER,
+  GET_ORDERINFO: GET_ORDERINFO,
   GET_ALL_ORDERS_BUYER: GET_ALL_ORDERS_BUYER,
   CANCEL_ORDER_BUYER: CANCEL_ORDER_BUYER,
   UPDATE_ORDER_URL: UPDATE_ORDER_URL,
