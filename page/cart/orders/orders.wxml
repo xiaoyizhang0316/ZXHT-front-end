@@ -21,7 +21,7 @@
             </view>
             <view class='explain-line'>
                 <view class="orders-pro-price1">￥ {{item.price}} </view>
-                
+
                 <view class='orders-pro-num'> × {{item.num}}</view>
             </view>
         </view>
@@ -100,10 +100,48 @@
         未登录用户无法购买,是否登录?
     </view>
     <view class="modal-footer">
-		<button open-type="getUserInfo" class="btn-confirm" lang="zh_CN" bindgetuserinfo="onConfirm" bindtap='onBindTap'>登录</button>
+        <button open-type="getUserInfo" class="btn-confirm" lang="zh_CN" bindgetuserinfo="onConfirm" bindtap='onBindTap'>登录</button>
         <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
         <!-- <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> -->
-		<!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
-		
+        <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+
+    </view>
+</view>
+
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showPaymentModalStatus}}"></view>
+<view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showPaymentModalStatus}}">
+    <view class='bottom-window'>
+        <view class='bottom-window-detail'>
+            <text>付款详情</text>
+            <image bindtap="hidepaymentModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
+        </view>
+
+        <view class='bottom-window-price'>
+            <text>付款方式</text>
+            <view style='display:flex;align-content: center;align-items:center;padding-right:15rpx'>
+                <picker bindchange="bindPayChoiceChange" value="{{payChoice[index].id}}" range="{{payChoice}}" data-selecthx="{{payChoice[index].name}}" data-id="{{payChoice[index].id}}" range-key="{{'name'}}">
+                    <view class="picker">
+                        {{payChoice[index].name}}
+                    </view>
+                </picker>
+                <image class='bottom-window-detail-arrow' src='/image/arrow_down.png'></image>
+            </view>
+        </view>
+        <!-- <view class="section">
+		<view class="section__title">选择支付方式</view>
+		<picker bindchange="bindPayChoiceChange" value="{{index}}" range="{{payChoice}}">
+			<view class="picker">
+			当前选择：{{payChoice[index]}}
+			</view>
+		</picker>
+	  </view> -->
+
+        <view class='bottom-window-pay'>
+            <text>需付款</text>
+            <text>￥{{selectedOrder.orderInfo.totalCost}}</text>
+            <!-- <text>约为￥{{selectedOrder.orderInfo.rmb}}</text> -->
+        </view>
+
+        <button data-order="{{selectedOrder.orderInfo.id}}" bindtap='payOrder' class='bottom-window-button' type='primary'>确认付款</button>
     </view>
 </view>

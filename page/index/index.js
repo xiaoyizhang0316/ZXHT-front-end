@@ -12,10 +12,10 @@ Page({
 		hasMoreData: true,
 		goodsList: {},
 		hotList: {},
-		discountList:{},
+		discountList: {},
 		shop: [],
 		imgUrls: [
-		
+
 			'https://img.zhenxianghaitao.com/siteImages/slide1.png',
 			'https://img.zhenxianghaitao.com/siteImages/slide2.png',
 			'https://img.zhenxianghaitao.com/siteImages/slide3.png'
@@ -28,15 +28,20 @@ Page({
 		displayClear: false,
 		userinfo: '',
 		targetShopId: null,
-		sign:"",
-		shopNote:"",
-		shopImg:"",
-		userName:"",
+		sign: "",
+		shopNote: "",
+		shopImg: "",
+		userName: "",
 		rate: 5,
 		currentTab: 0,
-		showModel:false,
-		fixTop:false,
+		showModel: false,
+		showShareModal: false,
+		showQrcodeModal: false,
+		fixTop: false,
 		winHeight: 0,
+		shopQrcode: "",
+
+
 
 	},
 
@@ -96,7 +101,7 @@ Page({
 		this.setData({
 			rate: parseFloat(Math.round(wx.getStorageSync("shopParams").rate * 100) / 100).toFixed(2)
 		})
-	
+
 	},
 	bindChange: function (e) {
 
@@ -113,8 +118,7 @@ Page({
 			})
 		}
 	},
-	displayShopNote : function(e)
-	{
+	displayShopNote: function (e) {
 		let self = this
 		this.setData({
 			showModal: true
@@ -124,9 +128,9 @@ Page({
 		// 	content: self.data.shopNote,
 		// })
 	},
-  /**
-   * load the recomemded products by the shop id
-   */
+	/**
+	 * load the recomemded products by the shop id
+	 */
 	loadRecommendedProducts: function (event) {
 		let self = this
 		//如果有targetShopId 则优先展示
@@ -134,9 +138,9 @@ Page({
 		self.setData({
 			goodsList: {},
 			hotList: {},
-			discountList:{}
+			discountList: {}
 		})
-	
+
 		let shopProducts = wx.getStorageSync("shopProducts");
 		console.log(shopProducts)
 		var shopProductIds = [];
@@ -148,9 +152,9 @@ Page({
 					"id": shopProduct.id,
 					"title": shopProduct.title,
 					"price": shopProduct.basePrice,
-					"vipPrice": shopProduct.discountPrice && shopProduct.discount? shopProduct.discountPrice : shopProduct.vipPrice,
+					"vipPrice": shopProduct.vipPrice,
 					"sales": shopProduct.sales,
-					"thumb": COM.load('Util').image(shopProduct.barcode),					
+					"thumb": COM.load('Util').image(shopProduct.barcode),
 				}
 			}
 			if (shopProduct.stock >= 0 && shopProduct.vipPrice >= 0 && shopProduct.hot) {
@@ -158,9 +162,9 @@ Page({
 					"id": shopProduct.id,
 					"title": shopProduct.title,
 					"price": shopProduct.basePrice,
-					"vipPrice": shopProduct.discountPrice && shopProduct.discount ? shopProduct.discountPrice : shopProduct.vipPrice,
+					"vipPrice": shopProduct.vipPrice,
 					"sales": shopProduct.sales,
-					"thumb": COM.load('Util').image(shopProduct.barcode),		
+					"thumb": COM.load('Util').image(shopProduct.barcode),
 				}
 			}
 			if (shopProduct.stock >= 0 && shopProduct.discountPrice >= 0 && shopProduct.discount) {
@@ -174,14 +178,13 @@ Page({
 				}
 			}
 		}
-		console.log("ooooooooooooooooooooooooooooooooooo")
-		console.log(self.data.discountList)
+
 		self.setData({
 			goodsList: self.data.goodsList,
 			hotList: self.data.hotList,
 			discountList: self.data.discountList
 		})
-		
+
 		wx.setStorage({
 			key: 'shopProductIds',
 			data: shopProductIds,
@@ -190,19 +193,18 @@ Page({
 		console.log(self.data.goodsList)
 		console.log(self.data.hotList)
 		console.log(self.data.discountList)
-		
+
 	},
 
-	
+
 
 	bindSearch: function (event) {
-	if(this.data.focus == false)
-	{
-		wx.navigateTo({
-			url: '/page/index/search/search'
-		})
-	}
-	
+		if (this.data.focus == false) {
+			wx.navigateTo({
+				url: '/page/index/search/search'
+			})
+		}
+
 	},
 
 	resetSearch: function (e) {
@@ -243,9 +245,9 @@ Page({
 		})
 	},
 
-  /**
-   * search the barcode only from internet
-   */
+	/**
+	 * search the barcode only from internet
+	 */
 	searchByBarcode: function (barcode) {
 		var self = this, item;
 
@@ -292,7 +294,7 @@ Page({
 			} else {
 				wx.showModal({
 					title: '提示',
-					content: '小店还没有上架此商品>_<，客官您再看看别的呀',
+					content: '小店还可能已经下架此商品>_<，客官您再看看别的呀',
 					showCancel: false,
 					success: function (res) {
 						if (res.confirm) {
@@ -309,13 +311,12 @@ Page({
 		let self = this
 		let shopOpen = wx.getStorageSync('shopOpened')
 		let openId = ""
-		if(shopOpen == true)
-		{
+		if (shopOpen == true) {
 			openId = app.globalData.openId;
-		}else{
+		} else {
 			openId = "oVxpo5FQkb2qY4TGpD9rq2xFWRlk"
 		}
-		
+
 		console.log(wx.getStorageSync('shopOpened'))
 		console.log(openId)
 		return {
@@ -346,20 +347,17 @@ Page({
 				console.log(shopProducts)
 				wx.setStorageSync("shopProducts", shopProducts)
 			};
-		
-
 			self.onLoad()
 			self.onShow()
 			wx.stopPullDownRefresh()
 
-
 		})
-	
+
 	},
 	onConfirm: function (e) {
 		let self = this
-		
-		
+
+
 		//储存用户信息
 		console.log("********************")
 		app.globalData.nickName = e.detail.userInfo.nickName
@@ -392,6 +390,11 @@ Page({
 			showModal: false
 		});
 	},
+	hideShareModal: function () {
+		this.setData({
+			showShareModal: false
+		});
+	},
     /**
      * 对话框取消按钮点击事件
      */
@@ -408,19 +411,80 @@ Page({
 	},
 	onPageScroll: function (e) {
 		let self = this
-		console.log(e.scrollTop)
-		console.log(self.data.fixTop)
-		console.log(self.data.winHeight)
 		let winHeight = self.data.winHeight;
-		let ratio = 421.5/750
-		let height = (winHeight * (1000 - ratio*1000))/1000
-		console.log("222222222222222222222222222222")
-		console.log(height)
+		let ratio = 421.5 / 750
+		let height = (winHeight * (1000 - ratio * 1000)) / 1000
 		self.setData({ fixTop: e.scrollTop > height })
-		
-		
-	},
-	
 
+	},
+
+	shareShop: function (e) {
+		this.setData({ showShareModal: true })
+	},
+	shareToShop: function (e) {
+		let url = COM.load('CON').GETSHOPIMG + "/" + app.globalData.targetShopId;
+		COM.load('NetUtil').netUtil(url, "GET", "", (callback) => {
+			if (callback == true) {
+				let imgShop = COM.load('CON').IMG_SHOP
+
+				this.setData({
+					qrcode: imgShop + app.globalData.targetShopId + ".png",
+					showQrcodeModal: true,
+					showShareModal: false
+				})
+			} else {
+				wx.showToast({
+					title: 'error',
+				})
+			}
+
+
+		})
+	},
+	hideQrcodeModal: function (e) {
+		this.setData({
+			showQrcodeModal: false
+		});
+	},
+	downloadQrcode: function () {
+		let self = this
+		wx.showLoading({
+			title: '加载中...',
+		})
+		wx.downloadFile({
+			url: this.data.qrcode,
+			success: function (res) {
+				console.log(res)
+				let tempFilePath = res.tempFilePath
+				wx.saveImageToPhotosAlbum({
+					filePath: tempFilePath,
+					success(res) {
+						console.log(res)
+						self.setData({
+							showQrcodeModal: false
+						}
+						)
+						wx.showToast({
+							title: '保存成功',
+						})
+					},
+					fail(res) {
+						console.log(res)
+					},
+					complete(res) {
+						console.log(res)
+					}
+				})
+			},
+
+			fail: function (e) {
+				console.info("下载一个文件失败");
+				console.info(e);
+
+			}
+		})
+
+
+	}
 })
 

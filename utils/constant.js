@@ -1,9 +1,12 @@
 //url相关
 const BASE_URL = "https://mini.zhenxianghaitao.com"
 
-//const BASE_URL = "https://34842770.ngrok.io"
+//const BASE_URL = "https://bdc8d5f7.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/mini/"
 const IMG_DETAIL_BASE = "https://img.zhenxianghaitao.com/"
+const IMG_ID = "https://img.zhenxianghaitao.com/ID/"
+const IMG_SHOP = "https://img.zhenxianghaitao.com/SHOP/"
+const IMG_SHOP_PRODUCT = "https://img.zhenxianghaitao.com/SHOPPRODUCT/"
 //登录 初始设置
 const CATEGORY_URL = BASE_URL + "/api/mall/categories/";
 const SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shopProducts/";
@@ -84,6 +87,7 @@ const DECLINE_TRANSFER_ORDER = BASE_URL + "/api/mall/orders/declineTransferOrder
 
 //功能性
 const UPLOADFILE = BASE_URL + "/api/mall/test/uploadFile"
+const GETSHOPIMG = BASE_URL + "/api/mall/test/shareShop"
 
 module.exports = {
   BASE_URL: BASE_URL,
@@ -143,6 +147,10 @@ module.exports = {
   APPLY_TRANSFER_ORDER: APPLY_TRANSFER_ORDER,
   ACCEPT_TRANSFER_ORDER: ACCEPT_TRANSFER_ORDER,
   DECLINE_TRANSFER_ORDER: DECLINE_TRANSFER_ORDER,
-  GET_CURRENT_ORDERGOOD_PRICE: GET_CURRENT_ORDERGOOD_PRICE
+  GET_CURRENT_ORDERGOOD_PRICE: GET_CURRENT_ORDERGOOD_PRICE,
+  GETSHOPIMG: GETSHOPIMG,
+  IMG_ID : IMG_ID,
+  IMG_SHOP : IMG_SHOP,
+  IMG_SHOP_PRODUCT : IMG_SHOP_PRODUCT,
    
 }

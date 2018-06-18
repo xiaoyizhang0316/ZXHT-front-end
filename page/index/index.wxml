@@ -16,10 +16,11 @@
 
     <view class="main-profile">
         <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
-        <view style="width:80%; flex-direction:row; display:flex; ">
+        <view style="width:70%; flex-direction:row; display:flex; ">
 
             <text id="sign">{{sign}}</text>
-            <image style="height:25px;width:25px;position:absolute;right:40rpx;opacity:0.7;" src="/image/public/video.png" catchtap='displayShopNote'></image>
+            <image style="height:25px;width:25px;position:absolute;right:1rpx;opacity:0.7;" src="/image/public/share1.png" catchtap='shareShop'></image>
+            <image style="height:25px;width:25px;position:absolute;right:60rpx;opacity:0.7;" src="/image/public/video.png" catchtap='displayShopNote'></image>
         </view>
 
     </view>
@@ -128,7 +129,7 @@
 
 
     <swiper-item>
-        <scroll-view scroll-y="{{fixTop}}" style="height:{{winHeight-44}}px" >
+        <scroll-view scroll-y="{{fixTop}}" style="height:{{winHeight-44}}px">
 
             <view class="newest">
 
@@ -150,5 +151,35 @@
 <view class="modal-dialog" wx:if="{{showModal}}">
     <view>
         <textarea disabled='true' class="myTextArea" maxlength="-1" value="{{shopNote ? shopNote : '暂无'}}" />
+    </view>
+</view>
+
+
+<view class="modal-mask" bindtap="hideShareModal" catchtouchmove="preventTouchMove" wx:if="{{showShareModal}}"></view>
+<view class="modal-dialog" wx:if="{{showShareModal}}">
+    <view class="modal-content">
+        <text class="privacyText">请选择分享方式</text>
+    </view>
+    <view class="modal-footer">
+        <button open-type="share" class="btn-confirm">分享好友</button>
+        <view class="btn-cancel" bindtap="shareToShop">分享朋友圈</view>
+        <!-- <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> -->
+        <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+
+    </view>
+</view>
+
+<view class="modal-mask" bindtap="hideQrcodeModal" catchtouchmove="preventTouchMove" wx:if="{{showQrcodeModal}}"></view>
+<view class="modal-qrcodedialog" wx:if="{{showQrcodeModal}}">
+    <view class="modal-content">
+        <image src='{{qrcode}}' style='height:400rpx;width:400rpx'></image>
+        <view class="privacyText">保存图片到本地后分享到朋友圈</view>
+    </view>
+    <view class="modal-footer">
+
+        <view class="btn-downloadConfirm" bindtap="downloadQrcode">保存图片</view>
+        <!-- <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> -->
+        <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+
     </view>
 </view>

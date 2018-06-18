@@ -10,7 +10,15 @@ Page({
 		orders: [],
 		animationData: {},
 		showModalStatus: false,
+	
+		selectedOrder: Object,
+		payChoice: [
+
+		],
+		showPaymentModalStatus:false,
 		showModal: false,
+		index: 0,
+		rate: 0,
 	},
 
 	onReady() {
@@ -87,7 +95,7 @@ Page({
 	},
 
 	placeOrder() {
-		console.log(app.globalData)
+		
 		//let orderTime = COM.load('Util').formatTime(new Date());
 		// if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId || app.globalData.targetShopId == "oVxpo5FQkb2qY4TGpD9rq2xFWRlk") {
 		let self = this
@@ -147,26 +155,92 @@ Page({
 		};
 		let url = COM.load('CON').SAVE_ORDER_URL;
 		COM.load('NetUtil').netUtil(url, "POST", order, (callback) => {
-			wx.showModal({
-				title: '提交订单成功',
-				content: '订单已提交, 请等待店主确认邮费后进行支付',
-				showCancel: false,
-				success: function (res) {
-					if (res.confirm) {
-						wx.switchTab({
-							url: '/page/index/index',
-						})
-					} else if (res.cancel) {
-						wx.switchTab({
-							url: '/page/index/index',
-						})
+			console.log(callback)
+			
+			if(callback.flag == true)
+			{
+				if(callback.freePost == true)
+				{
+					//此店铺为包邮 所以直接调用支付功能					
+					var animation = wx.createAnimation({
+						duration: 200,
+						timingFunction: "linear",
+						delay: 0
+					})
+					self.animation = animation
+					animation.translateY(300).step()					
+					let shop = callback.orderFull.sellerShop
+					let payChoice = []
+					if (shop.offlinePay)
+						payChoice.push({ id: 1, name: "线下支付" });
+					if (shop.prepay) {
+						let deposit = callback.orderFull.applyToShop.deposit
+						payChoice.push({ id: 2, name: "预存款支付(当前预存款为￥" + deposit + ")人民币" });
 					}
+					if (shop.weixinPay)
+						payChoice.push({ id: 3, name: "微信支付" });
+
+					let selectedOrder = callback.orderFull;
+				
+					let rmb = selectedOrder.orderInfo.totalCost;
+					selectedOrder.orderInfo.rmb = rmb;
+					self.setData({
+						animationData: animation.export(),
+						showPaymentModalStatus: true,
+						selectedOrder: selectedOrder,
+						payChoice: payChoice,
+					})
+
+					setTimeout(function () {
+						animation.translateY(0).step()
+						self.setData({
+							animationData: animation.export()
+						})
+					}.bind(self), 200)
 				}
-			})
+				else{
+					wx.showModal({
+						title: '提交订单成功',
+						content: '订单已提交, 请等待店主确认邮费后进行支付',
+						showCancel: false,
+						success: function (res) {
+							if (res.confirm) {
+								wx.switchTab({
+									url: '/page/index/index',
+								})
+							} else if (res.cancel) {
+								wx.switchTab({
+									url: '/page/index/index',
+								})
+							}
+						}
+					})
+				}
+
+			}else{
+				wx.showModal({
+					title: '订单信息错误',
+					content: callback.errorMessage,
+				})
+			}
+			
 		})
 
+		//修改购物车 本单中的货物取消掉 
+		//wx.removeStorageSync("cartList");
+		let cartList = wx.getStorageSync('cartList')
+		cartList = cartList.filter(item => !item.selected)
+		
+		wx.setStorage({
+			key: "cartList",
+			data: cartList
+		})
 		this.saveToOrderHistory(order);
-		wx.removeStorageSync("cartList");
+		wx.switchTab({
+			url: '/page/index/index',
+		})
+
+		
 
 
 
@@ -258,5 +332,127 @@ Page({
 	onBindTap(e) {
 		let self = this
 		this.hideModal();
+	},
+
+
+
+
+
+
+	// 显示遮罩层
+	
+
+	// 隐藏遮罩层
+	hidePaymentModal: function () {
+		var animation = wx.createAnimation({
+			duration: 200,
+			timingFunction: "linear",
+			delay: 0
+		})
+		this.animation = animation
+		animation.translateY(300).step()
+		this.setData({
+			animationData: animation.export(),
+		})
+		setTimeout(function () {
+			animation.translateY(0).step()
+			this.setData({
+				animationData: animation.export(),
+				showModalStatus: false
+			})
+		}.bind(this), 200)
+	},
+
+	//确认支付
+	payOrder: function (e) {
+		var self = this;
+		let order = self.data.selectedOrder;
+
+		//1. offlinePay 2. prepay 3.weixinPay
+		let payChoiceIndex = self.data.payChoice[self.data.index].id
+		console.log
+		if (payChoiceIndex == 2) {
+
+			let rate = wx.getStorageSync("shopParams").rate;
+			if (order.orderInfo.totalCost * 10000 * rate > order.applyToShop.deposit * 10000) {
+				wx.showModal({
+					title: '无法支付',
+					content: '存款余额不足以支付本订单，请储值后购买',
+				})
+
+				return
+			}
+		}
+
+		let url = COM.load('CON').PAY_ORDER_URL + e.currentTarget.dataset.order + "/" + app.globalData.openId + "/" + payChoiceIndex;
+		console.log(url)
+		COM.load('NetUtil').netUtil(url, "GET", {}, (callback) => {
+			if (callback.flag == true) {
+				if (callback.payChoice == 1 || callback.payChoice == 2) {
+					wx.showModal({
+						title: '提示',
+						content: '支付成功',
+						showCancel: false,
+						success: function (res) {
+							if (res.confirm) {
+								wx.navigateBack({
+									delta: 1
+								})
+							}
+						}
+					})
+				} else if (callback.payChoice == 3) {
+					let params = callback.params;
+					wx.requestPayment(
+						{
+							'timeStamp': params.timeStamp,
+							'nonceStr': params.nonceStr,
+							'package': params.package,
+							'signType': params.signType,
+							'paySign': params.paySign,
+							'success': function (res) {
+								wx.showModal({
+									title: '提示',
+									content: '支付成功',
+									showCancel: false,
+									success: function (res) {
+										if (res.confirm) {
+											wx.navigateBack({
+												delta: 1
+											})
+										}
+									}
+								})
+							},
+							'fail': function (res) {
+								wx.showModal({
+									title: '提示',
+									content: '支付失败',
+									showCancel: false,
+									success: function (res) {
+
+									}
+								})
+							},
+							'complete': function (res) {
+								console.log("done");
+							}
+						})
+				}
+
+			} else {
+				wx.showModal({
+					title: '支付失败',
+					content: callback.message ? callback.message : "支付失败",
+				})
+			}
+
+		})
+	},
+	bindPayChoiceChange: function (e) {
+
+		this.setData({
+			index: e.detail.value
+		})
 	},
 })

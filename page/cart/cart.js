@@ -89,6 +89,7 @@ Page({
     this.setData({
       carts: carts
     });
+	
     this.getTotalPrice();
   },
 
@@ -262,6 +263,10 @@ Page({
         return;
       }
     })
+	wx.setStorage({
+		key: "cartList",
+		data: this.data.carts
+	})
 
     wx.navigateTo({
       url: '/page/cart/orders/orders',

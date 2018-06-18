@@ -29,15 +29,23 @@ Page({
 	  prepayStatus: false,
 	  offlinePayStatus: false,
 	  weixinPayStatus: false, 
+	  freePostStatus: false,
 	  //名为memo 实际是shopNote 使用template的原因
-	  memo: ''
+	  memo: '',
+	  extraServices: [],
 
+  },
+  bindFreePost:function(){
+	this.setData({
+		'freePostStatus': !this.data.freePostStatus
+	})
   },
   bindPrePay: function () {
 	  this.setData({
 		  'prepayStatus': !this.data.prepayStatus
 	  })
   },
+
   bindOfflinePay: function () {
 	  this.setData({
 		  'offlinePayStatus': !this.data.offlinePayStatus
@@ -91,6 +99,11 @@ Page({
 		  url: "/page/common/templates/textArea/textArea?content=" + self.data.memo + "&placeHolder=请设定本店铺的用户须知"
 	  })
   },
+  bindExtraServices : function(){
+	  wx.navigateTo({
+		  url: "/page/mine/myShop/accountDetail/extraServices/extraServices?extraServices=" + self.data.extraServices
+	  })
+  },
   radioChange: function (e) {
 	  this.setData({
 		  'shop.payment': e.detail.value,
@@ -123,6 +136,8 @@ Page({
 		'weixinPayStatus': myShopInfo.weixinPay, 
 		'shop.rate': parseFloat(myShopInfo.rate),
 		'memo': myShopInfo.shopNote ? myShopInfo.shopNote : "",
+		'freePostStatus':myShopInfo.freePost,
+		'extraServices' : myShopInfo.extraServices
       })
 	  if(self.data.shop.payment)
 	  {
@@ -232,7 +247,8 @@ Page({
 			  "prepay": self.data.prepayStatus,
 			  "offlinePay": self.data.offlinePayStatus,
 			  "rate": self.data.shop.rate,
-			  "shopNote":self.data.memo
+			  "shopNote":self.data.memo,
+			  "freePost":self.data.freePostStatus,
 			//   "weixinPay": self.data.weixinPayStatus,
 			//   "payment": self.data.shop.payment,
 			//   "bankName": self.data.shop.bankName,

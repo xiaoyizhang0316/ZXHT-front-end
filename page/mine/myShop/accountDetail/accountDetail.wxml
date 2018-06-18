@@ -29,14 +29,27 @@
                 <input style="flex:6" placeholder="请输入店铺汇率" bindinput="bindRate" name="rate" value="{{shop.rate}}" />
 
             </view>
+			<view class="top-input-box flex-col">
+                <view class="pay-method">
+                    <text>包邮服务</text>
+                    <view class='bottom-text'>
+                        <text>客户购买后店家不须手动写入邮费</text>
+                    </view>
+                </view>
+                <switch class='switch1' bindchange='bindFreePost' checked="{{freePostStatus}}"></switch>
+            </view>
+			<view class="shop-msg top-input-box flex-col" bindtap='bindExtraServices'>
+                <view class="shop-msg-label">
+                    <text>设置增值服务</text>					
+                </view>
+            </view>
 
             <view class="shop-msg top-input-box flex-col" bindtap='bindExtra'>
                 <view class="shop-msg-label">
                     <text>设置店铺须知</text>
                 </view>
-              
-
             </view>
+
 
 
 
@@ -76,21 +89,21 @@
                 </view>
                 <switch class='switch2' bindchange='showModal' checked="{{weixinPayStatus}}" disabled></switch>
             </view>
-             <view class="top-input-box flex-col">
-            <view class='pay-method'>
-                <view>
-                    <text>微信支付方式已确定, 更改请联系系统管理员</text>
-                </view>
-                <view class='bottom-text'>
-                    <block wx:if="{{shop.payment == 1}}">
-                        <text>提现后资金会在2-4个工作日内到达您的账户</text>
+            <view class="top-input-box flex-col">
+                <view class='pay-method'>
+                    <view>
+                        <text>微信支付方式已确定, 更改请联系系统管理员</text>
+                    </view>
+                    <view class='bottom-text'>
+                        <block wx:if="{{shop.payment == 1}}">
+                            <text>提现后资金会在2-4个工作日内到达您的账户</text>
 
-                    </block>
-                    <block wx:else>
-                        <text class='bottom-text'>Please contact our admin via wechat account to complete related documents. After 3-5 business days of application, wechat payment will be automatically enabled.</text>
-                    </block>
+                        </block>
+                        <block wx:else>
+                            <text class='bottom-text'>Please contact our admin via wechat account to complete related documents. After 3-5 business days of application, wechat payment will be automatically enabled.</text>
+                        </block>
+                    </view>
                 </view>
-            </view>
             </view>
             <view class="commodity_attr_box bottom-window" wx:if="{{showModalStatus || weixinPayStatus}}">
                 <view class="top-input-box flex-col">

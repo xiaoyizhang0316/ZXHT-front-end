@@ -271,11 +271,11 @@ Page({
   },
 
 	downloadIDs: function(e){
-		let imgBase = COM.load('CON').IMG_BASE
+		let imgID = COM.load('CON').IMG_ID
 
 		console.log(this.data.receiver)
-		let url1 = imgBase + "ID/" + this.data.receiver.correctSidePic + ".png";
-		let url2 = imgBase + "ID/" + this.data.receiver.oppositeSidePic + ".png";
+		let url1 = imgID + this.data.receiver.correctSidePic + ".png";
+		let url2 = imgID + this.data.receiver.oppositeSidePic + ".png";
 		console.log("++++++++++++++++++++++++++++++++++++++++++++")
 		
 		console.log(url2)

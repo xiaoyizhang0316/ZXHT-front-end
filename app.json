@@ -46,7 +46,8 @@
 	"page/mine/transferOrder/transferOrder",
 	"page/mine/selectShops/selectShops",
 	"page/mine/selectFriends/selectFriends",
-	"page/mine/getTransferOrder/getTransferOrder"                                                                                                                                                                                              
+	"page/mine/getTransferOrder/getTransferOrder",
+	"page/mine/myShop/accountDetail/extraServices/extraServices"                                                                                                                                                                                              
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",
@@ -57,7 +58,7 @@
   },
   "tabBar": {
     "color": "#C0C0C0",
-    "selectedColor":"#9F000F",
+    "selectedColor":"#ff3347",
     "borderStyle": "#f5f5f5",
     "backgroundColor": "#f5f5f5",
     "list": [
@@ -65,7 +66,7 @@
         "pagePath": "page/index/index",
         "iconPath": "image/tabBar/12.png",
         "selectedIconPath": "image/tabBar/11.png",
-        "text": "精选"
+        "text": "发现"
       },
       {
         "pagePath": "page/category/category",

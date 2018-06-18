@@ -23,8 +23,13 @@ Page({
 		COM.load('Util').loadPayments();
 		COM.load('Util').loadShopParams();
 		let self = this
+		console.log("---------------------------------options--------------------------------------------")
+		console.log(Object.prototype.toString.call(options) !== '[object Undefined]')
+		console.log(Object.prototype.toString.call(options.targetShopId))
+		console.log(options)
+		console.log(options.targetShopId)
 		if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.targetShopId) !== '[object Undefined]') {
-			console.log(options.targetShopId)
+			console.log('I am here')
 		} else {
 			//this.navigatorToIndex()
 			let targetShopId = wx.getStorageSync("targetShopId")

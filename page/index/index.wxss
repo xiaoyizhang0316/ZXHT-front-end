@@ -242,6 +242,17 @@ justify-content:center;
   margin: -180rpx 55rpx;
   border-radius: 0rpx;
 }
+.modal-qrcodedialog{
+  width: 464rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 30%;
+  left: 0;
+  z-index: 9999;
+  background: #f9f9f9;
+  margin: -180rpx 143rpx;
+  border-radius: 0rpx;
+}
 
 .modal-title {
   padding-top: 25rpx;
@@ -299,6 +310,20 @@ input-holder {
   color: #ec5300;
   text-align: center;
 }
+.btn-downloadConfirm{
+	width: 100%;
+  color: #ec5300;
+  text-align: center;
+}
+.privacyText{
+	font-size: 24rpx;
+	max-width: 400rpx;
+	text-align: center;
+	width: 100%
+}
+button::after{ border: none; 
+border-right: 1px solid #dedede;
+border-radius: 0px}
 .myTextArea {
     width: 100%;
     padding: 20rpx;
