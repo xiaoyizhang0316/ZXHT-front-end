@@ -26,7 +26,7 @@ Page({
 			success: function (res) {
 				that.setData({
 					winWidth: res.windowWidth,
-					winHeight: res.windowHeight
+					winHeight: res.windowHeight-48
 				});
 			}
 		});

@@ -1,0 +1,36 @@
+<!--page/common/templates/extraServices/extraServices.wxml-->
+<!--page/mine/myShop/accountDetail/extraServices/extraServices.wxml-->
+
+<form class="page__bd" catchsubmit="formSubmit" catchreset="formReset">
+    
+    <view class="flex-row" style="margin-bottom:20rpx;">
+        <view class="flex-view-item1">
+            名称
+        </view>
+        <view class="flex-view-item1">
+            价格
+        </view>
+        <view class="flex-view-item1">
+            购买
+        </view>
+
+    </view>
+    <block wx:for="{{services}}" style="margin-top:40rpx">
+        <view class="flex-row" style="margin-bottom:20rpx;">
+            <view class="flex-view-item">
+              {{item.name}}
+            </view>
+            <view class="flex-view-item">
+                ￥{{item.price}}元
+            </view>
+            <view class="flex-view-item">
+                <switch data-index="{{index}}" bindchange="bindService" checked="{{item.enable}}"/>
+            </view>
+
+        </view>
+    </block>
+    <view class="submit-view">
+        <button form-type="submit" class="button" type="primary" style="margin:15px 10px 0 10px;">确定并返回</button>
+    </view>
+
+</form>

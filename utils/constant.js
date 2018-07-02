@@ -1,7 +1,7 @@
 //url相关
-const BASE_URL = "https://mini.zhenxianghaitao.com"
+//const BASE_URL = "https://mini.zhenxianghaitao.com"
 
-//const BASE_URL = "https://bdc8d5f7.ngrok.io"
+const BASE_URL = "https://460964a7.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/mini/"
 const IMG_DETAIL_BASE = "https://img.zhenxianghaitao.com/"
 const IMG_ID = "https://img.zhenxianghaitao.com/ID/"
@@ -42,7 +42,7 @@ const HEADERS = {
 const ONE_BUTTON_PRODUCTS = BASE_URL + "/api/mall/shops/oneButtonProducts/"
 const BALANCE_APPLY = BASE_URL + "/api/mall/shops/balanceApply/"
 const GET_SHOP_BALANCE = BASE_URL + "/api/mall/shops/getShopBalance/"
-
+const GET_EXTRASERVICES_BY_SHOP = BASE_URL + "/api/mall/shops/getExtraServicesByShopId/"
 
 
 //二维码扫描和商品搜索
@@ -74,6 +74,8 @@ const PAY_ORDER_URL = BASE_URL + "/api/mall/orders/payOrder/"
 const REORDER_URL = BASE_URL + "/api/mall/orders/reorder"
 const RECEIVE_ORDER_URL = BASE_URL + "/api/mall/orders/receiveOrder/"
 const GET_CURRENT_ORDERGOOD_PRICE = BASE_URL +"/api/mall/orders/getCurrentOrderGoodPrice"
+const ORDER_EXTRA_SERVICE_MESSAGE = BASE_URL + "/api/mall/orders/orderExtraServiceMessage"
+
 //发货单
 const SAVE_SHIPORDER = BASE_URL + "/api/mall/orders/saveShipOrder"
 
@@ -152,5 +154,7 @@ module.exports = {
   IMG_ID : IMG_ID,
   IMG_SHOP : IMG_SHOP,
   IMG_SHOP_PRODUCT : IMG_SHOP_PRODUCT,
+  GET_EXTRASERVICES_BY_SHOP : GET_EXTRASERVICES_BY_SHOP,
+  ORDER_EXTRA_SERVICE_MESSAGE: ORDER_EXTRA_SERVICE_MESSAGE
    
 }

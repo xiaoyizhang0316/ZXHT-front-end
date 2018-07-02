@@ -269,7 +269,14 @@ Page({
       })
     })
   },
-
+ editOrderExtraService: function(e){
+	 console.log(e)
+	 let orderExtraServiceId = e.currentTarget.dataset.index
+	 //TODO
+	 wx.navigateTo({
+		 url: '/page/common/templates/editOrderExtraSerivce/editOrderExtraService?id=' + orderExtraServiceId
+	 })
+ },
 	downloadIDs: function(e){
 		let imgID = COM.load('CON').IMG_ID
 

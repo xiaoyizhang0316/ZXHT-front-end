@@ -33,12 +33,19 @@
         <view class="orders-msg-label">
             <text>补充说明:(可选)</text>
         </view>
+
         <view>
             <text>{{memo}}</text>
         </view>
 
     </view>
+    <view class="orders-msg" bindtap='bindExtraServices'>
+        <view class="orders-msg-label">
+            <text>额外服务:商品(可选)</text>
+        </view>
 
+
+    </view>
     <!-- <view class="orders-msg" bindtap='bindExtra'>
         <view class="orders-msg-label">
             <text id='txt1'>优惠选项</text>
@@ -87,7 +94,7 @@
 
     <!-- 最下方的付款合计➕提交订单-->
     <view class="orders-footer">
-        <view class="orders-footer-total">付款合计：￥{{total}}</view>
+        <view class="orders-footer-total">付款合计:￥{{total}}(包含额外服务费{{orderExtraServicesPrice}}元)</view>
         <view class="orders-footer-btn" bindtap="placeOrder">提交订单</view>
     </view>
 
@@ -113,7 +120,7 @@
     <view class='bottom-window'>
         <view class='bottom-window-detail'>
             <text>付款详情</text>
-            <image bindtap="hidepaymentModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
+            <image bindtap="hidePaymentModal" class='bottom-window-detail-icon' src='/image/public/clear.png'></image>
         </view>
 
         <view class='bottom-window-price'>

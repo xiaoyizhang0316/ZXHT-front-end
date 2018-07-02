@@ -32,6 +32,7 @@ Page({
 		weixinPayStatus: false,
 		memo: '',
 		freePost:false,
+		extraServices: [],
 
 	},
 	bindExtra: function () {
@@ -39,6 +40,12 @@ Page({
 		console.log(self.data)
 		wx.navigateTo({
 			url: "/page/common/templates/textArea/textArea?content=" + self.data.memo + "&placeHolder=请设定本店铺的用户须知"
+		})
+	},
+	bindExtraServices: function () {
+		let self = this
+		wx.navigateTo({
+			url: "/page/mine/myShop/accountDetail/extraServices/extraServices"
 		})
 	},
 	bindFreePost: function () {
@@ -204,6 +211,29 @@ Page({
 			})
 			return
 		}
+
+
+		//加入额外服务的验证
+		let extraServices = self.data.extraServices
+		for (let i = 0; i < extraServices.length; i++) {
+			let v = extraServices[i]
+			let k = i
+			if (v.name == "" || !/^(([1-9][0-9]*)|(([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2})))$/.test(v.price)) {
+				wx.showModal({
+					title: '提示',
+					content: '额外服务设置有错,请重新设置',
+					showCancel: false,
+					success: function (e) {
+
+					}
+				})
+				return;
+			}
+		}
+
+		console.log(extraServices)
+
+
 		// 传入表单数据，调用验证方法
 		if (!this.WxValidate.checkForm(e)) {
 			const error = this.WxValidate.errorList[0]
@@ -212,22 +242,29 @@ Page({
 				content: error.msg
 			})
 		} else {
-			COM.load('NetUtil').netUtil(url, "POST", {
-				"open_id": app.globalData.openId,
-				"owner": app.globalData.nickName,
-				"shopName": self.data.shop.shopname,
-				"sign": self.data.shop.sign,
-				"prepay": self.data.prepayStatus,
-				"offlinePay": self.data.offlinePayStatus,
-				"weixinPay": self.data.weixinPayStatus,
-				"payment": self.data.shop.payment,
-				"bankName": self.data.shop.bankName,
-				"accountNbr": self.data.shop.accountNbr,
-				"accountName": self.data.shop.accountName,
-				"rate": self.data.rate,
-				"shopNote": self.data.memo,
-				'freePost': self.data.freePost
-			}, (callbackdata) => {
+			let params = {
+				"shop": {
+					"open_id": app.globalData.openId,
+					"owner": app.globalData.nickName,
+					"shopName": self.data.shop.shopname,
+					"sign": self.data.shop.sign,
+					"prepay": self.data.prepayStatus,
+					"offlinePay": self.data.offlinePayStatus,
+					"weixinPay": self.data.weixinPayStatus,
+					"payment": self.data.shop.payment,
+					"bankName": self.data.shop.bankName,
+					"accountNbr": self.data.shop.accountNbr,
+					"accountName": self.data.shop.accountName,
+					"rate": self.data.rate,
+					"shopNote": self.data.memo,
+					'freePost': self.data.freePost
+
+				},
+				"extraServices":
+				self.data.extraServices
+			}
+			console.log(extraServices)
+			COM.load('NetUtil').netUtil(url, "POST", params, (callbackdata) => {
 				if (callbackdata == true) {
 					console.log("成功")
 					app.globalData.shopId = app.globalData.openId
@@ -248,9 +285,6 @@ Page({
 							}
 						}
 					})
-
-
-
 				}
 				else {
 					console.log("失败")

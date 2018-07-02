@@ -358,6 +358,16 @@ Page({
 		
    
   },
+  bindPreviewImage: function (e) {
+	  console.log(e)
+	  console.log(this.data.detail.images)
+	  var curData = e.currentTarget.dataset;
+	  var images = this.data.detail.images;
+	  wx.previewImage({
+		  current: curData.current,
+		  urls: images
+	  })
+  },
 	onShareAppMessage: function(){
 		let self = this
 		let openId = app.globalData.openId;

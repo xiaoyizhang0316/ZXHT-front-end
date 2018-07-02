@@ -35,12 +35,15 @@
                 </view>
                 <switch class='switch1' bindchange='bindFreePost' checked="{{freePostStatus}}"></switch>
             </view>
+			<view class="shop-msg top-input-box flex-col" bindtap='bindExtraServices'>
+                <view class="shop-msg-label">
+                    <text>设置增值服务</text>					
+                </view>
+            </view>
 			<view class="shop-msg top-input-box flex-col" bindtap='bindExtra'>
                 <view class="shop-msg-label">
                     <text>设置店铺须知</text>
                 </view>
-              
-
             </view>
 
             <view class="top-header">

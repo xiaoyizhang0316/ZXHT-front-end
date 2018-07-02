@@ -4,7 +4,7 @@
         <textarea value="{{inputContent}}" placeholder='{{placeHolder}}' name="textarea"/>
        </view> 
       <view style="display: flex;flex-direction: column; justify-content: center;flex:0.8;">
-        <button form-type="submit" class="button" type="primary" style="margin:15px 10px 0 10px;">确定</button>
+        <button form-type="submit" class="button" type="primary" style="margin:15px 10px 0 10px;">确定并返回,请在前一页保存</button>
       </view>
     </form>
   </view>

@@ -19,6 +19,9 @@ Page({
 		showModal: false,
 		index: 0,
 		rate: 0,
+		orderExtraServices:[],
+		orderExtraServicesPrice:0
+
 	},
 
 	onReady() {
@@ -27,19 +30,14 @@ Page({
 
 	//如果为onShow那么会即时显示默认地址
 	onLoad: function () {
-
-
-
 	},
 
 	onShow: function () {
-
-
 		let self = this;
 		console.log(self.data.address)
 		if (Object.keys(self.data.address).length === 0) {
 			let addressList = wx.getStorageSync('addressList')
-
+			
 			if (addressList.length >= 1) {
 
 				var index = 0;//默认使用第一个
@@ -80,7 +78,7 @@ Page({
 			totalNum += orders[i].num;
 		}
 		let shopParams = wx.getStorageSync("shopParams");
-
+		total = total + this.data.orderExtraServicesPrice
 		this.setData({
 			total: total.toFixed(2),
 			rmb: (total * shopParams.rate).toFixed(2),
@@ -92,6 +90,12 @@ Page({
 		wx.navigateTo({
 			url: "/page/common/templates/textArea/textArea?content=" + this.data.memo + "&placeHolder=告诉卖家是否需要拍照签字等服务"
 		})
+	},
+	bindExtraServices: function (e) {
+		wx.navigateTo({
+			url: "/page/common/templates/extraServices/extraServices?shopId="+app.globalData.targetShopId
+		})
+
 	},
 
 	placeOrder() {
@@ -149,9 +153,11 @@ Page({
 				shopId: app.globalData.targetShopId,
 				consigneeId: this.data.address.id,
 				goodsCost: this.data.total,
+				extraServicesCost: this.data.extraSerivcesPrice,
 				orderMessage: this.data.memo
 			},
-			orderGoods: productinfo.data
+			orderGoods: productinfo.data,
+			orderExtraServices: this.data.orderExtraServices
 		};
 		let url = COM.load('CON').SAVE_ORDER_URL;
 		COM.load('NetUtil').netUtil(url, "POST", order, (callback) => {
@@ -180,8 +186,7 @@ Page({
 					if (shop.weixinPay)
 						payChoice.push({ id: 3, name: "微信支付" });
 
-					let selectedOrder = callback.orderFull;
-				
+					let selectedOrder = callback.orderFull;				
 					let rmb = selectedOrder.orderInfo.totalCost;
 					selectedOrder.orderInfo.rmb = rmb;
 					self.setData({
@@ -227,7 +232,7 @@ Page({
 		})
 
 		//修改购物车 本单中的货物取消掉 
-		//wx.removeStorageSync("cartList");
+		
 		let cartList = wx.getStorageSync('cartList')
 		cartList = cartList.filter(item => !item.selected)
 		
@@ -236,9 +241,7 @@ Page({
 			data: cartList
 		})
 		this.saveToOrderHistory(order);
-		wx.switchTab({
-			url: '/page/index/index',
-		})
+		
 
 		
 
@@ -358,7 +361,10 @@ Page({
 			animation.translateY(0).step()
 			this.setData({
 				animationData: animation.export(),
-				showModalStatus: false
+				showPaymentModalStatus: false
+			})
+			wx.switchTab({
+				url: '/page/index/index',
 			})
 		}.bind(this), 200)
 	},
@@ -395,8 +401,8 @@ Page({
 						showCancel: false,
 						success: function (res) {
 							if (res.confirm) {
-								wx.navigateBack({
-									delta: 1
+								wx.switchTab({
+									url: '/page/index/index',
 								})
 							}
 						}
@@ -417,8 +423,8 @@ Page({
 									showCancel: false,
 									success: function (res) {
 										if (res.confirm) {
-											wx.navigateBack({
-												delta: 1
+											wx.switchTab({
+												url: '/page/index/index',
 											})
 										}
 									}
@@ -455,4 +461,5 @@ Page({
 			index: e.detail.value
 		})
 	},
+
 })

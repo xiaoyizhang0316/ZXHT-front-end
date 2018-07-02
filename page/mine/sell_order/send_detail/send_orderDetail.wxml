@@ -74,7 +74,7 @@
                     <text class="explain-text" style='margin-right:0px'>￥</text>
                     <view class="explain-value" style="align-items:center;">{{finalPayment}}</view>
                 </view>
-				<view style="display:flex;">
+                <view style="display:flex;">
                     <view class="explain-text" style="padding-left:9px">总价</view>
                     <text class="explain-text" style='margin-right:0px'>￥</text>
                     <view class="explain-value" style="align-items:center;">{{totalPrice}}</view>
@@ -90,7 +90,7 @@
         <view class="explain-line" style="border-top:1px solid #eff3f4">
             <view class="inner-explain-line">
                 <!-- <view class="explain-text">收件地址</view> -->
-                <image style="width:25px;height:25px;margin-right:55rpx;margin-left:40rpx;" src="../../../../image/location.png" ></image>
+                <image style="width:25px;height:25px;margin-right:55rpx;margin-left:40rpx;" src="../../../../image/location.png"></image>
                 <view class="explain-value">
                     <view>
                         <text>{{receiver.name}}</text>
@@ -107,7 +107,7 @@
                         </view>
                     </view>
 
-                    <view class="explain-line" >
+                    <view class="explain-line">
                         <view class="receiver-line">
                             <view class="explain-value" style="line-height:15px;">
                                 {{receiver.city}} {{receiver.detail}}
@@ -121,6 +121,20 @@
         <!-- 插入身份证下载  -->
         <button type="primary" class='button' bindtap="downloadIDs">下载本单收货人身份证正反面</button>
 
+        <view class="explain-line" style="border-top:20px solid #eff3f4">
+            <view class="inner-explain-line">
+                 <view class="text">额外服务</view>
+            </view>
+        </view>
+        <view class="explain-line" style="flex-direction:column;border-top:1px solid #eff3f4">
+            <block wx:key="idx" wx:for-index="idx" wx:for="{{order.orderExtraServices}}">
+                <view class="inner-explain-line" style="padding-top:0px;" data-index="{{idx}}" catchtap='editOrderExtraService'>
+                    <view class="explain-text">{{item.name}}</view>
+                    <view class="explain-value">￥{{item.price}}</view>
+					<view><button type="default" size="mini"> 编辑服务 </button></view>
+                </view>
+            </block>
+        </view>
         <block wx:if="{{order.orderInfo.orderStatus == 5 || order.orderInfo.orderStatus == 6 || order.orderInfo.orderStatus == 7}}">
             <view class="explain-line" style='background:#eff3f4;justify-content:flex-start'>
                 <view class="text">已发货单</view>
@@ -202,7 +216,7 @@
     <view wx:if="{{!shared}}" class="footer">
 
 
-        <button  class='button-red' formType="submit">确认发货</button>
+        <button class='button-red' formType="submit">确认发货</button>
         <button type="default" class='button' formType="reset">重置</button>
     </view>
 </form>

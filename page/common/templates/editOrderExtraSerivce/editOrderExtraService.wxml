@@ -1,0 +1,33 @@
+<!--page/common/templates/editOrderExtraSerivce/editOrderExtraService.wxml-->
+<form bindsubmit="submitForm">
+    <view class="search-textarea">
+        <textarea value="{{inputContent}}" placeholder='请输入备注' name="textarea" />
+    </view>
+
+    <view style='display: flex;  flex-direction: row;flex-wrap:wrap;margin-left:10rpx;margin-right:10rpx'>
+    <view class="prew_img" wx:for="{{chooseImage}}" wx:key="{{index}}" style="background-image:url({{item}});margin-top:50rpx; margin-bottom:50rpx; margin-left:50rpx">
+        <view class="bind" data-group="{{chooseImage}}" data-current="{{item}}" bindtap="bindPreviewImage"></view>
+        <image class="delete" data-index="{{index}}" bindtap="bindDeleteImage" src="../../../../image/minus.png"></image>
+    </view>
+	</view>
+    <view class="prew_video" hidden="{{chooseVideo==''}}" style='margin-left:50rpx'>
+        <video id="prew_video" autoplay="true" muted="{{!playVideo}}" bindfullscreenchange="bindVideoScreenChange" src="{{chooseVideo}}"></video>
+        <image class="play" bindtap="bindPreviewVideo" src="../../../../image/play.png"></image>
+        <image class="delete" bindtap="bindDeleteVideo" src="../../../../image/minus.png"></image>
+    </view>
+    <view class= "image-div"><image class="upload" hidden="{{chooseImage.length==9||chooseVideo!=''}}" bindtap="bindChooseMedia" src="../../../../image/plus+.png"></image></view>
+
+    <!-- 循环列表视频项 -->
+    <view class="videoBox" wx:if="{{item.vedio}}" style="background-image:url({{item.vedio+'.jpg'}});" bindtap="bindPlayVideo" data-video-src="{{item.vedio}}">
+        <image class="play" src="../../static/img/play.png"></image>
+    </view>
+
+    <!-- 文档最底部 -->
+    <view class="video_box">
+        <video id="prew_video" autoplay="true" muted="{{!playVideo}}" bindfullscreenchange="bindVideoScreenChange" direction="0" src="{{playVideoSrc}}"></video>
+    </view>
+
+    <view style="display: flex;flex-direction: column; justify-content: center;flex:0.8;">
+        <button form-type="submit" class="button" type="primary" style="margin:15px 10px 0 10px;" disabled='{{!buttonFlag}}'>保存</button>
+    </view>
+</form>

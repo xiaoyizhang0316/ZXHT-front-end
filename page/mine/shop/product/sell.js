@@ -309,10 +309,11 @@ Page({
   },
 
   updatePrice: function (e) {
-	  let price = parseFloat(e.detail.value);
-    if (price >= 0.1) {
+	  let price =e.detail.value;
+    if (price >= 0.1 || price == "") {
 		this.setData({ 'selectedProduct.price': price });
 	} else {
+		
 		wx.showModal({
 			title: '错误',
 			content: '青铜会员价格需要大于0.1',
@@ -321,8 +322,8 @@ Page({
   },
 
   updateVip1Price: function (e) {
-	  let price = parseFloat(e.detail.value);
-    if (price >= 0.1) {
+	  let price = e.detail.value;
+	  if (price >= 0.1 || price == "") {
 		this.setData({ 'selectedProduct.vip1Price': price });
 	} else {
 		wx.showModal({
@@ -333,8 +334,8 @@ Page({
   },
 
   updateVip2Price: function (e) {
-	  let price = parseFloat(e.detail.value);
-    if (price >= 0.1) {
+	  let price =e.detail.value;
+	  if (price >= 0.1 || price == "") {
 		this.setData({ 'selectedProduct.vip2Price': price });
 	} else {
 		wx.showModal({
@@ -345,8 +346,8 @@ Page({
   },
 
   updateVip3Price: function (e) {
-	let price = parseFloat(e.detail.value);
-    if (price >= 0.1) {
+	let price = e.detail.value;
+	if (price >= 0.1 || price == "") {
 		this.setData({ 'selectedProduct.vip3Price': price });
 	} else {
 		wx.showModal({
@@ -357,8 +358,8 @@ Page({
   },
   updateDiscountPrice: function (e) {
 	 
-	  let price = parseFloat(e.detail.value);console.log(price);
-	  if (price >= 0.1) {
+	  let price = e.detail.value;
+	  if (price >= 0.1 || price == "") {
 		  this.setData({ 'selectedProduct.discountPrice': price });
 	  }else{
 		  wx.showModal({
@@ -393,6 +394,17 @@ Page({
       self.setData({ 'selectedProduct.vipPrice': self.data.tmp.vipPrice });
     }
 	let product = self.data.selectedProduct
+	if (product.price && product.vip1Price && product.vip2Price && product.vip3Price)
+	{
+
+	}else{
+		wx.showModal({
+			title: '请检查',
+			content: '会员价格设置有误',
+			showCancel: false
+		})
+		return
+	}
 	if(product.price < 0.1)
 	{
 		wx.showModal({

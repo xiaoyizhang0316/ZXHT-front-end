@@ -23,12 +23,10 @@ Page({
 	wx.navigateBack({
 		delta:1
 	})
-    
-
   },
 
   onLoad:function(option) {
-	  console.log(option)
+	console.log(option)
     this.setData({ inputContent: option.content, placeHolder: option.placeHolder});
   }
 

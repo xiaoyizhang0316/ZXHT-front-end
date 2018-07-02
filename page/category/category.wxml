@@ -70,7 +70,7 @@
                                 <text>{{val.title}}</text>
                              </view>
                              <view class="goods-price">
-                   <text class='goods-price-strong'>￥{{val.vipPrice}}澳元</text>
+                   <text class='goods-price-strong'>￥{{val.vipPrice}}元</text>
 										<text class='goods-sales-strong'>已售{{val.sales}}件</text>
                  
              <!--  <view><text>￥{{val.price}} 已售: {{val.sales}}</text></view>-->

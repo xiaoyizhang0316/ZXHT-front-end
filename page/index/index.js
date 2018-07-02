@@ -412,7 +412,7 @@ Page({
 	onPageScroll: function (e) {
 		let self = this
 		let winHeight = self.data.winHeight;
-		let ratio = 421.5 / 750
+		let ratio = 470 / 750
 		let height = (winHeight * (1000 - ratio * 1000)) / 1000
 		self.setData({ fixTop: e.scrollTop > height })
 

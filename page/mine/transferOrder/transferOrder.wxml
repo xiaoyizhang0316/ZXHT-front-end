@@ -38,16 +38,20 @@
                     <text>数量:{{item.num}}</text>
                 </view>
                 <view class="order-cate-price">
-				<input placeholder='参考价格: {{item.price}}' type="digit" font-size="12px" bindinput='updateGoodPrice' data-productId = '{{item.productId}}'></input>
+				<view class="inner-explain-line">
+        <view class="explain-text">参考价格: {{item.price}}澳元</view>
+        ￥<input placeholder='请输入RMB报价' type="digit" font-size="12px" bindinput='updateGoodPrice' data-productId='{{item.productId}}'></input>
+    </view>
                 </view>
             </view>
-        </view>        
+        </view>
     </block>
 
-	<view class="inner-explain-line">
-            <view class="explain-text">配送费用</view>
-            <text class="explain-text" style='margin-right:0px;font-size="12px"'>￥</text>
-            <input placeholder='请输入邮费' type="digit" font-size="12px" bindinput='updateShippingCost'></input>
+   
+    <view class="inner-explain-line">
+        <view class="explain-text">配送费用</view>
+        <text class="explain-text" style='margin-right:0px;font-size="12px"'>￥</text>
+        <input placeholder='请输入邮费' type="digit" font-size="12px" bindinput='updateShippingCost'></input>
     </view>
 
     <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;">
@@ -55,12 +59,12 @@
             <view class="explain-text" style="flex:5">总计: ￥{{totalCost}}
                 <text style="font-size:13px;color:#a4a6a5;padding-left:2px;padding-top:3rpx;">(包括运送费)</text>
             </view>
-           
-           
+
+
         </view>
     </view>
 </scroll-view>
 
 <view wx:if="{{!shared}}" class="footer">
-        <button type="default" class='button' data-order="{{transferOrder.id}}" bindtap="applyTransferOrder">确认提交</button>
+    <button type="default" class='button' data-order="{{transferOrder.id}}" bindtap="applyTransferOrder">确认提交</button>
 </view>

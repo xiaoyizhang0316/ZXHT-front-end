@@ -21,10 +21,6 @@ Page({
 	},
 
 	onLoad: function (options) {
-		
-	},
-	onShow: function(options)
-	{
 		let self = this
 		//每次进入 清空leftcate
 		if (self.data.leftCategory.length > 0) {
@@ -32,7 +28,7 @@ Page({
 				leftCategory: [
 					{ name: '所有品牌', ename: 'brands', banner: '/image/c1.png' },
 				],
-				rightCategory : []
+				rightCategory: []
 			});
 		}
 		//如果有targetShopId 则优先展示
@@ -48,6 +44,11 @@ Page({
 		self.filterProducts();
 		self.setData({ brands: self.filterBrands() });
 		self.setData({ items: self.data.brands });
+		
+	},
+	onShow: function(options)
+	{
+		
 	},
 
 	loadCategoies: function () {
@@ -226,12 +227,31 @@ Page({
 
 	},
 	onPullDownRefresh() {
-		let self = this
+		
 		console.log('--------下拉刷新-------')
-		COM.load('Util').loadProducts(app.globalData.openId, app.globalData.targetShopId);
-
-		self.onLoad()
-		self.onShow()
+		let self = this
+		//每次进入 清空leftcate
+		if (self.data.leftCategory.length > 0) {
+			self.setData({
+				leftCategory: [
+					{ name: '所有品牌', ename: 'brands', banner: '/image/c1.png' },
+				],
+				rightCategory: []
+			});
+		}
+		//如果有targetShopId 则优先展示
+		let targetShopId = ""
+		console.log(app.globalData)
+		if (app.globalData.targetShopId != "" && app.globalData.targetShopId != null) {
+			targetShopId = app.globalData.targetShopId;
+		} else {
+			targetShopId = app.globalData.openId;
+		}
+		self.setData({ targetShopId: targetShopId })
+		self.loadCategoies();
+		self.filterProducts();
+		self.setData({ brands: self.filterBrands() });
+		self.setData({ items: self.data.brands });
 		wx.stopPullDownRefresh()
 	}
 

@@ -132,6 +132,19 @@
 
     <view class="explain-line" style="border-top:20px solid #eff3f4">
         <view class="inner-explain-line">
+            <view class="explain-text">额外服务</view>
+        </view>
+    </view>
+    <view class="explain-line" style="flex-direction:column;border-top:1px solid #eff3f4">
+        <block wx:key="idx" wx:for-index="idx" wx:for="{{order.orderExtraServices}}">
+            <view class="inner-explain-line" style="padding-top:0px;">
+                <view class="explain-text">{{item.name}}</view>
+                <view class="explain-value">￥{{item.price}}</view>
+            </view>
+        </block>
+    </view>
+    <view class="explain-line" style="border-top:20px solid #eff3f4">
+        <view class="inner-explain-line">
             <view class="explain-text">订单商品</view>
         </view>
     </view>
@@ -177,7 +190,7 @@
 
     <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;flex-direction: column">
         <view class="inner-explain-line" style="dispaly:flex;justify-content:space-between;">
-            <text class="price">商品总计</text>
+            <text class="price">价格总计</text>
             <text class="price">￥{{totalGoodsPrice}}</text>
             <!-- <view class="explain-value" style="flex:1">
       {{totalQuantity}}件

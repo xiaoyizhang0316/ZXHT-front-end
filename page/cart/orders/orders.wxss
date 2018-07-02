@@ -68,7 +68,7 @@
     color: #adadad;
     border-bottom: 3rpx solid #ededed;
     font-size: 14px;
-    margin-bottom: 100rpx;
+   /*  margin-bottom: 100rpx; */
 }
 
 .orders-msg::after {

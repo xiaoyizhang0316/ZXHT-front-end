@@ -47,7 +47,9 @@
 	"page/mine/selectShops/selectShops",
 	"page/mine/selectFriends/selectFriends",
 	"page/mine/getTransferOrder/getTransferOrder",
-	"page/mine/myShop/accountDetail/extraServices/extraServices"                                                                                                                                                                                              
+	"page/mine/myShop/accountDetail/extraServices/extraServices",
+	"page/common/templates/extraServices/extraServices",
+	"page/common/templates/editOrderExtraSerivce/editOrderExtraService"                                                                                                                                   
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",

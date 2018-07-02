@@ -1,4 +1,4 @@
-/* page/mine/myShop/accountDetail/extraServices/extraServices.wxss */
+/* page/common/templates/extraServices/extraServices.wxss */
 
 .top {
   display: flex;
@@ -61,5 +61,9 @@
 .flex-view-item1
 {
 	font-size:34rpx;
-	padding-left:90rpx
+	 padding-right:50rpx 
+}
+
+.flex-view-item{
+	font-size:34rpx;
 }

@@ -1,2 +1,42 @@
 <!--page/mine/myShop/accountDetail/extraServices/extraServices.wxml-->
-<text>page/mine/myShop/accountDetail/extraServices/extraServices.wxml</text>
+
+<form class="page__bd" catchsubmit="formSubmit" catchreset="formReset">
+    <view class='top' bindtap="addService">
+        添加服务 +
+        <!-- <image class="add" src="/image/plus.png"></image> -->
+    </view>
+    <view class='top1' bindtap="deleteService">
+        减少服务 -
+
+    </view>
+    <view class="flex-row" style="margin-bottom:20rpx;">
+        <view class="flex-view-item1">
+            名称
+        </view>
+        <view class="flex-view-item1">
+            价格
+        </view>
+        <view class="flex-view-item1">
+            开启
+        </view>
+
+    </view>
+    <block wx:for="{{services}}" style="margin-top:40rpx">
+        <view class="flex-row" style="margin-bottom:20rpx;">
+            <view class="flex-view-item">
+                <input class="service-input" type="text" placeholder-class="placeholder-input" value="{{item.name}}" bindinput="bindInputName" data-index="{{index}}" placeholder='服务名称(最多四字)' />
+            </view>
+            <view class="flex-view-item">
+                <input class="service-input" type="digit" value="{{item.price}}" placeholder-class="placeholder-input" bindinput="bindInputPrice" data-index="{{index}}" placeholder='价格￥' />
+            </view>
+            <view class="flex-view-item">
+                <switch checked="{{item.enable}}" data-index="{{index}}" bindchange="changeEnableService" />
+            </view>
+
+        </view>
+    </block>
+    <view class="submit-view">
+        <button form-type="submit" class="button" type="primary" style="margin:15px 10px 0 10px;">确定并返回,请在前一页保存</button>
+    </view>
+
+</form>
