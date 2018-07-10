@@ -10,11 +10,14 @@ Page({
         tipHide: false,
         chooseTypeHide: true,
         chooseImage: [],
+		imagesIndex:[],
         chooseVideo: '',
         playVideo: false,
         message: '',
         orderExtraServiceId: '',
-        buttonFlag: true
+        buttonFlag: true,
+		edit: false,
+		message:""
 
     },
 
@@ -26,13 +29,58 @@ Page({
         let pages = getCurrentPages();
         let prevPage = pages[pages.length - 2]; //上一个页面
         let self = this
-        let orderExtraService = prevPage.data.order.orderExtraServices[options.id];
-        let orderExtraServiceId = orderExtraService.id
-        this.setData({
-            orderExtraServiceId: orderExtraServiceId
-        })
+		let orderExtraService = prevPage.data.order.orderExtraServices[options.id];
+		let edit = options.edit
+		console.log("edit")
+		console.log(edit)
+		this.setData({
+			edit: edit == 1 ? true : false
+		})
+		let orderExtraServiceId = orderExtraService.id
+		this.setData({
+			orderExtraServiceId: orderExtraServiceId
+		})
+
+		let url = COM.load('CON').GET_ORDER_EXTRA_SERVICE_BY_ID + orderExtraServiceId;
+		COM.load('NetUtil').netUtil(url, "GET", "", (callback) => {
+			let orderExtraService = callback;
+			let message = callback.message
+			if(message == "" && edit == 0)
+			{
+				message = "暂无留言"
+			}
+			this.setData({
+				message: message
+			})
 
 
+			if (orderExtraService.images != null) {
+				let images = JSON.parse(orderExtraService.images)
+				this.setData(
+					{
+						imagesIndex: images
+					}
+				)
+				let chooseImages = []
+				for (var i = 0; i < images.length; i++) {
+					console.log(images[i])
+					chooseImages.push(COM.load('CON').IMG_ORDER_EXTRASERVICE + orderExtraServiceId + "/" + images[i] + ".png")
+				}
+				console.log(chooseImages)
+				this.setData({
+					chooseImage: chooseImages
+				})
+			} else if (orderExtraService.video != null) {
+				this.setData({
+					chooseVideo: COM.load('CON').IMG_ORDER_EXTRASERVICE + orderExtraServiceId + "/" + +orderExtraService.video + ".mp4"
+				})
+			}
+
+
+
+		})
+
+        
 
     },
 
@@ -116,20 +164,111 @@ Page({
      * 删除图片
      */
     bindDeleteImage: function(e) {
+		let self = this
         var thisIndex = e.currentTarget.dataset.index;
         var allImage = this.data.chooseImage;
-        allImage.splice(thisIndex, 1);
-        this.setData({
-            chooseImage: allImage
-        })
+       
+		
+		var images = this.data.imagesIndex
+		console.log(images.length)
+		console.log(thisIndex)
+		//删除的图像是已上传的
+		if(images.length-1 >= thisIndex)
+		{
+			wx.showModal({
+				title: '提示',
+				content: '确定删除嘛?删除后不能恢复哦',
+				confirmText: "删除图像",
+				success: function(e){
+					let imageName = images[thisIndex]
+					let url = COM.load('CON').DELETE_FILE;
+					let cData = 
+						{
+							"id": self.data.orderExtraServiceId,
+							"table": "orderExtraService",
+							"name": imageName,
+							"type": "images"
+						
+						}
+					
+
+					
+					COM.load('NetUtil').netUtil(url, "PUT", cData, (callback) => {
+						if (callback == true) {
+							images.splice(thisIndex, 1);
+							allImage.splice(thisIndex, 1);
+							self.setData({
+								imagesIndex:images,
+								chooseImage: allImage
+							})
+						} else {
+							wx.showModal({
+								title: '提示',
+								content: '更新失败,请重新尝试',
+								showCancel: false,
+
+							})
+						}
+
+					})
+
+				}
+			})
+
+		}else{
+			allImage.splice(thisIndex, 1);
+			self.setData({				
+				chooseImage: allImage
+			})
+		}
+      
     },
     /**
      * 删除视频
      */
-    bindDeleteVideo: function(e) {
-        this.setData({
-            chooseVideo: ''
-        })
+    bindDeleteVideo: function(e) 
+	{
+		let self = this
+		
+
+		wx.showModal({
+			title: '提示',
+			content: '确定删除嘛?删除后不能恢复哦',
+			confirmText: "删除视频",
+			success: function (e) {
+				let fileName = self.data.chooseVideo
+				let url = COM.load('CON').DELETE_FILE;
+				let cData =
+					{
+						"id": self.data.orderExtraServiceId,
+						"table": "orderExtraService",
+						"name": fileName,
+						"type": "video"
+
+					}
+
+
+
+				COM.load('NetUtil').netUtil(url, "PUT", cData, (callback) => {
+					if (callback == true) {
+						self.setData({
+							chooseVideo: ''
+						})
+					} else {
+						wx.showModal({
+							title: '提示',
+							content: '更新失败,请重新尝试',
+							showCancel: false,
+
+						})
+					}
+
+				})
+
+			}
+		})
+
+       
     },
     /**
      * 预览图片
@@ -149,8 +288,12 @@ Page({
         var videoContext = this.videoContext;
         videoContext.seek(0);
         videoContext.play();
-        videoContext.requestFullScreen();
+        //videoContext.requestFullScreen();
     },
+	videoErrorCallback: function (e) {
+		console.log('视频错误信息:')
+		console.log(e.detail.errMsg)
+	},
     /**
      * 全屏改变
      */
@@ -167,165 +310,180 @@ Page({
         this.setData(play);
     },
     submitForm: function(e) {
+		
         this.setData({
             buttonFlag: false
         })
         let self = this
-        console.log(this.data)
-        console.log(e)
-        let message = e.detail.value.textarea;
-		if(message != '')
+		if(self.data.edit == true)
 		{
-			let url = COM.load('CON').ORDER_EXTRA_SERVICE_MESSAGE;
-			COM.load('NetUtil').netUtil(url, "POST", { "message": message, "orderExtraServiceId": self.data.orderExtraServiceId }, (callback) => {
-				if(callback == true)
-				{					
-					self.upload()
+			console.log(this.data)
+			console.log(e)
+			let message = e.detail.value.textarea;
+			if (message != '') {
+				let url = COM.load('CON').ORDER_EXTRA_SERVICE_MESSAGE;
+				COM.load('NetUtil').netUtil(url, "POST", {
+					"message": message,
+					"orderExtraServiceId": self.data.orderExtraServiceId
+				}, (callback) => {
+					if (callback == true) {
+						self.upload()
 
-				}else{
-					wx.showModal({
-						title: '提示',
-						content: '更新失败,请重新尝试',
-						showCancel: false,
-						
-					})
-				}
+					} else {
+						wx.showModal({
+							title: '提示',
+							content: '更新失败,请重新尝试',
+							showCancel: false,
 
-			}) 
-		}else{
-			self.upload()
-		}
-		
+						})
+					}
 
-    },
-	upload: function(){
-		let self = this
-		//上传图片
-		if (self.data.chooseImage.length > 0) {
-
-			let cData = []
-			for (var i = 0; i < self.data.chooseImage.length; i++) {
-				cData.push({
-					"id": self.data.orderExtraServiceId,
-					"table": "orderExtraService",
-					"name": "images",
-					"file": self.data.chooseImage[i]
-				})
-
+				},false)
+			} else {
+				self.upload()
 			}
 
-			//上传图片
-			console.log("img data here")
-			console.log(cData)
-			let url = COM.load("CON").UPLOADFILE;
-			COM.load('NetUtil').uploadFile(url, "POST", cData, (callback) => {
-				console.log(callback)
-
-				console.log("ppppppppppppppppppppppppppppppppppppppp")
-				if (callback == 'done') {
-					wx.showToast({
-						title: '上传成功',
-						icon: 'success',
-						duration: 1500,
-						success: function (res) {
-							self.setData({
-								'buttonFlag': false
-							})
-
-							wx.navigateBack({
-								delta: 1
-							})
-
-
-
-							// wx.redirectTo({
-							// 	url: '/page/mine/addressList/addressList?action=selectOne',
-							// })
-						}
-					})
-
-
-				} else {
-					wx.showToast({
-						title: '上传失败,请重新尝试',
-
-						icon: 'fail',
-						duration: 1500,
-						success: function (res) {
-							self.setData({
-								'buttonFlag': false
-							})
-							// wx.redirectTo({
-							// 	url: '/page/mine/addressList/addressList?action=selectOne',
-							// })
-						}
-					})
-
-
-				}
-
+		}else{
+			wx.navigateBack({
+				delta:1
 			})
-		} else if (self.data.chooseVideo != '') {
-			//上传视频
-			let cData = []
-			cData.push({
-				"id": self.data.orderExtraServiceId,
-				"table": "orderExtraService",
-				"name": "video",
-				"file": self.data.chooseVideo
-			})
-			let url = COM.load("CON").UPLOADFILE;
-			COM.load('NetUtil').uploadFile(url, "POST", cData, (callback) => {
-				console.log(callback)
-
-				console.log("ppppppppppppppppppppppppppppppppppppppp")
-				if (callback == 'done') {
-					wx.showToast({
-						title: '上传成功',
-						icon: 'success',
-						duration: 1500,
-						success: function (res) {
-							self.setData({
-								'buttonFlag': false
-							})
-
-							wx.navigateBack({
-								delta: 1
-							})
-
-
-
-							// wx.redirectTo({
-							// 	url: '/page/mine/addressList/addressList?action=selectOne',
-							// })
-						}
-					})
-
-
-				} else {
-					wx.showToast({
-						title: '上传失败,请重新尝试',
-
-						icon: 'fail',
-						duration: 1500,
-						success: function (res) {
-							self.setData({
-								'buttonFlag': false
-							})
-							// wx.redirectTo({
-							// 	url: '/page/mine/addressList/addressList?action=selectOne',
-							// })
-						}
-					})
-
-
-				}
-
-			})
-
-
 		}
-	},
+        
+
+
+    },
+    upload: function() {
+        let self = this
+        //上传图片
+        if (self.data.chooseImage.length > 0) {
+
+            let cData = []
+            for (var i = 0; i < self.data.chooseImage.length; i++) {
+                cData.push({
+                    "id": self.data.orderExtraServiceId,
+                    "table": "orderExtraService",
+                    "name": "images",
+                    "file": self.data.chooseImage[i]
+                })
+
+            }
+
+            //上传图片
+            console.log("img data here")
+            console.log(cData)
+            let url = COM.load("CON").UPLOADFILE;
+            COM.load('NetUtil').uploadFile(url, "POST", cData, (callback) => {
+                console.log(callback)
+
+                console.log("ppppppppppppppppppppppppppppppppppppppp")
+                if (callback == 'done') {
+                    wx.showToast({
+                        title: '上传成功',
+                        icon: 'success',
+                        duration: 1500,
+                        success: function(res) {
+                            self.setData({
+                                'buttonFlag': false
+                            })
+
+                            wx.navigateBack({
+                                delta: 1
+                            })
+
+
+
+                            // wx.redirectTo({
+                            // 	url: '/page/mine/addressList/addressList?action=selectOne',
+                            // })
+                        }
+                    })
+
+
+                } else {
+                    wx.showToast({
+                        title: '上传失败,请重新尝试',
+
+                        icon: 'fail',
+                        duration: 1500,
+                        success: function(res) {
+                            self.setData({
+                                'buttonFlag': false
+                            })
+                            // wx.redirectTo({
+                            // 	url: '/page/mine/addressList/addressList?action=selectOne',
+                            // })
+                        }
+                    })
+
+
+                }
+
+            })
+        } else if (self.data.chooseVideo != '') {
+            //上传视频
+            let cData = []
+            cData.push({
+                "id": self.data.orderExtraServiceId,
+                "table": "orderExtraService",
+                "name": "video",
+                "file": self.data.chooseVideo
+            })
+            let url = COM.load("CON").UPLOADFILE;
+            COM.load('NetUtil').uploadFile(url, "POST", cData, (callback) => {
+                console.log(callback)
+
+                console.log("ppppppppppppppppppppppppppppppppppppppp")
+                if (callback == 'done') {
+                    wx.showToast({
+                        title: '上传成功',
+                        icon: 'success',
+                        duration: 1500,
+                        success: function(res) {
+                            self.setData({
+                                'buttonFlag': false
+                            })
+
+                            wx.navigateBack({
+                                delta: 1
+                            })
+
+
+
+                            // wx.redirectTo({
+                            // 	url: '/page/mine/addressList/addressList?action=selectOne',
+                            // })
+                        }
+                    })
+
+
+                } else {
+                    wx.showToast({
+                        title: '上传失败,请重新尝试',
+
+                        icon: 'fail',
+                        duration: 1500,
+                        success: function(res) {
+                            self.setData({
+                                'buttonFlag': false
+                            })
+                            // wx.redirectTo({
+                            // 	url: '/page/mine/addressList/addressList?action=selectOne',
+                            // })
+                        }
+                    })
+
+
+                }
+
+            })
+
+
+        } else {
+            wx.navigateBack({
+                delta: 1
+            })
+        }
+    },
     /**
      * 生命周期函数--监听页面显示
      */

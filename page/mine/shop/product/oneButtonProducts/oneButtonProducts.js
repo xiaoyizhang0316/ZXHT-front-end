@@ -23,7 +23,7 @@ Page({
 		winHeight: 0,
 		// tab切换  
 		currentTab: 0,
-		vipArray: ["青铜会员", "白银会员", "黄金会员", "钻石会员"]
+		vipArray: ["青铜会员", "白银会员", "黄金会员", "商铺代理"]
 	},
 
 	radioChange: function (e) {
@@ -156,7 +156,7 @@ Page({
 							}else{
 								wx.showModal({
 									title: '上货失败',
-									content: '有未完成的订单关联的商品, 无法上新货',
+									content: '您在本店会员等级不足,或者店主不允许一键上货',
 								})
 							}
 						})

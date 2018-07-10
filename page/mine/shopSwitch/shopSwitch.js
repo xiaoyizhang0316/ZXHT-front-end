@@ -23,7 +23,7 @@ Page({
     winHeight: 0,
     // tab切换  
     currentTab: 0,
-	vipArray: ["青铜会员", "白银会员", "黄金会员", "钻石会员"]
+	vipArray: ["青铜会员", "白银会员", "黄金会员", "商铺代理"]
   },
 
 

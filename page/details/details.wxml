@@ -22,21 +22,31 @@
 
             <view class='goods-operation-num'>库存 {{goods.stock}}</view>
             <text class="goods-price">￥{{goods.price}}</text>
-			<block wx:if="{{goods.price < goods.basePrice}}">
-            <text class="goods-price del">￥{{goods.basePrice}}</text>
-			</block>
-			<block wx:else="{{goods.price < goods.basePrice}}">
-            <text class="goods-price del">     </text>
-			</block>
+            <block wx:if="{{goods.price < goods.basePrice}}">
+                <text class="goods-price del">￥{{goods.basePrice}}</text>
+            </block>
+            <block wx:else="{{goods.price < goods.basePrice}}">
+                <text class="goods-price del">     </text>
+            </block>
             <image src="/image/cart-plus.png" class="goods-cart-img"></image>
 
 
         </view>
         <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
     </view>
+    <view class="explain-line" style="margin-top:20px;" data-id="0" bindtap="showSpecialPrice">
+        <view class="explain-block">
+            <image style="height:22px;width:22px;" src="../../image/specialPrice.jpg"></image>
+        </view>
+        <view class="explain-text">优惠详情...</view>
+        <view class="explain-block">
+            <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
+        </view>
+    </view>
     <view class="goods-tab-box">
         <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">商品详情</view>
         <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">产品参数</view>
+
         <view class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">售后保障</view>
         <view class="goods-content">
             <view class="goods-detail-content" wx:if="{{curIndex === 0}}">
@@ -80,6 +90,25 @@
                 </view>
             </view>
             <view wx:if="{{curIndex === 2}}">{{goods.service}}</view>
+        </view>
+    </view>
+</view>
+
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title">
+        优惠
+    </view>
+    <view class="modal-content">
+        <view wx:key="idx" wx:for-index="idx" wx:for="{{specialPrices}}">
+
+          
+                <view style="padding-left:20rpx;font-size:26rpx;color:grey;">优惠{{idx+1}}</view>
+                <view style="padding-left:20rpx;font-size:26rpx;color:grey;">
+				购买{{item.minQuantity}}件到{{item.maxQuantity}}+件价格仅为: ￥{{item.price}}/件
+				</view>
+                
         </view>
     </view>
 </view>

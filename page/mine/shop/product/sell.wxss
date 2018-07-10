@@ -360,6 +360,17 @@
   padding-bottom: 10rpx;
   opacity: 0.9;
 }
+.bottom-window-btn1 {
+  width: 100%;
+  height: 70rpx;
+  background-color:snow;
+  color: #696969;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10rpx;
+  opacity: 0.9;
+}
 
 .bottom-window-btn text {
   font-size: 33rpx;

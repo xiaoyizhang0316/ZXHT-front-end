@@ -274,7 +274,7 @@ Page({
 	 let orderExtraServiceId = e.currentTarget.dataset.index
 	 //TODO
 	 wx.navigateTo({
-		 url: '/page/common/templates/editOrderExtraSerivce/editOrderExtraService?id=' + orderExtraServiceId
+		 url: '/page/common/templates/editOrderExtraSerivce/editOrderExtraService?id=' + orderExtraServiceId+'&edit=1'
 	 })
  },
 	downloadIDs: function(e){

@@ -21,6 +21,11 @@ Page({
 	},
 
 	onLoad: function (options) {
+		
+		
+	},
+	onShow: function(options)
+	{
 		let self = this
 		//每次进入 清空leftcate
 		if (self.data.leftCategory.length > 0) {
@@ -44,11 +49,6 @@ Page({
 		self.filterProducts();
 		self.setData({ brands: self.filterBrands() });
 		self.setData({ items: self.data.brands });
-		
-	},
-	onShow: function(options)
-	{
-		
 	},
 
 	loadCategoies: function () {

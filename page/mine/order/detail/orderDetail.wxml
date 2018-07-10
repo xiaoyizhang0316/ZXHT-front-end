@@ -137,9 +137,11 @@
     </view>
     <view class="explain-line" style="flex-direction:column;border-top:1px solid #eff3f4">
         <block wx:key="idx" wx:for-index="idx" wx:for="{{order.orderExtraServices}}">
-            <view class="inner-explain-line" style="padding-top:0px;">
+            <view class="inner-explain-line" style="padding-top:0px;" catchtap='viewOrderExtraService'
+			data-index="{{idx}}">
                 <view class="explain-text">{{item.name}}</view>
                 <view class="explain-value">￥{{item.price}}</view>
+				<view><button type="default" size="mini"> 查看明细 </button></view>
             </view>
         </block>
     </view>

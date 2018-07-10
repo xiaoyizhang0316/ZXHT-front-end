@@ -105,12 +105,15 @@ Page({
           if (res.confirm) {
             let url = COM.load('CON').SHOP_PRODUCT_URL;
             COM.load('NetUtil').netUtil(url, 'DELETE', product, function (res) {
-              let shopProductIds = wx.getStorageSync("shopProductIds");
-              shopProductIds = shopProductIds.filter(o => o != e.currentTarget.dataset.id),
-                wx.setStorage({
-                  key: 'shopProductIds',
-                  data: shopProductIds,
-                  success: function () {
+			// we dont need to modify shopProductIds
+            //   let shopProductIds = wx.getStorageSync("shopProductIds");
+            //   shopProductIds = shopProductIds.filter(o => o != e.currentTarget.dataset.id),
+            //     wx.setStorage({
+            //       key: 'shopProductIds',
+            //       data: shopProductIds,
+            //       success: function ()
+			if(res == true)
+				   {
                     for (let i = 0; i < self.data.goodsLineList.length; i++) {
                       if (self.data.goodsLineList[i].id == e.currentTarget.dataset.id) {
                         self.data.goodsLineList[i].selected = false;
@@ -127,8 +130,13 @@ Page({
                       goodsLineList: self.data.goodsLineList,
                       searchResult: self.data.searchResult
                     });
-                  }
-                })
+                  }else{
+				wx.showModal({
+					title: '提示',
+					content: '已有未完成的订单包含此商品,请完成订单后重试',
+				})
+				  }
+               
             })
           } else if (res.cancel) {
             self.setData({ goodsLineList: self.data.goodsLineList });
@@ -139,13 +147,13 @@ Page({
       //上架商品
       let url = COM.load('CON').ADD_SHOP_PRODUCT_URL;
       COM.load('NetUtil').netUtil(url, 'POST', product, function (res) {
-        let shopProductIds = wx.getStorageSync("shopProductIds");
-        if (!shopProductIds.includes(product.id)) {
-          shopProductIds.push(product.id);
-          wx.setStorage({
-            key: 'shopProductIds',
-            data: shopProductIds,
-            success: function () {
+        // let shopProductIds = wx.getStorageSync("shopProductIds");
+        // if (!shopProductIds.includes(product.id)) {
+        //   shopProductIds.push(product.id);
+        //   wx.setStorage({
+        //     key: 'shopProductIds',
+        //     data: shopProductIds,
+        //     success: function () {
               for (let i = 0; i < self.data.goodsLineList.length; i++) {
                 if (self.data.goodsLineList[i].id == e.currentTarget.dataset.id) {
                   self.data.goodsLineList[i].selected = true;
@@ -162,9 +170,9 @@ Page({
                 goodsLineList: self.data.goodsLineList,
                 searchResult: self.data.searchResult
               });
-            }
-          })
-        }
+        //     }
+        //   })
+        // }
       })
     };
     //once something changed should force refresh goods list page

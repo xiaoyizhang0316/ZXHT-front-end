@@ -1,12 +1,14 @@
 //url相关
-//const BASE_URL = "https://mini.zhenxianghaitao.com"
+const BASE_URL = "https://mini.zhenxianghaitao.com"
 
-const BASE_URL = "https://460964a7.ngrok.io"
+//const BASE_URL = "https://a42d4b72.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/mini/"
 const IMG_DETAIL_BASE = "https://img.zhenxianghaitao.com/"
 const IMG_ID = "https://img.zhenxianghaitao.com/ID/"
 const IMG_SHOP = "https://img.zhenxianghaitao.com/SHOP/"
 const IMG_SHOP_PRODUCT = "https://img.zhenxianghaitao.com/SHOPPRODUCT/"
+const IMG_ORDER_EXTRASERVICE = "https://img.zhenxianghaitao.com/EXTRASERVICES/"
+
 //登录 初始设置
 const CATEGORY_URL = BASE_URL + "/api/mall/categories/";
 const SHOP_PRODUCT_URL = BASE_URL + "/api/mall/shopProducts/";
@@ -58,7 +60,7 @@ const GET_MY_CONSIGNEES_URL = BASE_URL + "/api/mall/users/getMyConsignees/"
 const SET_DEFAULT_CONSIGNEE_URL = BASE_URL + "/api/mall/users/setDefaultConsignee/"
 const GET_ALL_PRODUCT_BY_CATEGORYID_URL = BASE_URL + "/api/mall/products/category/"
 const GET_MY_PRODUCTS = SHOP_PRODUCT_URL + "openId/"
-
+const GET_SPECIAL_PRICE_LIST = SHOP_PRODUCT_URL + "getSpecialPriceList/" 
 //进入他人店铺
 const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/"
 
@@ -75,7 +77,7 @@ const REORDER_URL = BASE_URL + "/api/mall/orders/reorder"
 const RECEIVE_ORDER_URL = BASE_URL + "/api/mall/orders/receiveOrder/"
 const GET_CURRENT_ORDERGOOD_PRICE = BASE_URL +"/api/mall/orders/getCurrentOrderGoodPrice"
 const ORDER_EXTRA_SERVICE_MESSAGE = BASE_URL + "/api/mall/orders/orderExtraServiceMessage"
-
+const GET_ORDER_EXTRA_SERVICE_BY_ID = BASE_URL +"/api/mall/orders/getOrderExtraServiceById/"
 //发货单
 const SAVE_SHIPORDER = BASE_URL + "/api/mall/orders/saveShipOrder"
 
@@ -90,7 +92,7 @@ const DECLINE_TRANSFER_ORDER = BASE_URL + "/api/mall/orders/declineTransferOrder
 //功能性
 const UPLOADFILE = BASE_URL + "/api/mall/test/uploadFile"
 const GETSHOPIMG = BASE_URL + "/api/mall/test/shareShop"
-
+const DELETE_FILE = BASE_URL + "/api/mall/test/deleteFile"
 module.exports = {
   BASE_URL: BASE_URL,
   CATEGORY_URL: CATEGORY_URL,
@@ -155,6 +157,11 @@ module.exports = {
   IMG_SHOP : IMG_SHOP,
   IMG_SHOP_PRODUCT : IMG_SHOP_PRODUCT,
   GET_EXTRASERVICES_BY_SHOP : GET_EXTRASERVICES_BY_SHOP,
-  ORDER_EXTRA_SERVICE_MESSAGE: ORDER_EXTRA_SERVICE_MESSAGE
+  ORDER_EXTRA_SERVICE_MESSAGE: ORDER_EXTRA_SERVICE_MESSAGE,
+  IMG_ORDER_EXTRASERVICE: IMG_ORDER_EXTRASERVICE,
+  DELETE_FILE: DELETE_FILE,
+  GET_ORDER_EXTRA_SERVICE_BY_ID: GET_ORDER_EXTRA_SERVICE_BY_ID,
+  GET_SPECIAL_PRICE_LIST: GET_SPECIAL_PRICE_LIST
+  
    
 }

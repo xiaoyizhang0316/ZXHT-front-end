@@ -169,3 +169,98 @@ justify-content:right;
     transform: rotate(45deg);
     align-items: center;
 }
+.container{
+  font-family: "微软雅黑";
+  padding: 0rpx 20rpx;
+  padding-top: 1px;
+}
+
+
+.modal{
+  position: absolute;
+  left: 0rpx;
+  top: 100rpx;
+  z-index: 200;
+  width:100%;
+}
+
+.modal-content{
+  width: 90%;
+  height: 900rpx;
+  margin: 0 auto;
+  background: #fff;
+  font-size: 30rpx;
+  font-family: "微软雅黑";
+  padding: 20rpx;
+  border-radius: 5px;
+}
+
+
+.modal-line-box.amount-title{
+  text-align: center;
+  font-size: 40rpx;
+  margin-bottom: 30rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-line-box.amount-title1{
+  margin-right: 20rpx;
+}
+
+.modal-line-box.amount-input input{
+  border:1px solid #eee;
+  border-radius: 5px;
+  height: 70rpx;
+  padding-left:20rpx; 
+}
+.modal-line-box.amount-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  margin-bottom: 30rpx;
+}
+.modal-line-box.amount-info2{
+  text-align: center;
+  background: #eee;
+  font-size: 23rpx;
+  padding: 20rpx;
+  border-radius: 5px;
+  margin-top: 50rpx;
+}
+.modal-line-box .amount-style{
+  color: #FF617C;
+}
+
+.modal-line-box.amount-button{
+  margin-top: 50rpx; 
+}
+.button-color{
+	color:#ededed;
+	background-color: #FF617C
+}
+.modal-line-box.amount-button button{
+  display: block;
+  margin:20rpx auto;
+  height: 75rpx;
+  line-height: 75rpx;
+  width: 92%;
+  font-size: 30rpx;
+}
+
+.mask{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height:100%;
+  z-index: 100;
+  background:rgba(0,0,0,0.5);
+}
+.showMask,.showModal{
+  display: block;
+}
+.hideMask,.hideModal{
+  display: none;
+}

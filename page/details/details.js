@@ -38,7 +38,9 @@ Page({
     show: false,
     scaleCart: false,
     productId:'',
-	img_base: COM.load('CON').IMG_BASE
+	img_base: COM.load('CON').IMG_BASE,
+	showModel: false,
+	specialPrices: []
   },
 
   addCount() {
@@ -358,6 +360,25 @@ Page({
 		
    
   },
+  showSpecialPrice: function(e){
+	  let self = this
+	  let productIdList = JSON.stringify([self.data.goods["id"]]);
+
+	  let url = COM.load('CON').GET_SPECIAL_PRICE_LIST + productIdList + "/" + app.globalData.targetShopId;
+	  COM.load('NetUtil').netUtil(url, "GET", "", (specialPriceList) => {
+		  if (specialPriceList) {
+			  
+			  let spl = JSON.parse(specialPriceList)
+			  console.log(spl[self.data.goods["id"]])
+			  self.setData({
+				  specialPrices: spl[self.data.goods["id"]],
+				  showModal: true
+			  });
+		  }
+	  })
+	  
+
+  },
   bindPreviewImage: function (e) {
 	  console.log(e)
 	  console.log(this.data.detail.images)
@@ -384,6 +405,11 @@ Page({
 				// 转发失败
 			}
 		}
+	},
+	hideModal: function () {
+		this.setData({
+			showModal: false
+		});
 	}
 
     

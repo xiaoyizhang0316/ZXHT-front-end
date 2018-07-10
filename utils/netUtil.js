@@ -124,12 +124,12 @@ function uploadAllFiles(url,list,callBack, hide)
 						mask: true
 					})
 				} else {
-					console.log(res)
-					wx.showToast({
-						title: "please check ",
-						duration: 3000,
-						mask: true
-					})
+					// console.log(res)
+					// wx.showToast({
+					// 	title: "please check ",
+					// 	duration: 3000,
+					// 	mask: true
+					// })
 				}
 
 			},

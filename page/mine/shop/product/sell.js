@@ -36,13 +36,14 @@ Page({
   * 生命周期函数--监听页面显示
   */
   onShow: function () {
-    if (wx.getStorageSync("refreshGoodsList")) {
-      this.filterProducts();
-      wx.setStorage({
-        key: 'refreshGoodsList',
-        data: false,
-      })
-    }
+    // if (wx.getStorageSync("refreshGoodsList")) {
+    //   this.filterProducts();
+    //   wx.setStorage({
+    //     key: 'refreshGoodsList',
+    //     data: false,
+    //   })
+    // }
+	  this.filterProducts();
   },
 
   filterProducts: function () {
@@ -258,6 +259,40 @@ Page({
       })
     }.bind(this), 200)
   },
+  deleteShopProduct: function(e){
+	  let self = this
+	  let productId = e.currentTarget.dataset.id;
+	  let shopId = app.globalData.openId;
+	  let product = { "openId": app.globalData.openId, "productId": productId };
+	  wx.showModal({
+		  title: '提示',
+		  content: '确认下架本商品么?',
+		  success:function(e){
+			  if(e.confirm)
+			  {
+				  let url = COM.load('CON').SHOP_PRODUCT_URL;
+				  COM.load('NetUtil').netUtil(url, "DELETE", product, (flag) => {
+					  if (flag == true) {
+
+						  self.onShow();
+
+					  } else {
+						  wx.showModal({
+							  title: '提示',
+							  content: '已有未完成的订单包含此商品,请完成订单后重试',
+						  })
+					  }
+
+				  })
+
+			  }
+			
+
+		  }
+	  })
+	 
+
+  },
 
   addRecommandation: function (e) {
     this.setData({
@@ -352,7 +387,7 @@ Page({
 	} else {
 		wx.showModal({
 			title: '错误',
-			content: '钻石会员价格需要大于0.1',
+			content: '商铺代理价格需要大于0.1',
 		})
 	}
   },
@@ -433,7 +468,7 @@ Page({
 	if (product.vip3Price < 0.1) {
 		wx.showModal({
 			title: '请检查',
-			content: '钻石会员价格最低为0.1',
+			content: '商铺代理价格最低为0.1',
 			showCancel: false
 		})
 		return

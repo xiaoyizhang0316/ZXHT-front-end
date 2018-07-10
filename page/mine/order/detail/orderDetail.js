@@ -344,7 +344,15 @@ Page({
 				})
 			}
 		})
-	}
+	},
+	viewOrderExtraService: function (e) {
+		console.log(e)
+		let orderExtraServiceId = e.currentTarget.dataset.index
+		//TODO
+		wx.navigateTo({
+			url: '/page/common/templates/editOrderExtraSerivce/editOrderExtraService?id=' + orderExtraServiceId+'&edit=0'
+		})
+	},
 
 	/**
 	 * 用户点击右上角分享

@@ -32,7 +32,7 @@
                 <text class='goods-price-clo'>价格</text>
             </view>
             <view class="goods-line-list-child goods-line-list-top">
-                <text class='goods-top-tip-clo'>点击商品修改价格和首页展示</text>
+                <text class='goods-top-tip-clo'>点击商品修改价格和首页展示(长按可删除)</text>
             </view>
             <!-- <block wx:if="{{displayClear == false}}"> -->
             <block wx:if="{{goodsLineList.length == 0}}">
@@ -45,7 +45,7 @@
                     <image style="height:27px;width:27px;align-self:center" src="/image/add_all.png"></image>
                 </view>
             </block>
-            <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}">
+            <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}" bindlongpress="deleteShopProduct">
                 <image class='goods-image-clo' src="{{item.thumb}}"></image>
                 <text class='goods-name-clo'>{{item.title}}</text>
                 <text class='goods-stock-clo'>{{item.stock}}</text>
@@ -98,7 +98,7 @@
                     <input type="digit" bindinput='updateVip2Price' value="{{selectedProduct.vip2Price}}"></input>
                 </view>
                 <view>
-                    <text>钻石会员: $</text>
+                    <text>商铺代理: $</text>
                     <input type="digit" bindinput='updateVip3Price' value="{{selectedProduct.vip3Price}}"></input>
                 </view>
             </view>
@@ -135,6 +135,8 @@
         </view>
         <view class='bottom-window-btn' bindtap='priceValidation'>
             <text>保存信息</text> </view>
+		<!-- <view class='bottom-window-btn1' bindtap='deleteShopProduct' data-id="{{item.id}}">
+            <text>删除商品</text> </view> -->
         <view class='bottom-window-btn2' bindtap='hideModal'>
             <text style='font-size:33rpx;'>放弃修改</text> </view>
     </view>

@@ -88,7 +88,7 @@ Page({
 
 	bindExtra: function () {
 		wx.navigateTo({
-			url: "/page/common/templates/textArea/textArea?content=" + this.data.memo + "&placeHolder=告诉卖家是否需要拍照签字等服务"
+			url: "/page/common/templates/textArea/textArea?content=" + this.data.memo + "&placeHolder=给卖家留言"
 		})
 	},
 	bindExtraServices: function (e) {

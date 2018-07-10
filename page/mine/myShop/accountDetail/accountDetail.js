@@ -15,6 +15,9 @@ Page({
 			accountNbr: '',
 			accountName: '',
 			rate: 0,
+			vip1: 1,
+			vip2: 1,
+			vip3: 1,
 
 		},
 		payItems: [
@@ -30,9 +33,14 @@ Page({
 		offlinePayStatus: false,
 		weixinPayStatus: false,
 		freePostStatus: false,
+
 		//名为memo 实际是shopNote 使用template的原因
 		memo: '',
 		extraServices: [],
+		showAmountModal: {
+			showModal: 'hideModal',
+			showMask: 'hideMask',
+		},
 
 	},
 	bindFreePost: function () {
@@ -43,6 +51,11 @@ Page({
 	bindPrePay: function () {
 		this.setData({
 			'prepayStatus': !this.data.prepayStatus
+		})
+	},
+	bindShopCopu:function(e){
+		this.setData({
+			'shopCopyStatus': !this.data.shopCopyStatus
 		})
 	},
 
@@ -105,6 +118,25 @@ Page({
 			url: "/page/mine/myShop/accountDetail/extraServices/extraServices"
 		})
 	},
+	bindVipSetup: function () {
+		let self = this
+		self.setData({
+			showAmountModal: {
+				showModal: 'showModal',
+				showMask: 'showMask',
+			}
+		})
+
+	},
+	hideAmountModal: function (e) {
+		var self = this;
+		self.setData({
+			showAmountModal: {
+				showModal: 'hideModal',
+				showMask: 'hideMask',
+			},
+		})
+	},
 	radioChange: function (e) {
 		this.setData({
 			'shop.payment': e.detail.value,
@@ -136,7 +168,11 @@ Page({
 				'shop.rate': parseFloat(myShopInfo.rate),
 				'memo': myShopInfo.shopNote ? myShopInfo.shopNote : "",
 				'freePostStatus': myShopInfo.freePost,
-				'extraServices': myShopInfo.extraServices
+				'shopCopyStatus': myShopInfo.shopCopy,
+				'extraServices': myShopInfo.extraServices,
+				'shop.vip1': myShopInfo.vip1*100,
+				'shop.vip2': myShopInfo.vip2*100,
+				'shop.vip3': myShopInfo.vip3*100
 			})
 			if (self.data.shop.payment) {
 				let payItems = self.data.payItems
@@ -244,6 +280,10 @@ Page({
 					"rate": self.data.shop.rate,
 					"shopNote": self.data.memo,
 					"freePost": self.data.freePostStatus,
+					"shopCopy": self.data.shopCopyStatus,
+					"vip1": self.data.shop.vip1/100,
+					"vip2": self.data.shop.vip2/100,
+					"vip3": self.data.shop.vip3/100,
 					//   "weixinPay": self.data.weixinPayStatus,
 					//   "payment": self.data.shop.payment,
 					//   "bankName": self.data.shop.bankName,
@@ -314,6 +354,54 @@ Page({
 	onReachBottom: function () {
 
 	},
+	vipDiscount:function(e)
+	{
+		let vip1 = e.detail.value.vip1;
+		let vip2 = e.detail.value.vip2;
+		let vip3 = e.detail.value.vip3;
+		let self = this
+		if (!(Number.isInteger(parseInt(vip1)) && vip1>0 && vip1<=100))
+		{
+			wx.showModal({
+				title: '提示',
+				content: '白银会员折扣设置有误',
+				showCancel: false,
+				success: function (e) {
+					return;
+				}
+			})
+		}
+		if (!(Number.isInteger(parseInt(vip2)) && vip2 > 0 && vip2 <= 100)) {
+			wx.showModal({
+				title: '提示',
+				content: '黄金会员折扣设置有误',
+				showCancel: false,
+				success: function (e) {
+					return;
+				}
+			})
+
+		}
+		
+		if (!(Number.isInteger(parseInt(vip3)) && vip3 > 0 && vip3 <= 100)) {
+			wx.showModal({
+				title: '提示',
+				content: '商铺代理折扣设置有误',
+				showCancel: false,
+				success: function (e) {
+					return;
+				}
+			})
+
+		}
+		self.setData({
+			'shop.vip1':vip1,
+			'shop.vip2':vip2,
+			'shop.vip3':vip3
+		})
+		self.hideAmountModal();
+
+	}
 
 
 })

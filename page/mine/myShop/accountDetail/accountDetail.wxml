@@ -29,7 +29,7 @@
                 <input style="flex:6" placeholder="请输入店铺汇率" bindinput="bindRate" name="rate" value="{{shop.rate}}" />
 
             </view>
-			<view class="top-input-box flex-col">
+            <view class="top-input-box flex-col">
                 <view class="pay-method">
                     <text>包邮服务</text>
                     <view class='bottom-text'>
@@ -38,9 +38,26 @@
                 </view>
                 <switch class='switch1' bindchange='bindFreePost' checked="{{freePostStatus}}"></switch>
             </view>
-			<view class="shop-msg top-input-box flex-col" bindtap='bindExtraServices'>
+			<view class="top-input-box flex-col">
+                <view class="pay-method">
+                    <text>店铺可被复制</text>
+                    <view class='bottom-text'>
+                        <text>会员等级为商品代理的客户可以复制你的商铺</text>
+                    </view>
+                </view>
+                <switch class='switch1' bindchange='bindShopCopy' checked="{{shopCopyStatus}}"></switch>
+            </view>
+
+            <view class="top-input-box flex-col" bindtap='bindVipSetup'>
                 <view class="shop-msg-label">
-                    <text>设置增值服务</text>					
+                    <text>设置Vip折扣</text>
+                </view>
+            </view>
+
+
+            <view class="shop-msg top-input-box flex-col" bindtap='bindExtraServices'>
+                <view class="shop-msg-label">
+                    <text>设置增值服务</text>
                 </view>
             </view>
 
@@ -105,6 +122,50 @@
                     </view>
                 </view>
             </view>
+            <view class="mask {{showAmountModal.showMask}}"></view>
+            <view class="modal {{showAmountModal.showModal}}">
+                <form bindsubmit="vipDiscount">
+                    <view class="modal-content">
+                        <view class="modal-line-box amount-title">
+                            <text>会员折扣</text>
+                        </view>
+
+                        <view class="modal-line-box amount-info">
+                            <view class="modal-line-box amount-title1">白银会员:</view>
+
+                            <view class="modal-line-box amount-input">
+                                <input type="digit" name="vip1" value="{{shop.vip1}}" placeholder="请输入折扣：1-100" />
+                            </view>
+
+                        </view>
+                        <view class="modal-line-box amount-info">
+                            <view class="modal-line-box amount-title1">黄金会员:</view>
+
+                            <view class="modal-line-box amount-input">
+                                <input type="digit" name="vip2" value="{{shop.vip2}}" placeholder="请输入折扣: 1-100" />
+                            </view>
+
+                        </view>
+                        <view class="modal-line-box amount-info">
+                            <view class="modal-line-box amount-title1">商铺代理:</view>
+                            <view class="modal-line-box amount-input">
+                                <input type="digit" name="vip3" value="{{shop.vip3}}" placeholder="请输入折扣: 1-100" />
+                            </view>
+                        </view>
+                       
+                        <view class="modal-line-box amount-info2">
+                            <view>请直接输入您想设定的折扣,只接受整数,举例在白银会员上输入80,表示修改店中所有商品对于白银会员打8折。输入100，表示商品价格为原价。</view>
+                            <view style="text-align:center">*请注意折扣的修改将会影响商店内的全部商品的相应定价，对于单一商品的修改请于商品管理页面进行修改
+							</view>
+                        </view>
+                        <view class="modal-line-box amount-button">
+                            <button form-type="submit" size="mini" class="button-color">确定</button>
+                            <button bindtap="hideAmountModal" size="mini" class="">取消</button>
+                        </view>
+                    </view>
+                </form>
+            </view>
+
             <view class="commodity_attr_box bottom-window" wx:if="{{showModalStatus || weixinPayStatus}}">
                 <view class="top-input-box flex-col">
                     <text class='pay-text'>支付方式</text>

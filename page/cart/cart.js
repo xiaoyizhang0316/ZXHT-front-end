@@ -1,4 +1,10 @@
 // page/component/new-pages/cart/cart.js
+var app = getApp();
+// var NetUtil = require('../../utils/netUtil.js')
+// var Util = require('../../utils/util.js')
+// var CON = require('../../utils/constant.js')
+
+var COM = require('../../utils/common.js')
 Page({
   data: {
     carts:[],               // 购物车列表
@@ -8,6 +14,8 @@ Page({
     obj:{
         name:"hello"
     },
+	specialPriceList:[],
+	savedPrice: 0
 
   },
   onLoad(){},
@@ -34,7 +42,26 @@ Page({
           })
 					
         }
-        self.getTotalPrice();
+		
+		let productIdList = []
+		for(var i = 0; i<res.data.length; i++)
+		{
+			productIdList.push(res.data[i].id)
+		}
+		console.log(res.data)
+		let url = COM.load('CON').GET_SPECIAL_PRICE_LIST + JSON.stringify(productIdList) + "/" + app.globalData.targetShopId;
+		COM.load('NetUtil').netUtil(url, "GET", "", (specialPriceList) => {
+			if (specialPriceList) {
+
+				let spl = JSON.parse(specialPriceList)
+				self.setData({
+					specialPriceList: spl
+				})
+				self.getTotalPrice();
+			}
+		})
+	
+        
       },
 	  fail: function(res){
 				self.setData({
@@ -202,14 +229,43 @@ Page({
    * 计算总价
    */
   getTotalPrice() {
+let self = this
     let carts = this.data.carts;                  // 获取购物车列表
     let total = 0;
+	let savedPrice = 0
+	let spl = self.data.specialPriceList
+	
     for(let i = 0; i<carts.length; i++) {         // 循环列表得到每个数据
-      if(carts[i].selected) {                     // 判断选中才会计算价格
-        total += carts[i].num * carts[i].price;   // 所有价格加起来
+		if (carts[i].selected) {// 判断选中才会计算价格
+		
+			if (spl.hasOwnProperty(carts[i].id))
+			{
+				//检查商品数量在哪个区间
+				let ss =  spl[carts[i].id]
+				console.log(ss)
+				console.log("ssssssssssssssss")
+				for(var j = 0; j< ss.length;j++)
+				{
+					if (carts[i].num >= ss[j].minQuantity && carts[i].num <= ss[j].maxQuantity)
+					{
+						carts[i].currentPrice = ss[j].price;
+						carts[i].memo = "享受优惠: 购买" + ss[j].minQuantity + "-" + ss[j].maxQuantity + "件仅: ￥" + ss[j].price+"元"
+						savedPrice = savedPrice + carts[i].num * (carts[i].price * 100 - ss[j].price*100)/100
+						total += carts[i].num * ss[j].price;
+						break;
+					}
+				}
+
+			}else{
+				total += carts[i].num * carts[i].price;
+			}                    
+       //total += carts[i].num * carts[i].price;   // 所有价格加起来
       }
     }
-    this.setData({                                // 最后赋值到data中渲染到页面
+	console.log(carts)
+    this.setData({
+	  savedPrice : savedPrice,
+	                                  // 最后赋值到data中渲染到页面
       carts: carts,
       totalPrice: total.toFixed(2)
     });
@@ -230,7 +286,11 @@ Page({
 
     var orderDate = []
     for (let i = 0; i < carts.length; i++) {         
-      if (carts[i].selected) {                     
+      if (carts[i].selected) {
+		  if(carts[i].currentPrice)
+		  {
+			  carts[i].price = carts[i].currentPrice
+		  }                     
         orderDate.push(carts[i]);
       }
     }
