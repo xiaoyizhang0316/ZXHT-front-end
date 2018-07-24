@@ -152,6 +152,7 @@
 <view class="modal-dialog" wx:if="{{showModal}}">
     <view>
         <textarea disabled='true' class="myTextArea" maxlength="-1" value="{{shopNote ? shopNote : '暂无'}}" />
+        <image class="hello"src="../../../../image/minus.png"></image>
     </view>
 </view>
 
