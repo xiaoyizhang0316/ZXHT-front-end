@@ -123,7 +123,22 @@ function loadProducts(openId, targetShopId) {
 		}	
 	})
 };
+function loadShopBanner(targetShopId) {
+	let self = this
+	NetUtil.netUtil(CON.GET_SHOP_BANNER + targetShopId, "GET", "", function (res) {
+		if (res) {
+			console.log(res);
+			if(res.flag == true)
+			{
+				wx.setStorageSync("shopBanner", res.banner)
+			}else{
+				wx.setStorageSync("shopBanner", null)
+			}		
+		}			
+	});
 
+	
+};
 /**
  * common method to load the cache or refresh the cache
  */
@@ -154,7 +169,7 @@ module.exports = {
   image: image,
   loadBrands: loadBrands,
   loadProducts: loadProducts,
-
+  loadShopBanner: loadShopBanner,
   loadPayments: loadPayments,
   loadShipAgents: loadShipAgents,
   loadShopParams: loadShopParams,

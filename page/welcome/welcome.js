@@ -59,6 +59,7 @@ Page({
 			self.setTargetShop(e)
 			//从读取所有的商品修改为读取本店的商品
 			COM.load('Util').loadProducts(app.globalData.openId, app.globalData.targetShopId);
+			COM.load('Util').loadShopBanner(app.globalData.targetShopId);
 		} else {
 			if (app.globalData.openId != null && (app.globalData.userId == false && self.data.approve == false))
 			{
@@ -147,7 +148,7 @@ Page({
 			if (callback.flag == false) { 
 				wx.showModal({
 					title: '提示',
-					content: '已经为您向店主申请进入本店铺, 请等待店主审核, 点击确认进入展厅',
+					content: '无法进入本店，请联系店主开放权限',
 					success: function (res) {
 						if (res.confirm) {
 							console.log('用户点击确定')

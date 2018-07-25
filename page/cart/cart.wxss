@@ -86,10 +86,10 @@
 }
 .cart-list .cart-count-box{
     position: absolute;
-    left: 400rpx;
+    left: 500rpx;
     bottom: 80rpx;
     /* width: 250rpx; */
-    height: 60rpx;
+    height: 40rpx;
     color: #ababab;
     padding-left: 50rpx;
 
@@ -101,20 +101,20 @@
 }
 .cart-count-down,.cart-count-add{
     border: 1rpx solid #e9e9e9;
-    font-size: 35rpx;
-    width: 65rpx;
-    line-height: 70rpx;
+    font-size: 25rpx;
+    width: 35rpx;
+    line-height: 40rpx;
     height: 100%;
     text-align: center;
 }
 .cart-count-num{
-    line-height: 70rpx;
+    line-height: 40rpx;
     text-align: center;
     font-size: 35rpx;
     border-top: 1rpx solid #e9e9e9;
     border-bottom:1rpx solid #e9e9e9;
     height: 100%;
-    width: 75rpx;
+    width: 35rpx;
 }
 .cart-del{
     position: absolute;

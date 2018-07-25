@@ -27,7 +27,6 @@
             <view class="goods-line-list-child goods-line-list-top">
                 <text class='goods-image-clo'>图片</text>
                 <text class='goods-top-name-clo'>名称</text>
-
                 <text class='goods-stock-clo'>库存</text>
                 <text class='goods-price-clo'>价格</text>
             </view>
@@ -40,7 +39,7 @@
                     点我去上货
                     <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
                 </view>
-				<view style="text-align:center; margin: 0 auto; margin-top: 40rpx" catchtap="oneButtonProducts">
+                <view style="text-align:center; margin: 0 auto; margin-top: 40rpx" catchtap="oneButtonProducts">
                     点我一键上货
                     <image style="height:27px;width:27px;align-self:center" src="/image/add_all.png"></image>
                 </view>
@@ -59,7 +58,7 @@
             <view class='bottom-window-detail-left'>
                 <image src='{{selectedProduct.thumb}}'></image>
             </view>
-			<view class='bottom-window-detail-right'>
+            <view class='bottom-window-detail-right'>
                 <!-- <text class='goods-name-label'>商品名:</text> -->
                 <text class='goods-name'>{{selectedProduct.title}}</text>
 
@@ -113,14 +112,14 @@
                     <!-- <input type="number" bindinput='updateHotSale' value='{{selectedProduct.hotSale}}'></input> -->
                 </view>
             </view>
-			 <view class='bottom-window-RecommandNHot'>
+            <view class='bottom-window-RecommandNHot'>
                 <view>
                     <text>商品打折</text>
                     <switch checked="{{isDiscount}}" data-id="{{item.id}}" bindchange="addDiscount" />
                 </view>
                 <view>
                     <text style='width: 150rpx'>折后价格$</text>
-                    
+
                     <input type="number" bindinput='updateDiscountPrice' value='{{selectedProduct.discountPrice}}'></input>
                 </view>
             </view>
@@ -135,10 +134,46 @@
         </view>
         <view class='bottom-window-btn' bindtap='priceValidation'>
             <text>保存信息</text> </view>
-		<!-- <view class='bottom-window-btn1' bindtap='deleteShopProduct' data-id="{{item.id}}">
+        <!-- <view class='bottom-window-btn1' bindtap='deleteShopProduct' data-id="{{item.id}}">
             <text>删除商品</text> </view> -->
         <view class='bottom-window-btn2' bindtap='hideModal'>
             <text style='font-size:33rpx;'>放弃修改</text> </view>
+    </view>
+
+
+
+
+    <!--modal for recommendationList-->
+    <view class="commodity_screen" bindtap="hideModal" wx:if="{{recommendationModal}}"></view>
+    <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{recommendationModal}}">
+        <view class='bottom-window-detail'>
+            <view style="display:flex;font-size:30rpx;align-items:center;">
+                <text>热销推荐</text>
+            </view>
+            <image bindtap='hideModal' class='bottom-window-detail-icon' src='/image/public/clear.png' data-name="recommendationModal"></image>
+        </view>
+        <view class='bottom-price'>
+            <scroll-view scroll-y style="height: 800rpx;" scroll-top="100">
+			
+                <view class='bottom-window-price' wx:for="{{recommendationList}}" wx:key="{{index}}">
+                    <image class='image-clo' src="{{item.thumb}}"></image>
+
+                    <text class='name-clo'>{{item.title}}</text>
+
+                    <view>
+                        <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChangeRecommendationList" />
+                    </view>
+                </view>
+
+
+            </scroll-view>
+        </view>
+        <view class='bottom-window-btn' bindtap='saveRecommendationAddList'>
+            <text>确认上货</text>
+        </view>
+        <!-- <view class='bottom-window-btn1' bindtap='deleteShopProduct' data-id="{{item.id}}">
+            <text>删除商品</text> </view> -->
+
     </view>
 
 </view>

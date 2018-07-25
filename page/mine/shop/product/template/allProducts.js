@@ -72,8 +72,8 @@ Page({
     let url = COM.load('CON').SHOP_PRODUCT_URL + "openId/" + app.globalData.openId;
 
     COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
-      for (var x in callbackdata) {
-        let shopProduct = callbackdata[x];
+      for (var x in callbackdata.myShopProducts) {
+		  let shopProduct = callbackdata.myShopProducts[x];
         self.data.myShopProductIds.push(shopProduct.id);
       }
       products.slice(0, products.length).forEach(function (p) {

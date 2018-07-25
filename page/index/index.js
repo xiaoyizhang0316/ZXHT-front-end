@@ -53,7 +53,7 @@ Page({
 	onShow: function () {
 		var self = this;
 		self.loadRecommendedProducts();
-
+		self.loadShopBanner();
 		wx.getSystemInfo({
 			success: function (res) {
 				self.setData({
@@ -131,6 +131,34 @@ Page({
 	/**
 	 * load the recomemded products by the shop id
 	 */
+	loadShopBanner :function(e)
+	{
+		let self = this
+		let shopBanner = wx.getStorageSync("shopBanner");
+		if(shopBanner != null)
+		{
+			console.log("222222222222222222222222222222222222222222222222222")
+			let shopBanners = JSON.parse(shopBanner);
+			let imgUrls = []	
+			for(var i = 0 ; i < shopBanners.length ; i++)
+			{
+				imgUrls[i] = COM.load('CON').IMG_BANNER+shopBanners[i]
+			}
+			self.setData({
+				imgUrls: imgUrls
+			})
+		}else{
+			self.setData({
+				imgUrls: [
+
+					'https://img.zhenxianghaitao.com/siteImages/slide1.png',
+					'https://img.zhenxianghaitao.com/siteImages/slide2.png',
+					'https://img.zhenxianghaitao.com/siteImages/slide3.png'
+				],
+			})
+		}
+		
+	},
 	loadRecommendedProducts: function (event) {
 		let self = this
 		//如果有targetShopId 则优先展示

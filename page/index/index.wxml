@@ -2,10 +2,7 @@
 <import src="/page/common/templates/goodsList/hotList-block/hotList-block.wxml" />
 <!-- <scroll-view scroll-y="true" style="height:{{winHeight}}px"> -->
 <!-- <view class='main'> -->
-
-<view class="search-box">
-
-    <swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true" stlye="z-index:-1;">
+<swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true" stlye="z-index:-1;" indicator-dots="true">
         <block wx:for="{{imgUrls}}" wx:key="{{index}}">
             <swiper-item>
                 <image src="{{item}}" class="slide-image" width="100%" />
@@ -13,6 +10,9 @@
         </block>
     </swiper>
 
+<view class="search-box">
+
+    
 
     <view class="main-profile">
         <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>

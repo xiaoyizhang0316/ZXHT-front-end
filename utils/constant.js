@@ -1,8 +1,9 @@
 //url相关
-const BASE_URL = "https://mini.zhenxianghaitao.com"
+//const BASE_URL = "https://mini.zhenxianghaitao.com"
 
-//const BASE_URL = "https://a42d4b72.ngrok.io"
+const BASE_URL = "https://9c9415e4.ngrok.io"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/mini/"
+const IMG_BANNER = "https://img.zhenxianghaitao.com/storage/"
 const IMG_DETAIL_BASE = "https://img.zhenxianghaitao.com/"
 const IMG_ID = "https://img.zhenxianghaitao.com/ID/"
 const IMG_SHOP = "https://img.zhenxianghaitao.com/SHOP/"
@@ -45,8 +46,8 @@ const ONE_BUTTON_PRODUCTS = BASE_URL + "/api/mall/shops/oneButtonProducts/"
 const BALANCE_APPLY = BASE_URL + "/api/mall/shops/balanceApply/"
 const GET_SHOP_BALANCE = BASE_URL + "/api/mall/shops/getShopBalance/"
 const GET_EXTRASERVICES_BY_SHOP = BASE_URL + "/api/mall/shops/getExtraServicesByShopId/"
-
-
+const GET_SHOP_BANNER = BASE_URL + "/api/mall/shops/getShopBanner/"
+const ADD_RECOMMENDATIONLIST = SHOP_PRODUCT_URL + "addRecommendationList"
 //二维码扫描和商品搜索
 const BAR_CODE_URL = PRODUCT_URL + "barcode/";
 const SEARCH_URL = PRODUCT_URL + "title/";
@@ -59,7 +60,7 @@ const DELETE_CONSIGNEE_URL = BASE_URL + "/api/mall/users/deleteConsignee/";
 const GET_MY_CONSIGNEES_URL = BASE_URL + "/api/mall/users/getMyConsignees/"
 const SET_DEFAULT_CONSIGNEE_URL = BASE_URL + "/api/mall/users/setDefaultConsignee/"
 const GET_ALL_PRODUCT_BY_CATEGORYID_URL = BASE_URL + "/api/mall/products/category/"
-const GET_MY_PRODUCTS = SHOP_PRODUCT_URL + "openId/"
+const GET_MY_PRODUCTS_AND_RECOMMENDATION  = SHOP_PRODUCT_URL + "openId/"
 const GET_SPECIAL_PRICE_LIST = SHOP_PRODUCT_URL + "getSpecialPriceList/" 
 //进入他人店铺
 const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/"
@@ -135,7 +136,7 @@ module.exports = {
   IMG_BASE: IMG_BASE,
   REORDER_URL: REORDER_URL,
   RECEIVE_ORDER_URL: RECEIVE_ORDER_URL,
-  GET_MY_PRODUCTS: GET_MY_PRODUCTS,
+  GET_MY_PRODUCTS_AND_RECOMMENDATION: GET_MY_PRODUCTS_AND_RECOMMENDATION,
   GET_TARGETSHOP_PRODUCT_URL : GET_TARGETSHOP_PRODUCT_URL,
   GET_SHOPPARAMS_URL : GET_SHOPPARAMS_URL,
   GET_PAYMENTS_URL : GET_PAYMENTS_URL,
@@ -155,13 +156,16 @@ module.exports = {
   GETSHOPIMG: GETSHOPIMG,
   IMG_ID : IMG_ID,
   IMG_SHOP : IMG_SHOP,
+  IMG_BANNER: IMG_BANNER,
   IMG_SHOP_PRODUCT : IMG_SHOP_PRODUCT,
   GET_EXTRASERVICES_BY_SHOP : GET_EXTRASERVICES_BY_SHOP,
   ORDER_EXTRA_SERVICE_MESSAGE: ORDER_EXTRA_SERVICE_MESSAGE,
   IMG_ORDER_EXTRASERVICE: IMG_ORDER_EXTRASERVICE,
   DELETE_FILE: DELETE_FILE,
   GET_ORDER_EXTRA_SERVICE_BY_ID: GET_ORDER_EXTRA_SERVICE_BY_ID,
-  GET_SPECIAL_PRICE_LIST: GET_SPECIAL_PRICE_LIST
+  GET_SPECIAL_PRICE_LIST: GET_SPECIAL_PRICE_LIST,
+  GET_SHOP_BANNER: GET_SHOP_BANNER,
+  ADD_RECOMMENDATIONLIST: ADD_RECOMMENDATIONLIST
   
    
 }
