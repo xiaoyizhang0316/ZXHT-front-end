@@ -14,22 +14,20 @@
 
 <view wx:key="idx" wx:for-index="idx" wx:for="{{orderHistoryList}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
     <view class="explain-line" bindtap="clickOrder" data-index="{{idx}}" data-order="{{item.orderInfo.id}}">
-        <!-- <view style="position:absolute;margin-top:-45px;margin-left:75px;">
-         <image style="height:80px;width:80px;" src="/images/done-order.png"></image> 
-      </view>  -->
+
         <view class="item-top">
             <view style="padding-left:20rpx;font-size:12px;flex:3.5;color:grey;">订单: {{item.orderInfo.orderSN}}</view>
             <view style="padding-left:20rpx;font-size:12px;flex:3;color:grey;">{{item.orderInfo.addTime}}</view>
             <view style="font-size:14px;flex:1.5;">{{item.consignee.name}}</view>
 
             <view wx:if="{{item.orderInfo.orderStatus == 1 || item.orderInfo.orderStatus==2}}" style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
-                <image style="height:20px;width:20px;" src="/image/public/clear.png"></image>
+                <image style="height:20px;width:20px;" src="/image/public/clear.png" mode="aspectFit"></image>
             </view>
         </view>
 
         <scroll-view class="order-item-scroll" scroll-x>
             <view class="order-item-scroll-box" wx:for="{{item.orderGoods}}" wx:for-item="val">
-                <image src="{{val.image}}" class="order-item-image"></image>
+                <image src="{{val.image}}" class="order-item-image" mode="aspectFit"></image>
             </view>
             <block wx:if="{{item.orderGoods.length == 1}}">
                 <view class="order-item-title">
@@ -42,39 +40,11 @@
 
         <view class='order-item-desc'>
 
-            <!--     <view class='button' data-order="{{item.orderInfo.id}}" data-logo="getLogo({{item.orderGoods.productId}})">
-     <block wx:if="{{item.orderInfo.orderStatus == 2}}">
-          <view class='button-red'data-order="{{item.orderInfo.id}}"data-id="{{idx}}" catchtap='showModal'>立即支付</view>
-        </block>
-        <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
-          <text>已下单</text>
-        </block>
-        <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
-          <text>发货中</text>
-        </block>
-        <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
-          <text>待发货</text>
-        </block>
-        <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
-          <text>已收货</text>
-        </block>
-				<block wx:elif="{{item.orderInfo.orderStatus == 6}}">
-          <text>待收货</text>
-        </block>
-        <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
-          <view class='button-grey'>已取消</view>
-        </block>
-        <block wx:else>
-          <text>处理中</text>
-        </block>
-      </view>-->
             <text>共{{item.orderGoods.length}}种商品</text>
             <text class='middle-tip'>实付款:</text>
             <text class='order-price'>￥{{item.orderInfo.totalCost}}</text>
         </view>
-        <!-- <view style="margin-right:20rpx;display:flex;border:1px solid #e64949;background-color:#e64949;color:#fff;padding:4px;font-size:15px;border-radius:3px;" data-order="{{item.orderId}}" data-logo="{{item.logo}}" catchtap="placeOrder">
-         再次下单
-       </view> -->
+
         <view class="order-pay">
 
             <!--订单状态-放在左边-->
@@ -112,33 +82,17 @@
                     <view class='button-red' data-order="{{item.orderInfo.id}}" data-id="{{idx}}" catchtap='showModal'>立即支付</view>
                 </view>
             </block>
-            <!-- <block wx:elif="{{item.orderInfo.orderStatus == 1}}">
-          <text>已下单</text>
-        </block>
-        <block wx:elif="{{item.orderInfo.orderStatus == 5}}">
-          <text>发货中</text>
-        </block> -->
 
-            <!-- <block wx:elif="{{item.orderInfo.orderStatus == 3 }}">
-          <text>待发货</text>
-        </block> -->
-            <!-- <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
-          <text>已收货</text>
-        </block> -->
             <block wx:elif="{{item.orderInfo.orderStatus == 6}}">
                 <view class='button2' data-order="{{item.orderInfo.id}}" data-logo="getLogo({{item.orderGoods.productId}})">
                     <view class='button-red' data-order="{{item.orderInfo.id}}" data-id="{{idx}}">去收货</view>
                 </view>
             </block>
-            <!-- <block wx:elif="{{item.orderInfo.orderStatus == 9}}">
-          <view class='button-grey'>已取消</view>
-        </block> -->
-            <!-- <block wx:else>
-          <text>处理中</text>
-        </block> -->
-
-
-
+            <block wx:elif="{{item.orderInfo.orderStatus == 7}}">
+                <view class='button2' data-order="{{item.orderInfo.id}}">
+                    <view class='button-red' data-order="{{item.orderInfo.id}}" data-id="{{idx}}">去评论</view>
+                </view>
+            </block>
             <view class='button3' data-order="{{item.orderInfo.id}}" catchtap="placeOrder">再次下单</view>
         </view>
     </view>
@@ -177,8 +131,29 @@
                 <text>￥{{selectedOrder.orderInfo.totalCost}}</text>
                 <!-- <text>约为￥{{selectedOrder.orderInfo.rmb}}</text> -->
             </view>
-
+            <view wx:if="{{qrCodeModal}}">
+                <image src='{{qrCodeImg}}'></image>
+            </view>
             <button data-order="{{selectedOrder.orderInfo.id}}" bindtap='payOrder' class='bottom-window-button' type='primary'>确认付款</button>
+
+
         </view>
+    </view>
+
+    <view class="modal-mask" bindtap="hideQrCodeModal" catchtouchmove="preventTouchMove" wx:if="{{qrCodeModal}}"></view>
+    <view class="modal-qrcodedialog" wx:if="{{qrCodeModal}}">
+        <view class="modal-content">
+            <image src='{{qrCodeImg}}' style='height:400rpx;width:400rpx' mode="aspectFit"></image>
+            <view class="privacyText">扫描图片进行支付，或者保存图像到本地后使用微信扫一扫进行支付</view>
+        </view>
+        <view class="modal-footer">
+
+            <view class="btn-downloadConfirm" bindtap="downloadQrcode">保存图片</view>
+
+        </view>
+    </view>
+    <view style='width:0px;height:0px;overflow:hidden;'>
+
+        <canvas canvas-id="myCanvas" style='height:400px;width:400px' />
     </view>
 </view>

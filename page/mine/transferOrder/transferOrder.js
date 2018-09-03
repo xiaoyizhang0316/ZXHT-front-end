@@ -26,7 +26,7 @@ Page({
 			if (app.globalData.openId == null) {
 				setTimeout(function () {
 
-					this.onLoad(options)
+					self.onLoad(options)
 
 				}, 1000)
 				return
@@ -241,8 +241,8 @@ Page({
 		COM.load('NetUtil').netUtil(url, "POST", params, (res) => {
 			if(res.flag==true)
 			{
-				wx.navigateBack({
-					delta: 0
+				wx.redirectTo({
+					url: '/page/index/index',
 				})
 			}else{
 				wx.showModal({

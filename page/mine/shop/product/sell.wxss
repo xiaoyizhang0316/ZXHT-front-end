@@ -149,7 +149,7 @@
     width: 100%;
     overflow: hidden;
     position: fixed;
-    bottom: 0;
+    top:200rpx;
     left: 0;
     z-index: 2000;
     background: #fff;

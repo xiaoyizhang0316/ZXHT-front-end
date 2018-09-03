@@ -3,7 +3,7 @@
         <view class="goods-item" wx:for="{{goodsList}}" wx:key="{{index}}">
             <!-- <view > -->
             <navigator url="/page/details/details?id={{item.id}}">
-            <image class="goods-image" src="{{item.thumb}}" background-size="cover"></image>
+            <image class="goods-image" src="{{item.thumb}}" mode="aspectFit"></image>
             </navigator> 
             <!-- </view> -->
 

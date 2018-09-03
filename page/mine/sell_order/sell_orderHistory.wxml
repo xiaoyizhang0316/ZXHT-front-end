@@ -4,11 +4,11 @@
         <view style="flex-direction:row;justify-content:space-between;flex:1;display: flex;margin-bottom: 10px;padding-top:10px;">
             <view class="search-input" style="height:25px;">
                 <view>
-                    <image style="height:21px;width:21px;margin-top:7rpx; margin-left:10rpx;margin-right:5rpx;" src="/image/public/find.png"></image>
+                    <image style="height:21px;width:21px;margin-top:7rpx; margin-left:10rpx;margin-right:5rpx;" src="/image/public/find.png" mode="aspectFit"></image>
                 </view>
                 <input focus="{{focus}}" value="{{search}}" placeholder="搜索收件人姓名、手机、订单SN编号和商品" placeholder-class="placeholderstyle" cursor-spacing="50px" confirm-type="search" type="text" bindinput="searchOrder" focus="{{isFocus}}" auto-focus="{{isFocus}}" />
                 <view class="{{displayClear?'':'hidden'}}" bindtap="reset">
-                    <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+                    <image mode="aspectFit" style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
                 </view>
             </view>
         </view>
@@ -38,15 +38,13 @@
                                 <view style="padding-left:20rpx;font-size:12px;flex:3.5;color:grey;">订单: {{item.orderInfo.orderSN}}</view>
                                 <view style="padding-left:20rpx;font-size:12px;flex:3;color:grey;">{{item.orderInfo.addTime}}</view>
                                 <view style="font-size:14px;flex:1.5;">{{item.consignee.name}}</view>
-                                <!-- <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
-                      <image style="height:20px;width:20px;" src="/image/public/clear.png"></image> 
-                  </view> -->
+                    
                             </view>
 
                             <scroll-view class="order-item-scroll" scroll-x>
 
                                 <view class="order-item-scroll-box" wx:for="{{item.orderGoods}}" wx:for-item="val">
-                                    <image src="{{val.image}}" class="order-item-image"></image>
+                                    <image src="{{val.image}}" class="order-item-image" mode="aspectFit"></image>
                                 </view>
 
                                 <block wx:if="{{item.orderGoods.length == 1}}">
@@ -140,7 +138,7 @@
                             <scroll-view class="order-item-scroll" scroll-x>
 
                                 <view class="order-item-scroll-box" wx:for="{{item.orderGoods}}" wx:for-item="val">
-                                    <image src="{{val.image}}" class="order-item-image"></image>
+                                    <image src="{{val.image}}" class="order-item-image" mode="aspectFit"></image>
                                 </view>
 
                                 <block wx:if="{{item.orderGoods.length == 1}}">
@@ -222,15 +220,13 @@
                                 <view style="padding-left:20rpx;font-size:12px;flex:3.5;color:grey;">订单: {{item.orderInfo.orderSN}}</view>
                                 <view style="padding-left:20rpx;font-size:12px;flex:3;color:grey;">{{item.orderInfo.addTime}}</view>
                                 <view style="font-size:14px;flex:1.5;">{{item.consignee.name}}</view>
-                                <!-- <view style="padding-left:10px;flex:0.5;" data-order="{{item.orderInfo.id}}" catchtap="delOrder">
-                      <image style="height:20px;width:20px;" src="/image/public/clear.png"></image> 
-                  </view> -->
+                            
                             </view>
 
                             <scroll-view class="order-item-scroll" scroll-x>
 
                                 <view class="order-item-scroll-box" wx:for="{{item.orderGoods}}" wx:for-item="val">
-                                    <image src="{{val.image}}" class="order-item-image"></image>
+                                    <image mode="aspectFit" src="{{val.image}}" class="order-item-image"></image>
                                 </view>
 
                                 <block wx:if="{{item.orderGoods.length == 1}}">

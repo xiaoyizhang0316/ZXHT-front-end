@@ -21,7 +21,7 @@ Page({
 	},
 
 	onLoad: function (options) {
-		
+		console.log("eeeeeeeeeeeeessssssssssssssssssssssssssssssssssssss")
 		
 	},
 	onShow: function(options)
@@ -119,8 +119,8 @@ Page({
 		//修改 product为从服务器读取
 		let openId = app.globalData.openId
 
-		COM.load('NetUtil').netUtil(COM.load('CON').GET_TARGETSHOP_PRODUCTS_URL + openId + "/" + targetShopId, "GET", "",function (shopProducts) {
-			
+		// COM.load('NetUtil').netUtil(COM.load('CON').GET_TARGETSHOP_PRODUCTS_URL + openId + "/" + targetShopId, "GET", "",function (shopProducts) {
+			let shopProducts = wx.getStorageSync("shopProducts")
 			if (shopProducts) {
 				//console.log("shop products")
 				//console.log(shopProducts);
@@ -158,7 +158,7 @@ Page({
 			}
 			
 			self.setData({ products : products });
-		})
+		// })
 
 
 	},
@@ -183,10 +183,9 @@ Page({
 		})
 
 		if (e.target.dataset.index == 0) {
-			console.log(self.data)
-			console.log(this.data)
+			
 			this.setData({ items: this.data.brands, rightCategory: [this.data.brands] });
-			console.log(this.data.brands)
+			
 		} else {
 			let subCategories = this.data.res[e.target.dataset.index - 1].subCategories;
 			let rightCategory = [];
@@ -195,12 +194,9 @@ Page({
 			let products = this.data.products
 			subCategories.forEach(function (subCat) {
 				subCat.productIds.forEach(function (val, index, arr) {
-					var id = (typeof val == 'object') ? val.id : val
-					console.log("id")
-					console.log(val)
-					console.log(products)
+					var id = (typeof val == 'object') ? val.id : val					
 					arr[index] = products[id]
-					console.log(arr[index])
+					
 				})
 			})
 			this.setData({

@@ -58,8 +58,7 @@ Page({
 			}
 			self.setTargetShop(e)
 			//从读取所有的商品修改为读取本店的商品
-			COM.load('Util').loadProducts(app.globalData.openId, app.globalData.targetShopId);
-			COM.load('Util').loadShopBanner(app.globalData.targetShopId);
+			
 		} else {
 			if (app.globalData.openId != null && (app.globalData.userId == false && self.data.approve == false))
 			{
@@ -145,6 +144,8 @@ Page({
 		COM.load('NetUtil').netUtil(url, "POST", { "open_id": fan, "shop_id": shop }, (callback) => {
 			console.log("applytoshop callback")
 			console.log(callback)
+			COM.load('Util').loadProducts(fan, shop);
+			COM.load('Util').loadShopBanner(shop);
 			if (callback.flag == false) { 
 				wx.showModal({
 					title: '提示',
@@ -172,6 +173,7 @@ Page({
 					key: 'targetShopId',
 					data: e.targetShopId,
 				})
+				wx.setStorageSync("applyToShop", callback)
 				app.globalData.deposit = callback.deposit
 				console.log("deposit: " + app.globalData.deposit)
 				app.globalData.targetShopId = e.targetShopId

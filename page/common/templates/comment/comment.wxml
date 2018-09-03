@@ -1,0 +1,21 @@
+<!--page/common/templates/comment/comment.wxml-->
+<form bindsubmit="submitForm">
+    <view class="search-textarea">
+        <textarea value="{{message}}" placeholder='请输入评论' name="textarea"/>
+    </view>
+
+    <view style='display: flex;flex-direction: row;flex-wrap:wrap;margin-left:10rpx;margin-right:10rpx'>
+    <view class="prew_img" wx:for="{{chooseImage}}" wx:key="{{index}}" style="background-image:url({{item}});margin-top:50rpx; margin-bottom:50rpx; margin-left:50rpx">
+        <view class="bind" data-group="{{chooseImage}}" data-current="{{item}}" bindtap="bindPreviewImage"></view>
+        <image class="delete" data-index="{{index}}" bindtap="bindDeleteImage" src="../../../../image/minus.png" ></image>
+    </view>
+	</view>
+   
+    <view class= "image-div" hidden="{{chooseImage.length==3}}"><image class="upload"  bindtap="bindChooseMedia" src="../../../../image/add_pics.png"></image></view>
+
+  
+
+    <view style="display: flex;flex-direction: column; justify-content: center;flex:0.8;position:fixed;bottom:10rpx;width:100%;">
+        <button form-type="submit" class="button" type="primary" style="margin:15px 10px 0 10px;" disabled='{{!buttonFlag}}'>确认</button>
+    </view>
+</form>

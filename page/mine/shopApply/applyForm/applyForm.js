@@ -149,14 +149,14 @@ Page({
 			},
 
 			bankName: {
-				required: self.data.weixinPayStatus ? true : false
+				required: self.data.weixinPayStatus && (self.data.shop.payment == 1) ? true : false
 			},
 			accountNbr: {
-				required: self.data.weixinPayStatus ? true : false,
-				digit: self.data.weixinPayStatus ? true : false
+				required: self.data.weixinPayStatus && (self.data.shop.payment == 1) ? true : false,
+				digit: self.data.weixinPayStatus && (self.data.shop.payment == 1) ? true : false
 			},
 			accountName: {
-				required: self.data.weixinPayStatus ? true : false
+				required: self.data.weixinPayStatus && (self.data.shop.payment == 1) ? true : false
 			}
 		}
 
@@ -182,11 +182,7 @@ Page({
 		// 创建实例对象
 		this.WxValidate = new WxValidate(rules, messages)
 
-		// paymethods = {
-		// 	'prepayStatus': self.data.prepayStatus,
-		// 	'offlinePayStatus': self.data.offlinePayStatus,
-		// 	'weixinPayStatus': self.data.weixinPayStatus
-		// }
+		
 		if (!self.data.prepayStatus && !self.data.offlinePayStatus && !self.data.weixinPayStatus) {
 			wx.showModal({
 				title: '开店失败',
@@ -231,8 +227,8 @@ Page({
 			}
 		}
 
-		console.log(extraServices)
-
+	
+		console.log(self.data)
 
 		// 传入表单数据，调用验证方法
 		if (!this.WxValidate.checkForm(e)) {
@@ -263,7 +259,7 @@ Page({
 				"extraServices":
 				self.data.extraServices
 			}
-			console.log(extraServices)
+			
 			COM.load('NetUtil').netUtil(url, "POST", params, (callbackdata) => {
 				if (callbackdata == true) {
 					console.log("成功")

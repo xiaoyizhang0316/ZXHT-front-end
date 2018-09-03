@@ -21,7 +21,7 @@
                 <view class="pay-method">
                     <text>店铺汇率</text>
                     <view class='bottom-text'>
-                        <text>店铺商品管理使用澳元,展示使用RMB</text>
+                        <text>店铺商品管理使用澳元,展示使用人民币</text>
                     </view>
 
 
@@ -184,37 +184,37 @@
                     </block>
                 </view>
 
-                <view class="top-input-box flex-col">
-                    <block wx:if="{{shop.payment == 1}}">
-                        <text>开户行:</text>
-                        <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" disabled/>
-                    </block>
-                    <block wx:else>
-                        <text>Bank: </text>
-                        <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" disabled/>
-                    </block>
+                <block wx:if="{{shop.payment == 1}}">
 
-                </view>
-                <view class="top-input-box flex-col">
-                    <block wx:if="{{shop.payment == 1}}">
+                    <view class="top-input-box flex-col">
+                        <text>开户行:</text>
+                        <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" /> </view>
+                    <view class="top-input-box flex-col">
                         <text>户名:</text>
-                        <input bindinput="bindaccountNbr" name="accountNbr" value="{{shop.accountNbr}}" disabled/>
-                    </block>
-                    <block wx:else>
-                        <text>AccountNbr:</text>
-                        <input bindinput="bindaccountNbr" name="accountNbr" value="{{shop.accountNbr}}" disabled/>
-                    </block>
-                </view>
-                <view class="top-input-box flex-col">
-                    <block wx:if="{{shop.payment == 1}}">
+                        <input bindinput="bindaccountNbr" name="accountNbr" value="{{shop.accountNbr}}" />
+                    </view>
+                    <view class="top-input-box flex-col">
                         <text>账户:</text>
-                        <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" disabled/>
-                    </block>
-                    <block wx:else>
-                        <text>AccountName:</text>
-                        <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" disabled/>
-                    </block>
-                </view>
+                        <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" /> </view>
+                    <view>
+                        <view>
+                            <text>请注意: 收款方式一旦确定, 只能联系系统管理员修改</text>
+                        </view>
+                        <view class='bottom-text'>
+                            <text>提现后资金会在1-3个工作日内到达您的账户</text>
+                        </view>
+
+
+                    </view>
+                </block>
+                <block wx:else>
+                    <view>
+                        <text>请注意: 收款方式一旦确定, 只能联系系统管理员修改</text>
+                    </view>
+                    <view class='bottom-text'>
+                        <text>请联系管理员微信qqinoz或公众号真享海淘</text>
+                    </view>
+                </block>
 
             </view>
 

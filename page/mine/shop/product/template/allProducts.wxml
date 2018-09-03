@@ -1,75 +1,94 @@
 <view class="main">
 
-  <view style='flex:1;display: flex;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;'>
-    <view class="search-box">
-      <view class="search-input">
-        <view style="display:flex;flex:1;">
-          <view>
-            <image style="height:21px;width:21px;margin-top:7rpx;margin-left:10rpx;" src="/image/public/find.png"></image>
-          </view>
-          <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{lastQuery}}" bindinput="bindSearch" />
+    <view style='flex:1;display: flex;padding-bottom:10px;border-bottom: 1px solid #e6e6e6;'>
+        <view class="search-box">
+            <view class="search-input">
+                <view style="display:flex;flex:1;">
+                    <view>
+                        <image style="height:21px;width:21px;margin-top:7rpx;margin-left:10rpx;" src="/image/public/find.png"></image>
+                    </view>
+                    <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{lastQuery}}" bindconfirm="bindSearch" />
+                </view>
+                <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
+                    <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+                </view>
+                <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
+                    <image style="height:21px;width:21px; margin-right: 5px;margin-top:5rpx;" src="/image/public/scan.png"></image>
+                </view>
+            </view>
         </view>
-        <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
-          <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
+    </view>
+
+    <view class="filter-box">
+        <view>
+            <picker bindchange="bindBrandChange" value="{{index}}" range="{{brandList}}">
+                <view class='picker-view'>按品牌上货</view>
+            </picker>
         </view>
-        <view class="{{displayClear?'hidden':''}}" bindtap="scanCode">
-          <image style="height:21px;width:21px; margin-right: 5px;margin-top:5rpx;" src="/image/public/scan.png"></image>
+
+        <view>
+            <picker bindchange="bindCateChange" value="{{index}}" range="{{cateList}}">
+                <view class='picker-view'>按分类上货</view>
+            </picker>
         </view>
-      </view>
-    </view>
-  </view>
+        <view bindtap='oneButtonProducts'>
 
-  <view class="filter-box">
-    <view>
-      <picker bindchange="bindBrandChange" value="{{index}}" range="{{brandList}}">
-        <view class='picker-view'>按品牌上货</view>
-      </picker>
-    </view>
+            <text>一键上货</text>
 
-    <view>
-      <picker bindchange="bindCateChange" value="{{index}}" range="{{cateList}}">
-        <view class='picker-view'>按分类上货</view>
-      </picker>
-    </view>
-	 <view bindtap='oneButtonProducts'>
-      
-       <text>一键上货</text>
-      
-    </view>
-  </view>
-
-  <view class='goods-line-list-container'>
-  <block wx:if="{{goodsLineList.length == 0}}">
-    <view style="text-align:center; margin: 100rpx auto; margin-top: 300rpx" >
-				 <text>请使用搜索功能/扫描商品barcode</text> 
-				 <text>或点击品牌/分类选择上货物品  </text>     
-    </view>
-    </block>
-    <view class='goods-line-list'>
-
-      <block wx:if="{{displayClear == false}}">
-      <view class="goods-line-item goods-line-list-child" wx:for="{{goodsLineList}}" wx:key="{{index}}">
-        <image class='goods-image-clo' src="{{item.thumb}}"></image>
-
-        <text class='goods-name-clo'>{{item.title}}</text>
-
-        <view class="goods-switch-clo">
-          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
         </view>
-      </view>
-      </block>
-      <block wx:else>
-      <view class="goods-line-item goods-line-list-child" wx:for="{{searchResult}}" wx:key="{{index}}">
-        <image class='goods-image-clo' src="{{item.thumb}}"></image>
-
-        <text class='goods-name-clo'>{{item.title}}</text>
-
-        <view class="goods-switch-clo">
-          <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
-        </view>
-      </view>
-      </block>
-
     </view>
-  </view>
+    <view class="goods-line-list-child goods-line-list-top">
+        <text class='goods-top-tip-clo'>长按可显示具体信息</text>
+    </view>
+    <view class='goods-line-list-container'>
+        <block wx:if="{{goodsLineList.length == 0}}">
+            <view style="text-align:center; margin: 100rpx auto; margin-top: 300rpx">
+                <text>请使用搜索功能/扫描商品barcode</text>
+                <text>或点击品牌/分类选择上货物品  </text>
+            </view>
+        </block>
+        <view class='goods-line-list'>
+
+            <block wx:if="{{displayClear == false}}">
+                <view class="goods-line-item goods-line-list-child" wx:for="{{goodsLineList}}" wx:key="{{index}}" bindlongpress="showDetail" data-key="{{index}}">
+
+                    <image class='goods-image-clo' src="{{item.thumb}}" mode="aspectFit"></image>
+
+                    <text class='goods-name-clo'>{{item.title}}</text>
+
+                    <view class="goods-switch-clo">
+                        <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
+                    </view>
+
+                </view>
+            </block>
+            <block wx:else>
+                <view class="goods-line-item goods-line-list-child" wx:for="{{searchResult}}" wx:key="{{index}}" bindlongpress="showDetailSearch" data-key="{{index}}">
+                    <image class='goods-image-clo' src="{{item.thumb}}" mode="aspectFit"></image>
+
+                    <text class='goods-name-clo'>{{item.title}}</text>
+
+                    <view class="goods-switch-clo">
+                        <switch checked="{{item.selected}}" data-id="{{item.id}}" bindchange="switchChange" />
+                    </view>
+                </view>
+            </block>
+
+        </view>
+    </view>
+
+    <view class="modal-mask" bindtap="hideProductDetailModal" catchtouchmove="preventTouchMove" wx:if="{{productDetailModal}}"></view>
+    <view class="modal-qrcodedialog" wx:if="{{productDetailModal}}">
+        <view class="modal-content">
+            <image src='{{productDetail.thumb}}' style='height:400rpx;width:400rpx' mode="aspectFit"></image>
+            <view class="privacyText">{{productDetail.title}}</view>
+        </view>
+        <view class="modal-footer">
+
+            <view class="btn-downloadConfirm" bindtap="hideProductDetailModal">确定</view>
+            <!-- <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> -->
+            <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+
+        </view>
+    </view>
 </view>

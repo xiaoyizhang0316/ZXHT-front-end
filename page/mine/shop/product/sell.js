@@ -24,7 +24,7 @@ Page({
         },
         memo: '',
         myShopProducts: {},
-		recommendation: false,
+		
 		recommendationList : {},
 		recommendationAddList : [],
 		recommendationModal : false,
@@ -34,9 +34,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-		this.setData({
-			recommendation:false
-		})
+		
         //this.filterProducts();
 
     },
@@ -53,6 +51,7 @@ Page({
         //   })
         // }
         this.filterProducts();
+		
     },
 
     filterProducts: function() {
@@ -65,13 +64,26 @@ Page({
                 key: "myProducts",
                 data: res.myShopProducts,
             })
-			let myShopProducts = res.myShopProducts		
-			if(self.data.recommendation == false && res.recommendation == true)
+			let myShopProducts = res.myShopProducts	
+			let last_recommendation = 0
+			try {
+				last_recommendation = wx.getStorageSync("recommendation");
+				
+			} catch (e) {
+				wx.setStorageSync("recommendation", +new Date)
+			}
+				
+			let current = + new Date
+			console.log(current)
+			console.log(last_recommendation)
+			console.log(res.recommendation)
+			if((current-last_recommendation) > 60*60*24*1000 && res.recommendation == true)
 			{
+				wx.setStorageSync("recommendation", +new Date)
 				for(var x in res.recommendationList)
 				{
 					let r = res.recommendationList[x];
-					res.recommendationList[x].thumb = COM.load('Util').image(r.barcode)
+					res.recommendationList[x].thumb = COM.load('Util').imageThumb(r.barcode)
 					res.recommendationList[x].selected = false
 				}
 				self.setData({
@@ -93,7 +105,7 @@ Page({
                         "vip3Price": shopProduct.vip3Price,
                         "discountPrice": shopProduct.discountPrice,
                         "stock": shopProduct.stock,
-                        "thumb": COM.load('Util').image(shopProduct.barcode),
+                        "thumb": COM.load('Util').imageThumb(shopProduct.barcode),
                         "openId": shopOpenId,
                         "barcode": shopProduct.barcode,
                         "recommend": shopProduct.recommend,
@@ -107,56 +119,6 @@ Page({
                     goodsLineList: Array.from(goodsMap.values()),
                     goodsMap: goodsMap
                 })
-
-                // if (!myProducts) {
-                // 	//先获得本店的商品目录
-                // 	let ids = []
-                // 	for (let x in shopProducts) {
-                // 		ids.push(shopProducts[x].productId)
-                // 	}
-                // 	if(ids.length > 0)
-                // 	{
-                // 		let url = COM.load('CON').GET_MY_PRODUCTS + ids;
-                // 		COM.load('NetUtil').netUtil(url, "GET", "", (myProducts) => {
-                // 			wx.setStorage({
-                // 				key: "myProducts",
-                // 				data: myProducts,
-                // 			})
-                // 			console.log(myProducts)
-                // 			for (var x in shopProducts) {
-                // 				let shopProduct = shopProducts[x];
-                // 				goodsMap.set(shopProduct.productId,
-                // 					{
-                // 						"productId": shopProduct.productId,
-                // 						"title": myProducts[shopProduct.productId].title,
-                // 						"price": shopProduct.price,
-                // 						"vip1Price": shopProduct.vip1Price,
-                // 						"vip2Price": shopProduct.vip2Price,
-                // 						"vip3Price": shopProduct.vip3Price,
-                // 						// "stock": shopProduct.stock == 0 ? 10 : shopProduct.stock,
-                // 						"stock": shopProduct.stock,
-                // 						"thumb": COM.load('Util').image(myProducts[shopProduct.productId].barcode),
-                // 						"memo": shopProduct.memo,
-                // 						"openId": shopOpenId,
-                // 						"id": shopProduct.id,
-                // 						"barcode": myProducts[shopProduct.productId].barcode,
-                // 						"recommend": shopProduct.recommend,
-                // 						"hot": shopProduct.hot,
-                // 						"hotSale": shopProduct.hotSale
-                // 					})
-                // 			}
-                // 			this.setData({
-                // 				goodsLineList: Array.from(goodsMap.values()),
-                // 				goodsMap: goodsMap
-                // 			})
-                // 		});
-
-                // 	}
-                // }else{
-
-
-                // }
-
 
             }
         });
@@ -277,7 +239,7 @@ Page({
 	hideModal: function (e) {
 		console.log(e)
 		let m = "showModalStatus"
-		if (e.currentTarget.dataset.name == 'recommendationModal')
+		if (Object.prototype.toString.call(e) !== '[object Undefined]' && e.currentTarget.dataset.name == 'recommendationModal')
 		{
 			m = 'recommendationModal'
 			this.setData({
@@ -395,71 +357,73 @@ Page({
 
     updatePrice: function(e) {
         let price = e.detail.value;
-        if (price >= 0.1 || price == "") {
-            this.setData({
+		let self = this
+		if (price.toString().match(/^(([0-9][0-9]*)|(([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2})))$/) && price >= 0.1) {
+             this.setData({
                 'selectedProduct.price': price
             });
+		
         } else {
 
             wx.showModal({
                 title: '错误',
-                content: '青铜会员价格需要大于0.1',
+                content: '青铜会员价格格式有误，或者价格不大于0.1',
             })
         }
     },
 
     updateVip1Price: function(e) {
         let price = e.detail.value;
-        if (price >= 0.1 || price == "") {
+        if (price.toString().match(/^(([0-9][0-9]*)|(([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2})))$/) && price >= 0.1) {
             this.setData({
                 'selectedProduct.vip1Price': price
             });
         } else {
             wx.showModal({
                 title: '错误',
-                content: '白银会员价格需要大于0.1',
+				content: '白银会员价格格式有误，或者价格不大于0.1',
             })
         }
     },
 
     updateVip2Price: function(e) {
         let price = e.detail.value;
-        if (price >= 0.1 || price == "") {
+		if (price.toString().match(/^(([0-9][0-9]*)|(([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2})))$/) && price >= 0.1) {
             this.setData({
                 'selectedProduct.vip2Price': price
             });
         } else {
             wx.showModal({
                 title: '错误',
-                content: '黄金会员价格需要大于0.1',
+				content: '黄金会员价格格式有误，或者价格不大于0.1',
             })
         }
     },
 
     updateVip3Price: function(e) {
         let price = e.detail.value;
-        if (price >= 0.1 || price == "") {
+		if (price.toString().match(/^(([0-9][0-9]*)|(([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2})))$/) && price >= 0.1) {
             this.setData({
                 'selectedProduct.vip3Price': price
             });
         } else {
             wx.showModal({
                 title: '错误',
-                content: '商铺代理价格需要大于0.1',
+				content: '商铺代理价格格式有误，或者价格不大于0.1',
             })
         }
     },
     updateDiscountPrice: function(e) {
 
         let price = e.detail.value;
-        if (price >= 0.1 || price == "") {
+		if (price.toString().match(/^(([0-9][0-9]*)|(([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2})))$/) && price >= 0.1) {
             this.setData({
                 'selectedProduct.discountPrice': price
             });
         } else {
             wx.showModal({
                 title: '错误',
-                content: '折扣价格需要大于0.1',
+				content: '折扣价格格式有误，或者价格不大于0.1',
             })
         }
     },
@@ -504,68 +468,77 @@ Page({
             })
             return
         }
-        if (product.price < 0.1) {
-            wx.showModal({
-                title: '请检查',
-                content: '青铜会员价格最低为0.1',
-                showCancel: false
-            })
-            return
-        }
-        if (product.vip1Price < 0.1) {
-            wx.showModal({
-                title: '请检查',
-                content: '白银会员价格最低为0.1',
-                showCancel: false
-            })
-            return
-        }
-        if (product.vip2Price < 0.1) {
-            wx.showModal({
-                title: '请检查',
-                content: '黄金会员价格最低为0.1',
-                showCancel: false
-            })
-            return
-        }
-        if (product.vip3Price < 0.1) {
-            wx.showModal({
-                title: '请检查',
-                content: '商铺代理价格最低为0.1',
-                showCancel: false
-            })
-            return
-        }
-        if (product.discount && product.discountPrice < 0.1) {
-            wx.showModal({
-                title: '请检查',
-                content: '打折价格最低为0.1',
-                showCancel: false
-            })
-            return
-        }
-        console.log(self.data.selectedProduct)
-        COM.load('NetUtil').netUtil(url, 'POST', self.data.selectedProduct, function(res) {
-            wx.showToast({
-                title: '数据更新成功',
-                success: function() {
-                    self.data.goodsMap.set(self.data.selectedProduct.productId, self.data.selectedProduct);
-                    for (let x in self.data.goodsLineList) {
-                        if (self.data.goodsLineList[x].productId == self.data.selectedProduct.productId) {
-                            self.data.goodsLineList[x] = self.data.selectedProduct;
-                            break;
-                        }
-                    }
-                    self.setData({
-                        goodsLineList: self.data.goodsLineList,
-                        goodsMap: self.data.goodsMap,
-                        tmp: Object
-                    });
+		let originalProduct = self.data.goodsMap.get(product.productId)
+		if (originalProduct.price != product.price)
+		{
+			let myShopInfo = wx.getStorageSync('myShopInfo')
+			let price = product.price
+			wx.showModal({
+				title: '青铜价格变更',
+				content: "是否根据店铺折扣改变本商品其他的会员价格?\r\n 白银: " + myShopInfo.vip1 * 100 + "折, 黄金: " + myShopInfo.vip2 * 100 + "折, 代理: " + myShopInfo.vip3 * 100 + "折",
+				success: function (res) {
+					if (res.confirm) {
 
-                    self.hideModal();
-                }
-            })
-        })
+						let vip1Price = Math.round((price * 10000 * myShopInfo.vip1) / 100) / 100
+						let vip2Price = Math.round((price * 10000 * myShopInfo.vip2) / 100) / 100
+						let vip3Price = Math.round((price * 10000 * myShopInfo.vip3) / 100) / 100
+						self.setData({
+							
+							'selectedProduct.vip1Price': vip1Price,
+							'selectedProduct.vip2Price': vip2Price,
+							'selectedProduct.vip3Price': vip3Price,
+						});
+
+					} else if (res.cancel) {
+						
+					}
+					COM.load('NetUtil').netUtil(url, 'POST', self.data.selectedProduct, function (res) {
+						wx.showToast({
+							title: '数据更新成功',
+							success: function () {
+								self.data.goodsMap.set(self.data.selectedProduct.productId, self.data.selectedProduct);
+								for (let x in self.data.goodsLineList) {
+									if (self.data.goodsLineList[x].productId == self.data.selectedProduct.productId) {
+										self.data.goodsLineList[x] = self.data.selectedProduct;
+										break;
+									}
+								}
+								self.setData({
+									goodsLineList: self.data.goodsLineList,
+									goodsMap: self.data.goodsMap,
+									tmp: Object
+								});
+
+								self.hideModal();
+							}
+						})
+					})
+				}
+			})
+		}else{
+			COM.load('NetUtil').netUtil(url, 'POST', self.data.selectedProduct, function (res) {
+				wx.showToast({
+					title: '数据更新成功',
+					success: function () {
+						self.data.goodsMap.set(self.data.selectedProduct.productId, self.data.selectedProduct);
+						for (let x in self.data.goodsLineList) {
+							if (self.data.goodsLineList[x].productId == self.data.selectedProduct.productId) {
+								self.data.goodsLineList[x] = self.data.selectedProduct;
+								break;
+							}
+						}
+						self.setData({
+							goodsLineList: self.data.goodsLineList,
+							goodsMap: self.data.goodsMap,
+							tmp: Object
+						});
+
+						self.hideModal();
+					}
+				})
+			})
+		}
+        
     },
 
     priceValidation: function() {

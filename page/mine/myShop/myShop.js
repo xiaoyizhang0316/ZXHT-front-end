@@ -4,9 +4,9 @@ var COM = require('../../../utils/common.js')
 Page({
 
   data: {
-    shopName: null,
-    shopSign: null,
-	shopBalance: null,
+    shopName: "暂无",
+    shopSign: "暂无",
+	shopBalance: 0,
     WXaddress: null,
     paymentMethod: null,
     thumb: null,
@@ -31,16 +31,17 @@ Page({
       nickName: wx.getStorageSync("nickname")
     })
     //let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + wx.getStorageSync("openId")
-		let url = COM.load("CON").getMyShopInfo + wx.getStorageSync("openId")
+	let url = COM.load("CON").getMyShopInfo + app.globalData.openId
     //console.log(url)
     
     COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
-		console.log(myShopInfo)
+	
      self.setData({
        shopName: myShopInfo.shopName,
        shopSign: myShopInfo.sign,
 	   shopBalance: myShopInfo.balance
      })
+	 wx.setStorageSync("myShopInfo", myShopInfo)
      
     })
   },

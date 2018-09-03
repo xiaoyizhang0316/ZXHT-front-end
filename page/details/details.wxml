@@ -1,6 +1,6 @@
 <view class="main">
     <view class="goods-box">
-        <image src="{{goods.thumb}}" class="goods-thumb"></image>
+        <image src="{{goods.thumb}}" class="goods-thumb" mode="aspectFit"></image>
 
         <navigator open-type="switchTab" url="../cart/cart">
             <view class="carts-icon {{scaleCart?'on':''}}">
@@ -34,7 +34,7 @@
         </view>
         <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
     </view>
-    <view class="explain-line" style="margin-top:20px;" data-id="0" bindtap="showSpecialPrice">
+    <view class="explain-line" style="margin-top:20px;" data-id="0" bindtap="showSpecialPrice" wx:if="{{specialPrices.length>0}}">
         <view class="explain-block">
             <image style="height:22px;width:22px;" src="../../image/specialPrice.jpg"></image>
         </view>
@@ -47,7 +47,8 @@
         <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">商品详情</view>
         <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">产品参数</view>
 
-        <view class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">售后保障</view>
+        <view wx:if="{{!hasComments}}" class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">售后保障</view>
+        <view wx:else class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">评论</view>
         <view class="goods-content">
             <view class="goods-detail-content" wx:if="{{curIndex === 0}}">
                 <view class="goods-item-line goods-item-desc" wx:if="{{detail.desc}}">
@@ -71,7 +72,7 @@
                     </view>
                 </view>
             </view>
-            <view class="goods-spec-content" wx:if="{{curIndex === 1}}">
+            <view class="goods-spec-content" wx:elif="{{curIndex === 1}}">
                 <view class="flex-row flex-cell" wx:if="{{detail.enTitle}}">
                     <text class="flex-cell flex-row">英文名称</text>
                     <text class="flex-cell flex-row flex-content goods-spec-entitle">{{detail.enTitle}}</text>
@@ -89,7 +90,37 @@
                     <text class="flex-cell flex-row flex-content">{{detail.attention}}</text>
                 </view>
             </view>
-            <view wx:if="{{curIndex === 2}}">{{goods.service}}</view>
+            <view wx:elif="{{curIndex === 2 && !hasComments}}">{{goods.service}}</view>
+            <view wx:else>
+                <view wx:key="idx" wx:for-index="idx" wx:for="{{comments}}">
+
+                    <view class="explain-line">
+                        <view class="item-top">
+                            <view style="padding-left:11px;font-size:12px;flex:7;color:grey;display:flex;justify-content:flex-start; align-items:center">
+                                <image class="blur" src="{{item.userThumb}}" mode="aspectFit" /> {{item.userName}}
+                            </view>
+                            <view style="padding-left:11px;font-size:10px;flex:5;color:grey;display:flex;justify-content:flex-end; align-items:center">{{item.createAt}}</view>
+                        </view>
+                    </view>
+                    <view class="explain-line" style='height:auto'>
+                        <view class="comment-message-box">
+                            {{item.message}}
+                        </view>
+                    </view>
+                    <view wx:if="{{item.images.length > 0}}">
+                        <view class="explain-line">
+                            <view class="comment-images-box">
+
+                                <view wx:for="{{item.images}}">
+
+                                    <image class="comment-img" src="{{item}}" mode="aspectFit" data-id="{{idx}}" data-img="{{item}}" bindtap='commentImgView' />
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+					<view class="hr"></view>
+                </view>
+            </view>
         </view>
     </view>
 </view>
@@ -103,12 +134,12 @@
     <view class="modal-content">
         <view wx:key="idx" wx:for-index="idx" wx:for="{{specialPrices}}">
 
-          
-                <view style="padding-left:20rpx;font-size:26rpx;color:grey;">优惠{{idx+1}}</view>
-                <view style="padding-left:20rpx;font-size:26rpx;color:grey;">
-				购买{{item.minQuantity}}件到{{item.maxQuantity}}+件价格仅为: ￥{{item.price}}/件
-				</view>
-                
+
+            <view style="padding-left:20rpx;font-size:26rpx;color:grey;">优惠{{idx+1}}</view>
+            <view style="padding-left:20rpx;font-size:26rpx;color:grey;">
+                购买{{item.minQuantity}}件到{{item.maxQuantity}}+件价格仅为: ￥{{item.price}}/件
+            </view>
+
         </view>
     </view>
 </view>

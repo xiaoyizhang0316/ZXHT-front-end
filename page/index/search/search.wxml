@@ -6,7 +6,7 @@
     <view class="header-box">
       <view class="header-input-box">
         <image class="find-icon" src="/image/public/find.png" background-size="cover"></image>
-        <input bindinput="onKeyUp" value="{{param}}" focus="{{focus}}" placeholder="请输入搜索关键字" />
+        <input bindconfirm="onKeyUp" value="{{param}}" focus="{{focus}}" placeholder="请输入搜索关键字" />
         <image wx:if="{{isShowTitleList}}" bindtap='clearTitle' class="clear-icon" src="/image/public/clear.png" background-size="cover"></image>
       </view>
     </view>
@@ -37,15 +37,18 @@
     <view class="title-contaniner">
       <block wx:if="{{searchTitleList.length > 0}}">
         <block wx:for="{{searchTitleList}}">
-          <view class="title-line" data-name="{{item.title}}" data-id="{{item.id}}" bindtap='showDetail'>
+          <view class="title-line" data-id="{{item.id}}" bindtap='showDetail'>
             <block wx:if="{{item.rendered.length > 0}}">
               <block wx:for="{{item.rendered}}" wx:for-item="key_obj">
-                <text wx:if="{{key_obj.key == true}}" class="high-light-font">{{key_obj.str}}</text>
+			  <view style='margin-top:20rpx'>
+			  <text wx:if="{{key_obj.key == true}}" class="high-light-font">{{key_obj.str}}</text>
                 <text wx:else>{{key_obj.str}}</text>
+			  </view>
+                
               </block>
             </block>
             <block wx:else>
-              <view class="title-line">
+              <view class="title-line" style='margin-top:20rpx'>
                 {{item.title}}
               </view>
             </block>

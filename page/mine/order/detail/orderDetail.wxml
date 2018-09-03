@@ -165,29 +165,12 @@
                 </view>
                 <view class="order-cate-price">
                     <text>￥{{item.price}}</text>
-                    <button size='mini' bindtap="addToCart" data-id="{{idx}}">加购物车</button>
+                    <button size='mini' bindtap="comment" data-id="{{idx}}" wx:if="{{order.orderInfo.orderStatus == 7}}">评论</button>
+					<button size='mini' bindtap="addToCart" data-id="{{idx}}">加购物车</button>
                 </view>
             </view>
         </view>
-        <!-- <view class="explain-line" style="padding-top:6px;padding-bottom:6px;background-color:{{idx%2==0? '#f6f6f6':''}}">
-      <view class="item-line">
-        <view class="explain-value" style="flex:0.4">
-          {{idx+1}}
-        </view>
-        <view class="explain-value" style="flex:5.5">
-          {{item.name}}
-        </view>
-        <view class="explain-value" style="flex:0.3">
-          X
-        </view>
-        <view class="explain-value" style="flex:0.5">
-          {{item.quantity}}
-        </view>
-        <view class="explain-value" style="flex:1">
-          {{item.weight}}g
-        </view>
-      </view>
-    </view> -->
+     
     </block>
 
     <view class="explain-line" style="border-top:1px solid #eff3f4;margin-bottom:50px;flex-direction: column">

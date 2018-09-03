@@ -15,7 +15,6 @@ Page({
 		discountList: {},
 		shop: [],
 		imgUrls: [
-
 			'https://img.zhenxianghaitao.com/siteImages/slide1.png',
 			'https://img.zhenxianghaitao.com/siteImages/slide2.png',
 			'https://img.zhenxianghaitao.com/siteImages/slide3.png'
@@ -40,12 +39,11 @@ Page({
 		fixTop: false,
 		winHeight: 0,
 		shopQrcode: "",
-
-
-
+		fistVisitModal: false,
 	},
 
 	onLoad: function (options) {
+		
 
 	},
 
@@ -89,8 +87,11 @@ Page({
 						userName: callbackdata.userName,
 						shopNote: callbackdata.shopNote ? callbackdata.shopNote : ""
 					})
-
-					//self.loadRecommendedProducts();
+					wx.setStorage({
+						key: 'targetShopInfo',
+						data: callbackdata,
+					})
+				
 				}
 			})
 		} else {
@@ -137,7 +138,7 @@ Page({
 		let shopBanner = wx.getStorageSync("shopBanner");
 		if(shopBanner != null)
 		{
-			console.log("222222222222222222222222222222222222222222222222222")
+			
 			let shopBanners = JSON.parse(shopBanner);
 			let imgUrls = []	
 			for(var i = 0 ; i < shopBanners.length ; i++)
@@ -227,11 +228,14 @@ Page({
 
 
 	bindSearch: function (event) {
-		if (this.data.focus == false) {
+	
+		if(event.detail.value.length > 0)
+		{
 			wx.navigateTo({
-				url: '/page/index/search/search'
+				url: '/page/index/search/search?param='+event.detail.value
 			})
 		}
+	
 
 	},
 
@@ -336,25 +340,21 @@ Page({
 	},
 
 	onShareAppMessage: function () {
+		
 		let self = this
-		let shopOpen = wx.getStorageSync('shopOpened')
-		let openId = ""
-		if (shopOpen == true) {
-			openId = app.globalData.openId;
-		} else {
-			openId = "oVxpo5FQkb2qY4TGpD9rq2xFWRlk"
-		}
-
-		console.log(wx.getStorageSync('shopOpened'))
-		console.log(openId)
+		self.setData({
+			showShareModal: false
+		});
 		return {
 			title: '真实澳洲直邮 朋友分享的海淘',
 			desc: self.data.sign,
-			path: '/page/welcome/welcome?targetShopId=' + openId,
+			path: '/page/welcome/welcome?targetShopId=' + app.globalData.targetShopId,
 			success: function (res) {
 				// 转发成功
+				
 			},
 			fail: function (res) {
+				
 				// 转发失败
 			}
 		}
@@ -440,9 +440,9 @@ Page({
 	onPageScroll: function (e) {
 		let self = this
 		let winHeight = self.data.winHeight;
-		let ratio = 470 / 750
+		let ratio = 501.5 / 750
 		let height = (winHeight * (1000 - ratio * 1000)) / 1000
-		self.setData({ fixTop: e.scrollTop > height })
+		self.setData({ fixTop: e.scrollTop >= height })
 
 	},
 
@@ -454,7 +454,6 @@ Page({
 		COM.load('NetUtil').netUtil(url, "GET", "", (callback) => {
 			if (callback == true) {
 				let imgShop = COM.load('CON').IMG_SHOP
-
 				this.setData({
 					qrcode: imgShop + app.globalData.targetShopId + ".png",
 					showQrcodeModal: true,
@@ -513,6 +512,28 @@ Page({
 		})
 
 
+	},
+	firstVisitSubmit: function(e){
+		console.log(e);
+		let self = this
+		let formId = e.detail.formId
+		let openId = app.globalData.openId
+		let targetShopId = app.globalData.targetShopId
+		console.log(formId);
+		let url = COM.load('CON').NEWVISITORMESSAGE + "/" + openId + "/" + targetShopId + "/" + formId;
+		COM.load('NetUtil').netUtil(url, "GET", "", (callback) => {
+			if (callback == true) {
+				self.setData({
+					firstVisitModal:false
+				})
+			} else {
+				self.setData({
+					firstVisitModal: false
+				})
+			}
+
+
+		})
 	}
 })
 

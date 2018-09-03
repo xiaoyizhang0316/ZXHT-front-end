@@ -21,12 +21,12 @@
                 <view class="pay-method">
                     <text>店铺汇率</text>
                     <view class='bottom-text'>
-                        <text>店铺商品管理使用澳元,展示给客户使用RMB</text>
+                        <text>店铺商品管理使用澳元,展示给客户使用人民币</text>
                     </view>
                 </view>
-                <input style="flex:4" placeholder="请输入店铺汇率" bindinput="bindRate" name="rate" value="{{rate}}"/>
+                <input style="flex:4" placeholder="请输入店铺汇率" bindinput="bindRate" name="rate" value="{{rate}}" />
             </view>
-			<view class="top-input-box flex-col">
+            <view class="top-input-box flex-col">
                 <view class="pay-method">
                     <text>包邮服务</text>
                     <view class='bottom-text'>
@@ -35,12 +35,12 @@
                 </view>
                 <switch class='switch1' bindchange='bindFreePost' checked="{{freePostStatus}}"></switch>
             </view>
-			<view class="shop-msg top-input-box flex-col" bindtap='bindExtraServices'>
+            <view class="shop-msg top-input-box flex-col" bindtap='bindExtraServices'>
                 <view class="shop-msg-label">
-                    <text>设置增值服务</text>					
+                    <text>设置增值服务</text>
                 </view>
             </view>
-			<view class="shop-msg top-input-box flex-col" bindtap='bindExtra'>
+            <view class="shop-msg top-input-box flex-col" bindtap='bindExtra'>
                 <view class="shop-msg-label">
                     <text>设置店铺须知</text>
                 </view>
@@ -85,13 +85,15 @@
             </view>
             <view class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
                 <view class="top-input-box flex-col">
-                    <text class='pay-text'>支付方式</text>
+                    <text class='pay-text'>收取币种</text>
                     <radio-group class="radio-group" bindchange="radioChange">
                         <label class="radio" wx:for="{{payItems}}">
                             <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
                         </label>
                     </radio-group>
                 </view>
+
+
                 <view class='payment-tips'>
                     <block wx:if="{{shop.payment == 1}}">
                         <text>↓↓ 请填写对应的支付信息 ↓↓</text>
@@ -101,57 +103,46 @@
                     </block>
                 </view>
 
-                <view class="top-input-box flex-col">
-                    <block wx:if="{{shop.payment == 1}}">
-                        <text>开户行:</text>
-                        <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" />
-                    </block>
-                    <block wx:else>
-                        <text>Bank: </text>
-                        <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" />
-                    </block>
+                <block wx:if="{{shop.payment == 1}}">
 
-                </view>
-                <view class="top-input-box flex-col">
-                    <block wx:if="{{shop.payment == 1}}">
+                    <view class="top-input-box flex-col">
+                        <text>开户行:</text>
+                        <input bindinput="bindbankName" name="bankName" value="{{shop.bankName}}" /> </view>
+                    <view class="top-input-box flex-col">
                         <text>户名:</text>
                         <input bindinput="bindaccountNbr" name="accountNbr" value="{{shop.accountNbr}}" />
-                    </block>
-                    <block wx:else>
-                        <text>AccountNbr:</text>
-                        <input bindinput="bindaccountNbr" name="accountNbr" value="{{shop.accountNbr}}" />
-                    </block>
-                </view>
-                <view class="top-input-box flex-col">
-                    <block wx:if="{{shop.payment == 1}}">
+                    </view>
+                    <view class="top-input-box flex-col">
                         <text>账户:</text>
-                        <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" />
-                    </block>
-                    <block wx:else>
-                        <text>AccountName:</text>
-                        <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" />
-                    </block>
-                </view>
-                <view>
+                        <input bindinput="bindaccountName" name="accountName" value="{{shop.accountName}}" /> </view>
+                    <view>
+                        <view>
+                            <text>请注意: 收款方式一旦确定, 只能联系系统管理员修改</text>
+                        </view>
+                        <view class='bottom-text'>
+                            <text>提现后资金会在1-3个工作日内到达您的账户</text>
+                        </view>
+
+
+                    </view>
+                </block>
+                <block wx:else>
                     <view>
                         <text>请注意: 收款方式一旦确定, 只能联系系统管理员修改</text>
                     </view>
                     <view class='bottom-text'>
-                        <block wx:if="{{shop.payment == 1}}">
-                            <text>提现后资金会在1-3个工作日内到达您的账户</text>
-
-                        </block>
-                        <block wx:else>
-                            <text class='bottom-text'>Please contact our admin via wechat account to complete related documents. After 3-5 business days of application, wechat payment will be automatically enabled.</text>
-                        </block>
+                        <text>请联系管理员微信qqinoz或公众号真享海淘</text>
                     </view>
-                </view>
-            </view>
+                </block>
 
+
+
+            </view>
         </view>
 
         <view class="bottom-contaniner">
             <button type='primary' class='confirmBtn' form-type="submit">提交</button>
         </view>
+
     </form>
 </view>

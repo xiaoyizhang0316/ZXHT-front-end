@@ -134,7 +134,7 @@ Page({
 		
 			wx.showModal({
 				title: '提示',
-				content: '选择上货则会删除掉当前商铺所有商品, 是否上货?',
+				content: '上货不会删除掉或覆盖当前商铺的商品，请放心上货。',
 				
 				success: function (res) {
 					if (res.confirm) {

@@ -1,4 +1,4 @@
-// var Util = require('../../../../utils/util.js');
+var app = getApp()
 var COM = require('../../../../utils/common.js')
 Page({
 
@@ -20,6 +20,7 @@ Page({
 		shippingCost: 0,
 		payment: null,
 		shipFulls: [],
+		shopId: null,
 	},
 
 	/**
@@ -58,6 +59,7 @@ Page({
 			orderId: options.orderId,
 			orderTime: order[0].orderInfo.addTime,
 			merchant: order[0].sellerShop.shopName,
+			shopId: order[0].orderInfo.shopId,
 			// service: order.orderInfo.service,
 			// sender: order[0].sender,
 			// items: order[0].items,
@@ -192,7 +194,25 @@ Page({
 		})
 
 	},
+	comment: function(e){
+		let self = this
+		let productId = self.data.order.orderGoods[e.currentTarget.dataset.id].productId
+		let openId = app.globalData.openId
+		let orderId = self.data.orderId
+		let shopId = self.data.shopId
+		let params = {
+			
+			"productId" : productId,
+			"orderId" : orderId,
+			"shopId" : shopId,
+			"openId" : openId,
+			
+		}
+		wx.navigateTo({
+			url: '/page/common/templates/comment/comment?params=' + JSON.stringify(params)
+		})
 
+	},
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

@@ -6,8 +6,8 @@ Page({
 
   submitTextarea: function (event) {
     var self = this;
-    let input = event.detail.value.textarea;
-    if (input === "")
+    let input = event.detail.value.textarea.trim();
+    if ( input=== "")
 	{
 		wx.navigateBack({
 			delta: 1,

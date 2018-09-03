@@ -151,4 +151,24 @@
 
         <button data-order="{{selectedOrder.orderInfo.id}}" bindtap='payOrder' class='bottom-window-button' type='primary'>确认付款</button>
     </view>
+
+
+	
+    <view class="modal-mask" bindtap="hideQrCodeModal" catchtouchmove="preventTouchMove" wx:if="{{qrCodeModal}}"></view>
+    <view class="modal-qrcodedialog" wx:if="{{qrCodeModal}}">
+        <view class="modal-content">
+            <image src='{{qrCodeImg}}' style='height:400rpx;width:400rpx'></image>
+            <view class="privacyText">扫描图片进行支付，或者保存图像到本地后使用微信扫一扫进行支付</view>
+        </view>
+        <view class="modal-footer">
+
+            <view class="btn-downloadConfirm" bindtap="downloadQrcode">保存图片</view>
+
+        </view>
+    </view>
+    <view style='width:0px;height:0px;overflow:hidden;'>
+
+        <canvas canvas-id="myCanvas" style='height:400px;width:400px'/>
+    </view>
+	
 </view>

@@ -3,25 +3,25 @@
 <!-- <scroll-view scroll-y="true" style="height:{{winHeight}}px"> -->
 <!-- <view class='main'> -->
 <swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true" stlye="z-index:-1;" indicator-dots="true">
-        <block wx:for="{{imgUrls}}" wx:key="{{index}}">
-            <swiper-item>
-                <image src="{{item}}" class="slide-image" width="100%" />
-            </swiper-item>
-        </block>
-    </swiper>
+    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+            <image src="{{item}}" class="slide-image" width="100%" />
+        </swiper-item>
+    </block>
+</swiper>
 
 <view class="search-box">
 
-    
+
 
     <view class="main-profile">
         <image id="profile" style="margin-right:2px;z-index:1;" src="{{shopImg}}"></image>
         <view style="width:70%; flex-direction:row; display:flex; ">
 
             <text id="sign">{{sign}}</text>
-			 <image style="height:25px;width:25px;position:absolute;right:20rpx;opacity:0.7;" src="/image/public/video.png" catchtap='displayShopNote'></image>
+            <image style="height:25px;width:25px;position:absolute;right:20rpx;opacity:0.7;" src="/image/public/video.png" catchtap='displayShopNote'></image>
             <image style="height:25px;width:25px;position:absolute;right:80rpx;opacity:0.7;" src="/image/public/share1.png" catchtap='shareShop'></image>
-           
+
         </view>
 
     </view>
@@ -36,7 +36,7 @@
                 <image style="height:21px;width:21px;margin-top:7rpx; margin-left:10rpx;" src="/image/public/find.png"></image>
 
             </view>
-            <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindfocus="bindSearch" />
+            <input focus="{{focus}}" placeholder="搜索商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindconfirm="bindSearch" />
         </view>
         <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
             <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
@@ -67,7 +67,7 @@
 <!--推荐  -->
 <swiper current="{{currentTab}}" class="swiper-box" duration="200" style="height:{{winHeight}}px" bindchange="bindChange">
     <swiper-item>
-        <scroll-view scroll-y="{{fixTop}}" style="height:{{winHeight-44}}px">
+        <scroll-view scroll-y="{{fixTop}}" style="height:1150rpx">
 
             <view class="newest">
 
@@ -80,7 +80,7 @@
                         <view class="goods-item" wx:for="{{discountList}}" wx:key="{{index}}">
                             <!-- <view > -->
                             <navigator url="/page/details/details?id={{item.id}}">
-                                <image class="goods-image" src="{{item.thumb}}" background-size="cover"></image>
+                                <image class="goods-image" src="{{item.thumb}}" mode="aspectFit"></image>
                             </navigator>
                             <!-- </view> -->
 
@@ -110,7 +110,7 @@
     </swiper-item>
 
     <swiper-item>
-        <scroll-view scroll-y="{{fixTop}}" style="height:{{winHeight-44}}px">
+        <scroll-view scroll-y="{{fixTop}}" style="height:1150rpx">
 
             <view class="newest">
 
@@ -130,7 +130,7 @@
 
 
     <swiper-item>
-        <scroll-view scroll-y="{{fixTop}}" style="height:{{winHeight-44}}px">
+        <scroll-view scroll-y="{{fixTop}}" style="height:1150rpx">
 
             <view class="newest">
 
@@ -148,14 +148,29 @@
 </swiper>
 <!-- </scroll-view> -->
 
-<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<!-- <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
     <view>
         <textarea disabled='true' class="myTextArea" maxlength="-1" value="{{shopNote ? shopNote : '暂无'}}" />
-        <image class="hello"src="../../../../image/minus.png"></image>
+		
+    </view>	
+        <image class = "hello" src="../../../../image/public/clear.png" bindtap='hideModal'></image>
+		
+</view> -->
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModal}}"></view>
+<view class="commodity_attr_box bottom-window" wx:if="{{showModal}}">
+    <view class='bottom-window-detail'>
+        <view style="display:flex;font-size:30rpx;align-items:center;">
+            <text>店铺须知</text>
+        </view>
+        <image bindtap='hideModal' class='bottom-window-detail-icon' src='/image/public/clear.png' data-name="recommendationModal"></image>
+    </view>
+    <view class='bottom-price'>
+        <textarea disabled='true' class="myTextArea" maxlength="-1" value="{{shopNote ? shopNote : '暂无'}}" /> </view>
+    <view class='bottom-window-btn' bindtap='hideModal'>
+        <text>确认</text>
     </view>
 </view>
-
 
 <view class="modal-mask" bindtap="hideShareModal" catchtouchmove="preventTouchMove" wx:if="{{showShareModal}}"></view>
 <view class="modal-dialog" wx:if="{{showShareModal}}">
@@ -183,5 +198,22 @@
         <!-- <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> -->
         <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
 
+    </view>
+</view>
+
+
+<view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{firstVisitModal}}"></view>
+<view class="modal-qrcodedialog" wx:if="{{firstVisitModal}}">
+    <view class="modal-content">
+        <image src='{{shopImg}}' style='height:400rpx;width:400rpx'></image>
+        <view class="privacyText">欢迎访问{{userName}}的店铺</view>
+    </view>
+    <view class="modal-footer">
+        <form bindsubmit="firstVisitSubmit" report-submit="true" style='width:100%'>
+            
+            <view class="btn-area">
+                <button class="btn-downloadConfirm" formType="submit">确定</button>               
+            </view>
+        </form>
     </view>
 </view>

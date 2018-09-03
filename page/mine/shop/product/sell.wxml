@@ -6,7 +6,7 @@
                     <view>
                         <image style="height:21px;width:21px;margin-top:7rpx;margin-left:10rpx;" src="/image/public/find.png"></image>
                     </view>
-                    <input focus="{{focus}}" placeholder="搜索已上架商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindinput="bindSearch" />
+                    <input focus="{{focus}}" placeholder="搜索已上架商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindconfirm="bindSearch" />
                 </view>
                 <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
                     <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>
@@ -37,7 +37,7 @@
             <block wx:if="{{goodsLineList.length == 0}}">
                 <view style="text-align:center; margin: 0 auto; margin-top: 250rpx" catchtap="listProdsTemplate">
                     点我去上货
-                    <image style="height:27px;width:27px;align-self:center" src="/image/add1.png"></image>
+                    <image style="height:27px;width:27px;align-self:center" src="/image/add1.png" mode="aspectFit" ></image>
                 </view>
                 <view style="text-align:center; margin: 0 auto; margin-top: 40rpx" catchtap="oneButtonProducts">
                     点我一键上货
@@ -45,7 +45,7 @@
                 </view>
             </block>
             <view bindtap="showModal" wx:for="{{goodsLineList}}" wx:key="{{index}}" class="goods-line-item goods-line-list-child" data-id="{{item.productId}}" bindlongpress="deleteShopProduct">
-                <image class='goods-image-clo' src="{{item.thumb}}"></image>
+                <image class='goods-image-clo' src="{{item.thumb}}" mode="aspectFit"></image>
                 <text class='goods-name-clo'>{{item.title}}</text>
                 <text class='goods-stock-clo'>{{item.stock}}</text>
                 <text class='goods-price-clo'>$ {{item.vip1Price}} \n$ {{item.price}}</text>
@@ -56,7 +56,7 @@
     <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
         <view class='bottom-window-detail'>
             <view class='bottom-window-detail-left'>
-                <image src='{{selectedProduct.thumb}}'></image>
+                <image src='{{selectedProduct.thumb}}' mode="aspectFit" ></image>
             </view>
             <view class='bottom-window-detail-right'>
                 <!-- <text class='goods-name-label'>商品名:</text> -->
@@ -66,7 +66,7 @@
                     <text>库存:</text>
                     <view class='stock-edit'>
                         <text bindtap='decreaseStock' data-stock="{{selectedProduct.stock}}">-</text>
-                        <input type="number" bindinput='updateStock' value='{{selectedProduct.stock}}'></input>
+                        <input type="number" bindconfirm='updateStock' value='{{selectedProduct.stock}}'></input>
                         <text bindtap='increaseStock' data-stock="{{selectedProduct.stock}}">+</text>
                     </view>
                 </view>
@@ -83,55 +83,55 @@
             <view class='bottom-window-price'>
                 <view>
                     <text>青铜会员: $</text>
-                    <input type="digit" bindinput='updatePrice' value="{{selectedProduct.price}}"></input>
+                    <input type="digit" bindblur='updatePrice' value="{{selectedProduct.price}}"></input>
                 </view>
                 <view>
                     <text>白银会员: $</text>
-                    <input type="digit" bindinput='updateVip1Price' value="{{selectedProduct.vip1Price}}"></input>
+                    <input type="digit" bindblur='updateVip1Price' value="{{selectedProduct.vip1Price}}"></input>
                 </view>
             </view>
 
             <view class='bottom-window-price'>
                 <view>
                     <text>黄金会员: $</text>
-                    <input type="digit" bindinput='updateVip2Price' value="{{selectedProduct.vip2Price}}"></input>
+                    <input type="digit" bindblur='updateVip2Price' value="{{selectedProduct.vip2Price}}"></input>
                 </view>
                 <view>
                     <text>商铺代理: $</text>
-                    <input type="digit" bindinput='updateVip3Price' value="{{selectedProduct.vip3Price}}"></input>
+                    <input type="digit" bindblur='updateVip3Price' value="{{selectedProduct.vip3Price}}"></input>
                 </view>
             </view>
             <view class='bottom-window-RecommandNHot'>
                 <view>
                     <text>本店推荐</text>
-                    <switch checked="{{isRecommandChecked}}" data-id="{{item.id}}" bindchange="addRecommandation" />
+                    <switch checked="{{isRecommandChecked}}"  bindchange="addRecommandation" />
                 </view>
                 <view>
                     <text style='width: 100rpx'>热卖</text>
-                    <switch checked="{{isHotChecked}}" data-id="{{item.id}}" bindchange="addHot" />
-                    <!-- <input type="number" bindinput='updateHotSale' value='{{selectedProduct.hotSale}}'></input> -->
+                    <switch checked="{{isHotChecked}}"  bindchange="addHot" />
+                   
                 </view>
             </view>
             <view class='bottom-window-RecommandNHot'>
                 <view>
                     <text>商品打折</text>
-                    <switch checked="{{isDiscount}}" data-id="{{item.id}}" bindchange="addDiscount" />
+                    <switch checked="{{isDiscount}}" bindchange="addDiscount" />
                 </view>
                 <view>
                     <text style='width: 150rpx'>折后价格$</text>
 
-                    <input type="number" bindinput='updateDiscountPrice' value='{{selectedProduct.discountPrice}}'></input>
+                    <input type="number" bindconfirm='updateDiscountPrice' value='{{selectedProduct.discountPrice}}'></input>
                 </view>
             </view>
         </view>
 
 
-        <view class='bottom-window-stock' bindtap='bindExtra'>
+        <!-- <view class='bottom-window-stock' bindtap='bindExtra'>
             <view style='color:#888;font-size:28rpx;margin-left:13px;'>额外信息:
                 <text style="text-overflow: ellipsis;">{{memo}}</text>
             </view>
 
-        </view>
+        </view> -->
         <view class='bottom-window-btn' bindtap='priceValidation'>
             <text>保存信息</text> </view>
         <!-- <view class='bottom-window-btn1' bindtap='deleteShopProduct' data-id="{{item.id}}">
@@ -154,9 +154,9 @@
         </view>
         <view class='bottom-price'>
             <scroll-view scroll-y style="height: 800rpx;" scroll-top="100">
-			
+
                 <view class='bottom-window-price' wx:for="{{recommendationList}}" wx:key="{{index}}">
-                    <image class='image-clo' src="{{item.thumb}}"></image>
+                    <image class='image-clo' src="{{item.thumb}}" mode="aspectFit"></image>
 
                     <text class='name-clo'>{{item.title}}</text>
 

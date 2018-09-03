@@ -18,6 +18,8 @@ Page({
 			vip1: 1,
 			vip2: 1,
 			vip3: 1,
+			partnerCode: "",
+			credentialCode: "",
 
 		},
 		payItems: [
@@ -147,12 +149,11 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		var self = this;
-		//let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + wx.getStorageSync("openId")
-		let url = COM.load("CON").getMyShopInfo + wx.getStorageSync("openId")
 
-		COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
-			console.log(myShopInfo)
+		var self = this;
+		let myShopInfo = wx.getStorageSync("myShopInfo")
+		if(myShopInfo != "")
+		{
 			self.setData({
 				'shop.id': myShopInfo.id,
 				'shop.name': myShopInfo.shopName,
@@ -170,9 +171,11 @@ Page({
 				'freePostStatus': myShopInfo.freePost,
 				'shopCopyStatus': myShopInfo.shopCopy,
 				'extraServices': myShopInfo.extraServices,
-				'shop.vip1': myShopInfo.vip1*100,
-				'shop.vip2': myShopInfo.vip2*100,
-				'shop.vip3': myShopInfo.vip3*100
+				'shop.vip1': myShopInfo.vip1 * 100,
+				'shop.vip2': myShopInfo.vip2 * 100,
+				'shop.vip3': myShopInfo.vip3 * 100,
+				'shop.partnerCode': myShopInfo.partnerCode,
+				'shop.credentialCode': myShopInfo.credentialCode,
 			})
 			if (self.data.shop.payment) {
 				let payItems = self.data.payItems
@@ -187,8 +190,53 @@ Page({
 				})
 			}
 
+		}else{
+			let url = COM.load("CON").getMyShopInfo + app.globalData.openId
 
-		})
+			COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
+				console.log(myShopInfo)
+				self.setData({
+					'shop.id': myShopInfo.id,
+					'shop.name': myShopInfo.shopName,
+					'shop.sign': myShopInfo.sign,
+					'shop.payment': myShopInfo.payment,
+					'shop.bankName': myShopInfo.bankName,
+					'shop.accountNbr': myShopInfo.accountNbr,
+					'shop.accountName': myShopInfo.accountName,
+					'shop.shopId': wx.getStorageSync('shopId'),
+					'prepayStatus': myShopInfo.prepay,
+					'offlinePayStatus': myShopInfo.offlinePay,
+					'weixinPayStatus': myShopInfo.weixinPay,
+					'shop.rate': parseFloat(myShopInfo.rate),
+					'memo': myShopInfo.shopNote ? myShopInfo.shopNote : "",
+					'freePostStatus': myShopInfo.freePost,
+					'shopCopyStatus': myShopInfo.shopCopy,
+					'extraServices': myShopInfo.extraServices,
+					'shop.vip1': myShopInfo.vip1 * 100,
+					'shop.vip2': myShopInfo.vip2 * 100,
+					'shop.vip3': myShopInfo.vip3 * 100,
+					'shop.partnerCode': myShopInfo.partnerCode,
+					'shop.credentialCode': myShopInfo.credentialCode,
+				})
+				if (self.data.shop.payment) {
+					let payItems = self.data.payItems
+					for (var i in payItems) {
+
+						if (self.data.shop.payment == payItems[i].value) {
+							payItems[i].checked = true
+						}
+					}
+					self.setData({
+						payItems: payItems
+					})
+				}
+
+
+			})
+
+		}
+		//let url = "https://a5f93900.ngrok.io/api/mall/shops/openId/" + wx.getStorageSync("openId")
+		
 	},
 
 	formSubmit: function (e) {
@@ -207,14 +255,14 @@ Page({
 			},
 
 			bankName: {
-				required: self.data.weixinPayStatus ? true : false
+				required: self.data.weixinPayStatus && (self.data.shop.payment == 1) ? true : false
 			},
 			accountNbr: {
-				required: self.data.weixinPayStatus ? true : false,
-				digit: self.data.weixinPayStatus ? true : false
+				required: self.data.weixinPayStatus && (self.data.shop.payment == 1) ? true : false,
+				digit: self.data.weixinPayStatus && (self.data.shop.payment == 1) ? true : false
 			},
 			accountName: {
-				required: self.data.weixinPayStatus ? true : false
+				required: self.data.weixinPayStatus && (self.data.shop.payment == 1)? true : false
 			}
 		}
 
@@ -269,7 +317,7 @@ Page({
 		} else {
 			let params = {
 				"shop": {
-					"id": self.data.shop.id,
+					
 					"id": self.data.shop.id,
 					"open_id": app.globalData.openId,
 					"owner": app.globalData.nickName,
@@ -284,8 +332,10 @@ Page({
 					"vip1": self.data.shop.vip1/100,
 					"vip2": self.data.shop.vip2/100,
 					"vip3": self.data.shop.vip3/100,
-					//   "weixinPay": self.data.weixinPayStatus,
-					//   "payment": self.data.shop.payment,
+					"weixinPay": self.data.weixinPayStatus,
+					"payment": self.data.shop.payment,
+					'partnerCode': self.data.shop.partnerCode,					
+					'credentialCode': self.data.shop.credentialCode,
 					//   "bankName": self.data.shop.bankName,
 					//   "accountNbr": self.data.shop.accountNbr,
 					//   "accountName": self.data.shop.accountName
@@ -297,11 +347,16 @@ Page({
 
 			COM.load('NetUtil').netUtil(url, "POST", params, (callbackdata) => {
 				if (callbackdata == true) {
-					console.log("成功")
-					wx.navigateBack({
+					let url = COM.load("CON").getMyShopInfo + app.globalData.openId
+
+					COM.load('NetUtil').netUtil(url, "GET", "", (myShopInfo) => {
+						wx.setStorageSync("myShopInfo", myShopInfo)
+						wx.navigateBack({
+
+						})
 
 					})
-
+					
 
 				}
 				else {

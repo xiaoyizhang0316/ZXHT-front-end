@@ -49,7 +49,7 @@ Page({
 			productIdList.push(res.data[i].id)
 		}
 		console.log(res.data)
-		let url = COM.load('CON').GET_SPECIAL_PRICE_LIST + JSON.stringify(productIdList) + "/" + app.globalData.targetShopId;
+		  let url = COM.load('CON').GET_SPECIAL_PRICE_LIST + JSON.stringify(productIdList) + "/" + app.globalData.openId + "/" + app.globalData.targetShopId;
 		COM.load('NetUtil').netUtil(url, "GET", "", (specialPriceList) => {
 			if (specialPriceList) {
 

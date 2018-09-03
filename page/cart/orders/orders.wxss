@@ -421,3 +421,27 @@ button::after {
 }
 
 /***** 弹窗end *****/
+.modal-qrcodedialog {
+    width: 464rpx;
+    overflow: hidden;
+    position: fixed;
+    top: 30%;
+    left: 0;
+    z-index: 9999;
+    background: #f9f9f9;
+    margin: -180rpx 143rpx;
+    border-radius: 0rpx;
+}
+
+.btn-downloadConfirm {
+    width: 100%;
+    color: #ec5300;
+    text-align: center;
+}
+
+.privacyText {
+    font-size: 24rpx;
+    max-width: 400rpx;
+    text-align: center;
+    width: 100%;
+}
