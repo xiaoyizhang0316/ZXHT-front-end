@@ -263,7 +263,8 @@
 }
 
 .good-image {
-    width: 700rpx;
+    width: 100%;
+	height: 700rpx;
 }
 
 .explain-line {

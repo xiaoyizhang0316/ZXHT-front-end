@@ -91,7 +91,6 @@ Page({
             for (var x in self.data.cartList) {
                 if (self.data.cartList[x].id == item.id) {
                     flag = true
-
                     self.data.cartList[x].num += item.num
                     self.setData({
                         cartList: self.data.cartList,
@@ -200,56 +199,55 @@ Page({
         self.setData({
             productId: options.id
         });
-        //如果是分享的页面
-        if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.targetShopId) !== '[object Undefined]') {
-            if (app.globalData.openId != "" && app.globalData.openId != null) {
-                let openId = app.globalData.openId
-                let targetShopId = options.targetShopId
-                let productId = options.id
-                //检查当前用户是否可以进入目标店铺
-                console.log('1')
-                console.log(options)
-                let url = COM.load('CON').APPLY_TO_SHOP;
-                COM.load('NetUtil').netUtil(url, "POST", {
-                    "open_id": openId,
-                    "shop_id": targetShopId
-                }, (callback) => {
+        // //如果是分享的页面
+        // if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.targetShopId) !== '[object Undefined]') {
+        //     if (app.globalData.openId != "" && app.globalData.openId != null) {
+        //         let openId = app.globalData.openId
+        //         let targetShopId = options.targetShopId
+        //         let productId = options.id
+        //         //检查当前用户是否可以进入目标店铺
+                
+        //         let url = COM.load('CON').APPLY_TO_SHOP;
+        //         COM.load('NetUtil').netUtil(url, "POST", {
+        //             "open_id": openId,
+        //             "shop_id": targetShopId
+        //         }, (callback) => {
 
-                    if (callback == false) {
-                        wx.showModal({
-                            title: '提示',
-                            content: '您暂时无法购买此店铺的商品，我们已经为您向店主申请进入, 请等待店主审核后方可进店购物, 点击确认进入展厅',
-                            success: function(res) {
-                                if (res.confirm) {
-                                    console.log('用户点击确定')
-                                    wx.navigateTo({
-                                        url: '/page/welcome/welcome?targetShopId=oVxpo5FQkb2qY4TGpD9rq2xFWRlk',
-                                    })
-                                } else if (res.cancel) {
-                                    console.log('用户点击取消')
-                                    wx.navigateBack({
-                                        delta: -1
-                                    })
-                                }
-                            }
-                        })
-                    } else {
-                        //将得到的shopid 写入缓存并改写global shopid
-                        wx.setStorageSync('targetShopId', targetShopId, )
+        //             if (callback == false) {
+        //                 wx.showModal({
+        //                     title: '提示',
+        //                     content: '您暂时无法购买此店铺的商品，我们已经为您向店主申请进入, 请等待店主审核后方可进店购物, 点击确认进入展厅',
+        //                     success: function(res) {
+        //                         if (res.confirm) {
+        //                             console.log('用户点击确定')
+        //                             wx.navigateTo({
+        //                                 url: '/page/welcome/welcome?targetShopId=oVxpo5FQkb2qY4TGpD9rq2xFWRlk',
+        //                             })
+        //                         } else if (res.cancel) {
+        //                             console.log('用户点击取消')
+        //                             wx.navigateBack({
+        //                                 delta: -1
+        //                             })
+        //                         }
+        //                     }
+        //                 })
+        //             } else {
+        //                 //将得到的shopid 写入缓存并改写global shopid
+        //                 wx.setStorageSync('targetShopId', targetShopId, )
 
-                        app.globalData.targetShopId = targetShopId
+        //                 app.globalData.targetShopId = targetShopId
 
 						
-                    }
-                })
-            } else {
-                setTimeout(function() {
+        //             }
+        //         })
+        //     } else {
+        //         setTimeout(function() {
 
-                    self.prepare(options)
-					return;
-                }, 1000)
-            }
-        }
+        //             self.prepare(options)
+		// 			return;
+        //         }, 1000)
+        //     }
+        // }
 
 		let url = ""
 		let productId = self.data.productId
@@ -395,9 +393,14 @@ Page({
         return {
             title: '真实澳洲直邮 朋友分享的海淘',
             desc: self.data.goods["title"],
-            path: '/page/details/details?id=' + self.data.productId + '&targetShopId=' + shopId,
+			path: '/page/welcome/welcome?productId=' + self.data.productId + '&targetShopId=' + shopId,
             success: function(res) {
                 // 转发成功
+				wx.showModal({
+					title: '提示',
+					content: '分享成功',
+					showCancel:false,
+				})
             },
             fail: function(res) {
                 // 转发失败

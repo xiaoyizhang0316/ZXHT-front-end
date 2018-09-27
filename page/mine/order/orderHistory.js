@@ -18,7 +18,7 @@ Page({
 
         ],
         index: 0,
-        rate: 0,
+       
         qrCodeImg: "",
 		qrCodeUrl: "",
         qrCodeModal: false,
@@ -74,9 +74,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        this.setData({
-            rate: wx.getStorageSync("shopParams").rate
-        })
+       
         this.showOrderList();
     },
 
@@ -227,8 +225,8 @@ Page({
             });
 
         let selectedOrder = orderList[e.currentTarget.dataset.id];
-        let rmb = Math.round(selectedOrder.orderInfo.totalCost * this.data.rate * 100) / 100;
-        selectedOrder.orderInfo.rmb = rmb;
+        // let rmb = Math.round(selectedOrder.orderInfo.totalCost * this.data.rate * 100) / 100;
+        // selectedOrder.orderInfo.rmb = rmb;
         this.setData({
             animationData: animation.export(),
             showModalStatus: true,
@@ -274,9 +272,8 @@ Page({
         let payChoiceIndex = self.data.payChoice[self.data.index].id
         console.log
         if (payChoiceIndex == 2) {
-
-            let rate = wx.getStorageSync("shopParams").rate;
-            if (order.orderInfo.totalCost * 10000 * rate > order.applyToShop.deposit * 10000) {
+           
+            if (order.orderInfo.totalCost > order.applyToShop.deposit) {
                 wx.showModal({
                     title: '无法支付',
                     content: '存款余额不足以支付本订单，请储值后购买',

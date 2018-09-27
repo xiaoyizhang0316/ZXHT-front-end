@@ -60,9 +60,7 @@ Page({
 				});
 			}
 		});
-		// setTimeout(function () {
-		//   wx.hideLoading()
-		// }, 100);
+	
 		self.resetSearch();
 
 		//设置页面标题
@@ -73,10 +71,11 @@ Page({
 		if (app.globalData.targetShopId != null && app.globalData.targetShopId != "") {
 			openId = app.globalData.targetShopId;
 			let url = COM.load('CON').getMyShopInfo + openId
-			COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
-				if (callbackdata == null) {
+			// COM.load('NetUtil').netUtil(url, "GET", "", (callbackdata) => {
+			// 	if (callbackdata == null) {
 
-				} else {
+			// 	} else {
+			let callbackdata = wx.getStorageSync("targetShopInfo");
 					console.log(callbackdata)
 					wx.setNavigationBarTitle({
 						title: callbackdata.shopName,
@@ -87,13 +86,10 @@ Page({
 						userName: callbackdata.userName,
 						shopNote: callbackdata.shopNote ? callbackdata.shopNote : ""
 					})
-					wx.setStorage({
-						key: 'targetShopInfo',
-						data: callbackdata,
-					})
+					
 				
-				}
-			})
+			// 	}
+			// })
 		} else {
 			wx.setNavigationBarTitle({
 				title: '真享 海淘',
@@ -124,10 +120,7 @@ Page({
 		this.setData({
 			showModal: true
 		});
-		// wx.showModal({
-		// 	title: '店铺须知',
-		// 	content: self.data.shopNote,
-		// })
+		
 	},
 	/**
 	 * load the recomemded products by the shop id
@@ -368,19 +361,15 @@ Page({
 
 	onPullDownRefresh() {
 		let self = this
+
 		console.log('--------下拉刷新-------')
-		COM.load('NetUtil').netUtil(COM.load('CON').GET_TARGETSHOP_PRODUCTS_URL + app.globalData.openId + "/" + app.globalData.targetShopId, "GET", "", function (shopProducts) {
-
-			if (shopProducts) {
-				console.log(shopProducts)
-				wx.setStorageSync("shopProducts", shopProducts)
-			};
-			self.onLoad()
-			self.onShow()
-			wx.stopPullDownRefresh()
-
+		COM.load('Util').loadShop(app.globalData.openId, app.globalData.targetShopId, function (res) {
+			if (res == true) {
+				self.onLoad()
+				self.onShow()
+				wx.stopPullDownRefresh()
+			}
 		})
-
 	},
 	onConfirm: function (e) {
 		let self = this

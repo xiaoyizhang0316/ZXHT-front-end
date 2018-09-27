@@ -1,6 +1,12 @@
 var NetUtil = require('netUtil.js');
 var CON = require('constant.js');
 
+
+var productFlag = 0;
+var bannerFlag = 0;
+var targetShopInfoFlag = 0;
+var categoryFlag = 0;
+
 function formatTime(date) {
     var year = date.getFullYear()
     var month = date.getMonth() + 1
@@ -9,7 +15,6 @@ function formatTime(date) {
     var hour = date.getHours()
     var minute = date.getMinutes()
     var second = date.getSeconds()
-
 
     return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':')
 }
@@ -69,7 +74,7 @@ function image(pic) {
 }
 
 function imageThumb(pic) {
-	return CON.IMG_BASE_THUMB + pic + ".jpg";
+    return CON.IMG_BASE_THUMB + pic + ".jpg";
 }
 
 /**
@@ -89,6 +94,7 @@ function loadShopParams() {
                 data: shopParams,
             })
         }
+		return 1;
     })
 }
 
@@ -101,6 +107,7 @@ function loadShipAgents() {
                 data: shipAgents,
             })
         }
+		return 1;
     })
 }
 
@@ -113,23 +120,64 @@ function loadPayments() {
                 data: payments,
             })
         }
+		return 1;
     })
 }
 
+
+
+
+/****************************
+进入动态读取模式
+**/
+function loadShop(openId,targetShopId,callback)
+{
+	loadProducts(openId, targetShopId);
+	loadShopBanner(targetShopId);
+	loadCategories(targetShopId);
+	loadShopInfo(targetShopId);
+	wait()
+	function wait (){
+		if((productFlag+bannerFlag+targetShopInfoFlag+categoryFlag) == 4)
+		{
+			callback(true)
+			return;
+		}else{
+			setTimeout(function () {
+				console.log("---------------------------------------------------------")
+				console.log(productFlag)
+				console.log(bannerFlag)
+				console.log(targetShopInfoFlag)
+				console.log(categoryFlag)
+				console.log("---------------------------------------------------------")
+				wait()
+				return
+			}, 1000)
+		}
+	}
+}
+
+
 function loadProducts(openId, targetShopId) {
+	
     let self = this
     let products = {}
     NetUtil.netUtil(CON.GET_TARGETSHOP_PRODUCTS_URL + openId + "/" + targetShopId, "GET", "", function(shopProducts) {
-
         if (shopProducts) {
             console.log(shopProducts);
-            wx.setStorage({
-                key: "shopProducts",
-                data: shopProducts,
-            })
+			wx.setStorageSync("shopProducts", shopProducts)
         }
+		productFlag = 1;
     })
 };
+
+function loadCategories(targetShopId){	
+	
+	NetUtil.netUtil(CON.CATEGORY_URL + "openId/" + targetShopId, "GET", "", function (categories) {
+		wx.setStorageSync("categories", categories)
+		categoryFlag = 1;
+	})
+}
 
 function loadShopBanner(targetShopId) {
     let self = this
@@ -141,11 +189,22 @@ function loadShopBanner(targetShopId) {
             } else {
                 wx.setStorageSync("shopBanner", null)
             }
+			bannerFlag = 1;
+		
         }
     });
 
 
 };
+function loadShopInfo(targetShopId)
+{
+	let url = CON.getMyShopInfo + targetShopId
+	
+	NetUtil.netUtil(url, "GET", "", function (res) {
+		wx.setStorageSync("targetShopInfo", res);
+		targetShopInfoFlag = 1
+	})
+}
 /**
  * common method to load the cache or refresh the cache
  */
@@ -180,6 +239,7 @@ module.exports = {
     loadPayments: loadPayments,
     loadShipAgents: loadShipAgents,
     loadShopParams: loadShopParams,
-	imageThumb: imageThumb,
+    imageThumb: imageThumb,
     isNumeric: isNumeric,
+	loadShop: loadShop
 }

@@ -10,7 +10,7 @@ Page({
 		hasAddress: false,
 		memo: '',
 		total: 0,
-		rmb: 0,
+		
 		orders: [],
 		animationData: {},
 		showModalStatus: false,
@@ -22,7 +22,7 @@ Page({
 		showPaymentModalStatus:false,
 		showModal: false,
 		index: 0,
-		rate: 0,
+		
 		orderExtraServices:[],
 		orderExtraServicesPrice:0,
 		interval: ""
@@ -83,11 +83,11 @@ Page({
 			total += orders[i].num * orders[i].price;
 			totalNum += orders[i].num;
 		}
-		let shopParams = wx.getStorageSync("shopParams");
+		// let shopParams = wx.getStorageSync("shopParams");
 		total = total + this.data.orderExtraServicesPrice
 		this.setData({
 			total: total.toFixed(2),
-			rmb: (total * shopParams.rate).toFixed(2),
+			
 			totalNum: totalNum
 		})
 	},
@@ -190,8 +190,8 @@ Page({
 						payChoice.push({ id: 3, name: "微信支付" });
 
 					let selectedOrder = callback.orderFull;				
-					let rmb = selectedOrder.orderInfo.totalCost;
-					selectedOrder.orderInfo.rmb = rmb;
+					// let rmb = selectedOrder.orderInfo.totalCost;
+					// selectedOrder.orderInfo.rmb = rmb;
 					self.setData({
 						animationData: animation.export(),
 						showPaymentModalStatus: true,
@@ -369,8 +369,8 @@ Page({
 		console.log
 		if (payChoiceIndex == 2) {
 
-			let rate = wx.getStorageSync("shopParams").rate;
-			if (order.orderInfo.totalCost * 10000 * rate > order.applyToShop.deposit * 10000) {
+			
+			if (order.orderInfo.totalCost > order.applyToShop.deposit) {
 				wx.showModal({
 					title: '无法支付',
 					content: '存款余额不足以支付本订单，请储值后购买',

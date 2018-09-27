@@ -1,70 +1,71 @@
 <!--page/index/search/search.wxml-->
 
-<view class="container">
+<!-- <view class="container"> -->
 
-  <view class="header-contaniner">
+<view class="header-contaniner">
     <view class="header-box">
-      <view class="header-input-box">
-        <image class="find-icon" src="/image/public/find.png" background-size="cover"></image>
-        <input bindconfirm="onKeyUp" value="{{param}}" focus="{{focus}}" placeholder="请输入搜索关键字" />
-        <image wx:if="{{isShowTitleList}}" bindtap='clearTitle' class="clear-icon" src="/image/public/clear.png" background-size="cover"></image>
-      </view>
-    </view>
-		 <view class="history-box">
-      <view class="history-box-text">
-        <text class="box-name-text">热门搜索</text>
-        <!-- <text bindtap='changeHot' class="red-btn">换一批</text> -->
-      </view>
-      <view class="history-box-label ">
-        <view bindtap='writeQuery' data-name="{{item.name}}" class="box-label" wx:for="{{searchHotList}}">{{item.name}}</view>
-      </view>
-    </view>
-  </view>
-	<view class="label-contaniner">
-    <view class="history-box" wx:if="{{isShowHistory}}">
-      <view class="history-box-text">
-        <text class="box-name-text">历史搜索</text>
-        <text bindtap='cleanHistory' class="red-btn">清除</text>
-      </view>
-      <view class="history-box-label ">
-        <view bindtap='writeQuery' data-name="{{item.name}}" class="box-label" wx:for="{{searchHistoryList}}">{{item.name}}</view>
-      </view>
-    </view>
-
-   
-
-  <block wx:if="{{isShowTitleList}}">
-    <view class="title-contaniner">
-      <block wx:if="{{searchTitleList.length > 0}}">
-        <block wx:for="{{searchTitleList}}">
-          <view class="title-line" data-id="{{item.id}}" bindtap='showDetail'>
-            <block wx:if="{{item.rendered.length > 0}}">
-              <block wx:for="{{item.rendered}}" wx:for-item="key_obj">
-			  <view style='margin-top:20rpx'>
-			  <text wx:if="{{key_obj.key == true}}" class="high-light-font">{{key_obj.str}}</text>
-                <text wx:else>{{key_obj.str}}</text>
-			  </view>
-                
-              </block>
-            </block>
-            <block wx:else>
-              <view class="title-line" style='margin-top:20rpx'>
-                {{item.title}}
-              </view>
-            </block>
-          </view>
-        </block>
-      </block>
-      <block wx:else>
-        <view class="title-line">
-          暂无搜索结果
+        <view class="header-input-box">
+            <image class="find-icon" src="/image/public/find.png" background-size="cover"></image>
+            <input bindconfirm="onKeyUp" value="{{param}}" focus="{{focus}}" placeholder="请输入搜索关键字" />
+            <image wx:if="{{isShowTitleList}}" bindtap='clearTitle' class="clear-icon" src="/image/public/clear.png" background-size="cover"></image>
         </view>
-      </block>
     </view>
-  </block>
 
-
-  
-
-  </view>
 </view>
+<view class="label-contaniner" wx:if="{{!isShowTitleList}}">
+    <view class="history-box">
+        <view class="history-box-text">
+            <text class="box-name-text">热门搜索</text>
+            <!-- <text bindtap='changeHot' class="red-btn">换一批</text> -->
+        </view>
+        <view class="history-box-label ">
+            <view bindtap='writeQuery' data-name="{{item.name}}" class="box-label" wx:for="{{searchHotList}}">{{item.name}}</view>
+        </view>
+    </view>
+    <view class="history-box">
+        <view class="history-box-text">
+            <text class="box-name-text">历史搜索</text>
+            <text bindtap='cleanHistory' class="red-btn">清除</text>
+        </view>
+        <view class="history-box-label ">
+            <view bindtap='writeQuery' data-name="{{item.name}}" class="box-label" wx:for="{{searchHistoryList}}">{{item.name}}</view>
+        </view>
+    </view>
+</view>
+
+
+
+<view class="title-contaniner" wx:if="{{isShowTitleList}}">
+
+    <block wx:if="{{searchTitleList.length > 0}}">
+        <block wx:for="{{searchTitleList}}">
+
+            <view class="search-results" data-id="{{item.id}}" bindtap='showDetail'>
+                <view class="result-image">
+                    <image mode = 'aspectFit'  src="{{item.image}}" style='height:100%;width:100%'></image>
+                </view>
+                <view class="result-desc">
+                    <view class="result-title">
+                        {{item.title}}
+                    </view>
+                    <view class="result-price">
+                        <text style="color:#ff5000">￥{{item.price}} </text> <text style='font-size:22rpx'>已售:{{item.sales}}件</text>
+                    </view>
+                </view>
+            </view>
+			<view style='height:10px; background-color: #e6e6e6;width:100%'></view>
+
+
+
+
+        </block>
+    </block>
+    <block wx:else>
+        <view class="title-line">
+            暂无搜索结果
+        </view>
+    </block>
+</view>
+
+
+<!-- </view> -->
