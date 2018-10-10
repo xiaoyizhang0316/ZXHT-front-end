@@ -53,7 +53,9 @@
         </view>
     </view>
     <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+
     <view animation="{{animationData}}" class="commodity_attr_box bottom-window" wx:if="{{showModalStatus}}">
+        <scroll-view scroll-y style="height: 1000rpx;">
         <view class='bottom-window-detail'>
             <view class='bottom-window-detail-left'>
                 <image src='{{selectedProduct.thumb}}' mode="aspectFit" ></image>
@@ -123,7 +125,36 @@
                     <input type="number" bindconfirm='updateDiscountPrice' value='{{selectedProduct.discountPrice}}'></input>
                 </view>
             </view>
-        </view>
+
+              <view class='bottom-window-RecommandNHot'>
+              <view>
+                <text>拼团</text>
+                 <switch checked="{{isGrouped}}" bindchange="addGroup" />
+              </view>
+              </view>
+              <view  wx:if="{{isGrouped}}">
+
+                <picker mode='date' value= "{{date}}" start='{{today}}' bindchange="bindDateChange" class='bottom-window-RecommandNHot'>
+                  <view style='width:96%'>
+                    <text style='width:260rpx'>商品过期时间</text>
+                    <view class='input-box' style='width:250rpx'> {{date}} <image src='../../../../image/calendar.png' class="calendar-image"></image>
+                    </view>
+                  </view>
+                </picker>
+              </view>
+              <view class='bottom-window-RecommandNHot' wx:if="{{isGrouped}}">
+                <view >
+                  <text>拼单价钱</text>
+                  <input type='digit' placeholder='{{selectedProduct.discountPrice}}' class='input-box'></input>
+                </view>
+              </view>
+              <view class='bottom-window-RecommandNHot' wx:if="{{isGrouped}}">
+                <view>
+                  <text>设置人数</text>
+                  <input type='number' placeholder='0' class='input-box'></input>
+                </view>
+              </view>
+              </view>
 
 
         <!-- <view class='bottom-window-stock' bindtap='bindExtra'>
@@ -138,7 +169,9 @@
             <text>删除商品</text> </view> -->
         <view class='bottom-window-btn2' bindtap='hideModal'>
             <text style='font-size:33rpx;'>放弃修改</text> </view>
+        </scroll-view>
     </view>
+
 
 
 

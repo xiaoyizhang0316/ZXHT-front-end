@@ -1,6 +1,8 @@
 /* page/mine/shopApply/shopApply.wxss */
 page {
   background-color: #fff;
+  font-size: 40rpx;
+  color: #696969;
 }
 .container{
   width: 100%;
@@ -39,7 +41,7 @@ page {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 34rpx;
+  font-size: 28rpx;
 }
 
 .apply-desc text {

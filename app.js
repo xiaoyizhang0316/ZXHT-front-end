@@ -27,7 +27,8 @@ App({
     var self = this
     var timestamp = Date.parse(new Date());
     timestamp = timestamp / 1000;
-    console.log('App Launch at: ' + timestamp)
+    console.log('App Launch at: ' + timestamp);
+
     //检查缓存
     wx.getStorage(
       {
@@ -49,6 +50,7 @@ App({
             success: function (res) {
 							console.log("login ok")
               self.setuserinfo(res.code)
+              
             },
 						fail: function (res){
 							console.log(res)

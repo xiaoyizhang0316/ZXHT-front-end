@@ -1,5 +1,6 @@
 var app = getApp();
-var COM = require('../../../../utils/common.js')
+var COM = require('../../../../utils/common.js');
+var util = require('../../../../utils/util.js');
 
 Page({
 
@@ -34,9 +35,14 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-		
         //this.filterProducts();
-
+      var time = new Date();
+      time = time.getFullYear() + '-' + (time.getMonth()+1 ) + '-' + time.getDate();
+        // 再通过setData更改Page()里面的data，动态更新页面的数据
+        this.setData({
+          date: time,
+          today: time,
+        });
     },
 
     /**
@@ -139,8 +145,10 @@ Page({
     //搜索事件
     bindSearch: function(e) {
         var query = e;
+        console.log(e);
         if (e instanceof Object) {
             query = e.detail.value;
+            query = query.replace(/’|‘/g, "'");
         }
         if (query.length === 0) {
             this.resetSearch();
@@ -167,6 +175,13 @@ Page({
             });
         }
     },
+
+    bindDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
+  },
 
     //二维码搜索
     scanCode() {
@@ -325,6 +340,13 @@ Page({
         this.setData({
             'selectedProduct.hot': e.detail.value
         })
+    },
+
+    addGroup: function(e){
+      console.log('switch1 发生 change 事件，携带值为', e.detail.value);
+      this.setData({
+        'isGrouped':e.detail.value
+      })
     },
 
 

@@ -273,9 +273,18 @@ Page({
      */
     bindSearch: function(e) {
         var query = e;
+        
         if (e instanceof Object) {
-            query = e.detail.value
+          query = e.detail.value;
+          query = query.replace(/’|‘/g, "'");
+
+
+
         }
+        // test code
+
+        console.log(query); 
+
 
         this.setData({
             lastQuery: query

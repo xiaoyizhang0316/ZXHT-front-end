@@ -119,7 +119,8 @@ Page({
 	onLoad: function (options) {
 		self = this
 		let rate = wx.getStorageSync("shopParams").rate
-		this.setData({ rate: rate })
+    console.log(rate.toFixed(2));
+    this.setData({ rate: rate.toFixed(2) })
 		wx.getUserInfo({
 			success: function (res) {
 				self.setData({

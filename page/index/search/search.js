@@ -133,11 +133,15 @@ Page({
 
     //发送关键字搜索请求
     searchTitleRequest: function(query) {
+      console.log(query);
         var self = this;
 		
         //NetUtil.netUtil
         //COM.util('NetUtil').netUtil
-		query = query.toUpperCase();
+		//query = query.toUpperCase();
+    query = query.replace(/’|‘/g,"'");
+    query = query.toUpperCase();
+    console.log(query);
 		
 		let shopProducts = wx.getStorageSync("shopProducts")
 		let fliteredTitleList = [];

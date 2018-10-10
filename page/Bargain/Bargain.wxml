@@ -1,0 +1,13 @@
+<!--page/Bargain/Bargain.wxml-->
+<view class="main">
+    <view class="goods-box">
+        <image src="{{goods.thumb}}" class="goods-thumb" mode="aspectFit"></image>
+
+        <navigator open-type="switchTab" url="../cart/cart">
+            <view class="carts-icon {{scaleCart?'on':''}}">
+                <image src="/image/cart2.png"></image>
+                <text class="carts-icon-num" wx:if="{{hasCarts}}">{{totalNum}}</text>
+            </view>
+        </navigator>
+    </view>
+  </view>

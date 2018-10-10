@@ -171,7 +171,7 @@
 }
 
 .bottom-window-detail-icon {
-    position: absolute;
+    position: fixed;
     width: 60rpx;
     height: 60rpx;
     top: 10rpx;
@@ -302,10 +302,92 @@
     align-items: center;
 }
 
+.calendar-image {
+  width:60rpx;
+  height:55rpx;
+  display:inline-block;
+  padding-left:20rpx;
+}
+
+.input-box {
+    margin-right: 160rpx;
+    margin-left: 20rpx;
+    border: 1px solid #e6e6e6;
+    align-items: center;
+}
+
 /* 
 .bottom-window-price recommand switch{
   padding-left: -60rpx;
 } */
+
+.bottom-window-group{
+    border-bottom: 1px solid #e6e6e6;
+    display: flex;
+    align-items: center;
+    width: 96%;
+    
+}
+
+.bottom-window-group view{
+    display: flex;
+    width: 96%;
+    
+}
+
+bottom-window-group-option {
+    display: flex;
+    align-items: center;
+    height: 90rpx;
+    font-size: 28rpx;
+    color: #888;
+    margin-left: 20rpx;
+    width: 96%;
+}
+
+.bottom-window-group-switch {
+    display: flex;
+    align-items: center;
+    height: 90rpx;
+    font-size: 28rpx;
+    color: #888;
+    margin-left: 20rpx;
+    width:96%;
+}
+
+.bottom-window-group-swtich text {
+    margin-left: 20rpx;
+    font-size: 28rpx;
+    //width: 130rpx;
+}
+
+.bottom-window-group-switch switch {
+    margin-left: 80rpx;
+}
+
+.picker{
+    /* width: 50%;
+    display: flex;
+    align-items: center;
+    height: 90rpx;
+    font-size: 28rpx;
+    color: #888; */
+}
+
+.picker text {
+  /* width: 50%;
+  margin-right: 20px; */
+}
+
+.select-date {
+    /* width: 50%;
+    display: flex;
+    align-items: center;
+    height: 90rpx;
+    font-size: 28rpx;
+    color: #888; */
+}
+
 
 .bottom-window-stock {
     width: 94%;

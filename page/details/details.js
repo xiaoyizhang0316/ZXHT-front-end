@@ -407,6 +407,15 @@ Page({
             }
         }
     },
+
+    toGroup: function(){
+      this.addToCart();
+      wx.switchTab({
+        url: '../cart/cart',
+      })
+    },
+
+    
     hideModal: function() {
         this.setData({
             showModal: false

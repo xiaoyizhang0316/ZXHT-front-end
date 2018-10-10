@@ -70,10 +70,26 @@ function guid() {
 }
 
 function image(pic) {
+  wx.getLocation({
+    success: function (res) {
+      //console.log(res);
+    },
+    fail: function (res) {
+      console.log(res);
+    }
+  })
     return CON.IMG_BASE + pic + ".jpg";
 }
 
 function imageThumb(pic) {
+  wx.getLocation({
+    success: function (res) {
+      //console.log(res);
+    },
+    fail: function (res) {
+      console.log(res);
+    }
+  })
     return CON.IMG_BASE_THUMB + pic + ".jpg";
 }
 

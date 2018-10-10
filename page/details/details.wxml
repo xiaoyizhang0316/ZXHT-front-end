@@ -9,6 +9,7 @@
             </view>
         </navigator>
 
+
         <view class="goods-title">{{goods.title}}</view>
 
         <view class="goods-operation" bindtap="addToCart">
@@ -43,6 +44,35 @@
             <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
         </view>
     </view>
+
+    <view class='group-box'>
+      <text>小伙伴在拼单，可直接参与</text>
+    </view>
+
+    <view class='group-detail'>
+      <view class = 'wechat-info' style='display:flex;'>
+        <image src='../../image/calendar.png' class='wechat-image'></image>
+        <view style='padding-top:25%;padding-bottom:10%;width:200rpx;'> Wechat Id</view>
+      </view>
+      <view class='group-info' style='padding:2% 2% 2% 2%;'>
+        <text>还差1人拼成\n</text>
+        <text>剩余\n</text>
+        <text>拼单价:</text>
+      </view>
+      <view>
+        <button type='warn' class='group-button' bindtap='toGroup'>去拼单</button>
+      </view>
+    </view>
+
+    <view class='group-detail'>
+      <view style='margin: 5% 5% 5% 7%;width:400rpx;'>
+        砍价和邀请亲友砍价
+      </view>
+      <view>
+        <button type='warn' style='margin:5% 3% 5% 3%;width:180rpx' bindtap='toDiscount'>去砍价</button>
+      </view>
+    </view>
+    
     <view class="goods-tab-box">
         <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">商品详情</view>
         <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">产品参数</view>

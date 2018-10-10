@@ -1,8 +1,10 @@
 //url相关
-//const BASE_URL = "https://mini.zhenxianghaitao.com"
-const BASE_URL = "https://509591fe.ngrok.io"
+const BASE_URL = "https://mini.zhenxianghaitao.com"
+//const BASE_URL = "https://509591fe.ngrok.io"
+//const IMG_BASE = "https://ozimg.zhenxianghaitao.com/storage/newthumbs/"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/newthumbs/"
 const IMG_BASE_THUMB = "https://img.zhenxianghaitao.com/storage/thumbs/"
+//const IMG_BASE_THUMB = "https://ozimg.zhenxianghaitao.com/storage/thumbs/"
 const IMG_BANNER = "https://img.zhenxianghaitao.com/storage/"
 const IMG_DETAIL_BASE = "https://img.zhenxianghaitao.com/"
 const IMG_ID = "https://img.zhenxianghaitao.com/ID/"
