@@ -109,20 +109,7 @@ Page({
 		//let orderTime = COM.load('Util').formatTime(new Date());
 		// if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId || app.globalData.targetShopId == "oVxpo5FQkb2qY4TGpD9rq2xFWRlk") {
 		let self = this
-		if (app.globalData.targetShopId == null || app.globalData.targetShopId == app.globalData.openId) {
-			wx.showModal({
-				title: '错误',
-				content: '您不能在自己的店或者展览厅中购物',
-				success: function (res) {
-					if (res.confirm) {
-						return
-					} else if (res.cancel) {
-						return
-					}
-				}
-			})
-			return
-		} else if (app.globalData.nickName == "未登录用户" || app.globalData.nickName == null) {
+		 if (app.globalData.nickName == "未登录用户" || app.globalData.nickName == null) {
 			self.setData({ showModal: true })
 			return
 		}
@@ -149,6 +136,7 @@ Page({
 			delete (productinfo.data[index].id)
 		}
 		console.log(productinfo)
+
 		console.log(this.data.address)
 		let order = {
 			orderInfo: {
@@ -162,6 +150,14 @@ Page({
 			orderGoods: productinfo.data,
 			orderExtraServices: this.data.orderExtraServices
 		};
+    //如果是拼团的订单
+    if(productinfo.data.length == 1 && productinfo.data[0].extraType == 1)
+    {
+      order.orderInfo.extraType = productinfo.data[0].extraType
+      order.orderInfo.extraTypeReferenceId = productinfo.data[0].extraTypeReferenceId
+    }
+    console.log("----------------------------------------")
+    console.log(order)
 		let url = COM.load('CON').SAVE_ORDER_URL;
 		COM.load('NetUtil').netUtil(url, "POST", order, (callback) => {
 			console.log(callback)

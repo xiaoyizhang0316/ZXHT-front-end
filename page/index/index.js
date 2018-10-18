@@ -13,6 +13,7 @@ Page({
 		goodsList: {},
 		hotList: {},
 		discountList: {},
+    groupAndCutList: {},
 		shop: [],
 		imgUrls: [
 			'https://img.zhenxianghaitao.com/siteImages/slide1.png',
@@ -160,7 +161,8 @@ Page({
 		self.setData({
 			goodsList: {},
 			hotList: {},
-			discountList: {}
+			discountList: {},
+      groupAndCutList: {}
 		})
 
 		let shopProducts = wx.getStorageSync("shopProducts");
@@ -189,12 +191,22 @@ Page({
 					"thumb": COM.load('Util').image(shopProduct.barcode),
 				}
 			}
-			if (shopProduct.stock >= 0 && shopProduct.discountPrice >= 0 && shopProduct.discount) {
-				self.data.discountList[shopProduct.id] = {
+			// if (shopProduct.stock >= 0 && shopProduct.discountPrice >= 0 && shopProduct.discount) {
+			// 	self.data.discountList[shopProduct.id] = {
+			// 		"id": shopProduct.id,
+			// 		"title": shopProduct.title,
+			// 		"price": shopProduct.basePrice,
+			// 		"vipPrice": shopProduct.vipPrice ? shopProduct.vipPrice : shopProduct.discountPrice,
+			// 		"sales": shopProduct.sales,
+			// 		"thumb": COM.load('Util').image(shopProduct.barcode),
+			// 	}
+			// }
+      if (shopProduct.group && shopProduct.groupPrice >= 0) {
+				self.data.groupAndCutList[shopProduct.id] = {
 					"id": shopProduct.id,
 					"title": shopProduct.title,
 					"price": shopProduct.basePrice,
-					"vipPrice": shopProduct.vipPrice ? shopProduct.vipPrice : shopProduct.discountPrice,
+          "vipPrice": shopProduct.groupPrice ? shopProduct.groupPrice : shopProduct.vipPrice,
 					"sales": shopProduct.sales,
 					"thumb": COM.load('Util').image(shopProduct.barcode),
 				}
@@ -204,7 +216,8 @@ Page({
 		self.setData({
 			goodsList: self.data.goodsList,
 			hotList: self.data.hotList,
-			discountList: self.data.discountList
+			discountList: self.data.discountList,
+      groupAndCutList: self.data.groupAndCutList
 		})
 
 		wx.setStorage({
@@ -215,7 +228,7 @@ Page({
 		console.log(self.data.goodsList)
 		console.log(self.data.hotList)
 		console.log(self.data.discountList)
-
+    console.log(self.data.groupAndCutList)
 	},
 
 

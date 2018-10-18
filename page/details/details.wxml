@@ -1,70 +1,97 @@
 <view class="main">
-    <view class="goods-box">
-        <image src="{{goods.thumb}}" class="goods-thumb" mode="aspectFit"></image>
+  <view class="goods-box">
+    <image src="{{goods.thumb}}" class="goods-thumb" mode="aspectFit"></image>
 
-        <navigator open-type="switchTab" url="../cart/cart">
-            <view class="carts-icon {{scaleCart?'on':''}}">
-                <image src="/image/cart2.png"></image>
-                <text class="carts-icon-num" wx:if="{{hasCarts}}">{{totalNum}}</text>
-            </view>
-        </navigator>
+    <navigator open-type="switchTab" url="../cart/cart">
+      <view class="carts-icon {{scaleCart?'on':''}}">
+        <image src="/image/cart2.png"></image>
+        <text class="carts-icon-num" wx:if="{{hasCarts}}">{{totalNum}}</text>
+      </view>
+    </navigator>
 
 
-        <view class="goods-title">{{goods.title}}</view>
+    <view class="goods-title">{{goods.title}}</view>
 
-        <view class="goods-operation" bindtap="addToCart">
+    <view class="goods-operation" bindtap="addToCart">
 
-            <!-- <text class="goods-price">￥{{goods.price}}</text>
+      <!-- <text class="goods-price">￥{{goods.price}}</text>
 	  <text class="goods-price del">￥{{goods.basePrice}}</text>
       <text class="goods-operation-num">库存 {{goods.stock}}</text>
       
       <image src="/image/cart1.png" class="goods-cart-img" ></image> -->
 
 
-            <view class='goods-operation-num'>库存 {{goods.stock}}</view>
-            <text class="goods-price">￥{{goods.price}}</text>
-            <block wx:if="{{goods.price < goods.basePrice}}">
-                <text class="goods-price del">￥{{goods.basePrice}}</text>
-            </block>
-            <block wx:else="{{goods.price < goods.basePrice}}">
-                <text class="goods-price del">     </text>
-            </block>
-            <image src="/image/cart-plus.png" class="goods-cart-img"></image>
+      <view class='goods-operation-num'>库存 {{goods.stock}}</view>
+      <text class="goods-price">￥{{goods.price}}</text>
+      <block wx:if="{{goods.price < goods.basePrice}}">
+        <text class="goods-price del">￥{{goods.basePrice}}</text>
+      </block>
+      <block wx:else="{{goods.price < goods.basePrice}}">
+        <text class="goods-price del">     </text>
+      </block>
+      <image src="/image/cart-plus.png" class="goods-cart-img"></image>
 
 
-        </view>
-        <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
     </view>
-    <view class="explain-line" style="margin-top:20px;" data-id="0" bindtap="showSpecialPrice" wx:if="{{specialPrices.length>0}}">
-        <view class="explain-block">
-            <image style="height:22px;width:22px;" src="../../image/specialPrice.jpg"></image>
-        </view>
-        <view class="explain-text">优惠详情...</view>
-        <view class="explain-block">
-            <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
-        </view>
+    <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
+  </view>
+  <view class="explain-line" style="margin-top:20px;" data-id="0" bindtap="showSpecialPrice" wx:if="{{specialPrices.length>0}}">
+    <view class="explain-block">
+      <image style="height:22px;width:22px;" src="../../image/specialPrice.jpg"></image>
     </view>
-
-    <view class='group-box'>
-      <text>小伙伴在拼单，可直接参与</text>
+    <view class="explain-text">优惠详情...</view>
+    <view class="explain-block">
+      <image style="height:23px;width:23px;" src="../../image/arrow_down.png"></image>
     </view>
-
-    <view class='group-detail'>
-      <view class = 'wechat-info' style='display:flex;'>
-        <image src='../../image/calendar.png' class='wechat-image'></image>
-        <view style='padding-top:25%;padding-bottom:10%;width:200rpx;'> Wechat Id</view>
+  </view>
+  <view wx:if="{{groupInfo.status}}">
+    <view wx:if="{{groupList.length > 0}}">
+      <view class='group-box'>
+        <text>小伙伴在拼单，可直接参与</text>
       </view>
-      <view class='group-info' style='padding:2% 2% 2% 2%;'>
-        <text>还差1人拼成\n</text>
-        <text>剩余\n</text>
-        <text>拼单价:</text>
-      </view>
-      <view>
-        <button type='warn' class='group-button' bindtap='toGroup'>去拼单</button>
-      </view>
-    </view>
+      <view wx:for="{{groupList}}" wx:key="{{index}}">
+        <view wx:if="{{item.status == 1}}">
+          <view class='group-detail'>
+            <view class='wechat-info' style='display:flex;'>
+              <image src='{{item.user.avatarUrl}}' class='wechat-image'></image>
+              <view style='padding-top:25%;padding-bottom:10%;width:200rpx;'>{{item.user.name}}</view>
+            </view>
+            <view class='group-info' style='padding:2% 2% 2% 2%;'>
+              <text>还差{{item.groupNumber - (item.orderList ? item.orderList.length : 0)}}人成团\n</text>
+              <text>拼单价:￥{{item.groupPrice}}</text>
+            </view>
+            <view>
 
-    <view class='group-detail'>
+              <view wx:if="{{item.user.openId != openId && !item.joined}}">
+                <button type='warn' class='group-button' bindtap='toGroup' data-price="{{item.groupPrice}}" data-groupbuyid="{{item.id}}">去拼单</button>
+              </view>
+              <view wx:elif="{{item.joined}}">
+                <button type='warn' class='group-button' open-type="share" data-groupbuyid="{{item.id}}">已参团/分享</button>
+              </view>
+              <view wx:else>
+                <button type='warn' class='group-button' open-type="share" data-groupbuyid="{{item.id}}">分享</button>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{item.status == 2}}">
+          <view class='group-detail'>
+            <view class='wechat-info' style='display:flex;'>
+              <image src='{{item.user.avatarUrl}}' class='wechat-image'></image>
+              <view style='padding-top:25%;padding-bottom:10%;width:200rpx;'>{{item.user.name}}</view>
+            </view>
+            <view class='group-info' style='padding:2% 2% 2% 2%;'>
+              <text>已成团</text>
+              <text>拼单价:￥{{item.groupPrice}}</text>
+            </view>
+            <view>
+
+
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class='group-detail'>
       <view style='margin: 5% 5% 5% 7%;width:400rpx;'>
         砍价和邀请亲友砍价
       </view>
@@ -72,104 +99,112 @@
         <button type='warn' style='margin:5% 3% 5% 3%;width:180rpx' bindtap='toDiscount'>去砍价</button>
       </view>
     </view>
-    
-    <view class="goods-tab-box">
-        <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">商品详情</view>
-        <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">产品参数</view>
-
-        <view wx:if="{{!hasComments}}" class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">售后保障</view>
-        <view wx:else class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">评论</view>
-        <view class="goods-content">
-            <view class="goods-detail-content" wx:if="{{curIndex === 0}}">
-                <view class="goods-item-line goods-item-desc" wx:if="{{detail.desc}}">
-                    【产品介绍】
-                    <view class="goods-item-text goods-item-desc-text">{{detail.desc}}</view>
-                </view>
-
-                <view class="goods-item-line" wx:if="{{detail.function}}">
-                    【产品功效】
-                    <view style="padding-left:5px;">
-                        <text class="goods-item-text">{{detail.function}}</text>
-                    </view>
-                </view>
-
-                <view class="goods-item-line" wx:if="{{detail.images}}">
-                    【产品详情】
-                    <view style="padding-left:5px;">
-                        <view wx:for="{{detail.images}}" wx:key="{{index}}" class="good-img">
-                            <image mode="aspectFit" class="good-image" src="{{item}}" data-current="{{item}}" bindtap="bindPreviewImage"></image>
-                        </view>
-                    </view>
-                </view>
-            </view>
-            <view class="goods-spec-content" wx:elif="{{curIndex === 1}}">
-                <view class="flex-row flex-cell" wx:if="{{detail.enTitle}}">
-                    <text class="flex-cell flex-row">英文名称</text>
-                    <text class="flex-cell flex-row flex-content goods-spec-entitle">{{detail.enTitle}}</text>
-                </view>
-                <view class="flex-row flex-cell" wx:if="{{detail.dosage}}">
-                    <text class="flex-cell flex-row">使用方法</text>
-                    <text class="flex-cell flex-row flex-content goods-spec-dosage">{{detail.dosage}}</text>
-                </view>
-                <view class="flex-row flex-cell" wx:if="{{detail.suitable}}">
-                    <text class="flex-cell flex-row">适用人群</text>
-                    <text class="flex-cell flex-row flex-content">{{detail.suitable}}</text>
-                </view>
-                <view class="flex-row flex-cell" wx:if="{{detail.attention}}">
-                    <text class="flex-cell flex-row">注意事项</text>
-                    <text class="flex-cell flex-row flex-content">{{detail.attention}}</text>
-                </view>
-            </view>
-            <view wx:elif="{{curIndex === 2 && !hasComments}}">{{goods.service}}</view>
-            <view wx:else>
-                <view wx:key="idx" wx:for-index="idx" wx:for="{{comments}}">
-
-                    <view class="explain-line">
-                        <view class="item-top">
-                            <view style="padding-left:11px;font-size:12px;flex:7;color:grey;display:flex;justify-content:flex-start; align-items:center">
-                                <image class="blur" src="{{item.userThumb}}" mode="aspectFit" /> {{item.userName}}
-                            </view>
-                            <view style="padding-left:11px;font-size:10px;flex:5;color:grey;display:flex;justify-content:flex-end; align-items:center">{{item.createAt}}</view>
-                        </view>
-                    </view>
-                    <view class="explain-line" style='height:auto'>
-                        <view class="comment-message-box">
-                            {{item.message}}
-                        </view>
-                    </view>
-                    <view wx:if="{{item.images.length > 0}}">
-                        <view class="explain-line">
-                            <view class="comment-images-box">
-
-                                <view wx:for="{{item.images}}">
-
-                                    <image class="comment-img" src="{{item}}" mode="aspectFit" data-id="{{idx}}" data-img="{{item}}" bindtap='commentImgView' />
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-					<view class="hr"></view>
-                </view>
-            </view>
-        </view>
+     -->
     </view>
+    <view>
+      <text> 团购价:{{groupInfo.groupPrice}}</text>
+      <text> 所需人数: {{groupInfo.groupNumber}}</text>
+      <button bindtap='createGroup' class="button" data-groupInfoId='{{groupInfo.id}}'>开团</button>
+    </view>
+  </view>
+
+  <view class="goods-tab-box">
+    <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">商品详情</view>
+    <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">产品参数</view>
+
+    <view wx:if="{{!hasComments}}" class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">售后保障</view>
+    <view wx:else class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">评论</view>
+    <view class="goods-content">
+      <view class="goods-detail-content" wx:if="{{curIndex === 0}}">
+        <view class="goods-item-line goods-item-desc" wx:if="{{detail.desc}}">
+          【产品介绍】
+          <view class="goods-item-text goods-item-desc-text">{{detail.desc}}</view>
+        </view>
+
+        <view class="goods-item-line" wx:if="{{detail.function}}">
+          【产品功效】
+          <view style="padding-left:5px;">
+            <text class="goods-item-text">{{detail.function}}</text>
+          </view>
+        </view>
+
+        <view class="goods-item-line" wx:if="{{detail.images}}">
+          【产品详情】
+          <view style="padding-left:5px;">
+            <view wx:for="{{detail.images}}" wx:key="{{index}}" class="good-img">
+              <image mode="aspectFit" class="good-image" src="{{item}}" data-current="{{item}}" bindtap="bindPreviewImage"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="goods-spec-content" wx:elif="{{curIndex === 1}}">
+        <view class="flex-row flex-cell" wx:if="{{detail.enTitle}}">
+          <text class="flex-cell flex-row">英文名称</text>
+          <text class="flex-cell flex-row flex-content goods-spec-entitle">{{detail.enTitle}}</text>
+        </view>
+        <view class="flex-row flex-cell" wx:if="{{detail.dosage}}">
+          <text class="flex-cell flex-row">使用方法</text>
+          <text class="flex-cell flex-row flex-content goods-spec-dosage">{{detail.dosage}}</text>
+        </view>
+        <view class="flex-row flex-cell" wx:if="{{detail.suitable}}">
+          <text class="flex-cell flex-row">适用人群</text>
+          <text class="flex-cell flex-row flex-content">{{detail.suitable}}</text>
+        </view>
+        <view class="flex-row flex-cell" wx:if="{{detail.attention}}">
+          <text class="flex-cell flex-row">注意事项</text>
+          <text class="flex-cell flex-row flex-content">{{detail.attention}}</text>
+        </view>
+      </view>
+      <view wx:elif="{{curIndex === 2 && !hasComments}}">{{goods.service}}</view>
+      <view wx:else>
+        <view wx:key="idx" wx:for-index="idx" wx:for="{{comments}}">
+
+          <view class="explain-line">
+            <view class="item-top">
+              <view style="padding-left:11px;font-size:12px;flex:7;color:grey;display:flex;justify-content:flex-start; align-items:center">
+                <image class="blur" src="{{item.userThumb}}" mode="aspectFit" /> {{item.userName}}
+              </view>
+              <view style="padding-left:11px;font-size:10px;flex:5;color:grey;display:flex;justify-content:flex-end; align-items:center">{{item.createAt}}</view>
+            </view>
+          </view>
+          <view class="explain-line" style='height:auto'>
+            <view class="comment-message-box">
+              {{item.message}}
+            </view>
+          </view>
+          <view wx:if="{{item.images.length > 0}}">
+            <view class="explain-line">
+              <view class="comment-images-box">
+
+                <view wx:for="{{item.images}}">
+
+                  <image class="comment-img" src="{{item}}" mode="aspectFit" data-id="{{idx}}" data-img="{{item}}" bindtap='commentImgView' />
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="hr"></view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>
 
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 
 <view class="modal-dialog" wx:if="{{showModal}}">
-    <view class="modal-title">
-        优惠
+  <view class="modal-title">
+    优惠
+  </view>
+  <view class="modal-content">
+    <view wx:key="idx" wx:for-index="idx" wx:for="{{specialPrices}}">
+
+
+      <view style="padding-left:20rpx;font-size:26rpx;color:grey;">优惠{{idx+1}}</view>
+      <view style="padding-left:20rpx;font-size:26rpx;color:grey;">
+        购买{{item.minQuantity}}件到{{item.maxQuantity}}+件价格仅为: ￥{{item.price}}/件
+      </view>
+
     </view>
-    <view class="modal-content">
-        <view wx:key="idx" wx:for-index="idx" wx:for="{{specialPrices}}">
-
-
-            <view style="padding-left:20rpx;font-size:26rpx;color:grey;">优惠{{idx+1}}</view>
-            <view style="padding-left:20rpx;font-size:26rpx;color:grey;">
-                购买{{item.minQuantity}}件到{{item.maxQuantity}}+件价格仅为: ￥{{item.price}}/件
-            </view>
-
-        </view>
-    </view>
+  </view>
 </view>

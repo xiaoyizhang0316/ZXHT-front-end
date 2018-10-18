@@ -1,6 +1,6 @@
 //url相关
 const BASE_URL = "https://mini.zhenxianghaitao.com"
-//const BASE_URL = "https://509591fe.ngrok.io"
+//const BASE_URL = "https://4cea8ec1.ngrok.io"
 //const IMG_BASE = "https://ozimg.zhenxianghaitao.com/storage/newthumbs/"
 const IMG_BASE = "https://img.zhenxianghaitao.com/storage/newthumbs/"
 const IMG_BASE_THUMB = "https://img.zhenxianghaitao.com/storage/thumbs/"
@@ -65,6 +65,8 @@ const GET_ALL_PRODUCT_BY_CATEGORYID_URL = BASE_URL + "/api/mall/products/categor
 const GET_MY_PRODUCTS_AND_RECOMMENDATION = SHOP_PRODUCT_URL + "openId/"
 const GET_SPECIAL_PRICE_LIST = SHOP_PRODUCT_URL + "getSpecialPriceList/"
 const PRODUCT_DETAIL_URL = PRODUCT_URL + "detail/"
+const GET_GROUPINFO = SHOP_PRODUCT_URL+ "getGroupInfo/"
+const CREATE_GROUP = SHOP_PRODUCT_URL + "createGroup"
 //进入他人店铺
 const GET_SHOPS_APPLY_TO_SHOP = BASE_URL + "/api/mall/users/getShopsApplyToShop/"
 
@@ -105,6 +107,7 @@ const GET_COMMENTS = BASE_URL + "/api/mall/comment/getComments/"
 const UPLOADFILE = BASE_URL + "/api/mall/test/uploadFile"
 const GETSHOPIMG = BASE_URL + "/api/mall/test/shareShop"
 const DELETE_FILE = BASE_URL + "/api/mall/test/deleteFile"
+
 module.exports = {
     BASE_URL: BASE_URL,
     CATEGORY_URL: CATEGORY_URL,
@@ -185,4 +188,6 @@ module.exports = {
 	GET_COMMENTS,
 	IMG_COMMENT,
 	PRODUCT_DETAIL_URL,
+  GET_GROUPINFO,
+  CREATE_GROUP,
 }

@@ -122,36 +122,36 @@
                 <view>
                     <text style='width: 150rpx'>折后价格$</text>
 
-                    <input type="number" bindconfirm='updateDiscountPrice' value='{{selectedProduct.discountPrice}}'></input>
+                    <input type="number" bindblur='updateDiscountPrice' value='{{selectedProduct.discountPrice}}'></input>
                 </view>
             </view>
 
               <view class='bottom-window-RecommandNHot'>
               <view>
                 <text>拼团</text>
-                 <switch checked="{{isGrouped}}" bindchange="addGroup" />
+                 <switch checked="{{isGroup}}" bindchange="addGroup" />
               </view>
               </view>
-              <view  wx:if="{{isGrouped}}">
+              <view  wx:if="{{isGroup}}">
 
                 <picker mode='date' value= "{{date}}" start='{{today}}' bindchange="bindDateChange" class='bottom-window-RecommandNHot'>
                   <view style='width:96%'>
-                    <text style='width:260rpx'>商品过期时间</text>
+                    <text style='width:260rpx'>拼团到期时间</text>
                     <view class='input-box' style='width:250rpx'> {{date}} <image src='../../../../image/calendar.png' class="calendar-image"></image>
                     </view>
                   </view>
                 </picker>
               </view>
-              <view class='bottom-window-RecommandNHot' wx:if="{{isGrouped}}">
+              <view class='bottom-window-RecommandNHot' wx:if="{{isGroup}}">
                 <view >
-                  <text>拼单价钱</text>
-                  <input type='digit' placeholder='{{selectedProduct.discountPrice}}' class='input-box'></input>
+                  <text>拼团价格</text>
+                  <input type='digit' bindblur="updateGroupPrice" placeholder="0" value='{{selectedProduct.groupPrice}}' class='input-box'></input>
                 </view>
               </view>
-              <view class='bottom-window-RecommandNHot' wx:if="{{isGrouped}}">
+              <view class='bottom-window-RecommandNHot' wx:if="{{isGroup}}">
                 <view>
                   <text>设置人数</text>
-                  <input type='number' placeholder='0' class='input-box'></input>
+                  <input type='number' bindblur='updateGroupNumber' placeholder='0' class='input-box' value="{{selectedProduct.groupNumber}}"></input>
                 </view>
               </view>
               </view>

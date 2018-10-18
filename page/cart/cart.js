@@ -311,7 +311,7 @@ let self = this
     this.setData({    
       orderInfo: orderInfo,
     });
-
+    console.log(this.data.orderInfo)
     wx.setStorage({
       key: "orderInfo",
       data: orderInfo,

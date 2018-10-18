@@ -105,6 +105,8 @@ function loadShopParams() {
     let shopParams = {}
     NetUtil.netUtil(CON.GET_SHOPPARAMS_URL, "GET", "", function(shopParams) {
         if (shopParams) {
+          shopParams.rate = shopParams.rate.toFixed(2);
+          shopParams.rate = Math.round(shopParams.rate*100)/100
             wx.setStorage({
                 key: "shopParams",
                 data: shopParams,

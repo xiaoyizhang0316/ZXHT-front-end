@@ -42,7 +42,10 @@ Page({
         showModel: false,
         specialPrices: [],
         hasComments: false,
-        comments: []
+        comments: [],
+        groupInfo: {},
+        groupList:[],
+        openId : ""
     },
 
     addCount() {
@@ -195,9 +198,10 @@ Page({
     },
     prepare: function(options) {
         let self = this
-
+        
         self.setData({
-            productId: options.id
+            productId: options.id,
+            openId: app.globalData.openId
         });
         // //如果是分享的页面
         // if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.targetShopId) !== '[object Undefined]') {
@@ -323,13 +327,50 @@ Page({
 					self.setData({
 						goods: self.data.goods
 					})
+
+          //TO DO 应该先知道是不是有这些 有的话再索取
 					self.getSpecialPrice();
+          self.getGroupInfo();
+
 					self.updateTotalNum();
 				}
 			}
 		});
     },
-
+    getGroupInfo: function(){
+      let self = this
+      let shopId = app.globalData.targetShopId
+      let productId = self.data.goods['id']
+      let url = COM.load('CON').GET_GROUPINFO + shopId + "/" + productId;
+      COM.load('NetUtil').netUtil(url, "GET", "", (result) => {
+        if (result.flag) {
+          console.log(result)
+          let groupList = result.groupList
+          if (groupList != null && groupList != "" && groupList.length > 0)
+          {
+            for(var g in groupList)
+            {
+              if (groupList[g].orderList != null && groupList[g].orderList != "")
+              {
+                groupList[g].orderList = JSON.parse(groupList[g].orderList)
+                for (var o in groupList[g].orderList)
+                {
+                  groupList[g].joined = groupList[g].orderList[o].openId == app.globalData.openId ? true : false;
+                 
+                }
+              }
+              
+              
+            }
+          }
+          self.setData({
+            groupInfo: result.groupInfo,
+            
+            groupList: groupList
+          })
+        }
+      })
+    },
     getSpecialPrice: function() {
 
         let self = this
@@ -347,6 +388,30 @@ Page({
                 });
             }
         }, true, false)
+    },
+
+    createGroup: function(e){
+      console.log(e)
+      let self = this
+      let groupInfoId = e.currentTarget.dataset.groupinfoid
+      let url = COM.load('CON').CREATE_GROUP;
+      COM.load('NetUtil').netUtil(url, "POST", {"openId": app.globalData.openId, "shopProductGroupId": groupInfoId}, (result) => {
+        if (result) {
+
+        wx.showModal({
+          title: '开团成功',
+          content: '您可以在本页分享您的团，邀请朋友一起拼团',
+          showCancel:false,
+          success: function(res){
+            if(res.confirm)
+            {
+              console.log("eeeeeeeeeeeeeeeeeeee")
+              self.getGroupInfo();
+            }
+          }
+        })
+        }
+      })
     },
     /**
      * 加载相应店铺的商品价格和库存
@@ -408,10 +473,28 @@ Page({
         }
     },
 
-    toGroup: function(){
-      this.addToCart();
-      wx.switchTab({
-        url: '../cart/cart',
+    toGroup: function(e){
+     
+      let data = []
+      let self = this
+      let good = self.data.goods
+      console.log(good)
+      console.log(e)
+      data.push({        
+        "id" : good.id,
+        "image": good.thumb,
+        "num": 1,
+        "price": e.currentTarget.dataset.price,
+        "title": good.title,
+        "extraType" : 1,
+        "extraTypeReferenceId" : e.currentTarget.dataset.groupbuyid
+      })
+      let orderInfo = {
+        'data': data
+      }
+      wx.setStorageSync("orderInfo", orderInfo)
+      wx.navigateTo({
+        url: '/page/cart/orders/orders',
       })
     },
 

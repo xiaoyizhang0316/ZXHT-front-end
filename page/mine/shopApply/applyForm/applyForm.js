@@ -118,7 +118,7 @@ Page({
 	 */
 	onLoad: function (options) {
 		self = this
-		let rate = wx.getStorageSync("shopParams").rate
+    let rate = wx.getStorageSync("shopParams").rate
     console.log(rate.toFixed(2));
     this.setData({ rate: rate.toFixed(2) })
 		wx.getUserInfo({
