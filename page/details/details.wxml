@@ -104,6 +104,7 @@
     <view>
       <text> 团购价:{{groupInfo.groupPrice}}</text>
       <text> 所需人数: {{groupInfo.groupNumber}}</text>
+      <!-- <text> 截止日期: {{groupInfo.groupEndDate}}</text> -->
       <button bindtap='createGroup' class="button" data-groupInfoId='{{groupInfo.id}}'>开团</button>
     </view>
   </view>

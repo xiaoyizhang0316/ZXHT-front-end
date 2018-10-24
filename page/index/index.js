@@ -171,6 +171,7 @@ Page({
 		for (var x in shopProducts) {
 			let shopProduct = shopProducts[x];
 			shopProductIds.push(shopProduct.id);
+      console.log(shopProduct);
 			if (shopProduct.stock >= 0 && shopProduct.vipPrice >= 0 && shopProduct.recommend) {
 				self.data.goodsList[shopProduct.id] = {
 					"id": shopProduct.id,
@@ -201,7 +202,7 @@ Page({
 			// 		"thumb": COM.load('Util').image(shopProduct.barcode),
 			// 	}
 			// }
-      if (shopProduct.group && shopProduct.groupPrice >= 0) {
+      if ((shopProduct.group && shopProduct.groupPrice >= 0)||shopProduct.discount) {
 				self.data.groupAndCutList[shopProduct.id] = {
 					"id": shopProduct.id,
 					"title": shopProduct.title,
@@ -209,6 +210,8 @@ Page({
           "vipPrice": shopProduct.groupPrice ? shopProduct.groupPrice : shopProduct.vipPrice,
 					"sales": shopProduct.sales,
 					"thumb": COM.load('Util').image(shopProduct.barcode),
+          "discount":shopProduct.discount,
+          "group":shopProduct.group,
 				}
 			}
 		}
@@ -225,10 +228,10 @@ Page({
 			data: shopProductIds,
 		})
 
-		console.log(self.data.goodsList)
-		console.log(self.data.hotList)
-		console.log(self.data.discountList)
-    console.log(self.data.groupAndCutList)
+		//console.log(self.data.goodsList)
+		//console.log(self.data.hotList)
+		//console.log(self.data.discountList)
+    console.log('grouplist:',self.data.groupAndCutList)
 	},
 
 

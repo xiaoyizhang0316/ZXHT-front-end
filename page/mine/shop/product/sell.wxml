@@ -132,16 +132,17 @@
                  <switch checked="{{isGroup}}" bindchange="addGroup" />
               </view>
               </view>
-              <view  wx:if="{{isGroup}}">
+              <!--<view  wx:if="{{isGroup}}">
 
-                <picker mode='date' value= "{{date}}" start='{{today}}' bindchange="bindDateChange" class='bottom-window-RecommandNHot'>
+                --<picker mode='date' value= "{{selectedProduct.groupEndDate}}" start='{{today}}' bindchange="bindDateChange" class='bottom-window-RecommandNHot'>
                   <view style='width:96%'>
                     <text style='width:260rpx'>拼团到期时间</text>
-                    <view class='input-box' style='width:250rpx'> {{date}} <image src='../../../../image/calendar.png' class="calendar-image"></image>
+                    <view class='input-box' style='width:250rpx'> {{selectedProduct.groupEndDate}} 
+                    <image src='../../../../image/calendar.png' class="calendar-image"  ></image>
                     </view>
                   </view>
                 </picker>
-              </view>
+              </view>-->
               <view class='bottom-window-RecommandNHot' wx:if="{{isGroup}}">
                 <view >
                   <text>拼团价格</text>

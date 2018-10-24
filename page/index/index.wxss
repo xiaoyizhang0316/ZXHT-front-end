@@ -69,10 +69,11 @@ swiper-item image {
 }
 
 .discount-image {
-  width:60rpx;
+  width:40rpx;
   height:55rpx;
-  display:inline-block;
-  padding-top:10rpx;
+  display:inline-grid;
+  /* padding-top:15rpx; */
+  
 }
 
 .select-title, .newest-title {
@@ -209,6 +210,13 @@ swiper-item image {
     font: Microsoft YaHeif;
 }
 
+.onMenu {
+    color: #9f000f;
+    font-weight: bolder;
+    opacity: 0.7;
+    font: Microsoft YaHeif;
+}
+
 .goods-status{
   padding-right:40%;
   margin-right:20%;
@@ -224,6 +232,8 @@ swiper-item image {
   height:40rpx;
   z-index:999;
   padding-bottom:20%;
+  padding-left:10rpx;
+  //border-right:10rpx;
 }
 
 .hello {
