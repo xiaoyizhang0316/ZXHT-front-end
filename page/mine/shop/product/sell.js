@@ -20,6 +20,7 @@ Page({
     isDiscount: false,
     selectedIndex: 0,
     isGroup: false,
+    date:'',
     tmp: {
       'price': '',
       'vipPrice': ''
@@ -37,13 +38,13 @@ Page({
    */
   onLoad: function(options) {
     //this.filterProducts();
-    var time = new Date();
-    time = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate();
-    // 再通过setData更改Page()里面的data，动态更新页面的数据
-    this.setData({
-      date: time,
-      today: time,
-    });
+    // var time = new Date();
+    // time = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate();
+    // // 再通过setData更改Page()里面的data，动态更新页面的数据
+    // this.setData({
+    //   date: time,
+    //   today: time,
+    // });
   },
 
   /**
@@ -101,6 +102,7 @@ Page({
       if (myShopProducts) {
         for (var x in myShopProducts) {
           let shopProduct = myShopProducts[x];
+          console.log(shopProduct);
           goodsMap.set(shopProduct.id, {
             "productId": shopProduct.id,
             "title": shopProduct.title,
@@ -121,6 +123,7 @@ Page({
             "group": shopProduct.group,
             "groupPrice": shopProduct.groupPrice,
             "groupNumber": shopProduct.groupNumber,
+            //"groupEndDate":shopProduct.groupEndDate,
           })
         }
         this.setData({
@@ -178,12 +181,6 @@ Page({
     }
   },
 
-  bindDateChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      date: e.detail.value
-    })
-  },
 
   //二维码搜索
   scanCode() {
@@ -236,6 +233,7 @@ Page({
         isHotChecked: this.data.goodsMap.get(e.currentTarget.dataset.id).hot,
         isDiscount: this.data.goodsMap.get(e.currentTarget.dataset.id).discount,
         isGroup: this.data.goodsMap.get(e.currentTarget.dataset.id).group,
+        date: this.data.goodsMap.get(e.currentTarget.dataset.id).groupEndDate,
       })
     }
     this.setData({
@@ -329,6 +327,7 @@ Page({
     this.setData({
       'selectedProduct.discount': e.detail.value
     })
+    console.log(self.data);
 
     if (e.detail.value) {
       let price = self.data.selectedProduct.discountPrice >= 0.1 ? self.data.selectedProduct.discountPrice : self.data.selectedProduct.vip3Price
@@ -350,6 +349,14 @@ Page({
       'selectedProduct.group': e.detail.value,
       'isGroup' : e.detail.value
     })
+  },
+
+  bindDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      'selectedProduct.groupEndDate': e.detail.value
+    })
+    console.log(e.detail.value);
   },
 
   updateGroupPrice: function(e) {
