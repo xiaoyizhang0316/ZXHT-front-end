@@ -6,7 +6,7 @@
                     <view>
                         <image style="height:21px;width:21px;margin-top:7rpx;margin-left:10rpx;" src="/image/public/find.png"></image>
                     </view>
-                    <input focus="{{focus}}" placeholder="搜索已上架商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindconfirm="bindSearch" />
+                    <input focus="{{focus}}" placeholder="搜索已上架商品" placeholder-class="placeholderstyle" cursor-spacing="50px" name="search" type="text" value="{{search}}" bindblur="bindSearch" />
                 </view>
                 <view class="{{displayClear?'':'hidden'}}" bindtap="resetSearch">
                     <image style="height:25px;width:25px;margin-right:2px;" src="/image/public/clear.png"></image>

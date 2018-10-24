@@ -325,8 +325,10 @@ Page({
     resetSearch: function(e) {
         this.setData({
             search: '',
-            displayClear: false
+            displayClear: false,
+			searchResult: []
         })
+		
     },
 
     bindBrandChange: function(e) {
@@ -355,7 +357,7 @@ Page({
             });
 
             self.setData({
-                goodsLineList: searchResult
+				searchResult: searchResult
             })
             self.notifySearchResult(searchResult)
 

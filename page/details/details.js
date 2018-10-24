@@ -330,7 +330,7 @@ Page({
 
           //TO DO 应该先知道是不是有这些 有的话再索取
 					self.getSpecialPrice();
-          self.getGroupInfo();
+          			self.getGroupInfo();
 
 					self.updateTotalNum();
 				}
