@@ -190,9 +190,6 @@
     <view class="modal-footer">
         <button open-type="share" class="btn-confirm">分享好友</button>
         <view class="btn-cancel" bindtap="shareToShop">分享朋友圈</view>
-        <!-- <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> -->
-        <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
-
     </view>
 </view>
 

@@ -26,18 +26,30 @@
     display: flex;
     color: #454552;
     border-bottom: 10rpx solid #ededed;
+    align-items:center;
 }
 
 .wechat-image{
   height:90rpx;
-  width:60rpx;
-  //padding:25% 5% 10% 5%;
+  width:90rpx;
+  padding:10% 5% 10% 5%;
 }
 
 .group-button {
-  margin:25% 2% 10% 2%;
+  margin:10% 2% 10% 10%;
   padding:0;
   width:180rpx;
+}
+
+.group-text{
+  font-size: 30rpx;
+  line-height: 26px;
+}
+
+.createGourpButton{
+  color:white;
+  background-color:red;
+  font-weight:700;
 }
 
 .to-carts-icon {

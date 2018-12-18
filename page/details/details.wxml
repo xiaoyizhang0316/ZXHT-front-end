@@ -54,11 +54,11 @@
           <view class='group-detail'>
             <view class='wechat-info' style='display:flex;'>
               <image src='{{item.user.avatarUrl}}' class='wechat-image'></image>
-              <view style='padding-top:25%;padding-bottom:10%;width:200rpx;'>{{item.user.name}}</view>
+              <view style='padding-top:17%;width:200rpx;text-overflow:ellipsis;'>{{item.user.name}}</view>
             </view>
             <view class='group-info' style='padding:2% 2% 2% 2%;'>
-              <text>还差{{item.groupNumber - (item.orderList ? item.orderList.length : 0)}}人成团\n</text>
-              <text>拼单价:￥{{item.groupPrice}}</text>
+              <text class='group-text'>还差{{item.groupNumber - (item.orderList ? item.orderList.length : 0)}}人成团\n</text>
+              <text class='group-text'>拼单价:￥{{item.groupPrice}}</text>
             </view>
             <view>
 
@@ -81,8 +81,8 @@
               <view style='padding-top:25%;padding-bottom:10%;width:200rpx;'>{{item.user.name}}</view>
             </view>
             <view class='group-info' style='padding:2% 2% 2% 2%;'>
-              <text>已成团</text>
-              <text>拼单价:￥{{item.groupPrice}}</text>
+              <text class='group-text'>已成团</text>
+              <text class='group-text'>拼单价:￥{{item.groupPrice}}</text>
             </view>
             <view>
 
@@ -101,11 +101,15 @@
     </view>
      -->
     </view>
-    <view>
-      <text> 团购价:{{groupInfo.groupPrice}}</text>
-      <text> 所需人数: {{groupInfo.groupNumber}}</text>
+    <view style='text-align:center;'>
+      <view style='margin:30rpx 0;font-size:36rpx'>
+         团购价: 
+          <text style='font-weight:600;color:red;'>￥{{groupInfo.groupPrice}}</text>
+        所需人数: 
+          <text style='font-weight:600;color:red;'>{{groupInfo.groupNumber}}</text>
+      </view>
       <!-- <text> 截止日期: {{groupInfo.groupEndDate}}</text> -->
-      <button bindtap='createGroup' class="button" data-groupInfoId='{{groupInfo.id}}'>开团</button>
+      <button bindtap='createGroup' class="button createGourpButton" data-groupInfoId='{{groupInfo.id}}'>开团</button>
     </view>
   </view>
 
