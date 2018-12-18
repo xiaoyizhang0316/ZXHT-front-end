@@ -8,6 +8,12 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
+
+
+
+
+
+
 		targetShopId: "",
 		showModal: false,
 		count:0,

@@ -43,10 +43,10 @@ Page({
             self.setData({
                 brandList: allbrands
             });
-            wx.setStorage({
-                key: 'brandIds',
-                data: brandIds,
-            })
+            // wx.setStorage({
+            //     key: 'brandIds',
+            //     data: brandIds,
+            // })
 
         }, false);
         //获得所有分类
