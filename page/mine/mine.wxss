@@ -39,6 +39,7 @@ page {
   color: #696969;
 }
 
+
 .explain-block {
   width: 5px;
   display: flex;

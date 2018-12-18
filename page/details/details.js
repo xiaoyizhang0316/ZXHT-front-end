@@ -1,4 +1,4 @@
-var app = getApp();
+ var app = getApp();
 // var NetUtil = require('../../utils/netUtil.js')
 // var Util = require('../../utils/util.js')
 // var CON = require('../../utils/constant.js')

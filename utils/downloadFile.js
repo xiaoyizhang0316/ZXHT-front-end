@@ -65,7 +65,7 @@ function downloadSaveFile(obj) {
 /**
  * 多文件下载并且保存，强制规定，必须所有文件下载成功才算返回成功
  */
-function downloadSaveFiles(obj) {
+function downloadSaveFiles(obj) { 
 	// console.info("准备下载。。。");
 	let that = this;
 	let success = obj.success; //下载成功
