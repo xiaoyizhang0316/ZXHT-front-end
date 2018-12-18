@@ -3,11 +3,18 @@ var COM = require('../../utils/common.js');
 Page({
     data: {
         res: {},
-        leftCategory: [{
+        leftCategory: [
+		{
             name: '所有品牌',
             ename: 'brands',
             banner: '/image/c1.png'
-        }, ],
+        },
+		{
+			name: '所有商品',
+			ename: 'products',
+			banner: '/image/c1.png'
+		},
+		],
         rightCategory: [],
         items: [],
         brands: [], //所有品牌
@@ -47,7 +54,13 @@ Page({
                     name: '所有品牌',
                     ename: 'brands',
                     banner: '/image/c1.png'
-                }, ],
+                }, 
+				{
+					name: '所有商品',
+					ename: 'products',
+					banner: '/image/c1.png'
+				},
+				],
                 
             });
         }
@@ -201,8 +214,26 @@ Page({
                 rightCategory: [this.data.brands]
             });
 
-        } else {
-            let subCategories = this.data.res[e.target.dataset.index - 1].subCategories;
+		} else if(e.target.dataset.index == 1)
+		{
+			let showProducts = [];
+			for(let p of this.data.products)
+			{
+				if(p != undefined)
+				showProducts.push(p)
+			}
+			
+			this.setData({
+				items: showProducts,
+				rightCategory: [showProducts]
+			});
+
+			console.log("00000000000000")
+			console.log(this.data.items);
+			wx.setStorageSync("cacheCategory", { "curIndex": self.data.curIndex, "rightCategory": self.data.rightCategory })
+		}
+		 else {
+            let subCategories = this.data.res[e.target.dataset.index - 2].subCategories;
             let rightCategory = [];
 
             //let products = wx.getStorageSync("shopProducts");

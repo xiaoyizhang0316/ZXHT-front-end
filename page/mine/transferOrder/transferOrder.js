@@ -20,27 +20,31 @@ Page({
 	 */
 	onLoad: function (options) {
 		let self = this
+		self.prepare(options)	
+	},
+
+	prepare: function(options)
+	{
 		console.log(options)
 		if (Object.prototype.toString.call(options) !== '[object Undefined]' && Object.prototype.toString.call(options.orderId) !== '[object Undefined]') {
 			let orderId = options.orderId
 			if (app.globalData.openId == null) {
 				setTimeout(function () {
 
-					self.onLoad(options)
+					self.prepare(options)
 
 				}, 1000)
 				return
 			} else {
-				
+
 				let orderId = options.orderId
 				let url = COM.load('CON').GET_ORDERINFO + '/' + orderId;
 				COM.load('NetUtil').netUtil(url, "GET", '', (orderInfo) => {
-					if (orderInfo.orderInfo.shopId == app.globalData.openId)
-					{
+					if (orderInfo.orderInfo.shopId == app.globalData.openId) {
 						wx.redirectTo({
 							url: '/page/mine/getTransferOrder/getTransferOrder?orderId=' + orderId,
 						})
-					}else{
+					} else {
 						let url = COM.load('CON').GET_TRANSFER_ORDER + '/' + app.globalData.openId + '/' + orderId;
 						COM.load('NetUtil').netUtil(url, "GET", '', (transferOrderFull) => {
 							console.log(transferOrderFull)
@@ -82,7 +86,7 @@ Page({
 
 					}
 				})
-				
+
 
 			}
 
@@ -105,8 +109,6 @@ Page({
 				}
 			})
 		}
-
-
 	},
 
 

@@ -152,7 +152,7 @@
 
         </view>
     </view>
-    <view style='width:0px;height:0px;overflow:hidden;'>
+    <view style='width:0px;height:0px;overflow:hidden;position:fixed;bottom:-9999px'>
 
         <canvas canvas-id="myCanvas" style='height:400px;width:400px' />
     </view>
